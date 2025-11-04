@@ -1,8 +1,3 @@
-# Linee guida per quei fenomeni di backend
-
-In questo documento definiremo la struttura, il modus operandi, naming convention, task e criteri di priorità. (e poi sicuramente altro che non mi viene in mente)
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Database Portale
 
 L’obiettivo principale di questa applicazione è gestire l’intero percorso di comunicazione e informazione per un immobile.

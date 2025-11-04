@@ -1,0 +1,71 @@
+/* --- HEADER BASE --- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+/* --- CONTAINER --- */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- LOGO --- */
+.header-logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #004aad;
+}
+
+/* --- NAV --- */
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* --- LINK --- */
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover */
+.nav-link:hover {
+  background-color: #e8f0ff;
+  color: #004aad;
+}
+
+/* Attivo (pagina corrente) */
+.nav-link.active {
+  background-color: #004aad;
+  color: white;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+}

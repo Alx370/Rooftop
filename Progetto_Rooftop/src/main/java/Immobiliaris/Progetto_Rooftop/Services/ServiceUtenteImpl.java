@@ -4,6 +4,8 @@ import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
 import Immobiliaris.Progetto_Rooftop.Model.Stato;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoUtente;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,8 @@ import java.util.List;
 @Transactional
 public class ServiceUtenteImpl implements ServiceUtente {
 
-    private final RepoUtente utenteRepo;
+    @Autowired
+    private RepoUtente utenteRepo;
 
     public ServiceUtenteImpl(RepoUtente utenteRepo) {
         this.utenteRepo = utenteRepo;

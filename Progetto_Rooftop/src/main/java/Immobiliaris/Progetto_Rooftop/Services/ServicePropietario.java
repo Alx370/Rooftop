@@ -5,6 +5,9 @@ import Immobiliaris.Progetto_Rooftop.Model.Stato;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface ServicePropietario {
 
     Proprietario create(Proprietario proprietario);

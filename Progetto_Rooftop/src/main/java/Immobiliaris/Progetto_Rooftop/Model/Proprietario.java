@@ -2,30 +2,36 @@ package Immobiliaris.Progetto_Rooftop.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.EnumType;
 
 @Entity
 @Table(name = "proprietari")
 public class Proprietario {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proprietario")
     private int id_proprietario;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+    // length=100 chosen to match DB schema (VARCHAR(100)) and keep consistent naming limits.
 
-    @Column(name = "cognome", nullable = false)
+    @Column(name = "cognome", nullable = false, length = 100)
     private String cognome;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
+    // Unique + not null to ensure one account per email.
+    // length=150 chosen to allow long emails.
 
-    @Column(name = "telefono", nullable = true)
+    @Column(name = "telefono", length = 20)
     private String telefono;
 
     @Column(name = "consenso_gdpr", nullable = false)
@@ -34,8 +40,11 @@ public class Proprietario {
     @Column(name = "consenso_marketing", nullable = false)
     private boolean consenso_marketing;
 
-    @Column(name = "stato", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stato", nullable = false, length = 20)
     private Stato stato;
+    // Store user state as string ("ACTIVE", etc.)
+    // EnumType.STRING ensures DB and Java stay aligned even if enum order changes.
 
 
     public int getId_proprietario() {

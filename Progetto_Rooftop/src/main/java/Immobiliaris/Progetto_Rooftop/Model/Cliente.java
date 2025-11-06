@@ -11,27 +11,29 @@ import jakarta.persistence.Column;
 @Table(name = "clienti")
 public class Cliente {
 
-    @Id
+        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
     private int id_cliente;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "cognome", nullable = false)
+    @Column(name = "cognome", nullable = false, length = 100)
     private String cognome;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
+    // Unique + not null to ensure one account per email.
+    // length=150 chosen to allow long emails.
 
-    @Column(name = "telefono")
+    @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(name = "consenso_gdpr")
+    @Column(name = "consenso_gdpr", nullable = false)
     private boolean consenso_gdpr;
 
-    @Column(name = "consenso_marketing")
+    @Column(name = "consenso_marketing", nullable = false)
     private boolean consenso_marketing;
 
     public int getId_cliente() {

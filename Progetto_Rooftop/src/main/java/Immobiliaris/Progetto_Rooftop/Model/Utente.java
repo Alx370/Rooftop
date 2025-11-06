@@ -2,41 +2,51 @@ package Immobiliaris.Progetto_Rooftop.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.EnumType;
 
 @Entity
 @Table(name = "utenti")
 public class Utente {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_utente")
+    @Column(name = "id_utente")
     private int id_utente;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+    // length=100 chosen to match DB schema (VARCHAR(100)) and keep consistent naming limits.
 
-    @Column(name = "cognome", nullable = false)
+
+    @Column(name = "cognome", nullable = false, length = 100)
     private String cognome;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
+    // Unique + not null to ensure one account per email.
+    // length=150 chosen to allow long emails (industry standard is usually 150–254 max).
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-    @Column(name = "ruolo", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ruolo", nullable = false, length = 20)
     private Ruolo ruolo;
+    // Store user role as string ("AMMINISTRATORE", etc.)
+    // EnumType.STRING ensures DB and Java stay aligned even if enum order changes.
 
-    @Column(name = "telefono", nullable = true)
+    @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(name = "stato", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stato", nullable = false, length = 20)
     private Stato stato;
-
     public int getId_utente() {
         return id_utente;
     }

@@ -1,4 +1,5 @@
-USE rooftop_immobiliare;
+-- USE rooftop_immobiliare;
+
 INSERT INTO utenti (nome, cognome, email, password, ruolo, telefono, stato) VALUES
 ('Marco', 'Rossi', 'marco.rossi@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AMMINISTRATORE', '+39 335 1234567', 'ATTIVO'),
 ('Laura', 'Bianchi', 'laura.bianchi@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AGENTE', '+39 348 2345678', 'ATTIVO'),

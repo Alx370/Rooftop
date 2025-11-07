@@ -23,5 +23,7 @@ public interface ServiceUtente {
 
     Utente update(Integer id, Utente updated);
 
+    Utente updatePassword(Integer id, String newPassword);
+
     void delete(Integer id);
 }

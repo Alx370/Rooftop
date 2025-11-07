@@ -1,71 +1,113 @@
-/* --- HEADER BASE --- */
-.header {
+header.header {
+  background-color: #B6BDF7; /* 💜 Colore fisso */
+  color: #020122;
+  
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 1000;
-  font-family: Arial, sans-serif;
+  padding: 14px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
-/* --- CONTAINER --- */
+/* --- LOGO --- */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-image {
+  height: 48px;       /* ✅ Altezza ideale per header */
+  width: auto;        /* Mantiene le proporzioni */
+  object-fit: contain; /* Evita deformazioni */
+  transition: transform 0.2s ease;
+}
+
+/* Effetto leggero al passaggio del mouse */
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* Variante responsive */
+@media (max-width: 768px) {
+  .logo-image {
+    height: 40px; /* un po’ più piccolo su mobile */
+  }
+}
+
+/* Contenitore principale */
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* --- LOGO --- */
-.header-logo {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #004aad;
+/* --- LINK LOGIN SPECIALE --- */
+.nav-links .login-link {
+  background-color: #FF6400;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: #fff;                
+  padding: 8px 16px;
+  border-radius: 15px;
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
-/* --- NAV --- */
-.header-nav {
+.nav-links .login-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(2px);
+}
+
+
+/* Link di navigazione */
+.nav-links {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 18px;
 }
 
-/* --- LINK --- */
-.nav-link {
+.nav-links a {
+  color: inherit;
   text-decoration: none;
-  color: #333;
-  font-size: 1rem;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
-/* Hover */
-.nav-link:hover {
-  background-color: #e8f0ff;
-  color: #004aad;
+
+/* Evita scroll orizzontale */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
 }
 
-/* Attivo (pagina corrente) */
-.nav-link.active {
-  background-color: #004aad;
-  color: white;
+/* Spazio per compensare l’header fisso */
+body {
+  padding-top: 70px;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 600px) {
+/* Responsive */
+@media (max-width: 768px) {
   .header-container {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 10px;
   }
 
-  .header-nav {
+  .nav-links {
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 8px;
+    justify-content: center;
+    font-size: 0.95rem;
   }
 }

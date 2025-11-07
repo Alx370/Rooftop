@@ -1,32 +1,30 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
-const Header = () => {
+function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        <div className="header-logo">Capibara</div>
-
-        <nav className="header-nav">
-          <NavLink to="/" className="nav-link">
-            Home
-          </NavLink>
-          <NavLink to="/catalogo" className="nav-link">
-            Catalogo
-          </NavLink>
-          <NavLink to="/chi-siamo" className="nav-link">
-            Chi Siamo
-          </NavLink>
-          <NavLink to="/Valutazione" className="nav-link">
-            Valuta
-          </NavLink>
-          <NavLink to="/login" className="nav-link">
-            Login
-          </NavLink>
+        <div className="logo">
+          <Link to="/">
+            <img
+              src="/src/assets/images/LogoBlack.png"
+              alt="Capibara Web Logo"
+              className="logo-image"
+            />
+          </Link>
+        </div>
+        <nav className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/chi-siamo">Chi Siamo</Link>
+          <Link to="/valutazione">Valuta</Link>
+          <Link to="/faq">FAQ</Link>
+          <Link to="/login" className="login-link">Login</Link>
         </nav>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

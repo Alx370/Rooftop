@@ -1,0 +1,335 @@
+/* Contenitore principale */
+.faq-page {
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  max-width: 1280px;
+  background: #F5FBEF;
+  margin: 0 auto;
+}
+
+/* --- Hero Section --- */
+.faq-hero {
+  background: #B6BDF7;
+  border-radius: 25px;
+  margin: 20px;
+  max-height: 250px;
+}
+
+.hero-container {
+  padding: 0px 6% 0px 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transform: translateY(-10.5%);
+}
+
+.hero-text {
+  flex: 1 1 520px;
+  min-width: 280px;
+  max-width: 640px;
+}
+
+.hero-text h1 {
+  font-size: 2.6rem;
+  color: #1f1b4b;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.hero-sub {
+  font-size: 1rem;
+}
+
+.hero-image {
+  flex: 0 0 420px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.hero-image img {
+  width: 420px;
+  max-width: 48vw;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+/* Sezione FAQ principale */
+.faq-section {
+  background-color: #F5FBEF;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48px 6%;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.faq-text {
+  flex: 1 1 420px;
+  min-width: 260px;
+  max-width: 480px;
+}
+
+.faq-boxes {
+  flex: 1 1 420px;
+  min-width: 300px;
+}
+
+.faq-item {
+  background-color: #B6BDF7;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  max-width: 520px;
+  box-shadow: 0 6px 12px rgba(99, 80, 200, 0.26);
+}
+
+.faq-item summary {
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.faq-item summary span {
+  color: #2a2250;
+}
+
+.faq-item p {
+  margin-top: 12px;
+  color: #3b3a4a;
+  line-height: 1.5;
+}
+
+/* custom +/- indicator for summary */
+.faq-item summary::marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  background: #b8a9ff;
+  color: #2a2250;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.faq-item[open] summary::after {
+  content: '\2212';
+}
+
+/* Sezione form con immagine */
+.faq-contact {
+  display: flex;
+  align-items: center;
+  padding: 56px 6%;
+  gap: 30px;
+  background-color: #F5FBEF;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-contact .contact-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.faq-contact .contact-collumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.faq-contact-text {
+  flex: 1 1 480px;
+  min-width: 280px;
+  max-width: 500px;
+}
+
+.faq-contact-image {
+  flex: 0 0 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-contact-image img {
+  width: 380px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 10px 30px rgba(33, 33, 55, 0.26);
+  transform: scaleX(-1);
+}
+
+/* Form */
+.faq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.input-wrap input,
+.input-wrap textarea,
+.faq-form input,
+.faq-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 18px;
+  background: #B6BDF7;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 0 6px 12px rgba(99, 80, 200, 0.06);
+}
+
+.input-wrap input::placeholder,
+.input-wrap textarea::placeholder,
+.faq-form input::placeholder {
+  color: #2b2546;
+}
+
+.input-wrap textarea {
+  max-width: 500px;
+  min-width: 500px;
+
+}
+
+.input-wrap textarea,
+.faq-form textarea {
+  min-height: 140px;
+}
+
+.btn-primary {
+  width: 160px;
+  height: 44px;
+  background-color: #FF6400;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  align-self: flex-start;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(2px);
+}
+
+/* --- Sezione recensioni --- */
+.faq-reviews {
+  background-color: #F5FBEF;
+  padding: 60px 0 80px;
+  text-align: center;
+}
+
+.reviews-title {
+  font-size: 1.9rem;
+  margin-bottom: 32px;
+}
+
+.reviews-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 22px;
+  overflow: hidden;
+}
+
+.review-card {
+  background: #048A81;
+  color: white;
+  border-radius: 12px;
+  padding: 22px 20px;
+  width: 340px;
+  flex: 0 0 340px;
+  position: relative;
+}
+
+.review-card .review-text {
+  font-style: normal;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 18px;
+}
+
+.review-author {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* small author meta */
+.author-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.author-meta .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0fb68f;
+  font-weight: 700;
+}
+
+/* navigation arrows (decorative) */
+.reviews-nav {
+  position: relative;
+  margin-top: 10px;
+}
+
+.reviews-nav .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.reviews-nav .arrow.left {
+  left: -18px;
+}
+
+.reviews-nav .arrow.right {
+  right: -18px;
+}

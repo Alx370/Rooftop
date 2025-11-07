@@ -1,0 +1,413 @@
+/* ============ RESET ============ */
+:root {
+  --primary: #ff6400;    /* Arancione accento */
+  --secondary: #048a81;  /* Verde acqua */
+  --hero-bg: #b6bdf7;    /* Lilla / azzurro chiaro */
+  --bg-light: #F5FBEF;   /* Sfondo sezioni chiare */
+  --text-dark: #020122;  /* Testo principale */
+  --text-light: #444;    /* Testo secondario */
+}
+
+/* ============ GLOBAL ============ */
+.home {
+  color: var(--text-dark);
+  width: 100%;
+  background-color: var(--bg-light);
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+/* ============ HERO ============ */
+.hero {
+  width: 100%;
+  background: var(--hero-bg);
+  border-radius: 0 0 60px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+  background-image: url(img/LogoImmobiliaris.png);
+  background-repeat: no-repeat;
+  background-position: 25% center;
+  background-size: 50%;
+  background-position-y: -70px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 65%;
+  gap: 2rem;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  text-align: justify;
+  margin-top: -5rem;
+}
+
+.hero-text p {
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  max-width: 400px;
+  text-align: justify;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  padding-top: 5rem;
+}
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  height: 42.5vh;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ============ BUTTONS ============ */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn.primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: var(--primary);
+}
+
+/* ===== INTRO SECTION ===== */
+.intro {
+  background-color: var(--bg-light);
+  padding: 6rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro h2 {
+  font-size: 40px;
+  color: var(--text-dark);
+}
+
+.subtitle {
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 70%;
+}
+
+/* ===== CARD CONTAINER ===== */
+.intro-cards {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+/* ===== CARD ===== */
+.card {
+  position: relative;
+  height: 400px;
+  border-radius: 70px;
+  overflow: hidden;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  min-width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(85%);
+  transition: filter 0.3s ease;
+}
+
+.card:hover img {
+  filter: brightness(70%);
+}
+
+.card-content {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  color: white;
+  text-align: left;
+}
+
+.card-content h3 {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  max-width: 85%;
+}
+
+/* ============ USP ============ */
+.usp {
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-light);
+}
+
+.usp h2 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 3rem;
+}
+
+.usp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  width: 67%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.usp-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.usp-item img {
+  width: 100%;
+  border-radius: 70px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.usp-item.centered {
+  grid-column: span 2;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.usp-item h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-size: 40px;
+}
+
+.usp-item p {
+  color: var(--text-light);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials {
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-light);
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.testimonials .subtitle {
+  text-align: center;
+  color: var(--text-light);
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+.testimonial-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 2rem;
+  width: 67%;
+  max-width: 1200px;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 auto;
+}
+
+.testimonial-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-card {
+  background-color: var(--secondary);
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 350px;
+  min-width: 350px;
+  height: 300px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #fff;
+}
+
+.testimonial-card h5 {
+  padding-left: 3rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.testimonial-card img {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* ============ NEWSLETTER ============ */
+.newsletter {
+  text-align: center;
+  padding: 6rem 2rem;
+  color: var(--text-dark);
+}
+
+.newsletter-form {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.newsletter-form input {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+
+.newsletter .btn {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: black;
+}
+
+.newsletter .btn:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* ============ RESPONSIVE FIXED ============ */
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    height: auto;
+    border-radius: 0 0 40px 40px;
+    background-position: center top;
+    background-size: 80%;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 1.5rem;
+  }
+
+  .hero-text {
+    margin-top: 1rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto 1rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    padding-top: 0;
+  }
+
+  .hero-image {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .intro-cards,
+  .usp-grid,
+  .testimonial-grid {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .usp-grid {
+    grid-template-columns: 1fr;
+  }
+}

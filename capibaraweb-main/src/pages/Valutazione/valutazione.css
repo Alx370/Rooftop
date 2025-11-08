@@ -1,0 +1,176 @@
+.valutazione-container {
+  font-family: "Poppins", sans-serif;
+  color: #1b1b1b;
+  text-align: center;
+  background: #fff;
+}
+
+/* ===== HERO ===== */
+.hero-section {
+  margin: 4rem 1rem 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1b1b1b;
+}
+
+.hero-section p {
+  margin-top: 0.5rem;
+  color: #5b5b5b;
+  font-size: 1.1rem;
+}
+
+/* ===== SERVIZI ===== */
+.servizi-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 3rem 0;
+}
+
+.card {
+  width: 330px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background: #fff;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.2rem;
+}
+
+.card-content h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.card-content p {
+  color: #444;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+}
+
+.btn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  align-items: center;
+}
+
+.btn.blu {
+  background-color: #276ef1;
+  color: white;
+}
+
+.btn.arancio {
+  background-color: #ff7a00;
+  color: white;
+}
+
+/* ===== STEPS ===== */
+.steps-section {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin: 3rem 1rem;
+}
+
+.step {
+  max-width: 220px;
+}
+
+.step img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1rem;
+}
+
+.step h3 {
+  color: #ff7a00;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.step p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* ===== ACCESSO ===== */
+.access-section {
+  background: linear-gradient(to bottom, #ffffff, #f2f4ff);
+  padding: 3rem 1rem;
+}
+
+.access-section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.access-section p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .servizi-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .steps-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .access-section h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-section p {
+    font-size: 0.95rem;
+  }
+
+  .card-content p,
+  .step p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

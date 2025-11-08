@@ -56,10 +56,10 @@ public class ServicePropietarioImpl implements ServicePropietario {
         }
 
         // GDPR consent defaults to false if not set
-        if (proprietario.isConsenso_gdpr() == false) {
+        if (proprietario.isConsenso_gdpr() == null) {
             proprietario.setConsenso_gdpr(false);
         }
-        if (proprietario.isConsenso_marketing() == false) {
+        if (proprietario.isConsenso_marketing() == null) {
             proprietario.setConsenso_marketing(false);
         }
 

@@ -13,10 +13,10 @@ import java.util.List;
 public interface RepoPropietario extends JpaRepository<Proprietario, Integer> {
 
     // Find an owner by email (case-insensitive)
-    Optional<Proprietario> findByEmailIgnoreCase(String email);
+    Optional<Proprietario> findByEmail(String email);
 
     // Check if an email already exists
-    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmail(String email);
 
     // Get all owners by status
     List<Proprietario> findAllByStato(Stato stato);

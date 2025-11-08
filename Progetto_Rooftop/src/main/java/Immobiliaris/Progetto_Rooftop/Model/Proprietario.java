@@ -87,7 +87,7 @@ public class Proprietario {
         this.telefono = telefono;
     }
 
-    public boolean isConsenso_gdpr() {
+    public Boolean isConsenso_gdpr() {
         return consenso_gdpr;
     }
 
@@ -95,7 +95,7 @@ public class Proprietario {
         this.consenso_gdpr = consenso_gdpr;
     }
 
-    public boolean isConsenso_marketing() {
+    public Boolean isConsenso_marketing() {
         return consenso_marketing;
     }
 

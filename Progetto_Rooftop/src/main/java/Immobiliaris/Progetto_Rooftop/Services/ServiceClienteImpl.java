@@ -1,7 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.Cliente;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoCliente;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import Immobiliaris.Progetto_Rooftop.Model.Cliente;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoCliente;
 
 @Service
 @Transactional
@@ -123,5 +123,13 @@ public class ServiceClienteImpl implements ServiceCliente {
     //METHODS
     private String normalizeEmail(String email) {
         return email == null ? null : email.trim().toLowerCase();
+    }
+
+    public RepoCliente getClienteRepo() {
+        return clienteRepo;
+    }
+
+    public void setClienteRepo(RepoCliente clienteRepo) {
+        this.clienteRepo = clienteRepo;
     }
 }

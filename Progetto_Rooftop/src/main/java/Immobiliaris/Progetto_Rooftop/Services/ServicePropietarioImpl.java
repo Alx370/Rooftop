@@ -1,8 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.Proprietario;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoPropietario;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import Immobiliaris.Progetto_Rooftop.Model.Proprietario;
+import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoPropietario;
 
 @Service
 @Transactional
@@ -138,5 +138,13 @@ public class ServicePropietarioImpl implements ServicePropietario {
     // METHODS
     private String normalizeEmail(String email) {
         return email == null ? null : email.trim().toLowerCase();
+    }
+
+    public RepoPropietario getProprietarioRepo() {
+        return proprietarioRepo;
+    }
+
+    public void setProprietarioRepo(RepoPropietario proprietarioRepo) {
+        this.proprietarioRepo = proprietarioRepo;
     }
 }

@@ -1,12 +1,23 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -31,15 +42,17 @@ public class Nota {
     private Utente agente;
 
     // Tipo nota (al momento solo "INTERNO")
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private TipoNota tipodd = TipoNota.INTERNO;
+    private TipoNota tipo = TipoNota.INTERNO;
 
     // Contenuto testuale della nota
     @Column(name = "contenuto", nullable = false, columnDefinition = "TEXT")
     private String contenuto;
 
     // Visibilità della nota (TEAM o PRIVATA)
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "visibilita")
     private VisibilitaNota visibilita = VisibilitaNota.TEAM;

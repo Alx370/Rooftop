@@ -1,16 +1,17 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.Nota;
-import Immobiliaris.Progetto_Rooftop.Model.TipoNota;
-import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoNota;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import Immobiliaris.Progetto_Rooftop.Model.Nota;
+import Immobiliaris.Progetto_Rooftop.Model.TipoNota;
+import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoNota;
 
 /**
  * Service implementation for Note management.
@@ -108,5 +109,13 @@ public class ServiceNotaImpl implements ServiceNota {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nota non trovata");
         }
         notaRepo.deleteById(id);
+    }
+
+    public RepoNota getNotaRepo() {
+        return notaRepo;
+    }
+
+    public void setNotaRepo(RepoNota notaRepo) {
+        this.notaRepo = notaRepo;
     }
 }

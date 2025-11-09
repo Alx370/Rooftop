@@ -1,14 +1,15 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.Recensione;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoRecensione;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import Immobiliaris.Progetto_Rooftop.Model.Recensione;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoRecensione;
 
 /**
  * Service layer implementation for managing Recensioni.
@@ -120,5 +121,13 @@ public class ServiceRecensioneImpl implements ServiceRecensione {
         Recensione r = getById(id);
         r.setVerificata(verificata);
         return recensioneRepo.save(r);
+    }
+
+    public RepoRecensione getRecensioneRepo() {
+        return recensioneRepo;
+    }
+
+    public void setRecensioneRepo(RepoRecensione recensioneRepo) {
+        this.recensioneRepo = recensioneRepo;
     }
 }

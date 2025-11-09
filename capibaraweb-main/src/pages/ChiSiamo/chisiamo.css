@@ -1,0 +1,72 @@
+.hero {
+  width: 100%;
+  background: var(--hero-bg);
+  border-radius: 0 0 60px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+  background-image: url(img/LogoImmobiliaris.png);
+  background-repeat: no-repeat;
+  background-position: 25% center;
+  background-size: 50%;
+  background-position-y: -70px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 65%;
+  gap: 2rem;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  text-align: justify;
+  margin-top: -5rem;
+}
+
+.hero-text p {
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  max-width: 400px;
+  text-align: justify;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  padding-top: 5rem;
+}
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  height: 42.5vh;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hero-title {
+  margin: 4rem 1rem 2rem;
+}
+
+.hero-title h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1b1b1b;
+  text-align: center;
+}
+
+.hero-title p {
+  color: #5b5b5b;
+  font-size: 1.1rem;
+  text-align: center;
+}

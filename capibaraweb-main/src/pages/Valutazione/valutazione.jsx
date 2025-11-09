@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import "../Valutazione/valutazione.css";
+import Affitto from "../../assets/images/valutazione/affitto.png";
+import Vendita from "../../assets/images/valutazione/vendita.png";
+import Icon1 from "../../assets/images/valutazione/icon1.png";
+import Icon2 from "../../assets/images/valutazione/icon2.png";
+import Icon3 from "../../assets/images/valutazione/icon3.png";  
 
 const Valutazione = () => {
   return (
@@ -14,10 +19,10 @@ const Valutazione = () => {
       {/* SCELTA SERVIZIO */}
       <section className="servizi-section">
         <div className="card">
-          <img src="./" alt="Vendita" />
+          <img src={Vendita} alt="Immagine di background di un appartamento" />
           <div className="card-content">
             <h2>Vendita</h2>
-            <p>
+            <p className="testo-card">
               Ti affianchiamo con professionalità e una valutazione precisa dei
               punti di forza della tua casa.
             </p>
@@ -26,10 +31,10 @@ const Valutazione = () => {
         </div>
 
         <div className="card">
-          <img src="/images/affitto.jpg" alt="Affitto" />
+          <img src={Affitto} alt="Immagine di background di un appartamento" />
           <div className="card-content">
             <h2>Affitto</h2>
-            <p>
+            <p className="testo-card">
               Ci occupiamo di tutto per l’affitto della tua casa, dagli inquilini
               alla gestione dei contratti.
             </p>
@@ -41,14 +46,14 @@ const Valutazione = () => {
       {/* INFO STEPS */}
       <section className="steps-section">
         <div className="step">
-          <img src="/icons/raccolta.svg" alt="Raccolta dati" />
+          <img src={Icon1} alt="Immagine di un icona" />
           <h3>Raccolta dati</h3>
           <p>
             Inserisci le <strong>informazioni principali</strong> sull’immobile
           </p>
         </div>
         <div className="step">
-          <img src="/icons/analisi.svg" alt="Analisi degli esperti" />
+          <img src={Icon2} alt="Immagine di un icona" />
           <h3>Analisi degli esperti</h3>
           <p>
             I nostri consulenti valutano <strong>mercato</strong> e{" "}
@@ -56,7 +61,7 @@ const Valutazione = () => {
           </p>
         </div>
         <div className="step">
-          <img src="/icons/consegna.svg" alt="Consegna valutazione" />
+          <img src={Icon3} alt="Immagine di un icona" />
           <h3>Consegna valutazione</h3>
           <p>
             Ricevi il report completo entro <strong>72 ore</strong>

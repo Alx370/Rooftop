@@ -32,7 +32,7 @@
 }
 
 .card {
-  width: 330px;
+  width: 550px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -59,7 +59,13 @@
   color: #444;
   font-size: 0.95rem;
   margin: 0.5rem 0 1rem;
+}
+
+.testo-card {
   text-align: center;
+  color: #444;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .btn {
@@ -74,15 +80,18 @@
 .btn.blu {
   background-color: #276ef1;
   color: white;
+  align-items: center;
 }
 
 .btn.arancio {
   background-color: #ff7a00;
   color: white;
+  align-items: center;
 }
 
 /* ===== STEPS ===== */
 .steps-section {
+  padding-top: 5rem;
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -95,8 +104,8 @@
 }
 
 .step img {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 1rem;
 }
 

@@ -33,7 +33,7 @@ public class Nota {
     // Tipo nota (al momento solo "INTERNO")
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private TipoNota tipo = TipoNota.INTERNO;
+    private TipoNota tipodd = TipoNota.INTERNO;
 
     // Contenuto testuale della nota
     @Column(name = "contenuto", nullable = false, columnDefinition = "TEXT")

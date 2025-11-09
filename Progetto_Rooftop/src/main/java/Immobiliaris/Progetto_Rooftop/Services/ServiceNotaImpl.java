@@ -14,7 +14,8 @@ import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoNota;
 
 /**
- * Service implementation for Note management.
+ * Implementazione del servizio per la gestione delle Note interne.
+ * Esegue validazioni, imposta valori di default e delega le operazioni al repository.
  */
 @Service
 @Transactional
@@ -27,6 +28,7 @@ public class ServiceNotaImpl implements ServiceNota {
         this.notaRepo = notaRepo;
     }
 
+    /** Valida i campi obbligatori della nota. */
     private void validate(Nota n) {
         if (n.getAgente() == null || n.getAgente().getId_utente() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Agente e richiesto");
@@ -37,6 +39,7 @@ public class ServiceNotaImpl implements ServiceNota {
     }
 
     @Override
+    /** Crea una nota applicando validazioni e valori di default. */
     public Nota create(Nota nota) {
         validate(nota);
         // Defaults
@@ -49,12 +52,14 @@ public class ServiceNotaImpl implements ServiceNota {
 
     @Override
     @Transactional(readOnly = true)
+    /** Restituisce tutte le note ordinate per data di creazione decrescente. */
     public List<Nota> getAllOrdered() {
         return notaRepo.findAllByOrderByCreated_atDesc();
     }
 
     @Override
     @Transactional(readOnly = true)
+    /** Restituisce una nota per id oppure NOT_FOUND se non esiste. */
     public Nota getById(Integer id) {
         return notaRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Nota non trovata"));
@@ -62,23 +67,27 @@ public class ServiceNotaImpl implements ServiceNota {
 
     @Override
     @Transactional(readOnly = true)
+    /** Restituisce le note filtrate per id agente. */
     public List<Nota> getByAgente(Integer idAgente) {
         return notaRepo.findAllByAgente_Id_utenteOrderByCreated_atDesc(idAgente);
     }
 
     @Override
     @Transactional(readOnly = true)
+    /** Restituisce le note filtrate per id immobile. */
     public List<Nota> getByImmobile(Integer idImmobile) {
         return notaRepo.findAllById_immobileOrderByCreated_atDesc(idImmobile);
     }
 
     @Override
     @Transactional(readOnly = true)
+    /** Restituisce le note filtrate per id immobile e visibilità. */
     public List<Nota> getByImmobileAndVisibilita(Integer idImmobile, VisibilitaNota visibilita) {
         return notaRepo.findAllById_immobileAndVisibilitaOrderByCreated_atDesc(idImmobile, visibilita);
     }
 
     @Override
+    /** Aggiorna una nota esistente con i campi forniti. */
     public Nota update(Integer id, Nota updated) {
         Nota existing = getById(id);
         if (updated.getContenuto() != null) {
@@ -104,6 +113,7 @@ public class ServiceNotaImpl implements ServiceNota {
     }
 
     @Override
+    /** Elimina una nota per id oppure NOT_FOUND se non esiste. */
     public void delete(Integer id) {
         if (!notaRepo.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nota non trovata");

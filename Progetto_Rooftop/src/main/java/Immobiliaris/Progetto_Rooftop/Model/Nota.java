@@ -19,6 +19,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entità JPA che mappa la tabella `note`.
+ * Rappresenta una nota interna con agente autore, tipo, contenuto,
+ * visibilità e timestamp di creazione.
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -32,32 +37,33 @@ public class Nota {
     @Column(name = "id_nota")
     private Integer id_nota;
 
-    // Immobile collegato (opzionale: non sempre la nota è su un immobile specifico)
+    /** Immobile collegato (opzionale: la nota può non riferirsi ad un immobile). */
     @Column(name = "id_immobile")
     private Integer id_immobile;
 
-    // Agente autore della nota
+    /** Agente autore della nota. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_agente", nullable = false)
     private Utente agente;
 
-    // Tipo nota (al momento solo "INTERNO")
+    /** Tipo della nota (default: INTERNO). */
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
     private TipoNota tipo = TipoNota.INTERNO;
 
-    // Contenuto testuale della nota
+    /** Contenuto testuale della nota. */
     @Column(name = "contenuto", nullable = false, columnDefinition = "TEXT")
     private String contenuto;
 
-    // Visibilità della nota (TEAM o PRIVATA)
+    /** Visibilità della nota (TEAM o PRIVATA, default: TEAM). */
     @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(name = "visibilita")
+    @Column(name = "visibilita", nullable = false)
     private VisibilitaNota visibilita = VisibilitaNota.TEAM;
 
-    @Column(name = "created_at")
+    /** Timestamp di creazione della nota (impostato in prePersist, non aggiornabile). */
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime created_at;
 
     @PrePersist

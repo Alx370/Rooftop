@@ -7,33 +7,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service interface for managing Note (internal notes).
- * Applies validation and delegates persistence to the repository.
+ * Interfaccia di servizio per la gestione delle Note interne.
+ * Applica validazioni e delega la persistenza al repository.
  */
 @Service
 public interface ServiceNota {
 
-    /** Create a new note with validation and defaults. */
+    /** Crea una nuova nota applicando validazioni e valori di default. */
     Nota create(Nota nota);
 
-    /** Returns all notes ordered by creation timestamp descending. */
+    /** Restituisce tutte le note ordinate per data di creazione decrescente. */
     List<Nota> getAllOrdered();
 
-    /** Retrieves a note by its ID or throws NOT_FOUND. */
+    /** Restituisce una nota per id oppure NOT_FOUND se non esiste. */
     Nota getById(Integer id);
 
-    /** Retrieves notes by agent id ordered by creation timestamp descending. */
+    /** Restituisce le note filtrate per id agente, ordinate per data di creazione decrescente. */
     List<Nota> getByAgente(Integer idAgente);
 
-    /** Retrieves notes by immobile id ordered by creation timestamp descending. */
+    /** Restituisce le note filtrate per id immobile, ordinate per data di creazione decrescente. */
     List<Nota> getByImmobile(Integer idImmobile);
 
-    /** Retrieves notes by immobile id filtered by visibility ordered by creation timestamp descending. */
+    /** Restituisce le note filtrate per id immobile e visibilità, ordinate per data di creazione decrescente. */
     List<Nota> getByImmobileAndVisibilita(Integer idImmobile, VisibilitaNota visibilita);
 
-    /** Updates an existing note with the given payload. */
+    /** Aggiorna una nota esistente con il payload fornito. */
     Nota update(Integer id, Nota updated);
 
-    /** Deletes a note by ID or throws NOT_FOUND. */
+    /** Elimina una nota per id oppure NOT_FOUND se non esiste. */
     void delete(Integer id);
 }

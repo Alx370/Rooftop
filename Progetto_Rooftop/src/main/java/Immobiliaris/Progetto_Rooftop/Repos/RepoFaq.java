@@ -7,12 +7,21 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for accessing FAQs.
+ * Exposes derived query methods leveraging Spring Data JPA conventions.
+ */
 @Repository
 public interface RepoFaq extends JpaRepository<Faq, Integer> {
 
-    // Lista tutte le FAQ ordinate per 'ordine' crescente
+    /**
+     * Returns all FAQs ordered by the 'ordine' field ascending.
+     */
     List<Faq> findAllByOrderByOrdineAsc();
 
-    // Lista le FAQ filtrate per categoria e ordinate per 'ordine'
+    /**
+     * Returns FAQs filtered by the given category, ordered by 'ordine' ascending.
+     * @param categoria category filter
+     */
     List<Faq> findAllByCategoriaOrderByOrdineAsc(CategoriaFaq categoria);
 }

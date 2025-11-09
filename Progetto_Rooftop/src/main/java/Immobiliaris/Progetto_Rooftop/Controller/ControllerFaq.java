@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * REST controller exposing CRUD endpoints for managing FAQs.
+ * Integrates with ServiceFaq to apply business rules and persistence operations.
+ */
 @RestController
 @RequestMapping("/api/faq")
 public class ControllerFaq {
@@ -22,7 +26,7 @@ public class ControllerFaq {
 
     /**
      * GET /api/faq
-     * Restituisce tutte le FAQ ordinate per campo 'ordine' crescente
+     * Returns all FAQs ordered by 'ordine' ascending.
      */
     @GetMapping
     public ResponseEntity<List<Faq>> getAllFaq() {
@@ -32,7 +36,7 @@ public class ControllerFaq {
 
     /**
      * GET /api/faq/{id}
-     * Restituisce una FAQ per id
+     * Returns a FAQ by its ID.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Faq> getFaqById(@PathVariable Integer id) {
@@ -42,7 +46,7 @@ public class ControllerFaq {
 
     /**
      * GET /api/faq/categorie
-     * Restituisce l'elenco delle categorie disponibili
+     * Returns the available FAQ categories (enum names) for frontend consumption.
      */
     @GetMapping("/categorie")
     public ResponseEntity<List<String>> getCategorie() {
@@ -54,7 +58,7 @@ public class ControllerFaq {
 
     /**
      * GET /api/faq/categoria/{categoria}
-     * Restituisce le FAQ filtrate per categoria, ordinate per 'ordine'
+     * Returns FAQs filtered by category (case-insensitive), ordered by 'ordine'.
      */
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<?> getFaqByCategoria(@PathVariable String categoria) {
@@ -64,13 +68,13 @@ public class ControllerFaq {
             return ResponseEntity.ok(faqs);
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("error", "Categoria non valida: " + categoria));
+                    .body(Map.of("error", "Invalid category: " + categoria));
         }
     }
 
     /**
      * POST /api/faq
-     * Crea una nuova FAQ
+     * Creates a new FAQ.
      */
     @PostMapping
     public ResponseEntity<Faq> createFaq(@RequestBody Faq faq) {
@@ -80,7 +84,7 @@ public class ControllerFaq {
 
     /**
      * PUT /api/faq/{id}
-     * Aggiorna una FAQ esistente
+     * Updates an existing FAQ.
      */
     @PutMapping("/{id}")
     public ResponseEntity<Faq> updateFaq(@PathVariable Integer id, @RequestBody Faq updated) {
@@ -90,7 +94,7 @@ public class ControllerFaq {
 
     /**
      * DELETE /api/faq/{id}
-     * Elimina una FAQ
+     * Deletes a FAQ by ID.
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFaq(@PathVariable Integer id) {

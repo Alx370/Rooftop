@@ -16,7 +16,7 @@ In sostanza, il sistema funge da gestionale immobiliare interno, che consente di
 Proposta Database per il portale : 
 
 ```SQL
-CREATE USER 'rooftop'@'%' IDENTIFIED BY 'back3nd'; -- bisogna poi configurarlo
+  CREATE USER 'rooftop'@'%' IDENTIFIED BY 'back3nd'; -- bisogna poi configurarlo
 
 CREATE DATABASE rooftop_immobiliare;
 USE rooftop_immobiliare;

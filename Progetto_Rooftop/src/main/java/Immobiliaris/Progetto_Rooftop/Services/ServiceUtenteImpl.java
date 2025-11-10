@@ -1,9 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
-import Immobiliaris.Progetto_Rooftop.Model.Utente;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoUtente;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Model.Utente;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoUtente;
 
 @Service
 @Transactional
@@ -176,5 +176,13 @@ public class ServiceUtenteImpl implements ServiceUtente {
         user.setPassword(hashedPassword);
         
         return utenteRepo.save(user);
+    }
+
+    public RepoUtente getUtenteRepo() {
+        return utenteRepo;
+    }
+
+    public void setUtenteRepo(RepoUtente utenteRepo) {
+        this.utenteRepo = utenteRepo;
     }
 }

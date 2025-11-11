@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import googleIcon from "../../assets/icons/Google-icon1.png";
 import "./Login.css";
 
 const Login = () => {
@@ -24,10 +25,19 @@ const Login = () => {
   return (
     <section className="login-section">
       <div className="login-card">
-        <h2 className="login-title">Accedi al tuo account</h2>
+        <h2 className="login-title">Accedi ora</h2>
         <p className="login-subtitle">
-          Bentornato! Inserisci le credenziali per continuare.
+          Bentornato a casa!
         </p>
+
+        <button className="google-btn">
+          <img src={googleIcon} alt="Google" className="google-icon" />
+          Accedi con Google
+        </button>
+
+        <div className="divider">
+          <span>o accedi con l'email</span>
+        </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -51,6 +61,15 @@ const Login = () => {
           </div>
 
           {error && <p className="login-error">{error}</p>}
+
+          <div className="options">
+            <label className="remember">
+              <input type="checkbox" /> Ricordami
+            </label>
+            <a href="#" className="forgot-password">
+              Password dimenticata?
+            </a>
+          </div>
 
           <button type="submit" className="login-button">
             Login

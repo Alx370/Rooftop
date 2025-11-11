@@ -3,8 +3,6 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 160px); /* tiene conto di header e footer */
-  background-color: #F5FBEF;
-  font-family: "Merriweather", serif;
 }
 
 /* Card bianca */
@@ -14,8 +12,8 @@
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   max-width: 450px;
+  max-height: 690px;
   width: 100%;
-  text-align: center;
 }
 
 /* Titoli */
@@ -23,12 +21,14 @@
   font-size: 1.8rem;
   color: #2c2c2c;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .register-subtitle {
   font-size: 0.95rem;
-  color: #555;
+  color: #333;
   margin-bottom: 1.8rem;
+  text-align: left;
 }
 
 /* Form */
@@ -98,14 +98,4 @@
 .register-login {
   margin-top: 1rem;
   font-size: 0.9rem;
-}
-
-.register-login a {
-  color: #ff6600;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.register-login a:hover {
-  text-decoration: underline;
 }

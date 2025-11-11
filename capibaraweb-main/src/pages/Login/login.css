@@ -2,8 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 160px); /* lascia spazio per header + footer */
-  background-color: #F5FBEF; 
+  min-height: calc(100vh - 160px); 
 }
 
 /* Card bianca centrale */
@@ -13,21 +12,61 @@
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 400px;
-  text-align: center;
+  max-width: 450px;
+  max-height: 690px;
+  text-align: left;
 }
 
 /* Titoli */
 .login-title {
   font-size: 1.8rem;
-  color: #2c2c2c;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .login-subtitle {
   font-size: 0.95rem;
-  color: #555;
+  color: #333;
   margin-bottom: 1.8rem;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.google-btn:hover {
+  background: #f5f5f5;
+}
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #333;
+  margin: 20px 0;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #333;
+  margin: 0 10px;
 }
 
 /* Form */
@@ -65,6 +104,19 @@
   box-shadow: 0 0 5px rgba(255, 102, 0, 0.4);
 }
 
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 20px;
+  font-size: 0.9rem;
+}
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 /* Messaggio di errore */
 .login-error {
   color: red;
@@ -91,18 +143,7 @@
   box-shadow: 0 8px 16px rgba(255, 102, 0, 0.5);
 }
 
-/* Link sotto al bottone */
 .login-register {
   margin-top: 1rem;
   font-size: 0.9rem;
-}
-
-.login-register a {
-  color: #ff6600;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.login-register a:hover {
-  text-decoration: underline;
 }

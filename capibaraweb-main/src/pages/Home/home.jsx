@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "./Home.css";
-
+import { Link } from "react-router-dom";
 
 const Home = () => {
   // Ref per la griglia dei testimonial
@@ -48,7 +48,7 @@ const Home = () => {
               Vendere casa è un percorso importante. Noi lo rendiamo più semplice. Affidati ai nostri esperti per una valutazione accurata e un supporto concreto, dal primo passo alla firma.
             </p>
             <div className="hero-buttons">
-              <button className="btn primary">Ottieni valutazione</button>
+              <Link className="btn primary" to="/valutazione" >Ottieni valutazione</Link>
             </div>
           </div>
         </div>

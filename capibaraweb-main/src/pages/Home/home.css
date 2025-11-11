@@ -340,7 +340,6 @@ h2 {
 
 /* --- SEZIONE USP --- */
 .usp-section {
-  background-color: var(--bg-light);
   padding: 4rem 2rem;
   color: var(--text-dark);
 }

@@ -38,8 +38,8 @@ const Register = () => {
   return (
     <section className="register-section">
       <div className="register-card">
-        <h2 className="register-title">Crea un nuovo account</h2>
-        <p className="register-subtitle">Unisciti a noi in pochi secondi.</p>
+        <h2 className="register-title">Registrati ora</h2>
+        <p className="register-subtitle">Crea il tuo account</p>
 
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">

@@ -208,3 +208,11 @@ INSERT INTO note (id_immobile, id_agente, tipo, contenuto, visibilita, created_a
 (10, 5, 'INTERNO', 'Primo interessato molto serio (imprenditore), visita programmata per il 10 novembre. Preparare documentazione completa cantiere.', 'TEAM', '2025-11-02 09:00:00'),
 
 (12, 2, 'INTERNO', 'Locale commerciale ottima posizione. Da evidenziare possibilità utilizzo come ufficio professionale o showroom. Zona alta visibilità.', 'TEAM', '2025-11-02 11:00:00');
+
+
+INSERT INTO valutazione_zona (zona, valore_mq_vendita, valore_mq_affitto) VALUES
+('TORINO_CENTRO', 3500.00, 20.00),
+('TORINO_NORD', 2200.00, 12.50),
+('TORINO_SUD', 2000.00, 11.00),
+('TORINO_EST', 2100.00, 11.50),
+('TORINO_OVEST', 2300.00, 12.00);

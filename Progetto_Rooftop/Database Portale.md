@@ -238,4 +238,10 @@ CREATE TABLE note (
   FOREIGN KEY (id_agente) REFERENCES utenti(id_utente) ON DELETE RESTRICT
 );
 
-```
+-- TABELLA AFFITTI E PREZZI AL MQ
+CREATE TABLE valutazione_zona (
+  id BIGSERIAL PRIMARY KEY,
+  zona VARCHAR(100) NOT NULL,
+  valore_mq_vendita NUMERIC(12,2),
+  valore_mq_affitto NUMERIC(12,2)
+);

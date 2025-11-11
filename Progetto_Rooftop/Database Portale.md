@@ -239,9 +239,11 @@ CREATE TABLE note (
 );
 
 -- TABELLA AFFITTI E PREZZI AL MQ
-CREATE TABLE valutazione_zona (
-  id BIGSERIAL PRIMARY KEY,
-  zona VARCHAR(100) NOT NULL,
-  valore_mq_vendita NUMERIC(12,2),
-  valore_mq_affitto NUMERIC(12,2)
+CREATE TABLE IF NOT EXISTS valutazione_zona (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  provincia VARCHAR (200) NOT NULL,
+  zona VARCHAR(200) NOT NULL,
+  valore_mq_vendita DECIMAL(12,2),
+  valore_mq_affitto DECIMAL(12,2),
+  UNIQUE KEY uq_zona (zona)
 );

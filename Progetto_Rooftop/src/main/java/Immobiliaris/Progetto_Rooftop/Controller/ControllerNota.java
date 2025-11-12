@@ -6,6 +6,7 @@ import Immobiliaris.Progetto_Rooftop.Services.ServiceNota;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +25,14 @@ public class ControllerNota {
 
     /** Restituisce tutte le note ordinate per data di creazione decrescente. */
     @GetMapping
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can view notes 
     public ResponseEntity<List<Nota>> getAll() {
         return ResponseEntity.ok(serviceNota.getAllOrdered());
     }
 
     /** Restituisce una singola nota tramite id. */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can view notes
     public ResponseEntity<Nota> getOne(@PathVariable Integer id) {
         return ResponseEntity.ok(serviceNota.getById(id));
     }
@@ -38,6 +41,7 @@ public class ControllerNota {
      * Restituisce le note associate a un immobile. Se specificata, filtra per visibilità.
      */
     @GetMapping("/immobili/{idImmobile}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can view notes
     public ResponseEntity<List<Nota>> getByImmobile(
             @PathVariable Integer idImmobile,
             @RequestParam(name = "visibilita", required = false) VisibilitaNota visibilita
@@ -50,12 +54,14 @@ public class ControllerNota {
 
     /** Restituisce le note dell'agente indicato. */
     @GetMapping("/agenti/{idAgente}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can view notes
     public ResponseEntity<List<Nota>> getByAgente(@PathVariable Integer idAgente) {
         return ResponseEntity.ok(serviceNota.getByAgente(idAgente));
     }
 
     /** Crea una nuova nota. */
     @PostMapping
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can create notes
     public ResponseEntity<Nota> create(@RequestBody Nota nota) {
         Nota saved = serviceNota.create(nota);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
@@ -63,6 +69,7 @@ public class ControllerNota {
 
     /** Aggiorna una nota esistente. */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // only admin, agent, evaluator can update notes
     public ResponseEntity<Nota> update(@PathVariable Integer id, @RequestBody Nota input) {
         Nota updated = serviceNota.update(id, input);
         return ResponseEntity.ok(updated);
@@ -70,6 +77,7 @@ public class ControllerNota {
 
     /** Elimina la nota con l'id fornito. */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // only admin can delete
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         serviceNota.delete(id);
         return ResponseEntity.noContent().build();

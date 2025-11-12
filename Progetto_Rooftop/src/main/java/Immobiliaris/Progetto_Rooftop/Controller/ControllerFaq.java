@@ -6,6 +6,7 @@ import Immobiliaris.Progetto_Rooftop.Services.ServiceFaq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -77,6 +78,7 @@ public class ControllerFaq {
      * Creates a new FAQ.
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // only admin or agent can create FAQs
     public ResponseEntity<Faq> createFaq(@RequestBody Faq faq) {
         Faq created = serviceFaq.create(faq);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -87,6 +89,7 @@ public class ControllerFaq {
      * Updates an existing FAQ.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // only admin or agent can update FAQs
     public ResponseEntity<Faq> updateFaq(@PathVariable Integer id, @RequestBody Faq updated) {
         Faq saved = serviceFaq.update(id, updated);
         return ResponseEntity.ok(saved);
@@ -97,6 +100,7 @@ public class ControllerFaq {
      * Deletes a FAQ by ID.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // only admin can delete FAQs
     public ResponseEntity<Void> deleteFaq(@PathVariable Integer id) {
         serviceFaq.delete(id);
         return ResponseEntity.noContent().build();

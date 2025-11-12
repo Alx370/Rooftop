@@ -5,6 +5,7 @@ import Immobiliaris.Progetto_Rooftop.Services.ServiceRecensione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class ControllerRecensione {
 
     /** POST /api/recensioni - creates a new review. */
     @PostMapping
+    @PreAuthorize("isAuthenticated()") // only authenticated users can create a review
     public ResponseEntity<Recensione> create(@RequestBody Recensione recensione) {
         Recensione created = serviceRecensione.create(recensione);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -54,6 +56,7 @@ public class ControllerRecensione {
 
     /** PUT /api/recensioni/{id} - updates an existing review. */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // only admin or agent can update
     public ResponseEntity<Recensione> update(@PathVariable Integer id, @RequestBody Recensione updated) {
         Recensione saved = serviceRecensione.update(id, updated);
         return ResponseEntity.ok(saved);
@@ -61,6 +64,7 @@ public class ControllerRecensione {
 
     /** PATCH /api/recensioni/{id}/verifica - toggles verification status. */
     @PatchMapping("/{id}/verifica")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'VALUTATORE')") // only admin or valutatatore can verify
     public ResponseEntity<Recensione> setVerificata(
             @PathVariable Integer id,
             @RequestBody Map<String, Boolean> payload) {
@@ -75,6 +79,7 @@ public class ControllerRecensione {
 
     /** DELETE /api/recensioni/{id} - deletes a review by id. */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // only admin can delete
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         serviceRecensione.delete(id);
         return ResponseEntity.noContent().build();

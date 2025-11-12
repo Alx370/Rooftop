@@ -3,6 +3,7 @@ package Immobiliaris.Progetto_Rooftop.Controller;
 import Immobiliaris.Progetto_Rooftop.Model.ValutazioneZona;
 import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceValutazioneZona;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,25 @@ public class ControllerValutazioneZona {
         }
     }
 
+    /** Restituisce tutte le valutazioni per una provincia. */
+    @GetMapping("/provincia/{provincia}")
+    public ResponseEntity<List<ValutazioneZona>> getByProvincia(@PathVariable String provincia) {
+        return ResponseEntity.ok(serviceValutazioneZona.getAllByProvincia(provincia));
+    }
+
+    /** Restituisce la valutazione per provincia e zona. */
+    @GetMapping("/provincia/{provincia}/zona/{zona}")
+    public ResponseEntity<?> getByProvinciaAndZona(@PathVariable String provincia, @PathVariable String zona) {
+        try {
+            ZonaProvinciaTorino zEnum = parseZona(zona);
+            ValutazioneZona v = serviceValutazioneZona.getByProvinciaAndZona(provincia, zEnum);
+            return ResponseEntity.ok(v);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Zona non valida: " + zona));
+        }
+    }
+
     /** Elenco delle zone disponibili (displayName). */
     @GetMapping("/zone")
     public ResponseEntity<List<String>> getAvailableZone() {
@@ -69,6 +89,22 @@ public class ControllerValutazioneZona {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         serviceValutazioneZona.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /** Calcola l'affitto totale per una zona con mq e opzionale provincia; se ammobiliato applica maggiorazione fissa. */
+    @GetMapping("/affitto")
+    public ResponseEntity<?> calcolaAffitto(@RequestParam("zona") String zona,
+                                            @RequestParam("mq") BigDecimal mq,
+                                            @RequestParam(value = "ammobiliato", defaultValue = "false") boolean ammobiliato,
+                                            @RequestParam(value = "provincia", required = false) String provincia) {
+        try {
+            ZonaProvinciaTorino zEnum = parseZona(zona);
+            BigDecimal totale = serviceValutazioneZona.calcolaAffitto(provincia, zEnum, mq, ammobiliato);
+            return ResponseEntity.ok(Map.of("totaleAffitto", totale));
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Zona non valida: " + zona));
+        }
     }
 
     private ZonaProvinciaTorino parseZona(String raw) {

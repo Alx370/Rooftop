@@ -1,8 +1,8 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
-import Immobiliaris.Progetto_Rooftop.Model.ValutazioneZona;
+import Immobiliaris.Progetto_Rooftop.Model.ValoriZona;
 import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
-import Immobiliaris.Progetto_Rooftop.Services.ServiceValutazioneZona;
+import Immobiliaris.Progetto_Rooftop.Services.ServiceValoriZona;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/valutazioni-zona")
-public class ControllerValutazioneZona {
+public class ControllerValoriZona {
 
     @Autowired
-    private ServiceValutazioneZona serviceValutazioneZona;
+    private ServiceValoriZona serviceValoriZona;
 
     /** Restituisce tutte le valutazioni presenti. */
     @GetMapping
-    public ResponseEntity<List<ValutazioneZona>> getAll() {
-        return ResponseEntity.ok(serviceValutazioneZona.getAll());
+    public ResponseEntity<List<ValoriZona>> getAll() {
+        return ResponseEntity.ok(serviceValoriZona.getAll());
     }
 
     /** Restituisce la valutazione per una zona (accetta enum name o displayName). */
@@ -34,7 +34,7 @@ public class ControllerValutazioneZona {
     public ResponseEntity<?> getByZona(@PathVariable String zona) {
         try {
             ZonaProvinciaTorino zEnum = parseZona(zona);
-            ValutazioneZona v = serviceValutazioneZona.getByZona(zEnum);
+            ValoriZona v = serviceValoriZona.getByZona(zEnum);
             return ResponseEntity.ok(v);
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -44,8 +44,8 @@ public class ControllerValutazioneZona {
 
     /** Restituisce tutte le valutazioni per una provincia. */
     @GetMapping("/provincia/{provincia}")
-    public ResponseEntity<List<ValutazioneZona>> getByProvincia(@PathVariable String provincia) {
-        return ResponseEntity.ok(serviceValutazioneZona.getAllByProvincia(provincia));
+    public ResponseEntity<List<ValoriZona>> getByProvincia(@PathVariable String provincia) {
+        return ResponseEntity.ok(serviceValoriZona.getAllByProvincia(provincia));
     }
 
     /** Restituisce la valutazione per provincia e zona. */
@@ -53,7 +53,7 @@ public class ControllerValutazioneZona {
     public ResponseEntity<?> getByProvinciaAndZona(@PathVariable String provincia, @PathVariable String zona) {
         try {
             ZonaProvinciaTorino zEnum = parseZona(zona);
-            ValutazioneZona v = serviceValutazioneZona.getByProvinciaAndZona(provincia, zEnum);
+            ValoriZona v = serviceValoriZona.getByProvinciaAndZona(provincia, zEnum);
             return ResponseEntity.ok(v);
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -72,22 +72,22 @@ public class ControllerValutazioneZona {
 
     /** Crea o aggiorna (per zona) i valori di vendita/affitto. */
     @PostMapping
-    public ResponseEntity<ValutazioneZona> upsert(@RequestBody ValutazioneZona payload) {
-        ValutazioneZona saved = serviceValutazioneZona.upsert(payload);
+    public ResponseEntity<ValoriZona> upsert(@RequestBody ValoriZona payload) {
+        ValoriZona saved = serviceValoriZona.upsert(payload);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     /** Aggiorna per id. */
     @PutMapping("/{id}")
-    public ResponseEntity<ValutazioneZona> update(@PathVariable Long id, @RequestBody ValutazioneZona updated) {
-        ValutazioneZona saved = serviceValutazioneZona.update(id, updated);
+    public ResponseEntity<ValoriZona> update(@PathVariable Long id, @RequestBody ValoriZona updated) {
+        ValoriZona saved = serviceValoriZona.update(id, updated);
         return ResponseEntity.ok(saved);
     }
 
     /** Cancella per id. */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        serviceValutazioneZona.delete(id);
+        serviceValoriZona.delete(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -99,7 +99,7 @@ public class ControllerValutazioneZona {
                                             @RequestParam(value = "provincia", required = false) String provincia) {
         try {
             ZonaProvinciaTorino zEnum = parseZona(zona);
-            BigDecimal totale = serviceValutazioneZona.calcolaAffitto(provincia, zEnum, mq, ammobiliato);
+            BigDecimal totale = serviceValoriZona.calcolaAffitto(provincia, zEnum, mq, ammobiliato);
             return ResponseEntity.ok(Map.of("totaleAffitto", totale));
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)

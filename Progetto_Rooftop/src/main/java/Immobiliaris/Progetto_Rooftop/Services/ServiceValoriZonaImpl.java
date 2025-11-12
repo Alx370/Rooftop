@@ -1,8 +1,8 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.ValutazioneZona;
+import Immobiliaris.Progetto_Rooftop.Model.ValoriZona;
 import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoValutazioneZona;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoValoriZona;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -24,49 +24,49 @@ import org.springframework.web.server.ResponseStatusException;
  */
 @Service
 @Transactional
-public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
+public class ServiceValoriZonaImpl implements ServiceValoriZona {
 
     @Autowired
-    private RepoValutazioneZona repoValutazioneZona;
+    private RepoValoriZona repoValoriZona;
 
-    public ServiceValutazioneZonaImpl(RepoValutazioneZona repoValutazioneZona) {
-        this.repoValutazioneZona = repoValutazioneZona;
+    public ServiceValoriZonaImpl(RepoValoriZona repoValoriZona) {
+        this.repoValoriZona = repoValoriZona;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ValutazioneZona> getAll() {
+    public List<ValoriZona> getAll() {
         // Restituisce tutte le valutazioni presenti senza filtro
-        return repoValutazioneZona.findAll();
+        return repoValoriZona.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ValutazioneZona getByZona(ZonaProvinciaTorino zona) {
+    public ValoriZona getByZona(ZonaProvinciaTorino zona) {
         // Validazione input: la zona è obbligatoria
         if (zona == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Zona e' richiesta");
         }
         // Ricerca per zona con errore 404 se assente
-        return repoValutazioneZona.findByZona(zona)
+        return repoValoriZona.findByZona(zona)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ValutazioneZona> getAllByProvincia(String provincia) {
+    public List<ValoriZona> getAllByProvincia(String provincia) {
         String prov = normalizeProvincia(provincia);
-        return repoValutazioneZona.findAllByProvinciaOrderByZonaAsc(prov);
+        return repoValoriZona.findAllByProvinciaOrderByZonaAsc(prov);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ValutazioneZona getByProvinciaAndZona(String provincia, ZonaProvinciaTorino zona) {
+    public ValoriZona getByProvinciaAndZona(String provincia, ZonaProvinciaTorino zona) {
         if (zona == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Zona e' richiesta");
         }
         String prov = normalizeProvincia(provincia);
-        return repoValutazioneZona.findByProvinciaAndZona(prov, zona)
+        return repoValoriZona.findByProvinciaAndZona(prov, zona)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
     }
 
@@ -85,10 +85,10 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
         BigDecimal mq = validateMq(metriQuadrati);
         String prov = normalizeProvincia(provincia);
 
-        ValutazioneZona v = (prov != null)
-                ? repoValutazioneZona.findByProvinciaAndZona(prov, zona)
+        ValoriZona v = (prov != null)
+                ? repoValoriZona.findByProvinciaAndZona(prov, zona)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"))
-                : repoValutazioneZona.findByZona(zona)
+                : repoValoriZona.findByZona(zona)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
 
         BigDecimal affittoMq = v.getValoreMqAffitto();
@@ -105,7 +105,7 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
     }
 
     @Override
-    public ValutazioneZona upsert(ValutazioneZona payload) {
+    public ValoriZona upsert(ValoriZona payload) {
         // L'upsert richiede almeno la zona; altri campi possono essere null
         if (payload == null || payload.getZona() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Zona e' richiesta");
@@ -113,13 +113,13 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
 
         // Se esiste già una valutazione per la zona, aggiornare i campi forniti
         // Cerca prima per provincia+zona se la provincia è presente, altrimenti per sola zona
-        ValutazioneZona existing = null;
+        ValoriZona existing = null;
         String prov = normalizeProvincia(payload.getProvincia());
         if (prov != null) {
-            existing = repoValutazioneZona.findByProvinciaAndZona(prov, payload.getZona()).orElse(null);
+            existing = repoValoriZona.findByProvinciaAndZona(prov, payload.getZona()).orElse(null);
         }
         if (existing == null) {
-            existing = repoValutazioneZona.findByZona(payload.getZona()).orElse(null);
+            existing = repoValoriZona.findByZona(payload.getZona()).orElse(null);
         }
         if (existing != null) {
             if (payload.getValoreMqVendita() != null) {
@@ -131,11 +131,11 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
             if (payload.getProvincia() != null && !payload.getProvincia().trim().isEmpty()) {
                 existing.setProvincia(payload.getProvincia().trim());
             }
-            return repoValutazioneZona.save(existing);
+            return repoValoriZona.save(existing);
         }
 
         // Altrimenti creare una nuova valutazione con i valori forniti
-        ValutazioneZona nuovo = new ValutazioneZona(
+        ValoriZona nuovo = new ValoriZona(
                 payload.getZona(),
                 payload.getValoreMqVendita() != null ? validateNonNegative(payload.getValoreMqVendita(), "valoreMqVendita") : null,
                 payload.getValoreMqAffitto() != null ? validateNonNegative(payload.getValoreMqAffitto(), "valoreMqAffitto") : null
@@ -143,16 +143,16 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
         // Imposta la provincia di default se non fornita esplicitamente
         nuovo.setProvincia(prov != null ? prov : "Torino");
 
-        return repoValutazioneZona.save(nuovo);
+        return repoValoriZona.save(nuovo);
     }
 
     @Override
-    public ValutazioneZona update(Long id, ValutazioneZona updated) {
+    public ValoriZona update(Long id, ValoriZona updated) {
         // Aggiornamento per id con validazioni; se non trovato lancia 404
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id e' richiesto");
         }
-        ValutazioneZona existing = repoValutazioneZona.findById(id)
+        ValoriZona existing = repoValoriZona.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
 
         // Aggiorna solo i campi forniti nel payload
@@ -171,7 +171,7 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
                 existing.setProvincia(prov);
             }
         }
-        return repoValutazioneZona.save(existing);
+        return repoValoriZona.save(existing);
     }
 
     @Override
@@ -180,10 +180,10 @@ public class ServiceValutazioneZonaImpl implements ServiceValutazioneZona {
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id e' richiesto");
         }
-        if (!repoValutazioneZona.existsById(id)) {
+        if (!repoValoriZona.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata");
         }
-        repoValutazioneZona.deleteById(id);
+        repoValoriZona.deleteById(id);
     }
 
     private BigDecimal validateNonNegative(BigDecimal val, String field) {

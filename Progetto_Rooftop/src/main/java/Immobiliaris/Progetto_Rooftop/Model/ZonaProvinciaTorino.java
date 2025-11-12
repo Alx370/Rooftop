@@ -6,7 +6,7 @@ package Immobiliaris.Progetto_Rooftop.Model;
  * (valore al mq vendita / valore al mq affitto) memorizzate in DB.
  *
  * Nota: i valori numerici sono meglio gestiti in una tabella DB separata
- * (vedi ValutazioneZona) così da poterli aggiornare senza ricompilare.
+ * (vedi ValoriZona) così da poterli aggiornare senza ricompilare.
  */
 public enum ZonaProvinciaTorino {
 

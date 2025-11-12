@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "valutazione_zona")
-public class ValutazioneZona {
+public class ValoriZona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +38,10 @@ public class ValutazioneZona {
     @jakarta.persistence.Column(name = "valore_mq_affitto", precision = 12, scale = 2)
     private BigDecimal valoreMqAffitto;
 
-    public ValutazioneZona() {
+    public ValoriZona() {
     }
 
-    public ValutazioneZona(ZonaProvinciaTorino zona, BigDecimal valoreMqVendita, BigDecimal valoreMqAffitto) {
+    public ValoriZona(ZonaProvinciaTorino zona, BigDecimal valoreMqVendita, BigDecimal valoreMqAffitto) {
         this.zona = zona;
         this.valoreMqVendita = valoreMqVendita;
         this.valoreMqAffitto = valoreMqAffitto;

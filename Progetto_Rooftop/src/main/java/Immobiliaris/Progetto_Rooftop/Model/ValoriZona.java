@@ -23,12 +23,16 @@ public class ValoriZona {
     private Long id;
 
     @Convert(converter = ZonaProvinciaTorinoConverter.class)
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 200)
     private ZonaProvinciaTorino zona;
 
     // provincia di riferimento (es. "Torino")
     @Column(name = "provincia", length = 200)
     private String provincia = "Torino";
+
+    // CAP di riferimento (numerico, 5 cifre)
+    @Column(name = "CAP", nullable = false)
+    private Integer cap;
 
     // valore medio vendita in euro al mq
     @Column(name = "valore_mq_vendita", precision = 12, scale = 2)
@@ -69,6 +73,14 @@ public class ValoriZona {
 
     public void setProvincia(String provincia) {
         this.provincia = provincia;
+    }
+
+    public Integer getCap() {
+        return cap;
+    }
+
+    public void setCap(Integer cap) {
+        this.cap = cap;
     }
 
     public BigDecimal getValoreMqVendita() {

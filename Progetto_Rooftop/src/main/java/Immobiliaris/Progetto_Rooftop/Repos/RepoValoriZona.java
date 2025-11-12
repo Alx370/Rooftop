@@ -12,4 +12,7 @@ public interface RepoValoriZona extends JpaRepository<ValoriZona, Long> {
     Optional<ValoriZona> findByProvinciaAndZona(String provincia, ZonaProvinciaTorino zona);
     boolean existsByProvinciaAndZona(String provincia, ZonaProvinciaTorino zona);
     java.util.List<ValoriZona> findAllByProvinciaOrderByZonaAsc(String provincia);
+
+    Optional<ValoriZona> findByZonaAndCap(ZonaProvinciaTorino zona, Integer cap);
+    Optional<ValoriZona> findByProvinciaAndZonaAndCap(String provincia, ZonaProvinciaTorino zona, Integer cap);
 }

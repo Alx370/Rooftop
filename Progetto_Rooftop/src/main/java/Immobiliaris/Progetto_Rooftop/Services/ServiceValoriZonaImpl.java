@@ -1,16 +1,17 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import Immobiliaris.Progetto_Rooftop.Model.ValoriZona;
-import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoValoriZona;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import Immobiliaris.Progetto_Rooftop.Model.ValoriZona;
+import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoValoriZona;
 
 /**
  * Implementazione del service per la gestione delle valutazioni per zona.
@@ -26,7 +27,6 @@ import org.springframework.web.server.ResponseStatusException;
 @Transactional
 public class ServiceValoriZonaImpl implements ServiceValoriZona {
 
-    @Autowired
     private RepoValoriZona repoValoriZona;
 
     public ServiceValoriZonaImpl(RepoValoriZona repoValoriZona) {
@@ -76,6 +76,7 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
     @Override
     @Transactional(readOnly = true)
     public BigDecimal calcolaAffitto(String provincia,
+                                     Integer cap,
                                      ZonaProvinciaTorino zona,
                                      BigDecimal metriQuadrati,
                                      boolean ammobiliato) {
@@ -85,11 +86,23 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
         BigDecimal mq = validateMq(metriQuadrati);
         String prov = normalizeProvincia(provincia);
 
-        ValoriZona v = (prov != null)
-                ? repoValoriZona.findByProvinciaAndZona(prov, zona)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"))
-                : repoValoriZona.findByZona(zona)
+        // Se viene fornito un CAP, validarlo e preferire la ricerca che lo include
+        Integer c = (cap != null) ? validateCap(cap) : null;
+
+        ValoriZona v;
+        if (prov != null && c != null) {
+            v = repoValoriZona.findByProvinciaAndZonaAndCap(prov, zona, c)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
+        } else if (prov != null) {
+            v = repoValoriZona.findByProvinciaAndZona(prov, zona)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
+        } else if (c != null) {
+            v = repoValoriZona.findByZonaAndCap(zona, c)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
+        } else {
+            v = repoValoriZona.findByZona(zona)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Valutazione zona non trovata"));
+        }
 
         BigDecimal affittoMq = v.getValoreMqAffitto();
         if (affittoMq == null) {
@@ -111,15 +124,21 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Zona e' richiesta");
         }
 
+        // CAP è richiesto dal modello
+        if (payload.getCap() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CAP e' richiesto");
+        }
+
         // Se esiste già una valutazione per la zona, aggiornare i campi forniti
         // Cerca prima per provincia+zona se la provincia è presente, altrimenti per sola zona
         ValoriZona existing = null;
         String prov = normalizeProvincia(payload.getProvincia());
+        Integer c = validateCap(payload.getCap());
         if (prov != null) {
-            existing = repoValoriZona.findByProvinciaAndZona(prov, payload.getZona()).orElse(null);
+            existing = repoValoriZona.findByProvinciaAndZonaAndCap(prov, payload.getZona(), c).orElse(null);
         }
         if (existing == null) {
-            existing = repoValoriZona.findByZona(payload.getZona()).orElse(null);
+            existing = repoValoriZona.findByZonaAndCap(payload.getZona(), c).orElse(null);
         }
         if (existing != null) {
             if (payload.getValoreMqVendita() != null) {
@@ -130,6 +149,9 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
             }
             if (payload.getProvincia() != null && !payload.getProvincia().trim().isEmpty()) {
                 existing.setProvincia(payload.getProvincia().trim());
+            }
+            if (payload.getCap() != null) {
+                existing.setCap(c);
             }
             return repoValoriZona.save(existing);
         }
@@ -142,6 +164,8 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
         );
         // Imposta la provincia di default se non fornita esplicitamente
         nuovo.setProvincia(prov != null ? prov : "Torino");
+        // Imposta il CAP (obbligatorio)
+        nuovo.setCap(c);
 
         return repoValoriZona.save(nuovo);
     }
@@ -170,6 +194,9 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
             if (prov != null) {
                 existing.setProvincia(prov);
             }
+        }
+        if (updated.getCap() != null) {
+            existing.setCap(validateCap(updated.getCap()));
         }
         return repoValoriZona.save(existing);
     }
@@ -213,5 +240,23 @@ public class ServiceValoriZonaImpl implements ServiceValoriZona {
         return mq;
     }
 
+    private Integer validateCap(Integer cap) {
+        if (cap == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CAP e' richiesto");
+        }
+        if (cap <= 0 || cap > 99999) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CAP non valido");
+        }
+        return cap;
+    }
+
     // Nessuna normalizzazione percentuale: si applica la percentuale fissa ammobiliato.
+
+    public RepoValoriZona getRepoValoriZona() {
+        return repoValoriZona;
+    }
+
+    public void setRepoValoriZona(RepoValoriZona repoValoriZona) {
+        this.repoValoriZona = repoValoriZona;
+    }
 }

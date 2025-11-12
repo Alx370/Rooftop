@@ -96,10 +96,11 @@ public class ControllerValoriZona {
     public ResponseEntity<?> calcolaAffitto(@RequestParam("zona") String zona,
                                             @RequestParam("mq") BigDecimal mq,
                                             @RequestParam(value = "ammobiliato", defaultValue = "false") boolean ammobiliato,
-                                            @RequestParam(value = "provincia", required = false) String provincia) {
+                                            @RequestParam(value = "provincia", required = false) String provincia,
+                                            @RequestParam(value = "cap", required = false) Integer cap) {
         try {
             ZonaProvinciaTorino zEnum = parseZona(zona);
-            BigDecimal totale = serviceValoriZona.calcolaAffitto(provincia, zEnum, mq, ammobiliato);
+            BigDecimal totale = serviceValoriZona.calcolaAffitto(provincia, cap, zEnum, mq, ammobiliato);
             return ResponseEntity.ok(Map.of("totaleAffitto", totale));
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)

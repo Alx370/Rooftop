@@ -4,13 +4,11 @@ import Immobiliaris.Progetto_Rooftop.Model.ValoriZona;
 import Immobiliaris.Progetto_Rooftop.Model.ZonaProvinciaTorino;
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * Service per gestione valutazioni al mq per zona.
  * Espone operazioni di lettura, creazione/aggiornamento e cancellazione.
  */
-@Service
 public interface ServiceValoriZona {
 
     /** Restituisce tutte le valutazioni zona. */
@@ -39,6 +37,7 @@ public interface ServiceValoriZona {
      * Se ammobiliato=true viene applicata una maggiorazione fissa (8%).
      */
     BigDecimal calcolaAffitto(String provincia,
+                              Integer cap,
                               ZonaProvinciaTorino zona,
                               BigDecimal metriQuadrati,
                               boolean ammobiliato);

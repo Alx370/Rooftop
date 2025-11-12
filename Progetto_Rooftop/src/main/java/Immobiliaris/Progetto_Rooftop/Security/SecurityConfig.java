@@ -11,8 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter; // <--
 
+import org.springframework.web.cors.CorsConfigurationSource;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
@@ -21,20 +22,23 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SecurityConfig {
 
     private final CorsConfigurationSource corsConfigurationSource; // Injected CORS configuration
+     private final JwtService jwtService;
 
-    public SecurityConfig(CorsConfigurationSource corsConfigurationSource) {
+    public SecurityConfig(CorsConfigurationSource corsConfigurationSource, JwtService jwtService) {
         this.corsConfigurationSource = corsConfigurationSource;
+        this.jwtService = jwtService;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        var jwtFilter = new JwtAuthFilter(jwtService); 
+
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource)) // Enable CORS
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
+            .cors(cors -> cors.configurationSource(corsConfigurationSource)) // Enable CORS 
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
-                // public endpoints (authentication, public metadata)
-                .requestMatchers("/auth/**", "/api/utenti/ruoli", "/api/utenti/stati", "/actuator/**").permitAll()
+                .requestMatchers("/auth/**", "/api/**", "/actuator/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form.disable())
@@ -42,15 +46,12 @@ public class SecurityConfig {
             .exceptionHandling(ex -> ex.authenticationEntryPoint(
                 (request, response, authException) ->
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
-            ));
-
-        // Note: when you create a JwtAuthenticationFilter bean, register it here via
-        // http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            ))
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // expose AuthenticationManager so controllers (Auth) can use it
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();

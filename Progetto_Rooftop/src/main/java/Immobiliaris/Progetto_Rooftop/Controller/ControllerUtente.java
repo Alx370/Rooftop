@@ -7,6 +7,7 @@ import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class ControllerUtente {
      * Retrieves all users
      */
     @GetMapping
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // permit viewing only by AMMINISTRATORE
     public ResponseEntity<List<Utente>> getAllUtenti() {
         List<Utente> utenti = serviceUtente.getAll();
         return ResponseEntity.ok(utenti);
@@ -36,6 +38,7 @@ public class ControllerUtente {
      * Retrieves a user by ID
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // permit viewing only by AMMINISTRATORE
     public ResponseEntity<Utente> getUtenteById(@PathVariable Integer id) {
         Utente utente = serviceUtente.getById(id);
         return ResponseEntity.ok(utente);
@@ -45,6 +48,7 @@ public class ControllerUtente {
      * GET /api/utenti/email/{email}
      * Retrieves a user by email
      */
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // permit viewing only by AMMINISTRATORE
     @GetMapping("/email/{email}")
     public ResponseEntity<Utente> getUtenteByEmail(@PathVariable String email) {
         Utente utente = serviceUtente.getByEmail(email);
@@ -56,6 +60,7 @@ public class ControllerUtente {
      * Retrieves all users with a specific role
      */
     @GetMapping("/ruolo/{ruolo}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE')")
     public ResponseEntity<List<Utente>> getUtentiByRuolo(@PathVariable Ruolo ruolo) {
         List<Utente> utenti = serviceUtente.getByRuolo(ruolo);
         return ResponseEntity.ok(utenti);
@@ -65,6 +70,7 @@ public class ControllerUtente {
      * GET /api/utenti/stato/{stato}
      * Retrieves all users with a specific status
      */
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // permit viewing by AMMINISTRATORE, AGENTE, VALUTATORE
     @GetMapping("/stato/{stato}")
     public ResponseEntity<List<Utente>> getUtentiByStato(@PathVariable Stato stato) {
         List<Utente> utenti = serviceUtente.getByStato(stato);
@@ -75,6 +81,7 @@ public class ControllerUtente {
      * GET /api/utenti/ruoli
      * Returns the available roles (enum names) so the frontend can populate selects
      */
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // permit viewing by AMMINISTRATORE, AGENTE, VALUTATORE
     @GetMapping("/ruoli")
     public ResponseEntity<List<String>> getAvailableRuoli() {
         List<String> ruoli = Arrays.stream(Ruolo.values())
@@ -100,6 +107,7 @@ public class ControllerUtente {
      * Creates a new user
      */
     @PostMapping
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // create other user/admin only by AMMINISTRATORE
     public ResponseEntity<Utente> createUtente(@RequestBody Utente utente) {
         Utente nuovoUtente = serviceUtente.create(utente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoUtente);
@@ -110,6 +118,7 @@ public class ControllerUtente {
      * Updates an existing user
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // update only by AMMINISTRATORE
     public ResponseEntity<Utente> updateUtente(
             @PathVariable Integer id,
             @RequestBody Utente utente) {
@@ -122,6 +131,7 @@ public class ControllerUtente {
      * Updates only the password of a user
      */
     @PatchMapping("/{id}/password")
+    @PreAuthorize("hasRole('AMMINISTRATORE') or #id == authentication.principal") // permit AMMINISTRATORE or the user themselves to update password
     public ResponseEntity<Void> updatePassword(
             @PathVariable Integer id,
             @RequestBody Map<String, String> payload) {
@@ -135,6 +145,7 @@ public class ControllerUtente {
      * Deletes a user
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // delete only by AMMINISTRATORE
     public ResponseEntity<Void> deleteUtente(@PathVariable Integer id) {
         serviceUtente.delete(id);
         return ResponseEntity.noContent().build();

@@ -6,6 +6,7 @@ import Immobiliaris.Progetto_Rooftop.Services.ServicePropietario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ControllerProprietario {
      * Retrieves all owners
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // viewing all owners by AMMINISTRATORE or AGENTE
     public ResponseEntity<List<Proprietario>> getAllProprietari() {
         List<Proprietario> proprietari = servicePropietario.getAll();
         return ResponseEntity.ok(proprietari);
@@ -34,6 +36,7 @@ public class ControllerProprietario {
      * Retrieves an owner by ID
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // viewing owner by AMMINISTRATORE or AGENTE
     public ResponseEntity<Proprietario> getProprietarioById(@PathVariable Integer id) {
         Proprietario proprietario = servicePropietario.getById(id);
         return ResponseEntity.ok(proprietario);
@@ -44,6 +47,7 @@ public class ControllerProprietario {
      * Retrieves an owner by email
      */
     @GetMapping("/email/{email}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // viewing owner by AMMINISTRATORE or AGENTE
     public ResponseEntity<Proprietario> getProprietarioByEmail(@PathVariable String email) {
         Proprietario proprietario = servicePropietario.getByEmail(email);
         return ResponseEntity.ok(proprietario);
@@ -54,6 +58,7 @@ public class ControllerProprietario {
      * Retrieves all owners with a specific status
      */
     @GetMapping("/stato/{stato}")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE', 'VALUTATORE')") // viewing owners by status by AMMINISTRATORE or AGENTE
     public ResponseEntity<List<Proprietario>> getProprietariByStato(@PathVariable Stato stato) {
         List<Proprietario> proprietari = servicePropietario.getByStato(stato);
         return ResponseEntity.ok(proprietari);
@@ -72,11 +77,12 @@ public class ControllerProprietario {
     }
 
     /**
-     * POST /api/proprietari
+     * POST /api/proprietari/registrati
      * Creates a new owner
      */
-    @PostMapping
-    public ResponseEntity<Proprietario> createProprietario(@RequestBody Proprietario proprietario) {
+    @PostMapping("/registrati")
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // create owner by AMMINISTRATORE or AGENTE
+    public ResponseEntity<Proprietario> createProprietarioUtente(@RequestBody Proprietario proprietario) {
         Proprietario nuovoProprietario = servicePropietario.create(proprietario);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoProprietario);
     }
@@ -86,7 +92,16 @@ public class ControllerProprietario {
      * Updates an existing owner
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Proprietario> updateProprietario(
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // update owner by AMMINISTRATORE or AGENTE
+    public ResponseEntity<Proprietario> updateProprietarioAdmin(
+            @PathVariable Integer id,
+            @RequestBody Proprietario proprietario) {
+        Proprietario proprietarioAggiornato = servicePropietario.update(id, proprietario);
+        return ResponseEntity.ok(proprietarioAggiornato);
+    }
+
+    @PutMapping("utente/{id}")
+    public ResponseEntity<Proprietario> updateProprietarioUtente(
             @PathVariable Integer id,
             @RequestBody Proprietario proprietario) {
         Proprietario proprietarioAggiornato = servicePropietario.update(id, proprietario);
@@ -98,6 +113,7 @@ public class ControllerProprietario {
      * Deletes an owner
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // delete owner only by AMMINISTRATORE
     public ResponseEntity<Void> deleteProprietario(@PathVariable Integer id) {
         servicePropietario.delete(id);
         return ResponseEntity.noContent().build();

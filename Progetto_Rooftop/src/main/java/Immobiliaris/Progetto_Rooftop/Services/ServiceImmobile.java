@@ -13,10 +13,9 @@ public interface ServiceImmobile {
 
     List<Immobile> getAll();
 
-    Immobile getById();
+    Immobile getById(int id);
 
     Immobile update(int id, Immobile updated);
 
-    void delete(int id);
-    
+    void delete(int id);    
 }

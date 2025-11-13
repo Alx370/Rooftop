@@ -35,11 +35,11 @@ public class Nota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_nota")
-    private Integer id_nota;
+    private Integer idNota;
 
     /** Immobile collegato (opzionale: la nota può non riferirsi ad un immobile). */
     @Column(name = "id_immobile")
-    private Integer id_immobile;
+    private Integer idImmobile;
 
     /** Agente autore della nota. */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,12 +64,12 @@ public class Nota {
 
     /** Timestamp di creazione della nota (impostato in prePersist, non aggiornabile). */
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @PrePersist
     public void prePersist() {
-        if (created_at == null) {
-            created_at = LocalDateTime.now();
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
         }
         if (tipo == null) {
             tipo = TipoNota.INTERNO;

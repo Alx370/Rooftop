@@ -54,7 +54,7 @@ public class ServiceNotaImpl implements ServiceNota {
     @Transactional(readOnly = true)
     /** Restituisce tutte le note ordinate per data di creazione decrescente. */
     public List<Nota> getAllOrdered() {
-        return notaRepo.findAllByOrderByCreated_atDesc();
+        return notaRepo.findAllByOrderByCreatedAtDesc();
     }
 
     @Override
@@ -69,21 +69,21 @@ public class ServiceNotaImpl implements ServiceNota {
     @Transactional(readOnly = true)
     /** Restituisce le note filtrate per id agente. */
     public List<Nota> getByAgente(Integer idAgente) {
-        return notaRepo.findAllByAgente_Id_utenteOrderByCreated_atDesc(idAgente);
+        return notaRepo.findAllByAgente_Id_utenteOrderByCreatedAtDesc(idAgente);
     }
 
     @Override
     @Transactional(readOnly = true)
     /** Restituisce le note filtrate per id immobile. */
     public List<Nota> getByImmobile(Integer idImmobile) {
-        return notaRepo.findAllById_immobileOrderByCreated_atDesc(idImmobile);
+        return notaRepo.findAllByIdImmobileOrderByCreatedAtDesc(idImmobile);
     }
 
     @Override
     @Transactional(readOnly = true)
     /** Restituisce le note filtrate per id immobile e visibilità. */
     public List<Nota> getByImmobileAndVisibilita(Integer idImmobile, VisibilitaNota visibilita) {
-        return notaRepo.findAllById_immobileAndVisibilitaOrderByCreated_atDesc(idImmobile, visibilita);
+        return notaRepo.findAllByIdImmobileAndVisibilitaOrderByCreatedAtDesc(idImmobile, visibilita);
     }
 
     @Override
@@ -103,8 +103,8 @@ public class ServiceNotaImpl implements ServiceNota {
         if (updated.getTipo() != null) {
             existing.setTipo(updated.getTipo());
         }
-        if (updated.getId_immobile() != null) {
-            existing.setId_immobile(updated.getId_immobile());
+        if (updated.getIdImmobile() != null) {
+            existing.setIdImmobile(updated.getIdImmobile());
         }
         if (updated.getAgente() != null && updated.getAgente().getId_utente() != 0) {
             existing.setAgente(updated.getAgente());

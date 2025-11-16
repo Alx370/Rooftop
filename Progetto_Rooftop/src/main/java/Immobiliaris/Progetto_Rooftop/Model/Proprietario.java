@@ -1,19 +1,13 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.EnumType;
+import java.util.List;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "proprietari")
 public class Proprietario {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proprietario")
@@ -21,15 +15,12 @@ public class Proprietario {
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
-    // length=100 chosen to match DB schema (VARCHAR(100)) and keep consistent naming limits.
 
     @Column(name = "cognome", nullable = false, length = 100)
     private String cognome;
 
-    @Column(name = "email", nullable = false, unique = true, length = 150)
+    @Column(name = "email", unique = true, length = 150, nullable = false)
     private String email;
-    // Unique + not null to ensure one account per email.
-    // length=150 chosen to allow long emails.
 
     @Column(name = "telefono", length = 20)
     private String telefono;
@@ -41,11 +32,24 @@ public class Proprietario {
     private boolean consenso_marketing;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "ruolo", nullable = false, length = 20)
+    private RuoloProprietario ruolo;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "stato", nullable = false, length = 20)
     private Stato stato;
-    // Store user state as string ("ACTIVE", etc.)
-    // EnumType.STRING ensures DB and Java stay aligned even if enum order changes.
 
+    @Column(name = "immagine_profilo")
+    private String immagineProfilo;
+
+    @OneToMany(mappedBy = "proprietario")
+    private List<Immobile> immobili;
+
+    public Proprietario() {
+        // valori di default coerenti con DB
+        this.ruolo = RuoloProprietario.PROPRIETARIO;
+        this.stato = Stato.ATTIVO;
+    }
 
     public int getId_proprietario() {
         return id_proprietario;
@@ -103,11 +107,35 @@ public class Proprietario {
         this.consenso_marketing = consenso_marketing;
     }
 
+    public RuoloProprietario getRuolo() {
+        return ruolo;
+    }
+
+    public void setRuolo(RuoloProprietario ruolo) {
+        this.ruolo = ruolo;
+    }
+
     public Stato getStato() {
         return stato;
     }
 
     public void setStato(Stato stato) {
         this.stato = stato;
+    }
+
+    public String getImmagineProfilo() {
+        return immagineProfilo;
+    }
+
+    public void setImmagineProfilo(String immagineProfilo) {
+        this.immagineProfilo = immagineProfilo;
+    }
+
+    public List<Immobile> getImmobili() {
+        return immobili;
+    }
+
+    public void setImmobili(List<Immobile> immobili) {
+        this.immobili = immobili;
     }
 }

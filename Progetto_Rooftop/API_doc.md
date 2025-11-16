@@ -1,13 +1,61 @@
 # Documentazione API - Rooftop Backend
 
 ## Indice
+- [Autenticazione](#autenticazione)
 - [Utenti](#utenti)
 - [Clienti](#clienti)
 - [Proprietari](#proprietari)
+- [Immobili](#immobili)
 - [Recensioni](#recensioni)
 - [Note](#note)
 - [FAQ](#faq)
 - [Autenticazione e Autorizzazioni](#autenticazione-e-autorizzazioni)
+
+---
+
+## Autenticazione
+**Base URL**: `/api/auth`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/auth/login` | Login utente e generazione JWT token | Pubblico | Body: `LoginReq` JSON |
+| POST | `/api/auth/logout` | Logout utente (client-side token removal) | Pubblico | - |
+| GET | `/api/auth/me` | Recupera info utente autenticato | Utente autenticato | - |
+
+### Esempio Body Login
+```json
+{
+  "email": "mario.rossi@example.com",
+  "password": "securePassword123"
+}
+```
+
+### Esempio Response Login
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Esempio Response /me
+```json
+{
+  "authenticated": true,
+  "nome": "Mario",
+  "cognome": "Rossi",
+  "email": "mario.rossi@example.com",
+  "telefono": "+39 333 1234567",
+  "stato": "ATTIVO",
+  "authorities": ["ROLE_AGENTE"]
+}
+```
+
+### Esempio Response Logout
+```json
+{
+  "message": "Logout effettuato con successo"
+}
+```
 
 ---
 
@@ -109,6 +157,57 @@ Authorization: Bearer <token>
   "stato": "ATTIVO",
   "indirizzo": "Corso Vittorio Emanuele 45, Roma"
 }
+```
+
+---
+
+## Immobili
+**Base URL**: `/api/immobili`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| GET | `/api/immobili` | Recupera tutti gli immobili | Pubblico | - |
+| GET | `/api/immobili/{id}` | Recupera un immobile per ID | Pubblico | Path: `id` |
+| POST | `/api/immobili` | Crea un nuovo immobile | AMMINISTRATORE, AGENTE, PROPRIETARIO | Body: `Immobile` JSON |
+| PUT | `/api/immobili/{id}` | Aggiorna un immobile esistente | AMMINISTRATORE, AGENTE, PROPRIETARIO | Path: `id`, Body: `Immobile` JSON |
+| DELETE | `/api/immobili/{id}` | Elimina un immobile | AMMINISTRATORE | Path: `id` |
+
+### Esempio Body Immobile
+```json
+{
+  "id_proprietario": 5,
+  "id_agente": 3,
+  "titolo": "Appartamento moderno con vista mare",
+  "descrizione": "Luminoso trilocale completamente ristrutturato...",
+  "indirizzo": "Via Garibaldi",
+  "civico": "42",
+  "citta": "Napoli",
+  "provincia": "NA",
+  "cap": "80121",
+  "quartiere": "Centro Storico",
+  "tipologia": "APPARTAMENTO",
+  "metri_quadri": 85.50,
+  "piano": "3",
+  "anno_costruzione": 1980,
+  "prezzo_richiesto": 250000.00,
+  "stato_immobile": "BUONO",
+  "stato_annuncio": "VALUTAZIONE"
+}
+```
+
+### Enum Tipologia Immobile
+```
+APPARTAMENTO, VILLA, CASA_INDIPENDENTE, ATTICO, LOFT, MANSARDA, RUSTICO, CASALE
+```
+
+### Enum Stato Immobile
+```
+OTTIMO, BUONO, DA_RISTRUTTURARE, NUOVO
+```
+
+### Enum Stato Annuncio
+```
+VALUTAZIONE, PUBBLICATO, VENDUTO, RITIRATO, SOSPESO
 ```
 
 ---
@@ -244,5 +343,5 @@ GENERALE, VENDITA, ACQUISTO, VALUTAZIONE, CONTATTI
 PRIVATA, CONDIVISA, PUBBLICA
 ```
 
-**Versione Documento**: 1.0  
-**Data Ultimo Aggiornamento**: 12 Novembre 2025
+**Versione Documento**: 1.1  
+**Data Ultimo Aggiornamento**: 16 Novembre 2025

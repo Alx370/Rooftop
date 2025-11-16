@@ -38,7 +38,19 @@ public class AuthController {
         return new LoginRes(token);
     }
 
-    // comodo per debug rapido del filtro JWT
+    /**
+     * Logout (stateless with JWT).
+     * The client must delete the token on the frontend.
+     * The token remains technically valid until its natural expiration.
+     */
+    @PostMapping("/logout")
+    public Map<String, String> logout() {
+        return Map.of(
+            "message", "Logout effettuato con successo"
+        );
+    }
+
+    // debug endpoint to verify authentication and get user details
     @GetMapping("/me")
     public Map<String, Object> me() {
         var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();

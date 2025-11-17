@@ -161,6 +161,7 @@
 
 .card-agente {
   background: #0c0d33;
+  margin-bottom: 65px; 
   color: white;
   padding: 25px 25px 0 25px;
   border-radius: 25px;
@@ -211,7 +212,7 @@
 }
 
 .map-box img {
-  width: 100%;
+  width: 50%;
   border-radius: 25px;
   margin-top: 20px;
 }
@@ -249,4 +250,47 @@
   .hero-text p {
     text-align: center;
   }
+}
+
+
+/* ------------------------------------------------------ */
+/* BOTTONI RECAPITI */
+/* ------------------------------------------------------ */
+
+.bottone-recapiti-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.recapiti-btn {
+  background-color: #048A81;
+  color: white;
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(138, 138, 138, 0.4);
+} 
+
+
+/* ------------------------------------------------------ */
+/* STORIA SECTION */
+/* ------------------------------------------------------ */
+.storia-section {
+  padding: 80px 50px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.title-storia {
+  font-size: 42px;
+  margin-bottom: 20px;
+  text-align: left;
 }

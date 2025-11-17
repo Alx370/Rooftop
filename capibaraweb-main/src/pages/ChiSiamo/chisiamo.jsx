@@ -73,6 +73,9 @@ export default function ChiSiamo() {
       ? agentsData
       : agentsData.filter((a) => a.provincia === selectedProvince);
 
+  const phoneNumber = "+391234567890";
+  const emailAddress = "info@immobiliaris.com";
+
   return (
     <div className="chisiamo">
 
@@ -166,6 +169,7 @@ export default function ChiSiamo() {
         </div>
       </section>
 
+
       {/* -------------------------------- */}
       {/* MAPPA */}
       {/* -------------------------------- */}
@@ -174,9 +178,36 @@ export default function ChiSiamo() {
         <p>Via Margherite 56 (TO) CAP 10059</p>
 
         <div className="map-box">
-          <img src="/imgs/mappa.png" alt="Mappa Google" />
+          <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" />
         </div>
       </section>
+
+
+      {/* -------------------------------- */}
+      {/* BOTTONI RECAPITI */}
+      {/* -------------------------------- */}
+      <section className="bottone-recapiti-section">
+        <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" > +39 123 456 7890 </button>
+      </section>    
+
+      <section className="bottone-recapiti-section">
+        <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > info@immobiliaris.com </button>
+      </section>    
+
+
+    {/* -------------------------------- */}
+    {/* LA NOSTRA STORIA */}
+    {/* -------------------------------- */}
+    <section className="storia-section">
+      <h2 className="title-storia">La nostra storia:</h2>
+      <p>
+        Fondata nel <strong>cuore di Torino</strong> nel 2005, la nostra agenzia immobiliare nasce <br />
+        dalla <strong>passione</strong> per il mercato immobiliare residenziale e dalla volontà di  <br />
+        offrire un servizio <strong>trasparente, professionale e su misura. </strong>
+      </p>
+    </section>
+
+
 
     </div>
   );

@@ -1,12 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  // Ref per la griglia dei testimonial
   const testimonialGridRef = useRef(null);
-
-  // Funzione per scroll fluido
   const smoothScroll = (direction) => {
     if (!testimonialGridRef.current) return;
 
@@ -22,16 +19,33 @@ const Home = () => {
       behavior: "smooth",
     });
   };
-
-
-  // Array dinamico dei testimonial
-  const testimonials = [
+  const [testimonials, setTestimonials] = useState([
     { text: "Esperienza fantastica, servizio impeccabile e staff super disponibile. Consigliatissimo!", img: "laura.png", name: "Marco Rossi" },
     { text: "Mi sono sentita seguita passo dopo passo. Hanno reso tutto semplice e veloce, anche nei momenti più stressanti.", img: "laura.png", name: "Giulia Verdi" },
     { text: "Servizio eccellente! Il team è stato professionale e attento ai dettagli. Tornerò sicuramente per il prossimo progetto!", img: "laura.png", name: "Luca Bianchi" },
     { text: "Professionalità e cortesia ineguagliabili. Consiglio vivamente a chiunque voglia vendere o affittare.", img: "laura.png", name: "Anna Neri" },
     { text: "Ottima esperienza, tutto semplice e veloce grazie al team. Tornerò sicuramente.", img: "laura.png", name: "Marco L." }
-  ];
+  ]);
+
+  useEffect(() => {
+    const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+    fetch(`${base}/api/recensioni`)
+      .then((res) => {
+        if (!res.ok) throw new Error("API error");
+        return res.json();
+      })
+      .then((data) => {
+        const mapped = (Array.isArray(data) ? data : []).map((r) => ({
+          text: r.commento,
+          img: "laura.png",
+          name: r.nome_cliente || "Cliente"
+        }));
+        if (mapped.length) setTestimonials(mapped);
+      })
+      .catch(() => {
+        // fallback già impostato nello state
+      });
+  }, []);
 
 
   return (
@@ -48,7 +62,9 @@ const Home = () => {
               Vendere casa è un percorso importante. Noi lo rendiamo più semplice. Affidati ai nostri esperti per una valutazione accurata e un supporto concreto, dal primo passo alla firma.
             </p>
             <div className="hero-buttons">
-              <Link className="btn primary" to="/valutazione" >Ottieni valutazione</Link>
+              <Link className="btn primary" to="/valutazione">Ottieni valutazione</Link>
+              <Link className="btn primary" to="/chi-siamo">Scopri chi siamo</Link>
+              <Link className="btn primary" to="/faq">FAQ</Link>
             </div>
           </div>
         </div>
@@ -64,7 +80,7 @@ const Home = () => {
             <div className="card-content">
               <h3>Per venderlo</h3>
               <p>Ti guidiamo nella vendita con metodo, trasparenza e attenzione al valore.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="/valutazione">Valuta</Link>
             </div>
           </div>
           <div className="card">
@@ -74,7 +90,7 @@ const Home = () => {
               <p>Gestiamo tutto noi: inquilini,
                 contratti e sicurezza del
                 tuo immobile.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="/valutazione">Valuta</Link>
             </div>
           </div>
         </div>

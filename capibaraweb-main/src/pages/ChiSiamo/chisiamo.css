@@ -285,7 +285,6 @@
 /* ------------------------------------------------------ */
 .storia-section {
   padding: 80px 50px;
-  text-align: left;
   font-size: 20px;
 }
 
@@ -293,4 +292,20 @@
   font-size: 42px;
   margin-bottom: 20px;
   text-align: left;
+}
+
+.storia-section p{
+  text-align: left;
+  font-family: Montserrat, sans-serif; 
+}
+
+.map-box-storia img {
+  width: 50%;
+  height: 450px;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

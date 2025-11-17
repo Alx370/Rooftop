@@ -76,6 +76,11 @@ export default function ChiSiamo() {
   const phoneNumber = "+391234567890";
   const emailAddress = "info@immobiliaris.com";
 
+
+{/* -------------------------------- */}
+{/* INIZIO HTML */}
+{/* -------------------------------- */}
+
   return (
     <div className="chisiamo">
 
@@ -199,15 +204,23 @@ export default function ChiSiamo() {
     {/* LA NOSTRA STORIA */}
     {/* -------------------------------- */}
     <section className="storia-section">
+      {/* devo dividere questa parte in due colonne per la Mole Antonelliana */}
       <h2 className="title-storia">La nostra storia:</h2>
       <p>
         Fondata nel <strong>cuore di Torino</strong> nel 2005, la nostra agenzia immobiliare nasce <br />
         dalla <strong>passione</strong> per il mercato immobiliare residenziale e dalla volontà di  <br />
         offrire un servizio <strong>trasparente, professionale e su misura. </strong>
       </p>
+
+      <p>
+        Oggi siamo un <strong>punto di riferimento</strong> per chi cerca appartamenti in vendita a Torino, <br />immobili di pregio, 
+        case indipendenti e <strong>investimenti immobiliari.</strong>
+      </p>
     </section>
 
-
+    <div className="map-box-storia">
+        <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino"/>
+    </div>
 
     </div>
   );

@@ -1,18 +1,26 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
-import Immobiliaris.Progetto_Rooftop.Model.CategoriaFaq;
-import Immobiliaris.Progetto_Rooftop.Model.Faq;
-import Immobiliaris.Progetto_Rooftop.Services.ServiceFaq;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import Immobiliaris.Progetto_Rooftop.Model.CategoriaFaq;
+import Immobiliaris.Progetto_Rooftop.Model.Faq;
+import Immobiliaris.Progetto_Rooftop.Services.ServiceFaq;
 
 /**
  * REST controller exposing CRUD endpoints for managing FAQs.
@@ -104,5 +112,37 @@ public class ControllerFaq {
     public ResponseEntity<Void> deleteFaq(@PathVariable Integer id) {
         serviceFaq.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * GET /api/faq/stats
+     * Returns FAQ statistics
+     */
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        try {
+            List<Faq> allFaqs = serviceFaq.getAllOrdered();
+            Map<String, Object> stats = new java.util.HashMap<>();
+            stats.put("totalFaqs", allFaqs.size());
+            stats.put("categories", Arrays.stream(CategoriaFaq.values())
+                    .map(Enum::name)
+                    .collect(Collectors.toList()));
+            return ResponseEntity.ok(stats);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * GET /api/faq/test
+     * Test connection endpoint
+     */
+    @GetMapping("/test")
+    public ResponseEntity<Map<String, String>> testConnection() {
+        Map<String, String> response = Map.of(
+            "status", "success",
+            "message", "Connessione al backend FAQ stabilita con successo"
+        );
+        return ResponseEntity.ok(response);
     }
 }

@@ -125,22 +125,27 @@ export default function ChiSiamo() {
         </button>
 
         {openMenu && (
-          <div className="dropdown">
-            {provinces.map((prov) => (
-              <div
-                key={prov}
-                className="dropdown-item"
-                onClick={() => {
-                  setSelectedProvince(prov);
-                  setOpenMenu(false);
-                }}
-              >
-                {prov}
-              </div>
-            ))}
+          <div className="modal-overlay" onClick={() => setOpenMenu(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <h3>Seleziona la tua provincia</h3>
+              {provinces.map((prov) => (
+                <div
+                  key={prov}
+                  className="dropdown-item"
+                  onClick={() => {
+                    setSelectedProvince(prov);
+                    setOpenMenu(false);
+                  }}
+                >
+                  {prov}
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </section>
+
+
 
       {/* -------------------------------- */}
       {/* CARD AGENTI */}

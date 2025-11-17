@@ -12,6 +12,8 @@ const Register = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,9 +32,45 @@ const Register = () => {
       setError("Le password non coincidono.");
       return;
     }
-
-    console.log("Registrazione effettuata con:", formData);
     setError("");
+    setSuccess("");
+    setLoading(true);
+
+    const parts = name.trim().split(/\s+/);
+    const nome = parts.shift() || name.trim();
+    const cognome = parts.join(" ") || "";
+
+    const payload = {
+      nome,
+      cognome,
+      email: email.trim().toLowerCase(),
+      password: password.trim(),
+    };
+
+    const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+    fetch(`${base}/api/utenti/registrati`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          const message = (data && (data.message || data.error)) || "Errore di registrazione";
+          throw new Error(message);
+        }
+        return data;
+      })
+      .then(() => {
+        setSuccess("Registrazione completata. Ora puoi accedere.");
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -88,13 +126,14 @@ const Register = () => {
 
           {error && <p className="register-error">{error}</p>}
 
-          <button type="submit" className="register-button">
-            Registrati
+          <button type="submit" className="register-button" disabled={loading}>
+            {loading ? "Invio..." : "Registrati"}
           </button>
 
           <p className="register-login">
             Hai già un account? <Link to="/login">Accedi</Link>
           </p>
+          {success && <p className="register-subtitle">{success} <Link to="/login">Vai al login</Link></p>}
         </form>
       </div>
     </section>

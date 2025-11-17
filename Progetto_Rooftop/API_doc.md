@@ -329,4 +329,4 @@ PRIVATA, CONDIVISA, PUBBLICA
 ```
 
 **Versione Documento**: 1.1  
-**Data Ultimo Aggiornamento**: 16 Novembre 2025
+**Data Ultimo Aggiornamento**: 17 Novembre 2025

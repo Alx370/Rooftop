@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { homeService } from "../../services/homeService";
 
 const Home = () => {
   const testimonialGridRef = useRef(null);
@@ -26,25 +27,28 @@ const Home = () => {
     { text: "Professionalità e cortesia ineguagliabili. Consiglio vivamente a chiunque voglia vendere o affittare.", img: "laura.png", name: "Anna Neri" },
     { text: "Ottima esperienza, tutto semplice e veloce grazie al team. Tornerò sicuramente.", img: "laura.png", name: "Marco L." }
   ]);
+  const [newsEmail, setNewsEmail] = useState("");
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
 
   useEffect(() => {
-    const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
-    fetch(`${base}/api/recensioni`)
-      .then((res) => {
-        if (!res.ok) throw new Error("API error");
-        return res.json();
-      })
-      .then((data) => {
-        const mapped = (Array.isArray(data) ? data : []).map((r) => ({
-          text: r.commento,
-          img: "laura.png",
-          name: r.nome_cliente || "Cliente"
-        }));
-        if (mapped.length) setTestimonials(mapped);
-      })
-      .catch(() => {
-        // fallback già impostato nello state
-      });
+    const fetchReviews = async () => {
+      try {
+        const reviews = await homeService.getReviews();
+        if (reviews && reviews.length > 0) {
+          const mapped = reviews.map((r) => ({
+            text: r.commento,
+            img: "laura.png",
+            name: r.nome_cliente || "Cliente"
+          }));
+          setTestimonials(mapped);
+        }
+      } catch (error) {
+        console.error('Errore nel caricamento recensioni:', error);
+        // Usa i valori di default già impostati nello state
+      }
+    };
+
+    fetchReviews();
   }, []);
 
 
@@ -157,9 +161,32 @@ const Home = () => {
         <h2>Iscriviti alla newsletter</h2>
         <p>Resta aggiornato con consigli e approfondimenti dai nostri esperti per </p>
         <p>vendere o affittare in modo consapevole.</p>
-        <form className="newsletter-form">
-          <input type="email" placeholder="Inserisci la tua email" />
-          <button className="btn primary">Iscriviti</button>
+        <form className="newsletter-form" onSubmit={async (e) => {
+          e.preventDefault();
+          if (!newsEmail) return;
+
+          setNewsletterLoading(true);
+          try {
+            await homeService.subscribeNewsletter(newsEmail);
+            alert('Grazie per la sottoscrizione!');
+            setNewsEmail('');
+          } catch (error) {
+            console.error('Errore sottoscrizione:', error);
+            alert('Errore nella sottoscrizione. Riprova più tardi.');
+          } finally {
+            setNewsletterLoading(false);
+          }
+        }}>
+          <input 
+            type="email" 
+            placeholder="Inserisci la tua email"
+            value={newsEmail}
+            onChange={(e) => setNewsEmail(e.target.value)}
+            required
+          />
+          <button className="btn primary" type="submit" disabled={newsletterLoading}>
+            {newsletterLoading ? 'Caricamento...' : 'Iscriviti'}
+          </button>
         </form>
       </section>
     </div>

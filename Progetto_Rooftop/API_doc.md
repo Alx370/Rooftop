@@ -89,6 +89,7 @@ Authorization: Bearer <token>
 | GET | `/api/utenti/ruoli` | Lista dei ruoli disponibili (enum) | AMMINISTRATORE, AGENTE, VALUTATORE | - |
 | GET | `/api/utenti/stati` | Lista degli stati disponibili (enum) | Pubblico | - |
 | POST | `/api/utenti` | Crea un nuovo utente | AMMINISTRATORE | Body: `Utente` JSON |
+| POST | `/api/utenti/registrati` | Registrazione nuovo proprietario | Pubblico | Body: `Utente` JSON (ruolo e stato forzati) |
 | PUT | `/api/utenti/{id}` | Aggiorna un utente esistente | AMMINISTRATORE | Path: `id`, Body: `Utente` JSON |
 | PATCH | `/api/utenti/{id}/password` | Aggiorna solo la password | AMMINISTRATORE o utente stesso | Path: `id`, Body: `{"newPassword": "..."}` |
 | DELETE | `/api/utenti/{id}` | Elimina un utente | AMMINISTRATORE | Path: `id` |
@@ -101,9 +102,22 @@ Authorization: Bearer <token>
   "email": "mario.rossi@example.com",
   "password": "securePassword123",
   "ruolo": "AGENTE",
+  "telefono": "+39 333 1234567",
   "stato": "ATTIVO"
 }
 ```
+
+### Esempio Body Registrazione Proprietario
+```json
+{
+  "nome": "Giuseppe",
+  "cognome": "Verdi",
+  "email": "giuseppe.verdi@example.com",
+  "password": "securePassword123",
+  "telefono": "+39 333 9876543"
+}
+```
+**Nota**: L'endpoint `/api/utenti/registrati` forza automaticamente `ruolo: "PROPRIETARIO"` e `stato: "ATTIVO"`, indipendentemente dai valori inviati nel body.
 
 ---
 
@@ -127,35 +141,6 @@ Authorization: Bearer <token>
   "email": "laura.bianchi@example.com",
   "telefono": "+39 333 1234567",
   "indirizzo": "Via Roma 123, Milano"
-}
-```
-
----
-
-## Proprietari
-**Base URL**: `/api/proprietari`
-
-| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
-|--------|----------|-------------|----------------|-------------|
-| GET | `/api/proprietari` | Recupera tutti i proprietari | AMMINISTRATORE, AGENTE, VALUTATORE | - |
-| GET | `/api/proprietari/{id}` | Recupera un proprietario per ID | AMMINISTRATORE, AGENTE, VALUTATORE | Path: `id` |
-| GET | `/api/proprietari/email/{email}` | Recupera un proprietario per email | AMMINISTRATORE, AGENTE, VALUTATORE | Path: `email` |
-| GET | `/api/proprietari/stato/{stato}` | Recupera proprietari per stato | AMMINISTRATORE, AGENTE, VALUTATORE | Path: `stato` (enum) |
-| GET | `/api/proprietari/stati` | Lista degli stati disponibili (enum) | Pubblico | - |
-| POST | `/api/proprietari/registrati` | Registrazione nuovo proprietario | AMMINISTRATORE, AGENTE | Body: `Proprietario` JSON |
-| PUT | `/api/proprietari/{id}` | Aggiorna proprietario (admin/agente) | AMMINISTRATORE, AGENTE | Path: `id`, Body: `Proprietario` JSON |
-| PUT | `/api/proprietari/utente/{id}` | Aggiorna proprietario (utente) | Pubblico | Path: `id`, Body: `Proprietario` JSON |
-| DELETE | `/api/proprietari/{id}` | Elimina un proprietario | AMMINISTRATORE | Path: `id` |
-
-### Esempio Body Proprietario
-```json
-{
-  "nome": "Giuseppe",
-  "cognome": "Verdi",
-  "email": "giuseppe.verdi@example.com",
-  "telefono": "+39 333 9876543",
-  "stato": "ATTIVO",
-  "indirizzo": "Corso Vittorio Emanuele 45, Roma"
 }
 ```
 

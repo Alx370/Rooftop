@@ -4,6 +4,7 @@ import "./ChiSiamo.css";
 export default function ChiSiamo() {
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState("Torino");
+  const [selectedAgent, setSelectedAgent] = useState(null);
 
   const provinces = ["Torino", "Cuneo", "Alessandria", "Asti", "Tutti"];
 
@@ -12,60 +13,84 @@ export default function ChiSiamo() {
       id: 1,
       nome: "Marco Rossi",
       descrizione: "Trasformo le case nei sogni di chi le cerca.",
+      presentazione:"Da oltre 15 anni accompagno persone nella scelta della casa giusta. Più di 289 clienti soddisfatti mi hanno scelto per la mia trasparenza, competenza e attenzione ai dettagli. Il mio obiettivo? Far sentire ogni cliente davvero a casa.",
       provincia: "Torino",
+      tel: "+391234567890",
+      mail: "mario.rossi@immobiliaris.com",
       img: "../../src/assets/images/chisiamo/Torino/agente1.png",
     },
     {
       id: 2,
       nome: "Pino Bianco",
       descrizione: "Ho fiuto per le occasioni da batticuore.",
+      presentazione:"Credo che trovare casa significhi trovare il proprio equilibrio quotidiano ti accompagno con professionalità trasparenza e impegno perché ogni scelta merita attenzione e rispetto.",
       provincia: "Torino",
+      tel: "+391234567890",
+      mail: "pino.bianco@immobiliaris.com",
       img: "../../src/assets/images/chisiamo/Torino/agente2.png",
     },
     {
       id: 3,
       nome: "Serena Fiocchi",
       descrizione: "Accompagno nella scelta della casa giusta.",
+      presentazione: "Non solo vendite: creo connessioni. Con oltre 100 clienti soddisfatti e 10 anni di esperienza, ti accompagno nella scelta della casa giusta, con ascolto, trasparenza e passione.",
       provincia: "Torino",
+      tel: "+391234567890",
+      mail: "serena.fiocchi@immobiliaris.com",
       img: "../../src/assets/images/chisiamo/Torino/agente3.png",
     },
     {
       id: 4,
       nome: "Alma Cosi",
       descrizione: "Creo connessioni tra spazi e persone.",
+      presentazione: "Ti accompagnerò nella scelta della casa giusta con ascolto, empatia e visione. Ogni spazio ha un potenziale: il mio lavoro è aiutarti a riconoscerlo.",
       provincia: "Torino",
+      tel: "+391234567890",
+      mail: "alma.cosi@immobiliaris.com",
       img: "../../src/assets/images/chisiamo/Torino/agente4.png",
     },
 
     // Agenti di un'altra provincia (da finire di modificare)
     {
-      id: 5,
-      nome: "Nicola Verdi",
-      descrizione: "Trasformo le case nei sogni di chi le cerca.",
-      provincia: "Cuneo",
-      img: "../../src/assets/images/chisiamo/Cuneo/",
-    },
-    {
-      id: 6,
-      nome: "Paolo Neri",
-      descrizione: "Ho fiuto per le occasioni da batticuore.",
-      provincia: "Cuneo",
-      img: "../../src/assets/images/chisiamo/Cuneo/agente2.png",
-    },
-    {
-      id: 7,
-      nome: "Francesca Bianchi",
-      descrizione: "Creo connessioni tra spazi e persone.",
-      provincia: "Cuneo",
-      img: "../../src/assets/images/chisiamo/Cuneo/agente3.png",
-    },
-    {
-      id: 8,
-      nome: "Tea Russo",
-      descrizione: "Accompagno nella scelta della casa giusta.",
-      provincia: "Cuneo",
-      img: "../../src/assets/images/chisiamo/Cuneo/agente4.png",
-    },
+    id: 5,
+    nome: "Luca Ferrero",
+    descrizione: "Trasformo il desiderio di casa in un percorso sereno.",
+    presentazione: "Ti guiderò con dedizione e ascolto per aiutarti a riconoscere il valore di ogni ambiente.",
+    provincia: "Cuneo",
+    tel: "+393441112233",
+    mail: "luca.ferrero@immobiliaris.com",
+    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  },
+  {
+    id: 6,
+    nome: "Sara Montesi",
+    descrizione: "Credo che ogni casa racconti una storia unica.",
+    presentazione: "Ti accompagnerò con sensibilità e chiarezza per trovare lo spazio che rispecchia davvero chi sei.",
+    provincia: "Cuneo",
+    tel: "+393478889900",
+    mail: "sara.montesi@immobiliaris.com",
+    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  },
+  {
+    id: 7,
+    nome: "Marco Galletto",
+    descrizione: "Ogni scelta immobiliare merita cura e attenzione.",
+    presentazione: "Sarò al tuo fianco con competenza e trasparenza per aiutarti a immaginare e costruire il tuo futuro.",
+    provincia: "Cuneo",
+    tel: "+393493225588",
+    mail: "marco.galletto@immobiliaris.com",
+    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  },
+  {
+    id: 8,
+    nome: "Elena Bessone",
+    descrizione: "Connetto persone e luoghi con equilibrio e visione.",
+    presentazione: "Ti accompagnerò con professionalità e ascolto per trovare la casa che possa diventare il tuo punto di partenza.",
+    provincia: "Cuneo",
+    tel: "+393402556677",
+    mail: "elena.bessone@immobiliaris.com",
+    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  }
   ];
 
   const filteredAgents =
@@ -77,9 +102,9 @@ export default function ChiSiamo() {
   const emailAddress = "info@immobiliaris.com";
 
 
-{/* -------------------------------- */}
-{/* INIZIO HTML */}
-{/* -------------------------------- */}
+  {/* -------------------------------- */ }
+  {/* INIZIO HTML */ }
+  {/* -------------------------------- */ }
 
   return (
     <div className="chisiamo">
@@ -151,6 +176,13 @@ export default function ChiSiamo() {
             </div>
           </div>
         )}
+
+        {/* Titolo provincia selezionata */}
+        <h2 className="provincia-selezionata-title">
+          {selectedProvince === "Tutti" 
+            ? "Tutti gli agenti" 
+            : `Agenti di ${selectedProvince}`}
+        </h2>
       </section>
 
 
@@ -167,12 +199,50 @@ export default function ChiSiamo() {
 
               <div className="foto-box">
                 <img src={agent.img} alt={agent.nome} />
-                <div className="arrow-card">›</div>
+                <div 
+                  className="arrow-card"
+                  onClick={() => setSelectedAgent(agent)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  ›
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
+
+      {/* -------------------------------- */}
+      {/* MODALE DI DETTAGLIO AGENTE */}
+      {/* -------------------------------- */}
+      {selectedAgent && (
+        <div className="agent-modal-overlay" onClick={() => setSelectedAgent(null)}>
+          <div className="agent-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="close-modal-btn" 
+              onClick={() => setSelectedAgent(null)}
+            >
+              ✕
+            </button>
+            
+            <div className="modal-left">
+              <img src={selectedAgent.img} alt={selectedAgent.nome} />
+            </div>
+            
+            <div className="modal-right">
+              <h2>{selectedAgent.nome}</h2>
+              <p className="modal-provincia">{selectedAgent.provincia}</p>
+              <p className="modal-presentazione">{selectedAgent.presentazione}</p>
+
+              <div className="modal-contact">
+                <h3><strong>Contattami per una consulenza</strong></h3>
+                <p>Telefono: <a href={`tel:${selectedAgent.tel}`}>{selectedAgent.tel}</a></p>
+                <p>Email: <a href={`mailTo:${selectedAgent.mail}`}>{selectedAgent.mail}</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
 
       {/* -------------------------------- */}
@@ -193,35 +263,52 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" > +39 123 456 7890 </button>
-      </section>    
+      </section>
 
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > info@immobiliaris.com </button>
-      </section>    
+      </section>
 
 
-    {/* -------------------------------- */}
-    {/* LA NOSTRA STORIA */}
-    {/* -------------------------------- */}
-    <section className="storia-section">
-      {/* devo dividere questa parte in due colonne per la Mole Antonelliana */}
-      <h2 className="title-storia">La nostra storia:</h2>
-      <p>
-        Fondata nel <strong>cuore di Torino</strong> nel 2005, la nostra agenzia immobiliare nasce <br />
-        dalla <strong>passione</strong> per il mercato immobiliare residenziale e dalla volontà di  <br />
-        offrire un servizio <strong>trasparente, professionale e su misura. </strong>
-      </p>
+      {/* -------------------------------- */}
+      {/* LA NOSTRA STORIA */}
+      {/* -------------------------------- */}
+      <section className="storia-container">
 
-      <p>
-        Oggi siamo un <strong>punto di riferimento</strong> per chi cerca appartamenti in vendita a Torino, <br />immobili di pregio, 
-        case indipendenti e <strong>investimenti immobiliari.</strong>
-      </p>
-    </section>
+        <div className="storia-section">
+          <h2 className="title-storia">La nostra storia:</h2>
 
-    <div className="map-box-storia">
-        <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino"/>
-    </div>
+          <p>
+            Fondata nel <strong>cuore di Torino</strong> nel 2005, la nostra agenzia immobiliare nasce <br />
+            dalla <strong>passione</strong> per il mercato immobiliare residenziale e dalla volontà di  <br />
+            offrire un servizio <strong>trasparente, professionale e su misura.</strong>
+          </p>
 
+          <p>
+            Oggi siamo un <strong>punto di riferimento</strong> per chi cerca appartamenti in vendita a Torino, <br />
+            immobili di pregio, case indipendenti e <strong>investimenti immobiliari.</strong>
+          </p>
+        </div>
+
+        <div className="map-box-storia">
+          <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino" />
+        </div>
+
+      </section>
+
+
+      {/* -------------------------------- */}
+      {/* I DATI */}
+      {/* -------------------------------- */}
+      <section className="hero-title">
+        <h1>Cosa abbiamo costruito insieme</h1>
+        <p>
+          In oltre 15 anni di attività, abbiamo aiutato centinaia di clienti a vendere casa, 
+          valutare immobili e trovare la soluzione abitativa ideale, costruendo relazioni basate 
+          sulla fiducia e sull'ascolto.
+        </p>
+      </section>
+      
     </div>
   );
 }

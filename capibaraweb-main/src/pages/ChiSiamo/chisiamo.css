@@ -75,8 +75,9 @@
 
 .filtro-provincia-section {
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
   position: relative;
 }
 
@@ -145,13 +146,23 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Titolo provincia selezionata */
+.provincia-selezionata-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-top: 40px;
+  animation: fadeIn 0.5s ease;
+}
+
 
 /* ------------------------------------------------------ */
 /* CARD AGENTI */
 /* ------------------------------------------------------ */
 
 .card-agenti-section {
-  padding: 120px;
+  padding: 50px 120px 20px 120px;
 }
 
 .cards-container {
@@ -198,6 +209,145 @@
 }
 
 /* ------------------------------------------------------ */
+/* MODALE DETTAGLIO AGENTE */
+/* ------------------------------------------------------ */
+
+.agent-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.agent-modal-content {
+  display: flex;
+  width: 800px;
+  max-width: 90%;
+  height: 500px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+}
+
+.close-modal-btn:hover {
+  background: white;
+  transform: rotate(90deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-left {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-right {
+  flex: 1;
+  background: var(--primary-color);
+  padding:  40px 40px 60px 40px;
+  flex-direction: column;
+  color: black;
+  background-color: #B6BDF7;
+}
+
+.modal-right h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.modal-provincia {
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-presentazione {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.modal-contact {
+  font-weight: 600;
+  padding: 0px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .agent-modal-content {
+    flex-direction: column;
+    height: auto;
+    max-height: 90vh;
+  }
+  
+  .modal-left {
+    height: 300px;
+  }
+  
+  .modal-right {
+    padding: 40px 30px;
+  }
+}
+
+
+/* ------------------------------------------------------ */
 /* MAPPA */
 /* ------------------------------------------------------ */
 
@@ -215,41 +365,6 @@
   width: 50%;
   border-radius: 25px;
   margin-top: 20px;
-}
-
-/* ------------------------------------------------------ */
-/* RESPONSIVE */
-/* ------------------------------------------------------ */
-
-@media (max-width: 900px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 550px) {
-  .cards-container {
-    grid-template-columns: 1fr;
-  }
-
-  .provincia-btn {
-    width: 90%;
-    justify-content: center;
-  }
-
-  .hero-content {
-    flex-direction: column;
-    width: 90%;
-    text-align: center;
-  }
-
-  .hero-text h1 {
-    text-align: center;
-  }
-
-  .hero-text p {
-    text-align: center;
-  }
 }
 
 
@@ -283,9 +398,20 @@
 /* ------------------------------------------------------ */
 /* STORIA SECTION */
 /* ------------------------------------------------------ */
+/* DUE COLONNE */
+.storia-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 50px 0px 50px;
+  gap: 40px;
+}
+
+/* COLONNA TESTO */
 .storia-section {
-  padding: 80px 50px;
+  flex: 1;
   font-size: 20px;
+  font-family: Montserrat, sans-serif;
 }
 
 .title-storia {
@@ -294,18 +420,17 @@
   text-align: left;
 }
 
-.storia-section p{
-  text-align: left;
-  font-family: Montserrat, sans-serif; 
+/* COLONNA IMMAGINE */
+.map-box-storia {
+  flex: 1;
+  display: flex;
+  margin-bottom: 150px;
 }
 
 .map-box-storia img {
-  width: 50%;
-  height: 450px;
-  border-radius: 25px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  max-width: 700px;
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+  object-fit: cover;
 }

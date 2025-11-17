@@ -11,5 +11,7 @@ public enum Ruolo {
     /** Agente immobiliare operativo. */
     AGENTE,
     /** Utente dedicato alle valutazioni degli immobili. */
-    VALUTATORE
+    VALUTATORE,
+    /** Proprietario di immobili che utilizza il sistema per gestirli. */
+    PROPRIETARIO
 }

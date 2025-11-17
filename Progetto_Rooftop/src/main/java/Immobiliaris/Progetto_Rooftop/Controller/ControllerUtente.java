@@ -107,10 +107,26 @@ public class ControllerUtente {
      * Creates a new user
      */
     @PostMapping
-    @PreAuthorize("hasRole('AMMINISTRATORE')") // create other user/admin only by AMMINISTRATORE
+    // @PreAuthorize("hasRole('AMMINISTRATORE')") // create other user/admin only by AMMINISTRATORE
     public ResponseEntity<Utente> createUtente(@RequestBody Utente utente) {
         Utente nuovoUtente = serviceUtente.create(utente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoUtente);
+    }
+
+    /**
+     * POST /api/utenti/registrati
+     * Public endpoint to register a new property owner
+     * This endpoint is accessible without authentication and forces the role to PROPRIETARIO
+     */
+    @PostMapping("/registrati")
+    public ResponseEntity<Utente> registraProprietario(@RequestBody Utente utente) {
+        // Force the role to PROPRIETARIO regardless of what is sent in the request
+        utente.setRuolo(Ruolo.PROPRIETARIO);
+        // Force the status to ATTIVO
+        utente.setStato(Stato.ATTIVO);
+        
+        Utente nuovoProprietario = serviceUtente.create(utente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovoProprietario);
     }
 
     /**

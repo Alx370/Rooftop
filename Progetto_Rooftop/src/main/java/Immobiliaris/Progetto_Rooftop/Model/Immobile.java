@@ -6,6 +6,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.EnumType;
 import java.math.BigDecimal;
@@ -20,9 +22,10 @@ public class Immobile {
     @Column(name = "id_immobile")
     private Integer id_immobile;
 
-    @Column(name = "id_proprietario", nullable = false)
-    private Integer id_proprietario;
-    // Foreign key to proprietario - required field linking property to owner.
+    @ManyToOne
+    @JoinColumn(name = "id_proprietario", nullable = false)
+    private Utente proprietario;
+    // Foreign key to Utente (proprietario) - required field linking property to owner.
 
     @Column(name = "id_agente")
     private Integer id_agente;
@@ -93,7 +96,7 @@ public class Immobile {
 
     @Column(name = "creato_il", columnDefinition = "DATETIME")
     private LocalDateTime creato_il;
-    // Creation timestamp - automatically set when property is created.
+    // Creation timestamp - automatically set when property is created
 
     public Integer getId_immobile() {
         return id_immobile;
@@ -103,12 +106,12 @@ public class Immobile {
         this.id_immobile = id_immobile;
     }
 
-    public Integer getId_proprietario() {
-        return id_proprietario;
+    public Utente getProprietario() {
+        return proprietario;
     }
 
-    public void setId_proprietario(Integer id_proprietario) {
-        this.id_proprietario = id_proprietario;
+    public void setProprietario(Utente proprietario) {
+        this.proprietario = proprietario;
     }
 
     public Integer getId_agente() {

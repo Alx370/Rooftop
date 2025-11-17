@@ -31,7 +31,7 @@ public class ServiceImmobileImpl implements ServiceImmobile {
 
     /** Valida i campi obbligatori dell'immobile. */
     private void validate(Immobile immobile) {
-        if (immobile.getId_proprietario() == null) {
+        if (immobile.getProprietario() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Proprietario e richiesto");
         }
         if (immobile.getTitolo() == null || immobile.getTitolo().trim().isEmpty()) {
@@ -116,8 +116,8 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         Immobile existing = getById(id);
 
         // Update only non-null fields
-        if (updated.getId_proprietario() != null) {
-            existing.setId_proprietario(updated.getId_proprietario());
+        if (updated.getProprietario() != null) {
+            existing.setProprietario(updated.getProprietario());
         }
         if (updated.getId_agente() != null) {
             existing.setId_agente(updated.getId_agente());

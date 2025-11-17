@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Validazione semplice
+    // Validazione semplice
     if (!email || !password) {
       setError("Compila tutti i campi per procedere.");
       return;

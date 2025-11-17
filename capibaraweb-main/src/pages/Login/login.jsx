@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
 import "./Login.css";
 
@@ -7,6 +7,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [remember, setRemember] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,10 +19,48 @@ const Login = () => {
       setError("Compila tutti i campi per procedere.");
       return;
     }
-
-    // Simulazione invio login
-    console.log("Login effettuato con:", { email, password });
     setError("");
+    setLoading(true);
+
+    const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+    fetch(`${base}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email.trim().toLowerCase(), password }),
+    })
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          const msg = (data && (data.message || data.error)) || "Credenziali non valide";
+          throw new Error(msg);
+        }
+        return data; // atteso { token }
+      })
+      .then(async (data) => {
+        const token = data?.token;
+        if (!token) throw new Error("Token non ricevuto");
+        const storage = remember ? localStorage : sessionStorage;
+        storage.setItem("auth_token", token);
+
+        // opzionale: verifica utente
+        try {
+          const meRes = await fetch(`${base}/api/auth/me`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const me = await meRes.json().catch(() => null);
+          if (me && me.authenticated) {
+            storage.setItem("auth_user", JSON.stringify(me));
+          }
+        } catch {}
+
+        navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -64,15 +105,15 @@ const Login = () => {
 
           <div className="options">
             <label className="remember">
-              <input type="checkbox" /> Ricordami
+              <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> Ricordami
             </label>
             <a href="#" className="forgot-password">
               Password dimenticata?
             </a>
           </div>
 
-          <button type="submit" className="login-button">
-            Login
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Accesso..." : "Login"}
           </button>
 
           {/* Testo aggiuntivo sotto */}

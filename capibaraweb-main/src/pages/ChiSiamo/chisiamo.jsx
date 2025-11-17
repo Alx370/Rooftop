@@ -300,13 +300,31 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       {/* I DATI */}
       {/* -------------------------------- */}
-      <section className="hero-title">
+      <section className="dati-section">
         <h1>Cosa abbiamo costruito insieme</h1>
         <p>
           In oltre 15 anni di attività, abbiamo aiutato centinaia di clienti a vendere casa, 
           valutare immobili e trovare la soluzione abitativa ideale, costruendo relazioni basate 
           sulla fiducia e sull'ascolto.
         </p>
+
+        <div className="dati-cards-container">
+          <div className="dati-card">
+            <h3 className="title-card">+462</h3>
+            <p>Case Vendute</p>
+          </div>
+
+          <div className="dati-card">
+            <h3 className="title-card">+56</h3>
+            <p>Agenti a disposizione</p>
+          </div>
+
+          <div className="dati-card">
+            <h3 className="title-card">+513</h3>
+            <p>Consulenze Fatte</p>
+          </div>
+        </div>
+        
       </section>
       
     </div>

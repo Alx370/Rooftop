@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
+import { authService } from "../../services/authService";
 import "./Login.css";
 
 const Login = () => {
@@ -22,38 +23,24 @@ const Login = () => {
     setError("");
     setLoading(true);
 
-    const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
-    fetch(`${base}/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email.trim().toLowerCase(), password }),
-    })
-      .then(async (res) => {
-        const data = await res.json().catch(() => null);
-        if (!res.ok) {
-          const msg = (data && (data.message || data.error)) || "Credenziali non valide";
-          throw new Error(msg);
-        }
-        return data; // atteso { token }
-      })
+    authService
+      .login(email.trim().toLowerCase(), password)
       .then(async (data) => {
         const token = data?.token;
         if (!token) throw new Error("Token non ricevuto");
-        const storage = remember ? localStorage : sessionStorage;
-        storage.setItem("auth_token", token);
+        
+        // Salva il token
+        authService.saveToken(token, remember);
 
-        // opzionale: verifica utente
+        // Recupera le info dell'utente
         try {
-          const meRes = await fetch(`${base}/api/auth/me`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          const me = await meRes.json().catch(() => null);
-          if (me && me.authenticated) {
-            storage.setItem("auth_user", JSON.stringify(me));
+          const user = await authService.getCurrentUser();
+          if (user && user.authenticated) {
+            authService.saveUser(user, remember);
           }
-        } catch {}
+        } catch (err) {
+          console.warn('Errore nel recupero dati utente:', err);
+        }
 
         navigate("/", { replace: true });
       })

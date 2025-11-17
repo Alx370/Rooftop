@@ -7,7 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import Immobiliaris.Progetto_Rooftop.Model.Immobile;
@@ -45,6 +52,7 @@ public class ControllerImmobile {
     }
 
     @PostMapping
+    @SuppressWarnings("UseSpecificCatch")
     public ResponseEntity<?> createImmobile(@RequestBody Immobile immobile) {
         try {
             // Retrieve current authentication
@@ -52,7 +60,7 @@ public class ControllerImmobile {
             
             if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
                 String userId = auth.getPrincipal().toString();
-                Utente utente = serviceUtente.getById(Integer.parseInt(userId));
+                Utente utente = serviceUtente.getById(Integer.valueOf(userId));
                 
                 // if the user is logged in as a PROPRIETARIO, find their proprietario profile
                 if ("PROPRIETARIO".equals(utente.getRuolo().name())) {

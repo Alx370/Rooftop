@@ -70,9 +70,69 @@
 
 /* Messaggio di errore */
 .register-error {
-  color: red;
+  color: #dc3545;
   font-size: 0.9rem;
-  margin-top: -0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+/* Messaggio di successo */
+.register-success {
+  color: #155724;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+}
+
+/* Errore di validazione */
+.validation-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* Password requirements */
+.password-requirements {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.requirements-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirement-error {
+  font-size: 0.85rem;
+  color: #dc3545;
+  margin: 0.25rem 0;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.requirement-error::before {
+  content: "✗ ";
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+  font-weight: bold;
 }
 
 /* Bottone */
@@ -89,9 +149,15 @@
   box-shadow: 0 6px 12px rgba(255, 102, 0, 0.4);
 }
 
-.register-button:hover {
+.register-button:hover:not(:disabled) {
   background-color: #e65c00;
   box-shadow: 0 8px 16px rgba(255, 102, 0, 0.5);
+}
+
+.register-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Link sotto */

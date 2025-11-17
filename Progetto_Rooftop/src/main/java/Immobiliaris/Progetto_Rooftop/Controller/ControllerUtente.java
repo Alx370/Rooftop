@@ -107,7 +107,7 @@ public class ControllerUtente {
      * Creates a new user
      */
     @PostMapping
-    // @PreAuthorize("hasRole('AMMINISTRATORE')") // create other user/admin only by AMMINISTRATORE
+    @PreAuthorize("hasRole('AMMINISTRATORE')") // create other user/admin only by AMMINISTRATORE
     public ResponseEntity<Utente> createUtente(@RequestBody Utente utente) {
         Utente nuovoUtente = serviceUtente.create(utente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoUtente);

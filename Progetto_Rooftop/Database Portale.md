@@ -23,27 +23,15 @@ USE rooftop_immobiliare;
 
 -- DROP DATABASE rooftop_immobiliare;
 
--- Utenti che accedono al sistema.
+-- Utenti che accedono al sistema backoffice come amministratori, agenti, valutatori e poi i proprietari che caricano i loro immobili.
 CREATE TABLE utenti (
   id_utente INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
   cognome VARCHAR(100) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL, -- sarà cifrata
-  ruolo ENUM('AMMINISTRATORE', 'AGENTE', 'VALUTATORE') NOT NULL,
+  ruolo ENUM('AMMINISTRATORE', 'AGENTE', 'VALUTATORE', 'PROPRIETARIO') NOT NULL DEFAULT 'PROPRIETARIO',
   telefono VARCHAR(20) NULL,
-  stato ENUM('ATTIVO','DISABILITATO','BLOCCATO') NOT NULL DEFAULT 'ATTIVO'
-);
-
--- Profilo del proprietario dove forzeremo il proprietario a registrare i suoi dati per mettere l'immobile per valutarlo o in vendita.
-CREATE TABLE proprietari (
-  id_proprietario INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(100) NOT NULL,
-  cognome VARCHAR(100) NOT NULL,
-  email VARCHAR(150) UNIQUE,
-  telefono VARCHAR(20),
-  consenso_gdpr BOOLEAN NOT NULL DEFAULT FALSE,
-  consenso_marketing BOOLEAN NOT NULL DEFAULT FALSE,
   stato ENUM('ATTIVO','DISABILITATO','BLOCCATO') NOT NULL DEFAULT 'ATTIVO'
 );
 
@@ -87,7 +75,7 @@ CREATE TABLE immobili (
   
   creato_il DATETIME DEFAULT CURRENT_TIMESTAMP,
   
-  FOREIGN KEY (id_proprietario) REFERENCES proprietari(id_proprietario) ON DELETE RESTRICT,
+  FOREIGN KEY (id_proprietario) REFERENCES utenti(id_utente) ON DELETE RESTRICT,
   FOREIGN KEY (id_agente) REFERENCES utenti(id_utente) ON DELETE SET NULL
 );
 
@@ -166,7 +154,7 @@ CREATE TABLE contratti (
   file_contratto VARCHAR(255) NULL,
   
   FOREIGN KEY (id_immobile) REFERENCES immobili(id_immobile) ON DELETE RESTRICT,
-  FOREIGN KEY (id_proprietario) REFERENCES proprietari(id_proprietario) ON DELETE RESTRICT
+  FOREIGN KEY (id_proprietario) REFERENCES utenti(id_utente) ON DELETE RESTRICT
 );
 
 -- TABELLA APPUNTAMENTI

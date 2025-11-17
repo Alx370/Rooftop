@@ -1,24 +1,27 @@
-USE rooftop_immobiliare;
-INSERT INTO utenti (nome, cognome, email, password, ruolo, telefono, stato) VALUES
-('Marco', 'Rossi', 'marco.rossi@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AMMINISTRATORE', '+39 335 1234567', 'ATTIVO'),
-('Laura', 'Bianchi', 'laura.bianchi@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AGENTE', '+39 348 2345678', 'ATTIVO'),
-('Giuseppe', 'Verdi', 'giuseppe.verdi@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AGENTE', '+39 340 3456789', 'ATTIVO'),
-('Francesca', 'Neri', 'francesca.neri@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'VALUTATORE', '+39 333 4567890', 'ATTIVO'),
-('Alessandro', 'Colombo', 'alessandro.colombo@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AGENTE', '+39 347 5678901', 'ATTIVO'),
-('Martina', 'Ferrari', 'martina.ferrari@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'VALUTATORE', '+39 331 6789012', 'ATTIVO'),
-('Roberto', 'Moretti', 'roberto.moretti@rooftop.it', '$2y$10$abcdefghijklmnopqrstuvwxyz123456789', 'AGENTE', '+39 338 7890123', 'DISABILITATO');
+-- USE rooftop_immobiliare;
 
-INSERT INTO proprietari (nome, cognome, email, telefono, consenso_gdpr, consenso_marketing, stato) VALUES
-('Giovanni', 'Mancini', 'giovanni.mancini@email.it', '+39 340 1111111', TRUE, TRUE, 'ATTIVO'),
-('Elena', 'Rizzo', 'elena.rizzo@email.it', '+39 347 2222222', TRUE, FALSE, 'ATTIVO'),
-('Paolo', 'Gallo', 'paolo.gallo@email.it', '+39 335 3333333', TRUE, TRUE, 'ATTIVO'),
-('Silvia', 'Conti', 'silvia.conti@email.it', '+39 333 4444444', TRUE, TRUE, 'ATTIVO'),
-('Andrea', 'Marchetti', 'andrea.marchetti@email.it', '+39 348 5555555', TRUE, FALSE, 'ATTIVO'),
-('Chiara', 'De Luca', 'chiara.deluca@email.it', '+39 331 6666666', TRUE, TRUE, 'ATTIVO'),
-('Stefano', 'Barbieri', 'stefano.barbieri@email.it', '+39 340 7777777', TRUE, TRUE, 'ATTIVO'),
-('Valentina', 'Santoro', 'valentina.santoro@email.it', '+39 347 8888888', TRUE, FALSE, 'ATTIVO'),
-('Luca', 'Fontana', 'luca.fontana@email.it', '+39 335 9999999', TRUE, TRUE, 'ATTIVO'),
-('Federica', 'Marini', 'federica.marini@email.it', '+39 333 1010101', TRUE, TRUE, 'ATTIVO');
+-- Utenti staff (amministratori, agenti, valutatori)
+INSERT INTO utenti (nome, cognome, email, password, ruolo, telefono, stato) VALUES
+('Marco', 'Rossi', 'marco.rossi@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AMMINISTRATORE', '+39 335 1234567', 'ATTIVO'),
+('Laura', 'Bianchi', 'laura.bianchi@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENTE', '+39 348 2345678', 'ATTIVO'),
+('Giuseppe', 'Verdi', 'giuseppe.verdi@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENTE', '+39 340 3456789', 'ATTIVO'),
+('Francesca', 'Neri', 'francesca.neri@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'VALUTATORE', '+39 333 4567890', 'ATTIVO'),
+('Alessandro', 'Colombo', 'alessandro.colombo@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENTE', '+39 347 5678901', 'ATTIVO'),
+('Martina', 'Ferrari', 'martina.ferrari@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'VALUTATORE', '+39 331 6789012', 'ATTIVO'),
+('Roberto', 'Moretti', 'roberto.moretti@rooftop.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENTE', '+39 338 7890123', 'DISABILITATO'),
+
+('Giovanni', 'Mancini', 'giovanni.mancini@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 340 1111111', 'ATTIVO'),
+('Elena', 'Rizzo', 'elena.rizzo@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 347 2222222', 'ATTIVO'),
+('Paolo', 'Gallo', 'paolo.gallo@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 335 3333333', 'ATTIVO'),
+('Silvia', 'Conti', 'silvia.conti@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 333 4444444', 'ATTIVO'),
+('Andrea', 'Marchetti', 'andrea.marchetti@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 348 5555555', 'ATTIVO'),
+('Chiara', 'De Luca', 'chiara.deluca@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 331 6666666', 'ATTIVO'),
+('Stefano', 'Barbieri', 'stefano.barbieri@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 340 7777777', 'ATTIVO'),
+('Valentina', 'Santoro', 'valentina.santoro@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 347 8888888', 'ATTIVO'),
+('Luca', 'Fontana', 'luca.fontana@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 335 9999999', 'ATTIVO'),
+('Federica', 'Marini', 'federica.marini@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 333 1010101', 'ATTIVO'),
+('Marco', 'Giordano', 'marco.giordano@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 338 1111222', 'ATTIVO'),
+('Alessia', 'Ferrero', 'alessia.ferrero@email.it', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'PROPRIETARIO', '+39 340 3333444', 'ATTIVO');
 
 INSERT INTO clienti (nome, cognome, email, telefono, consenso_gdpr, consenso_marketing) VALUES
 ('Davide', 'Greco', 'davide.greco@email.com', '+39 340 2020202', TRUE, TRUE),
@@ -34,30 +37,19 @@ INSERT INTO clienti (nome, cognome, email, telefono, consenso_gdpr, consenso_mar
 ('Antonio', 'Serra', 'antonio.serra@email.com', '+39 348 1414141', TRUE, FALSE),
 ('Sofia', 'Costa', 'sofia.costa@email.com', '+39 331 1515151', TRUE, TRUE);
 
-INSERT INTO immobili (id_proprietario, id_agente, titolo, descrizione, indirizzo, civico, citta, provincia, cap, quartiere, tipologia, metri_quadri, locali, bagni, piano, anno_costruzione, prezzo_richiesto, stato_immobile, stato_annuncio, creato_il) VALUES
-(1, 2, 'Luminoso Appartamento in Centro Storico', 'Splendido appartamento ristrutturato con finiture di pregio, sito nel cuore del centro storico. Doppia esposizione, molto luminoso, composto da ampio soggiorno, cucina abitabile, 2 camere matrimoniali e 2 bagni.', 'Via Giuseppe Garibaldi', '45', 'Milano', 'MI', '20121', 'Centro Storico', 'APPARTAMENTO', 95.00, 4, 2, '3', 1920, 485000.00, 'BUONO', 'PUBBLICATO', '2025-09-15 10:30:00'),
-
- (2, 3, 'Villa con Giardino Privato', 'Elegante villa indipendente su due livelli con ampio giardino privato. Piano terra: salone doppio, cucina abitabile, bagno servizio. Piano primo: 3 camere, 2 bagni, terrazzo. Cantina e garage doppio.', 'Via dei Colli', '12', 'Roma', 'RM', '00153', 'Testaccio', 'VILLA', 250.00, 6, 3, 'Villa', 2005, 890000.00, 'BUONO', 'PUBBLICATO', '2025-09-20 14:15:00'),
-
-(3, 2, 'Attico con Vista Panoramica', 'Prestigioso attico di recente costruzione con terrazzo panoramico di 80 mq. Soggiorno open space con cucina a vista, 3 camere da letto, 2 bagni. Predisposizione domotica e aria condizionata.', 'Corso Vittorio Emanuele', '88', 'Torino', 'TO', '10121', 'San Salvario', 'ATTICO', 140.00, 4, 2, '7', 2018, 620000.00, 'NUOVO', 'PUBBLICATO', '2025-10-01 09:00:00'),
-
-(4, 5, 'Monolocale Zona Universitaria', 'Grazioso monolocale appena ristrutturato, ideale per studenti o giovani professionisti. Zona giorno con angolo cottura, bagno con doccia. Arredato, pronto per essere abitato.', 'Via San Francesco', '23/A', 'Bologna', 'BO', '40121', 'Zona Universitaria', 'MONOLOCALE', 35.00, 1, 1, '2', 1970, 145000.00, 'NUOVO', 'PUBBLICATO', '2025-10-05 11:20:00'),
-
-(5, 3, 'Appartamento Moderno con Parcheggio', 'Appartamento in zona residenziale tranquilla, ben collegata. Ingresso, soggiorno con angolo cottura, 2 camere, bagno, ripostiglio. Balcone e posto auto coperto. Ottime condizioni.', 'Via delle Rose', '67', 'Firenze', 'FI', '50100', 'Campo di Marte', 'APPARTAMENTO', 75.00, 3, 1, '1', 1985, 295000.00, 'BUONO', 'PUBBLICATO', '2025-10-10 16:45:00'),
-
-(6, 2, 'Terreno Edificabile Vista Mare', 'Terreno edificabile di circa 1000 mq in posizione panoramica con vista mare. Possibilità di costruire villa bifamiliare. Tutti i servizi disponibili, strada asfaltata.', 'Località Belvedere', 'snc', 'Napoli', 'NA', '80126', 'Posillipo', 'TERRENO', 1000.00, NULL, NULL, NULL, NULL, 380000.00, 'BUONO', 'PUBBLICATO', '2025-10-12 10:00:00'),
-
-(7, 5, 'Trilocale Ristrutturato con Balcone', 'Appartamento completamente ristrutturato a nuovo, secondo piano con ascensore. Soggiorno, cucina abitabile, 2 camere, bagno finestrato, balcone. Riscaldamento autonomo, basse spese condominiali.', 'Via Torino', '34', 'Genova', 'GE', '16121', 'Centro', 'APPARTAMENTO', 68.00, 3, 1, '2', 1960, 235000.00, 'NUOVO', 'PUBBLICATO', '2025-10-15 13:30:00'),
-
-(8, 3, 'Villa Bifamiliare da Ristrutturare', 'Villa bifamiliare su tre livelli da ristrutturare completamente. Ampi spazi, giardino privato, garage. Ottima opportunità per creare la casa dei propri sogni.', 'Via dei Pini', '5', 'Verona', 'VR', '37121', 'Borgo Trento', 'VILLA', 180.00, 7, 2, 'Villa', 1975, 320000.00, 'DA_RISTRUTTURARE', 'TRATTATIVA', '2025-10-18 08:45:00'),
-
-(9, 2, 'Appartamento da Valutare', 'Appartamento necessita valutazione prima della pubblicazione. Zona semicentrale, secondo piano senza ascensore, da vedere.', 'Via Mazzini', '78', 'Padova', 'PD', '35100', 'Centro', 'APPARTAMENTO', 85.00, 3, 1, '2', 1980, 195000.00, 'BUONO', 'VALUTAZIONE', '2025-10-25 09:15:00'),
-
-(10, 5, 'Attico di Lusso in Costruzione', 'Attico di nuova costruzione in fase di completamento. Ampio terrazzo con jacuzzi, domotica completa, finiture di altissimo pregio. Consegna prevista marzo 2026.', 'Viale Europa', '150', 'Milano', 'MI', '20141', 'Porta Nuova', 'ATTICO', 165.00, 5, 3, '8', 2024, 1200000.00, 'NUOVO', 'TRATTATIVA', '2025-10-28 15:00:00'),
-
-(1, 3, 'Bilocale in Affitto/Vendita', 'Grazioso bilocale al primo piano, soggiorno con angolo cottura, camera matrimoniale, bagno. Arredato, disponibile da subito.', 'Via Dante', '92', 'Brescia', 'BS', '25121', 'Centro', 'APPARTAMENTO', 50.00, 2, 1, '1', 1990, 165000.00, 'BUONO', 'PUBBLICATO', '2025-10-30 12:00:00'),
-
-(4, 2, 'Immobile Commerciale', 'Locale commerciale piano strada, vetrine su strada principale, attualmente libero. Ideale per ufficio o negozio.', 'Corso Italia', '45', 'Parma', 'PR', '43121', 'Centro', 'ALTRO', 90.00, 3, 1, 'Terra', 1965, 275000.00, 'BUONO', 'PUBBLICATO', '2025-11-01 10:30:00');
+INSERT INTO immobili (id_immobile, id_proprietario, id_agente, titolo, descrizione, indirizzo, civico, citta, provincia, cap, quartiere, tipologia, metri_quadri, piano, anno_costruzione, prezzo_richiesto, stato_immobile, stato_annuncio, creato_il) VALUES
+(1, 8, 2, 'Luminoso Appartamento in Centro Storico', 'Splendido appartamento ristrutturato con finiture di pregio, sito nel cuore del centro storico. Doppia esposizione, molto luminoso, composto da ampio soggiorno, cucina abitabile, 2 camere matrimoniali e 2 bagni.', 'Via Giuseppe Garibaldi', '45', 'Milano', 'MI', '20121', 'Centro Storico', 'APPARTAMENTO', 95.00, '3', 1920, 485000.00, 'BUONO', 'PUBBLICATO', '2025-09-15 10:30:00'),
+(2, 9, 3, 'Villa con Giardino Privato', 'Elegante villa indipendente su due livelli con ampio giardino privato. Piano terra: salone doppio, cucina abitabile, bagno servizio. Piano primo: 3 camere, 2 bagni, terrazzo. Cantina e garage doppio.', 'Via dei Colli', '12', 'Roma', 'RM', '00153', 'Testaccio', 'VILLA', 250.00, 'Villa', 2005, 890000.00, 'BUONO', 'PUBBLICATO', '2025-09-20 14:15:00'),
+(3, 10, 2, 'Attico con Vista Panoramica', 'Prestigioso attico di recente costruzione con terrazzo panoramico di 80 mq. Soggiorno open space con cucina a vista, 3 camere da letto, 2 bagni. Predisposizione domotica e aria condizionata.', 'Corso Vittorio Emanuele', '88', 'Torino', 'TO', '10121', 'San Salvario', 'ATTICO', 140.00, '7', 2018, 620000.00, 'NUOVO', 'PUBBLICATO', '2025-10-01 09:00:00'),
+(4, 11, 5, 'Monolocale Zona Universitaria', 'Grazioso monolocale appena ristrutturato, ideale per studenti o giovani professionisti. Zona giorno con angolo cottura, bagno con doccia. Arredato, pronto per essere abitato.', 'Via San Francesco', '23/A', 'Bologna', 'BO', '40121', 'Zona Universitaria', 'MONOLOCALE', 35.00, '2', 1970, 145000.00, 'NUOVO', 'PUBBLICATO', '2025-10-05 11:20:00'),
+(5, 12, 3, 'Appartamento Moderno con Parcheggio', 'Appartamento in zona residenziale tranquilla, ben collegata. Ingresso, soggiorno con angolo cottura, 2 camere, bagno, ripostiglio. Balcone e posto auto coperto. Ottime condizioni.', 'Via delle Rose', '67', 'Firenze', 'FI', '50100', 'Campo di Marte', 'APPARTAMENTO', 75.00, '1', 1985, 295000.00, 'BUONO', 'PUBBLICATO', '2025-10-10 16:45:00'),
+(6, 13, 2, 'Terreno Edificabile Vista Mare', 'Terreno edificabile di circa 1000 mq in posizione panoramica con vista mare. Possibilità di costruire villa bifamiliare. Tutti i servizi disponibili, strada asfaltata.', 'Località Belvedere', 'snc', 'Napoli', 'NA', '80126', 'Posillipo', 'TERRENO', 1000.00, NULL, NULL, 380000.00, 'BUONO', 'PUBBLICATO', '2025-10-12 10:00:00'),
+(7, 14, 5, 'Trilocale Ristrutturato con Balcone', 'Appartamento completamente ristrutturato a nuovo, secondo piano con ascensore. Soggiorno, cucina abitabile, 2 camere, bagno finestrato, balcone. Riscaldamento autonomo, basse spese condominiali.', 'Via Torino', '34', 'Genova', 'GE', '16121', 'Centro', 'APPARTAMENTO', 68.00, '2', 1960, 235000.00, 'NUOVO', 'PUBBLICATO', '2025-10-15 13:30:00'),
+(8, 15, 3, 'Villa Bifamiliare da Ristrutturare', 'Villa bifamiliare su tre livelli da ristrutturare completamente. Ampi spazi, giardino privato, garage. Ottima opportunità per creare la casa dei propri sogni.', 'Via dei Pini', '5', 'Verona', 'VR', '37121', 'Borgo Trento', 'VILLA', 180.00, 'Villa', 1975, 320000.00, 'DA_RISTRUTTURARE', 'TRATTATIVA', '2025-10-18 08:45:00'),
+(9, 16, 2, 'Bilocale Moderno Zona Stazione', 'Bilocale completamente ristrutturato vicino alla stazione, ideale per investimento o prima casa. Soggiorno con angolo cottura, camera matrimoniale, bagno. Quarto piano con ascensore.', 'Via Roma', '78', 'Brescia', 'BS', '25121', 'Centro', 'APPARTAMENTO', 55.00, '4', 1980, 195000.00, 'BUONO', 'VALUTAZIONE', '2025-10-25 09:00:00'),
+(10, 17, 5, 'Attico di Lusso in Costruzione', 'Prestigioso attico di nuova costruzione in fase di completamento. Finiture di altissimo livello, domotica completa, terrazzo di 150 mq con jacuzzi e vista panoramica. Due posti auto e cantina.', 'Viale Europa', '150', 'Milano', 'MI', '20139', 'Porta Romana', 'ATTICO', 220.00, '8', 2024, 1200000.00, 'NUOVO', 'PUBBLICATO', '2025-10-28 15:00:00'),
+(11, 8, 3, 'Bilocale Arredato Centro Storico', 'Grazioso bilocale completamente arredato in pieno centro storico. Ideale per investimento o pied-à-terre. Soggiorno con angolo cottura, camera, bagno. Terzo piano con ascensore.', 'Via Dante', '92', 'Brescia', 'BS', '25121', 'Centro Storico', 'APPARTAMENTO', 48.00, '3', 1975, 165000.00, 'BUONO', 'PUBBLICATO', '2025-10-30 11:00:00'),
+(12, 9, 2, 'Locale Commerciale Corso Principale', 'Ampio locale commerciale su strada principale ad alto passaggio. Attualmente libero, pronto per nuova attività. Vetrine ampie, bagno, ripostiglio. Ideale ufficio, showroom o negozio.', 'Corso Italia', '45', 'Parma', 'PR', '43121', 'Centro', 'ALTRO', 85.00, 'PT', 1990, 275000.00, 'BUONO', 'PUBBLICATO', '2025-11-01 10:00:00');
 
 INSERT INTO caratteristiche_immobile (id_immobile, ascensore, parcheggio, posti_auto, garage, balcone, balcone_mq, terrazzo, terrazzo_mq, giardino, giardino_mq, cantina, arredato, aria_condizionata, allarme, riscaldamento, classe_energetica, orientamento) VALUES
 (1, TRUE, FALSE, 0, FALSE, TRUE, 8.00, FALSE, NULL, FALSE, NULL, TRUE, FALSE, TRUE, FALSE, 'CENTRALIZZATO', 'C', 'SUD_EST'),
@@ -74,32 +66,32 @@ INSERT INTO caratteristiche_immobile (id_immobile, ascensore, parcheggio, posti_
 (12, FALSE, TRUE, 1, FALSE, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, FALSE, FALSE, FALSE, 'CENTRALIZZATO', 'D', 'NORD');
 
 INSERT INTO valutazioni (id_immobile, id_valutatore, valore_stimato, valore_min, valore_max, stato, metodo, data_valutazione, note) VALUES
-(1, 4, 485000.00, 465000.00, 505000.00, 'COMPLETATA', 'MANUALE', '2025-09-16 14:30:00', 'Valutazione basata su comparabili della zona. Immobile in ottime condizioni, prezzo allineato al mercato.'),
-(2, 6, 890000.00, 850000.00, 930000.00, 'COMPLETATA', 'MANUALE', '2025-09-21 10:00:00', 'Villa di pregio, giardino ben curato. Prezzo giustificato dalla posizione e dalle caratteristiche.'),
-(3, 4, 620000.00, 590000.00, 650000.00, 'COMPLETATA', 'MANUALE', '2025-10-02 11:15:00', 'Attico di nuova costruzione, terrazzo panoramico molto apprezzabile. Fascia alta del mercato.'),
-(4, 6, 145000.00, 138000.00, 152000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-05 15:00:00', 'Monolocale zona universitaria, valutazione automatica confermata. Buon investimento.'),
-(5, 4, 295000.00, 280000.00, 310000.00, 'COMPLETATA', 'MANUALE', '2025-10-11 09:30:00', 'Appartamento standard per la zona, posto auto rappresenta un plus.'),
-(6, 6, 380000.00, 350000.00, 420000.00, 'COMPLETATA', 'MANUALE', '2025-10-13 16:00:00', 'Terreno edificabile, vista mare eccellente. Prezzo competitivo per la zona.'),
-(7, 4, 235000.00, 225000.00, 245000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-16 10:00:00', 'Ristrutturazione completa recente, valore allineato.'),
-(8, 6, 320000.00, 280000.00, 350000.00, 'COMPLETATA', 'MANUALE', '2025-10-19 14:00:00', 'Immobile da ristrutturare, prezzo tiene conto dei lavori necessari. Potenziale interessante.'),
-(9, 4, 195000.00, 185000.00, 205000.00, 'IN_LAVORAZIONE', 'MANUALE', '2025-10-26 08:00:00', 'Valutazione in corso, necessario sopralluogo approfondito.'),
-(10, 6, 1200000.00, 1150000.00, 1280000.00, 'COMPLETATA', 'MANUALE', '2025-10-29 11:30:00', 'Immobile di lusso, segmento premium. Prezzo giustificato dalle finiture e dalla posizione strategica.'),
-(11, 4, 165000.00, 158000.00, 172000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-31 09:00:00', 'Bilocale in buone condizioni, arredato. Prezzo di mercato.'),
-(12, 6, 275000.00, 260000.00, 290000.00, 'COMPLETATA', 'MANUALE', '2025-11-02 10:00:00', 'Locale commerciale, posizione strategica su corso principale. Buona opportunità.');
+(1, 3, 485000.00, 465000.00, 505000.00, 'COMPLETATA', 'MANUALE', '2025-09-16 14:30:00', 'Valutazione basata su comparabili della zona. Immobile in ottime condizioni, prezzo allineato al mercato.'),
+(2, 3, 890000.00, 850000.00, 930000.00, 'COMPLETATA', 'MANUALE', '2025-09-21 10:00:00', 'Villa di pregio, giardino ben curato. Prezzo giustificato dalla posizione e dalle caratteristiche.'),
+(3, 3, 620000.00, 590000.00, 650000.00, 'COMPLETATA', 'MANUALE', '2025-10-02 11:15:00', 'Attico di nuova costruzione, terrazzo panoramico molto apprezzabile. Fascia alta del mercato.'),
+(4, 3, 145000.00, 138000.00, 152000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-05 15:00:00', 'Monolocale zona universitaria, valutazione automatica confermata. Buon investimento.'),
+(5, 3, 295000.00, 280000.00, 310000.00, 'COMPLETATA', 'MANUALE', '2025-10-11 09:30:00', 'Appartamento standard per la zona, posto auto rappresenta un plus.'),
+(6, 3, 380000.00, 350000.00, 420000.00, 'COMPLETATA', 'MANUALE', '2025-10-13 16:00:00', 'Terreno edificabile, vista mare eccellente. Prezzo competitivo per la zona.'),
+(7, 3, 235000.00, 225000.00, 245000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-16 10:00:00', 'Ristrutturazione completa recente, valore allineato.'),
+(8, 3, 320000.00, 280000.00, 350000.00, 'COMPLETATA', 'MANUALE', '2025-10-19 14:00:00', 'Immobile da ristrutturare, prezzo tiene conto dei lavori necessari. Potenziale interessante.'),
+(9, 3, 195000.00, 185000.00, 205000.00, 'IN_LAVORAZIONE', 'MANUALE', '2025-10-26 08:00:00', 'Valutazione in corso, necessario sopralluogo approfondito.'),
+(10, 3, 1200000.00, 1150000.00, 1280000.00, 'COMPLETATA', 'MANUALE', '2025-10-29 11:30:00', 'Immobile di lusso, segmento premium. Prezzo giustificato dalle finiture e dalla posizione strategica.'),
+(11, 3, 165000.00, 158000.00, 172000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-31 09:00:00', 'Bilocale in buone condizioni, arredato. Prezzo di mercato.'),
+(12, 3, 275000.00, 260000.00, 290000.00, 'COMPLETATA', 'MANUALE', '2025-11-02 10:00:00', 'Locale commerciale, posizione strategica su corso principale. Buona opportunità.');
 
 INSERT INTO contratti (id_immobile, id_proprietario, numero_contratto, tipo_contratto, durata_mesi, percentuale_provvigione, prezzo_concordato, data_proposta, data_accettazione, data_scadenza, stato, file_contratto) VALUES
-(1, 1, 'CTR-2025-001', 'ESCLUSIVA', 6, 3.00, 485000.00, '2025-09-15 15:00:00', '2025-09-17 10:30:00', '2026-03-17', 'ACCETTATO', '/documenti/contratti/CTR-2025-001.pdf'),
-(2, 2, 'CTR-2025-002', 'ESCLUSIVA', 12, 3.50, 890000.00, '2025-09-20 16:00:00', '2025-09-22 14:00:00', '2026-09-22', 'ACCETTATO', '/documenti/contratti/CTR-2025-002.pdf'),
-(3, 3, 'CTR-2025-003', 'ESCLUSIVA', 6, 3.00, 620000.00, '2025-10-01 10:00:00', '2025-10-03 11:00:00', '2026-04-03', 'ACCETTATO', '/documenti/contratti/CTR-2025-003.pdf'),
-(4, 4, 'CTR-2025-004', 'NON_ESCLUSIVA', 6, 2.50, 145000.00, '2025-10-05 12:00:00', '2025-10-06 09:00:00', '2026-04-06', 'ACCETTATO', '/documenti/contratti/CTR-2025-004.pdf'),
-(5, 5, 'CTR-2025-005', 'ESCLUSIVA', 6, 3.00, 295000.00, '2025-10-10 17:00:00', '2025-10-12 15:30:00', '2026-04-12', 'ACCETTATO', '/documenti/contratti/CTR-2025-005.pdf'),
-(6, 6, 'CTR-2025-006', 'ESCLUSIVA', 12, 4.00, 380000.00, '2025-10-12 11:00:00', '2025-10-14 10:00:00', '2026-10-14', 'ACCETTATO', '/documenti/contratti/CTR-2025-006.pdf'),
-(7, 7, 'CTR-2025-007', 'NON_ESCLUSIVA', 6, 2.50, 235000.00, '2025-10-15 14:00:00', '2025-10-16 16:00:00', '2026-04-16', 'ACCETTATO', '/documenti/contratti/CTR-2025-007.pdf'),
-(8, 8, 'CTR-2025-008', 'ESCLUSIVA', 9, 3.00, 320000.00, '2025-10-18 09:00:00', '2025-10-20 11:30:00', '2026-07-20', 'ACCETTATO', '/documenti/contratti/CTR-2025-008.pdf'),
-(9, 9, 'CTR-2025-009', 'ESCLUSIVA', 6, 3.00, 195000.00, '2025-10-25 10:00:00', NULL, '2026-04-25', 'PROPOSTO', NULL),
-(10, 10, 'CTR-2025-010', 'ESCLUSIVA', 12, 3.50, 1200000.00, '2025-10-28 16:00:00', '2025-10-30 14:00:00', '2026-10-30', 'ACCETTATO', '/documenti/contratti/CTR-2025-010.pdf'),
-(11, 1, 'CTR-2025-011', 'NON_ESCLUSIVA', 3, 2.00, 165000.00, '2025-10-30 13:00:00', '2025-10-31 10:00:00', '2026-01-31', 'ACCETTATO', '/documenti/contratti/CTR-2025-011.pdf'),
-(12, 4, 'CTR-2025-012', 'ESCLUSIVA', 6, 3.00, 275000.00, '2025-11-01 11:00:00', '2025-11-02 15:00:00', '2026-05-02', 'ACCETTATO', '/documenti/contratti/CTR-2025-012.pdf');
+(1, 4, 'CTR-2025-001', 'ESCLUSIVA', 6, 3.00, 485000.00, '2025-09-15 15:00:00', '2025-09-17 10:30:00', '2026-03-17', 'ACCETTATO', '/documenti/contratti/CTR-2025-001.pdf'),
+(2, 5, 'CTR-2025-002', 'ESCLUSIVA', 12, 3.50, 890000.00, '2025-09-20 16:00:00', '2025-09-22 14:00:00', '2026-09-22', 'ACCETTATO', '/documenti/contratti/CTR-2025-002.pdf'),
+(3, 6, 'CTR-2025-003', 'ESCLUSIVA', 6, 3.00, 620000.00, '2025-10-01 10:00:00', '2025-10-03 11:00:00', '2026-04-03', 'ACCETTATO', '/documenti/contratti/CTR-2025-003.pdf'),
+(4, 7, 'CTR-2025-004', 'NON_ESCLUSIVA', 6, 2.50, 145000.00, '2025-10-05 12:00:00', '2025-10-06 09:00:00', '2026-04-06', 'ACCETTATO', '/documenti/contratti/CTR-2025-004.pdf'),
+(5, 4, 'CTR-2025-005', 'ESCLUSIVA', 6, 3.00, 295000.00, '2025-10-10 17:00:00', '2025-10-12 15:30:00', '2026-04-12', 'ACCETTATO', '/documenti/contratti/CTR-2025-005.pdf'),
+(6, 5, 'CTR-2025-006', 'ESCLUSIVA', 12, 4.00, 380000.00, '2025-10-12 11:00:00', '2025-10-14 10:00:00', '2026-10-14', 'ACCETTATO', '/documenti/contratti/CTR-2025-006.pdf'),
+(7, 6, 'CTR-2025-007', 'NON_ESCLUSIVA', 6, 2.50, 235000.00, '2025-10-15 14:00:00', '2025-10-16 16:00:00', '2026-04-16', 'ACCETTATO', '/documenti/contratti/CTR-2025-007.pdf'),
+(8, 7, 'CTR-2025-008', 'ESCLUSIVA', 9, 3.00, 320000.00, '2025-10-18 09:00:00', '2025-10-20 11:30:00', '2026-07-20', 'ACCETTATO', '/documenti/contratti/CTR-2025-008.pdf'),
+(9, 4, 'CTR-2025-009', 'ESCLUSIVA', 6, 3.00, 195000.00, '2025-10-25 10:00:00', NULL, '2026-04-25', 'PROPOSTO', NULL),
+(10, 5, 'CTR-2025-010', 'ESCLUSIVA', 12, 3.50, 1200000.00, '2025-10-28 16:00:00', '2025-10-30 14:00:00', '2026-10-30', 'ACCETTATO', '/documenti/contratti/CTR-2025-010.pdf'),
+(11, 6, 'CTR-2025-011', 'NON_ESCLUSIVA', 3, 2.00, 165000.00, '2025-10-30 13:00:00', '2025-10-31 10:00:00', '2026-01-31', 'ACCETTATO', '/documenti/contratti/CTR-2025-011.pdf'),
+(12, 7, 'CTR-2025-012', 'ESCLUSIVA', 6, 3.00, 275000.00, '2025-11-01 11:00:00', '2025-11-02 15:00:00', '2026-05-02', 'ACCETTATO', '/documenti/contratti/CTR-2025-012.pdf');
 
 INSERT INTO appuntamenti (id_immobile, id_cliente, id_agente, tipo, data_ora_inizio, data_ora_fine, luogo, stato, note) VALUES
 (1, 1, 2, 'VISITA', '2025-11-05 10:00:00', '2025-11-05 11:00:00', 'Via Giuseppe Garibaldi 45, Milano', 'PROGRAMMATO', 'Cliente interessato, prima visita.'),

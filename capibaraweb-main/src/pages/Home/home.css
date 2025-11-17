@@ -9,10 +9,10 @@
 }
 
 /* ============ GLOBAL ============ */
+
 .home {
   color: var(--text-dark);
   width: 100%;
-  background-color: var(--bg-light);
 }
 
 h2 {
@@ -30,34 +30,68 @@ h2 {
 
 /* ============ HERO ============ */
 .hero {
-  width: 100%;
-  background: var(--hero-bg);
+  position: relative;
+  height: 530px;
   border-radius: 0 0 60px 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 4rem;
-  background-image: url(img/LogoImmobiliaris.png);
-  background-repeat: no-repeat;
-  background-position: 25% center;
-  background-size: 50%;
-  background-position-y: -70px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4);
+  background-color: var(--hero-bg);
+  overflow: hidden;
+  padding: 0 4rem;
+  top: -1.5rem;
 }
 
+/* --- Background images --- */
+.hero-bg-logo,
+.hero-bg-palazzo {
+  position: absolute;
+  height: 100%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.hero-bg-logo {
+  width: 90%;
+  background-image: url(img/LogoImmobiliaris.png);
+  background-position: 18% center;
+  bottom: -320px;
+  background-size: contain;
+  height: 920px;
+}
+
+.hero-bg-palazzo {
+  width: 65%;
+  background-image: url(img/PalazzoModerno.png);
+  background-position: center right;
+  background-size: contain;
+  height: 440px;
+  top: 90px;
+}
+
+/* --- Content --- */
 .hero-content {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
+  width: 63%;
   gap: 2rem;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .hero-text h1 {
   font-size: 4rem;
   margin-bottom: 2rem;
-  text-align: justify;
-  margin-top: -5rem;
 }
 
 .hero-text p {
@@ -70,20 +104,94 @@ h2 {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  padding-top: 5rem;
+  padding-top: 2rem;
 }
 
-.hero-image {
-  display: flex;
-  align-items: center;
-  height: 42.5vh;
+/* ============================= */
+/*        RESPONSIVE PART        */
+/* ============================= */
+
+/* Tablet (max 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    height: 450px;
+    padding: 0 2rem;
+  }
+
+  .hero-content {
+    width: 80%;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-bg-palazzo {
+    width: 70%;
+    opacity: 0.7; /* meno invasiva */
+  }
+
+  .hero-bg-logo {
+    background-position: 15% bottom;
+    bottom: -320px;
+    opacity: 0.6;
+  }
 }
 
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+/* Mobile grande (max 768px) */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 4rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-text {
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-text p {
+    max-width: 90%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    padding-top: 1.5rem;
+  }
+
+  .hero-bg-palazzo {
+    width: 100%;
+    height: 350px;
+    background-position: center;
+    opacity: 0.4;
+  }
+
+  .hero-bg-logo {
+    background-position: center bottom;
+    bottom: -300px;
+    width: 100%;
+    opacity: 0.3;
+  }
 }
+
+
+
 
 /* ============ BUTTONS ============ */
 .btn {
@@ -106,7 +214,6 @@ h2 {
 
 /* ===== INTRO SECTION ===== */
 .intro {
-  background-color: var(--bg-light);
   padding: 6rem 0;
   display: flex;
   flex-direction: column;
@@ -114,35 +221,40 @@ h2 {
 }
 
 .intro h2 {
-  font-size: 40px;
+  font-size: 2.5rem;
   color: var(--text-dark);
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .subtitle {
   color: var(--text-light);
   margin-bottom: 3rem;
   text-align: center;
-  max-width: 70%;
+  max-width: 90%;
 }
 
 /* ===== CARD CONTAINER ===== */
 .intro-cards {
   display: flex;
-  justify-content: center;
-  gap: 4rem;
+  gap: 2rem;
   flex-wrap: wrap;
-  width: 60%;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 /* ===== CARD ===== */
 .card {
   position: relative;
-  height: 400px;
-  border-radius: 70px;
+  width: 100%;
+  max-width: 600px; /* mantiene il limite massimo */
+  height: 350px;
+  border-radius: 30px;
   overflow: hidden;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-  min-width: 300px;
+  min-width: 280px; /* per schermi piccoli */
 }
 
 .card:hover {
@@ -180,13 +292,70 @@ h2 {
   max-width: 85%;
 }
 
-/* ============ USP ============ */
-.usp {
-  padding: 6rem 2rem;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .card {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro h2 {
+    font-size: 2rem;
+  }
+
+  .card {
+    height: 250px;
+  }
+
+  .card-content p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro {
+    padding: 4rem 1rem;
+  }
+
+  .intro-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .card {
+    height: 220px;
+    border-radius: 20px;
+  }
+
+  .card-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .card-content p {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* --- SEZIONE USP --- */
+.usp-section {
+  padding: 4rem 2rem;
+  color: var(--text-dark);
+}
+
+.usp-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* --- GRIGLIA USP --- */
+.usp-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--bg-light);
 }
 
 .usp h2 {
@@ -201,54 +370,156 @@ h2 {
   gap: 3rem;
   width: 67%;
   max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
+/* --- ELEMENTO USP --- */
 .usp-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 4rem;
+  width: 90%;
+  flex-wrap: wrap;
 }
 
-.usp-item img {
-  width: 100%;
-  border-radius: 70px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease;
+/* --- TESTO --- */
+.usp-text {
+  flex: 1;
+  min-width: 280px;
+  text-align: left;
 }
 
-.usp-item.centered {
-  grid-column: span 2;
-  justify-content: center;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.usp-item h3 {
+.usp-text h3 {
   color: var(--primary);
-  margin-bottom: 0.5rem;
-  font-size: 40px;
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
 }
 
-.usp-item p {
+.usp-text p {
   color: var(--text-light);
-  max-width: 300px;
-  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/* ============ TESTIMONIALS ============ */
+/* --- Variante centrata per la USP finale --- */
+.usp-item.centered {
+  justify-content: center;
+  text-align: center;
+}
+
+.usp-item.centered .usp-text {
+  text-align: center;
+  max-width: 600px;
+  padding-top: 3rem;
+}
+
+/* --- IMMAGINE --- */
+.usp-img {
+  display: flex;
+  justify-content: center;
+  flex: 0.5;
+  min-width: 280px;
+  margin-top: 1rem;
+ 
+}
+
+
+.usp-img img {
+  width: 100%;
+  max-width: 400px; /* immagine edificio più piccola */
+  border-radius: 12px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.15);
+  height: auto;
+  object-fit: cover;
+ 
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .usp-item {
+    gap: 3rem;
+  }
+
+  .usp-text h3 {
+    font-size: 1.8rem;
+  }
+
+  .usp-img img {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .usp-item {
+    flex-direction: column; /* alternanza verticale */
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  /* Alternanza testo/immagine: testo sopra, immagine sotto nei pari */
+  .usp-item:nth-child(even) {
+    flex-direction: column-reverse;
+  }
+
+  .usp-text {
+    text-align: center;
+  }
+
+  .usp-img {
+    justify-content: center;
+  }
+
+  .usp-text h3 {
+    font-size: 1.6rem;
+  }
+
+  .usp-text p {
+    font-size: 0.95rem;
+  }
+
+  .usp-img img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .usp-section {
+    padding: 3rem 1rem;
+  }
+
+  .usp-section h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .usp-text h3 {
+    font-size: 1.4rem;
+  }
+
+  .usp-text p {
+    font-size: 0.9rem;
+  }
+
+  .usp-img img {
+    max-width: 100%;
+  }
+}
+
+
+
+/* ================= TESTIMONIALS ================= */
 .testimonials {
   padding: 6rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--bg-light);
 }
 
 .testimonials h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -259,29 +530,38 @@ h2 {
   margin-bottom: 3rem;
 }
 
-.testimonial-grid {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 2rem;
-  width: 67%;
+/* Container del carosello */
+.testimonial-container {
+  position: relative;
+  width: 80%; /* più flessibile del 67% */
   max-width: 1200px;
-  padding-bottom: 1rem;
-  -webkit-overflow-scrolling: touch;
   margin: 0 auto;
 }
 
-.testimonial-grid::-webkit-scrollbar {
-  display: none;
+/* Griglia scrollabile */
+.testimonial-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
 }
 
+.testimonial-grid::-webkit-scrollbar {
+  display: none; /* nasconde la scrollbar */
+}
+
+/* Card */
 .testimonial-card {
-  background-color: var(--secondary);
-  padding: 2.5rem;
-  border-radius: 12px;
-  width: 350px;
-  min-width: 350px;
+  flex: 0 0 auto; /* impedisce ridimensionamento */
+  width: 300px; /* larghezza fissa per più card visibili */
   height: 300px;
+  background-color: var(--secondary);
+  padding: 2rem;
+  border-radius: 12px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -313,32 +593,76 @@ h2 {
   border: 2px solid #fff;
 }
 
+/* Pulsanti scroll */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: black 1px solid;
+  color: #000000;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.scroll-btn.left {
+  left: -80px;
+}
+
+.scroll-btn.right {
+  right: -80px;
+}
+
+
 /* ============ NEWSLETTER ============ */
 .newsletter {
   text-align: center;
-  padding: 6rem 2rem;
+  padding: 7rem 2rem;
   color: var(--text-dark);
 }
 
+.newsletter p {
+  margin-top: -0.5rem;
+}
+
+.newsletter h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Form */
 .newsletter-form {
-  margin-top: 1.5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  padding-top: 1rem;
+  padding-bottom: 7rem;
 }
 
 .newsletter-form input {
   padding: 0.8rem 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
-  width: 250px;
+  width: 550px;
+  max-width: 90%; /* si adatta agli schermi piccoli */
+  box-sizing: border-box;
 }
 
 .newsletter .btn {
-  background-color: transparent;
+  max-width: 100px;
+  margin-top: 1rem;
+  background-color: var(--primary);
   border: 2px solid var(--primary);
-  color: black;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .newsletter .btn:hover {
@@ -346,68 +670,57 @@ h2 {
   color: #fff;
 }
 
-/* ============ RESPONSIVE FIXED ============ */
-@media (max-width: 992px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 3rem 1rem 2rem;
-    height: auto;
-    border-radius: 0 0 40px 40px;
-    background-position: center top;
-    background-size: 80%;
-  }
+/* ================= RESPONSIVE ================= */
 
-  .hero-content {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    gap: 1.5rem;
-  }
-
-  .hero-text {
-    margin-top: 1rem;
-  }
-
-  .hero-text h1 {
+/* Tablet */
+@media (max-width: 1024px) {
+  .newsletter h2 {
     font-size: 2rem;
-    margin-top: 0;
   }
 
-  .hero-text p {
-    font-size: 0.9rem;
-    text-align: center;
-    max-width: 90%;
-    margin: 0 auto 1rem;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-    padding-top: 0;
-  }
-
-  .hero-image {
-    width: 80%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .intro-cards,
-  .usp-grid,
-  .testimonial-grid {
-    width: 90%;
-    flex-direction: column;
-  }
-
-  .usp-grid {
-    grid-template-columns: 1fr;
+  .newsletter-form input {
+    width: 450px;
   }
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .newsletter {
+    padding: 5rem 1.5rem;
+  }
+
+  .newsletter h2 {
+    font-size: 1.8rem;
+  }
+
+  .newsletter-form input {
+    width: 350px;
+  }
+
+  .newsletter .btn {
+    max-width: 90px;
+    padding: 0.6rem 0.9rem;
+  }
+}
+
+/* Mobile piccolo */
+@media (max-width: 480px) {
+  .newsletter {
+    padding: 4rem 1rem;
+  }
+
+  .newsletter h2 {
+    font-size: 1.6rem;
+  }
+
+  .newsletter-form input {
+    width: 90%; /* si adatta completamente allo schermo */
+  }
+
+  .newsletter .btn {
+    width: 80px;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+

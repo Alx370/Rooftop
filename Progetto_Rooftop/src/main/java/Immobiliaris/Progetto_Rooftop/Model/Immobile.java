@@ -1,15 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -25,78 +16,66 @@ public class Immobile {
     @ManyToOne
     @JoinColumn(name = "id_proprietario", nullable = false)
     private Utente proprietario;
-    // Foreign key to Utente (proprietario) - required field linking property to owner.
 
     @Column(name = "id_agente")
     private Integer id_agente;
-    // Foreign key to agente - optional field for assigned agent.
 
     @Column(nullable = false, length = 200)
     private String titolo;
-    // Property listing title - required field, max 200 characters.
 
     @Column(columnDefinition = "TEXT")
     private String descrizione;
-    // Detailed property description - optional field, TEXT type allows longer content.
 
     @Column(nullable = false, length = 255)
     private String indirizzo;
-    // Street address - required field, max 255 characters.
 
     @Column(length = 20)
     private String civico;
-    // Street number - optional field, max 20 characters.
 
     @Column(nullable = false, length = 100)
     private String citta;
-    // City name - required field, max 100 characters.
 
     @Column(nullable = false, length = 2)
     private String provincia;
-    // Province code (e.g., "MI", "RM") - required field, 2 characters.
 
     @Column(nullable = false, length = 10)
     private String cap;
-    // Postal code - required field, max 10 characters.
 
     @Column(length = 100)
     private String quartiere;
-    // Neighborhood/district - optional field, max 100 characters.
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Tipologia tipologia;
-    // Property type (APPARTAMENTO, VILLA, etc.) - required field stored as string.
 
     @Column(name = "metri_quadri", precision = 7, scale = 2, nullable = false)
     private BigDecimal metri_quadri;
-    // Square meters - required field, precision 7 digits with 2 decimal places.
+
+    @Column(name = "locali")
+    private Integer locali;
+
+    @Column(name = "bagni")
+    private Integer bagni;
 
     @Column(length = 15)
     private String piano;
-    // Floor level - optional field, max 15 characters (allows "PT", "1", "Attico", etc.).
 
     @Column(name = "anno_costruzione")
     private Integer anno_costruzione;
-    // Year of construction - optional field.
 
     @Column(name = "prezzo_richiesto", precision = 10, scale = 2, nullable = false)
     private BigDecimal prezzo_richiesto;
-    // Asking price - required field, precision 10 digits with 2 decimal places.
 
     @Enumerated(EnumType.STRING)
     @Column(name = "stato_immobile", length = 20)
     private StatoImmobile stato_immobile;
-    // Property condition (OTTIMO, BUONO, etc.) - stored as string.
 
     @Enumerated(EnumType.STRING)
     @Column(name = "stato_annuncio", length = 20)
     private StatoAnnuncio stato_annuncio;
-    // Listing status (VALUTAZIONE, PUBBLICATO, etc.) - stored as string.
 
     @Column(name = "creato_il", columnDefinition = "DATETIME")
     private LocalDateTime creato_il;
-    // Creation timestamp - automatically set when property is created
 
     public Integer getId_immobile() {
         return id_immobile;
@@ -202,6 +181,22 @@ public class Immobile {
         this.metri_quadri = metri_quadri;
     }
 
+    public Integer getLocali() {
+        return locali;
+    }
+
+    public void setLocali(Integer locali) {
+        this.locali = locali;
+    }
+
+    public Integer getBagni() {
+        return bagni;
+    }
+
+    public void setBagni(Integer bagni) {
+        this.bagni = bagni;
+    }
+
     public String getPiano() {
         return piano;
     }
@@ -248,5 +243,5 @@ public class Immobile {
 
     public void setCreato_il(LocalDateTime creato_il) {
         this.creato_il = creato_il;
-    }
+    }   
 }

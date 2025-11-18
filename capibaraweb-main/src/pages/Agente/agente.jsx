@@ -14,7 +14,7 @@ const Agente = () => {
       id: 1,
       nome: "Casa Sfarfalli",
       stato: "Affitto",
-      immagine: "/src/assets/images/casa1.jpg",
+    //   immagine: "/src/assets/images/casa1.jpg",
       indirizzo: "Torino, Via ferrucci 56",
       valutazione: "In valutazione"
     },
@@ -22,7 +22,7 @@ const Agente = () => {
       id: 2,
       nome: "Casa Viti",
       stato: "Vendita",
-      immagine: "/src/assets/images/casa2.jpg",
+    //   immagine: "/src/assets/images/casa2.jpg",
       indirizzo: "Alba, Via giovanni VI 21",
       valutazione: "Venduto"
     },
@@ -30,7 +30,7 @@ const Agente = () => {
       id: 3,
       nome: "Casa Monti",
       stato: "Vendita",
-      immagine: "/src/assets/images/casa3.jpg",
+    //   immagine: "/src/assets/images/casa3.jpg",
       indirizzo: "Meana (TO), Via fiori 6",
       valutazione: "Trattativa in corso"
     }
@@ -95,15 +95,12 @@ const Agente = () => {
                 <div className="immobili-grid">
                     {immobili.map((immobile) => (
                         <div key={immobile.id} className="immobile-card">
-                            <span className={`badge ${immobile.stato === "Affitto" ? "badge-affitto" : "badge-vendita"}`}>
-                                {immobile.stato}
-                            </span>
-                            <img src={immobile.immagine} alt={immobile.nome} />
-                            <h3>{immobile.nome}</h3>
+                            <span className={`badge ${immobile.stato === "Affitto" ? "badge-affitto" : "badge-vendita"}`}>{immobile.stato}</span>
+                            <h2>{immobile.nome}</h2>
                             <p className="indirizzo">{immobile.indirizzo}</p>
-                            <select className="select-valutazione" defaultValue={immobile.valutazione}>
-                                <option>{immobile.valutazione}</option>
-                            </select>
+                            <div className="valutazione-card">
+                                {immobile.valutazione}
+                            </div>
                             <div className="immobile-azioni">
                                 <button className="btn-icon">Elimina</button>
                                 <button className="btn-icon">Modifica</button>
@@ -126,8 +123,7 @@ const Agente = () => {
                         {appuntamenti.map((app, index) => (
                             <div key={index} className="appuntamento-item">
                                 <h3>{app.data}</h3>
-                                <p>{app.descrizione}</p>
-                                <button className="btn-icon">⋮</button>
+                                <p>{app.descrizione}</p>    
                             </div>
                         ))}
                     </div>

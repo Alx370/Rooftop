@@ -3,10 +3,10 @@ import "./Agente.css";
 
 const Agente = () => {
   const [clienti] = useState([
-    { nome: "Vanessa Olmi", tipologia: "Acquirente", contatto: "+39 235 534 2344", stato: "Nuova richiesta" },
-    { nome: "Giovanna Scudi", tipologia: "Acquirente", contatto: "+39 565 584 2322", stato: "Contatto avviato" },
+    { nome: "Vanessa Olmi", tipologia: "Venditore", contatto: "+39 235 534 2344", stato: "Nuova richiesta" },
+    { nome: "Giovanna Scudi", tipologia: "Venditore", contatto: "+39 565 584 2322", stato: "Contatto avviato" },
     { nome: "Andrea Passi", tipologia: "Locatore", contatto: "+39 665 534 2316", stato: "Proposta ricevuta" },
-    { nome: "Fausto Allietta", tipologia: "Inquilino", contatto: "+39 489 267 4316", stato: "Contratto firmato" }
+    { nome: "Fausto Allietta", tipologia: "Venditore", contatto: "+39 489 267 4316", stato: "Contratto firmato" }
   ]);
 
   const [immobili] = useState([
@@ -47,6 +47,8 @@ const Agente = () => {
 
   const orari = ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "11:00"];
 
+
+{/* Inizio HTML */}
   return (
     <div className="agente-page"> 
         <section className="hero-section">
@@ -70,14 +72,13 @@ const Agente = () => {
                             <tr key={index}>
                                 <td>{cliente.nome}</td>
                                 <td>{cliente.tipologia}</td>
-                                <td>{cliente.contatto}</td>
+                                <td><a href={`tel:${cliente.contatto}`}>{cliente.contatto}</a></td>
                                 <td className={cliente.stato === "Nuova richiesta" ? "stato-nuovo" : ""}>
                                     {cliente.stato}
                                 </td>
                                 <td className="azioni">
                                     <button className="btn-icon">Elimina</button>
                                     <button className="btn-icon">Modifica</button>
-                                    <button className="btn-icon">Altro</button>
                                 </td>
                             </tr>
                         ))}
@@ -104,7 +105,6 @@ const Agente = () => {
                             <div className="immobile-azioni">
                                 <button className="btn-icon">Elimina</button>
                                 <button className="btn-icon">Modifica</button>
-                                <button className="btn-icon">Altro</button>
                             </div>
                         </div>
                     ))}

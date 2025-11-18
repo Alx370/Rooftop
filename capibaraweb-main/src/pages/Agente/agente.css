@@ -1,0 +1,399 @@
+.agente-page {
+    background: linear-gradient(180deg, #E8F4FA 0%, #FFFFFF 100%);
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.hero-section {
+    padding: 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.hero-section h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: left;
+}
+
+/* Area clienti */
+.area-clienti {
+    margin-bottom: 60px;
+}
+
+.clienti-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-bottom: 20px;
+}
+
+.clienti-table thead th {
+    text-align: left;
+    padding: 15px 20px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+.clienti-table tbody tr {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.clienti-table tbody td {
+    padding: 20px;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.clienti-table tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+    font-weight: 600;
+}
+
+.clienti-table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.stato-nuovo {
+    color: #FF6B35;
+    font-weight: 600;
+}
+
+.azioni {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.btn-icon {
+    background: none;
+    background-color: #e55a28;
+    border-radius: 10%;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s;
+}
+
+.btn-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Bottoni */
+.bottoni-area {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-arancione {
+    background: #FF6B35;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-arancione:hover {
+    background: #e55a28;
+}
+
+.btn-bianco {
+    background: white;
+    color: #FF6B35;
+    border: 2px solid #FF6B35;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-bianco:hover {
+    background: #FF6B35;
+    color: white;
+}
+
+/* Elenco immobili */
+.elenco-immobili {
+    margin-bottom: 60px;
+}
+
+.immobili-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.immobile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.badge-affitto {
+    background: #4A90E2;
+    color: white;
+}
+
+.badge-vendita {
+    background: #27AE60;
+    color: white;
+}
+
+.immobile-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.immobile-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.indirizzo {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.select-valutazione {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.immobile-azioni {
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+}
+
+/* Appuntamenti */
+.appuntamenti-section {
+    margin-bottom: 40px;
+}
+
+.appuntamenti-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.appuntamenti-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.appuntamento-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.appuntamento-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.appuntamento-item p {
+    color: #00796B;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.appuntamento-item .btn-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Calendario e Orario */
+.calendario-orario {
+    display: flex;
+    gap: 20px;
+}
+
+.calendario, .orario {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex: 1;
+}
+
+.calendario h3, .orario h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.giorni-settimana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.giorni-settimana span {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.date-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.date-grid .day {
+    aspect-ratio: 1;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.date-grid .day:hover {
+    background: #E8F4FA;
+}
+
+.date-grid .day.selected {
+    background: #4A90E2;
+    color: white;
+    font-weight: 600;
+}
+
+.date-grid .day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: #4A90E2;
+    border-radius: 50%;
+}
+
+.date-grid .day.selected.has-event::after {
+    background: white;
+}
+
+.orario-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.orario-slot {
+    padding: 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.orario-slot:hover {
+    border-color: #4A90E2;
+    background: #E8F4FA;
+}
+
+.orario-slot.selected {
+    background: #4A90E2;
+    color: white;
+    border-color: #4A90E2;
+}
+
+.btn-gestisci {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 40px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .immobili-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-section {
+        padding: 40px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .immobili-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .appuntamenti-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendario-orario {
+        flex-direction: column;
+    }
+    
+    .hero-section {
+        padding: 30px 20px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}

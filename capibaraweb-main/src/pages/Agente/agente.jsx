@@ -45,7 +45,7 @@ const Agente = () => {
   const [selectedDate, setSelectedDate] = useState(18);
   const [selectedTime, setSelectedTime] = useState(null);
 
-  const orari = ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "11:00"];
+  const orari = ["9:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00", "18:00"];
 
 
 {/* Inizio HTML */}

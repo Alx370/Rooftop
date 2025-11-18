@@ -388,6 +388,10 @@
     .hero-section {
         padding: 40px 40px;
     }
+
+    .appuntamenti-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
@@ -409,5 +413,131 @@
     
     .hero-section h1 {
         font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .hero-section h2 {
+        font-size: 1rem;
+    }
+
+    .clienti-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .clienti-table thead,
+    .clienti-table tbody,
+    .clienti-table tr,
+    .clienti-table td,
+    .clienti-table th {
+        display: block;
+    }
+
+    .clienti-table thead {
+        display: none;
+    }
+
+    .clienti-table tbody tr {
+        margin-bottom: 15px;
+        padding: 15px;
+        position: relative;
+    }
+
+    .clienti-table tbody td {
+        padding: 10px 0;
+        text-align: left;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .clienti-table tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .clienti-table tbody tr td:first-child,
+    .clienti-table tbody tr td:last-child {
+        border-radius: 0;
+    }
+
+    .azioni {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .bottoni-area {
+        flex-direction: column;
+    }
+
+    .btn-arancione,
+    .btn-bianco {
+        width: 100%;
+    }
+
+    .immobile-azioni {
+        gap: 20px;
+    }
+
+    .date-grid {
+        gap: 5px;
+    }
+
+    .date-grid .day {
+        font-size: 0.8rem;
+    }
+
+    .giorni-settimana span {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 20px 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .immobile-card {
+        padding: 15px;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+    }
+
+    .date-grid .day {
+        font-size: 0.7rem;
+        padding: 2px;
+    }
+
+    .orario-slot {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .btn-icon {
+        font-size: 0.9rem;
+        padding: 4px;
+    }
+
+    .azioni {
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .immobile-azioni {
+        gap: 15px;
     }
 }

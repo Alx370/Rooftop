@@ -9,6 +9,7 @@ import ChiSiamo from "../pages/ChiSiamo/chisiamo.jsx";
 import Valutazione from "../pages/Valutazione/valutazione.jsx";
 import FAQ from "../pages/FAQ/faq.jsx";
 import NotFound from "../pages/NotFound/notfound.jsx";
+import Agente from "../pages/Agente/agente.jsx";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
             <Route path="/valutazione" element={<Valutazione />} />
             <Route path="/login" element={<Login />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/agente" element={<Agente />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

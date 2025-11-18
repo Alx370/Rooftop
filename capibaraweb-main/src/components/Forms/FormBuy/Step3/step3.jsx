@@ -63,14 +63,6 @@ export default function Step3({ formData, setFormData, nextStep, prevStep }) {
 
           {error && <p className={styles.error}>{error}</p>}
 
-          <label className={styles.label}>Messaggio aggiuntivo (opzionale)</label>
-          <textarea
-            value={customerMessage}
-            onChange={(e) => setCustomerMessage(e.target.value)}
-            placeholder="Scrivi un messaggio..."
-            className={styles.textarea}
-          />
-
           <div className={styles.buttonContainer}>
             <button className={styles.backButton} onClick={prevStep}>
               Indietro

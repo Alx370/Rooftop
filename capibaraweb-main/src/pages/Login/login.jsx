@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login } from "../../services/api"; 
+import { login, setAuthToken } from "../../services/api"; 
 import "./Login.css";
 
 const Login = () => {
@@ -21,19 +21,22 @@ const Login = () => {
     }
 
     try {
-      // Chiamata al backend
-      const data = await login(email, password);
+      // Chiamata al backend: passiamo un oggetto { email, password }
+      const data = await login({ email, password });
       console.log("Token ricevuto dal backend:", data.token);
 
       // Salvataggio token in localStorage
       localStorage.setItem("token", data.token);
+
+      // Imposta l'Authorization header per le chiamate future
+      setAuthToken(data.token);
 
       setError("");
 
       // Redirect alla dashboard o pagina protetta
       navigate("/dashboard"); // modifica con la tua route
     } catch (err) {
-      setError("Credenziali non valide");
+      setError(err.message || "Credenziali non valide");
       console.error(err);
     }
   };

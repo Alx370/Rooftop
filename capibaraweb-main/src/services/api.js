@@ -1,75 +1,63 @@
 import axios from "axios";
 
-// Base URL del backend
+// Base URL del backend (controlla che corrisponda alla tua configurazione)
 const API_BASE_URL = "http://localhost:8080/api";
+// crea l'istanza axios qui (era mancante -> ReferenceError)
+const api = axios.create({ baseURL: API_BASE_URL, headers: { "Content-Type": "application/json" } });
 
-// -----------------------------
-// Funzione per ottenere tutti gli utenti (GET JSON)
-// -----------------------------
-export const getUsers = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/users`);
-    return response.data;
-  } catch (error) {
-    console.error("Errore nel fetch degli utenti:", error);
-    throw error;
-  }
+// Helper per gestire l'Authorization header
+export const setAuthToken = (token) => {
+  if (token) api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  else delete api.defaults.headers.common["Authorization"];
 };
 
-// -----------------------------
-// Funzione per login (POST JSON)
+export const clearAuthToken = () => setAuthToken(null);
+
+
+// POST /api/auth/login -> restituisce { token }
 // credentials = { email, password }
-// -----------------------------
 export const login = async (credentials) => {
   try {
-    console.log("Login inviato:", credentials); 
-    const response = await axios.post(`${API_BASE_URL}/login`, credentials, {
-      headers: { "Content-Type": "application/json" },
-    });
-    console.log("Risposta backend login:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Errore nel login:", {
-      message: error.message,
-      status: error.response?.status,
-      data: error.response?.data
-    });
-    throw new Error(error.response?.data?.message || "Errore nel login");
+    // debug: log minimale prima della chiamata (non stampare la password)
+    console.log("POST", API_BASE_URL + "/auth/login", { email: credentials.email });
+    const res = await api.post("/auth/login", credentials);
+    return res.data; // es. { token: '...' }
+  } catch (err) {
+    console.error("Errore login: status", err.response?.status, "data:", err.response?.data);
+    const message = err.response?.data?.message || err.response?.data || err.message;
+    throw new Error(message);
   }
 };
 
-// -----------------------------
-// Funzione per creare un nuovo utente
-// userData deve contenere: { nome, cognome, email, password, ruolo (opzionale) }
-// -----------------------------
+// POST /api/utenti -> crea utente (ATTENZIONE: il backend attualmente richiede ROLE_AMMINISTRATORE)
+// userData: { nome, cognome, email, password, telefono?, ruolo?, stato? }
 export const createUser = async (userData) => {
-  // Validazione rapida
-  if (!userData.nome || !userData.cognome || !userData.email || !userData.password) {
-    throw new Error("Compila tutti i campi obbligatori");
+  if (!userData?.nome || !userData?.cognome || !userData?.email || !userData?.password) {
+    throw new Error("Compila tutti i campi obbligatori: nome, cognome, email, password");
   }
 
+  // Non hashare la password lato client: il server si occupa dell'hashing
   const payload = {
     nome: userData.nome,
     cognome: userData.cognome,
     email: userData.email,
     password: userData.password,
-    ruolo: userData.ruolo || "PROPRIETARIO",
-    stato: "ATTIVO",
     telefono: userData.telefono || null,
+    // ruolo e stato sono opzionali; il server applicherà default se mancanti
+    ruolo: userData.ruolo,
+    stato: userData.stato,
   };
 
-  console.log("Payload inviato al backend:", payload);
-
   try {
-    const response = await axios.post(`${API_BASE_URL}/users`, payload, {
-      headers: { "Content-Type": "application/json" },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Errore createUser:", error.response?.data || error.message);
-    if (error.response?.status === 400 && error.response.data?.message?.includes("Email")) {
-      throw new Error("Email già registrata");
-    }
-    throw new Error(error.response?.data?.message || "Si è verificato un errore. Riprova.");
+    const res = await api.post("/utenti", payload);
+    return res.data; // oggetto Utente creato
+  } catch (err) {
+    console.error("Errore createUser:", err.response?.data || err.message);
+    // mappa i messaggi più comuni
+    if (err.response?.status === 409) throw new Error("Email già registrata");
+    const message = err.response?.data?.message || err.response?.data || err.message;
+    throw new Error(message);
   }
 };
+
+export default api;

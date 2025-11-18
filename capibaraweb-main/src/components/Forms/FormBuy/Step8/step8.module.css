@@ -7,100 +7,61 @@
   margin: 0 auto;
 }
 
-.title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.googleButton {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-.googleButton:hover {
-  background-color: #f5f5f5;
-}
-
-.googleIcon {
-  width: 20px;
-  height: 20px;
-}
-
-.divider {
-  text-align: center;
-  margin: 20px 0;
-  color: #555;
-}
-
-.form {
-  display: flex;
-  gap: 30px;
+.progressWrapper {
   width: 100%;
+  max-width: 900px;
+  margin-bottom: 50px;
 }
 
-.leftColumn,
-.rightColumn {
-  flex: 1;
+.content {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 20px;
 }
 
-input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.iconCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ff6600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkmark {
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.text {
   font-size: 1rem;
-  outline: none;
+  color: #333;
+  max-width: 600px;
 }
 
-input:focus {
-  border-color: #ff6600;
-  box-shadow: 0 0 5px rgba(255, 102, 0, 0.4);
-}
-
-.loginText {
-  font-size: 0.9rem;
-  margin-top: 10px;
-}
-
-.loginLink {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-.loginLink:hover {
-  text-decoration: underline;
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.registerButton {
-  margin-top:-2rem;
+.homeButton {
+  margin-top: 30px;
+  padding: 12px 40px;
   background-color: #ff6600;
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 12px 40px;
+  border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-right: 5.3rem;
 }
 
-.registerButton:hover {
+.homeButton:hover {
   background-color: #e65c00;
 }

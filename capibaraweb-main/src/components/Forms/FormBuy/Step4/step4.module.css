@@ -1,0 +1,109 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* GRIGLIA 2x2 */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* SELETTORE QUADRETTI */
+.selectorGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionBox {
+  width: 70px;
+  height: 50px;
+  border: 2px solid #dcdcdc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  background: #fafafa;
+}
+
+.optionBox:hover {
+  border-color: #ff7504;
+}
+
+.selected {
+  border-color: #ff5709 !important;
+  background: #fff2e7;
+}
+
+/* SELECT */
+.select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #dcdcdc;
+  font-size: 15px;
+}
+
+/* ERROR */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.buttonContainer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.backButton {
+  background: #ffffff;
+  padding: 12px 30px;
+  border-radius: 12px;
+  font-size: 16px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background: #ffffff;
+}
+
+.continueButton {
+  background: #ff5e01;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.continueButton:hover {
+  background: #ff6600;
+}

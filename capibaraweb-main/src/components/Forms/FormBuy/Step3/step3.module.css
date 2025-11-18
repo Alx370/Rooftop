@@ -1,0 +1,99 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.leftColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rightColumn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightColumn img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.label {
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.select, .textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* distanza tra Indietro e Continua */
+  margin-top: 15px;
+}
+
+.continueButton {
+  background-color: rgb(255, 94, 0);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.continueButton:hover:not(:disabled) {
+  background-color: #e67300;
+}
+
+.continueButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.backButton {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #f0f0f0;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}

@@ -26,7 +26,11 @@ h2 {
   text-align: center;
   color: var(--text-light);
   margin-bottom: 2rem;
+  font-family: Montserrat, sans-serif;;
 }
+
+
+
 
 /* ============ HERO ============ */
 .hero {
@@ -107,10 +111,26 @@ h2 {
   padding-top: 2rem;
 }
 
-/* ============================= */
-/*        RESPONSIVE PART        */
-/* ============================= */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
 
+.btn.primary {
+  background-color: var(--primary);
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+
+.btn.primary:hover {
+  background-color: var(--primary);
+}
+
+/* RESPONSIVE PART */
 /* Tablet (max 1024px) */
 @media (max-width: 1024px) {
   .hero {
@@ -168,6 +188,7 @@ h2 {
     max-width: 90%;
     text-align: center;
     font-size: 1rem;
+    font-family: Montserrat, sans-serif;
   }
 
   .hero-buttons {
@@ -192,26 +213,6 @@ h2 {
 
 
 
-
-/* ============ BUTTONS ============ */
-.btn {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-.btn.primary {
-  background-color: var(--primary);
-  color: #fff;
-}
-
-.btn.primary:hover {
-  background-color: var(--primary);
-}
-
 /* ===== INTRO SECTION ===== */
 .intro {
   padding: 6rem 0;
@@ -232,6 +233,7 @@ h2 {
   margin-bottom: 3rem;
   text-align: center;
   max-width: 90%;
+  font-size: 1.2rem;
 }
 
 /* ===== CARD CONTAINER ===== */
@@ -242,6 +244,9 @@ h2 {
   width: 100%;
   justify-content: center;
   margin: 0 auto;
+  background-size: cover;
+  background-position: center;   /* centra l'immagine */
+  background-repeat: no-repeat;
 }
 
 /* ===== CARD ===== */
@@ -274,6 +279,8 @@ h2 {
 }
 
 .card-content {
+  margin-left: 35px;
+  margin-bottom: 35px;
   position: absolute;
   bottom: 1.5rem;
   /* left: 1.5rem; */
@@ -284,12 +291,16 @@ h2 {
 .card-content h3 {
   margin-bottom: 0.5rem;
   font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  font-family: Montserrat, sans-serif;
 }
 
 .card-content p {
-  font-size: 0.9rem;
   margin-bottom: 1rem;
   max-width: 85%;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat, sans-serif;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -365,7 +376,6 @@ h2 {
 }
 
 .usp-grid {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   width: 67%;
@@ -376,24 +386,40 @@ h2 {
 
 /* --- ELEMENTO USP --- */
 .usp-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 4rem;
   width: 90%;
-  flex-wrap: wrap;
+  max-width: 1200px;
 }
 
 /* --- TESTO --- */
-.usp-text {
-  flex: 1;
-  min-width: 280px;
-  text-align: left;
+.usp-text { 
+  font-family: Montserrat, sans-serif;
+}
+
+.usp-text-centered h3 { 
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.usp-text-centered p { 
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .usp-text h3 {
   color: var(--primary);
   font-size: 2rem;
   margin-bottom: 0.6rem;
+
 }
 
 .usp-text p {
@@ -402,26 +428,11 @@ h2 {
   line-height: 1.6;
 }
 
-/* --- Variante centrata per la USP finale --- */
-.usp-item.centered {
-  justify-content: center;
-  text-align: center;
-}
-
-.usp-item.centered .usp-text {
-  text-align: center;
-  max-width: 600px;
-  padding-top: 3rem;
-}
-
 /* --- IMMAGINE --- */
 .usp-img {
   display: flex;
   justify-content: center;
-  flex: 0.5;
-  min-width: 280px;
-  margin-top: 1rem;
- 
+  align-items: center;
 }
 
 
@@ -572,12 +583,12 @@ h2 {
 }
 
 .testimonial-card p {
-  font-style: italic;
+  font-family: Montserrat, sans-serif;
   color: #fff;
 }
 
 .testimonial-card h5 {
-  padding-left: 3rem;
+  padding-left: 5rem;
   color: #fff;
   font-weight: 600;
 }
@@ -618,6 +629,78 @@ h2 {
 }
 
 
+/* ============ FAQ ============ */
+.faq {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 4rem 6rem;
+  align-items: center;
+}
+
+.faq-left {
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.faq-left .btn {
+  align-self: flex-start;
+  width: auto;
+}
+
+.faq-title {
+  text-align: left;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.faq-text {
+  text-align: left;
+  font-family: Montserrat, sans-serif;
+}
+
+.faq-text p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* CSS delle card a dx delle FAQ */
+.faq-boxes {
+  flex: 1 1 420px;
+  min-width: 300px;
+}
+
+.faq-item {
+  background-color: #B6BDF7;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  max-width: 520px;
+  box-shadow: 0 6px 12px rgba(99, 80, 200, 0.26);
+}
+
+.faq-item summary {
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.faq-item summary span {
+  color: #2a2250;
+}
+
+.faq-item p {
+  margin-top: 12px;
+  color: #3b3a4a;
+  line-height: 1.5;
+}
+
+
 /* ============ NEWSLETTER ============ */
 .newsletter {
   text-align: center;
@@ -645,9 +728,11 @@ h2 {
 }
 
 .newsletter-form input {
+  background-color: white;
+  color: #000000;
   padding: 0.8rem 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   width: 550px;
   max-width: 90%; /* si adatta agli schermi piccoli */
   box-sizing: border-box;
@@ -658,7 +743,7 @@ h2 {
   margin-top: 1rem;
   background-color: var(--primary);
   border: 2px solid var(--primary);
-  color: #fff;
+  color: #ffffff;
   padding: 0.7rem 1rem;
   border-radius: 8px;
   cursor: pointer;
@@ -667,7 +752,7 @@ h2 {
 
 .newsletter .btn:hover {
   background-color: var(--primary);
-  color: #fff;
+  color: #000000;
 }
 
 /* ================= RESPONSIVE ================= */

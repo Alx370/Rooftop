@@ -2,72 +2,190 @@
 /* HERO SECTION */
 /* ------------------------------------------------------ */
 
-.hero {
-  width: 100%;
-  background: var(--hero-bg);
+.hero-chisiamo {
+  position: relative;
+  height: 530px;
   border-radius: 0 0 60px 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 4rem;
-  background-image: url(img/LogoImmobiliaris.png);
-  background-repeat: no-repeat;
-  background-position: 25% center;
-  background-size: 50%;
-  background-position-y: -70px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4);
+  background-color: var(--hero-bg);
+  overflow: hidden;
+  padding: 0 4rem;
+  top: -1.5rem;
+  font-family: Montserrat, sans-serif;
 }
 
-.hero-content {
+/* --- Background images --- */
+.hero-bg-logo-chisiamo,
+.hero-bg-palazzo-chisiamo {
+  position: absolute;
+  height: 100%;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.hero-bg-logo-chisiamo {
+  width: 90%;
+  background-image: url(../../pages/Home/img/LogoImmobiliaris.png);
+  background-position: 18% center;
+  bottom: -320px;
+  background-size: contain;
+  height: 920px;
+}
+
+.hero-bg-palazzo-chisiamo {
+  width: 65%;
+  background-image: url(../../assets/images/chisiamo/palazzo-chisiamo.png);
+  background-position: center right;
+  background-size: contain;
+  height: 440px;
+  top: 90px;
+}
+
+/* --- Content --- */
+.hero-content-chisiamo {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
+  width: 63%;
   gap: 2rem;
 }
 
-.hero-text h1 {
-  font-size: 4rem;
-  margin-bottom: 2rem;
-  text-align: justify;
-  margin-top: -5rem;
+.hero-text-chisiamo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-.hero-text p {
+.hero-text-chisiamo h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.hero-text-chisiamo p {
   color: var(--text-light);
   margin-bottom: 3rem;
   max-width: 400px;
   text-align: justify;
 }
 
-.hero-image {
-  display: flex;
-  align-items: center;
-  height: 42.5vh;
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.btn.primary {
+  background-color: var(--primary);
+  color: #fff;
+  font-family: Montserrat, sans-serif;
 }
 
-.hero-title {
-  margin: 4rem 1rem 2rem;
+.btn.primary:hover {
+  background-color: #e55a00;
+  color: #fff;
 }
 
-.hero-title h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #1b1b1b;
+/* RESPONSIVE PART */
+/* Tablet (max 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    height: 450px;
+    padding: 0 2rem;
+  }
+
+  .hero-content {
+    width: 80%;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-bg-palazzo {
+    width: 70%;
+    opacity: 0.7; /* meno invasiva */
+  }
+
+  .hero-bg-logo {
+    background-position: 15% bottom;
+    bottom: -320px;
+    opacity: 0.6;
+  }
+}
+
+/* Mobile grande (max 768px) */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 4rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-text {
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-text p {
+    max-width: 90%;
+    text-align: center;
+    font-size: 1rem;
+    font-family: Montserrat, sans-serif;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    padding-top: 1.5rem;
+  }
+
+  .hero-bg-palazzo {
+    width: 100%;
+    height: 350px;
+    background-position: center bottom;
+    opacity: 0.4;
+    top: auto;
+    bottom: 0;
+  }
+
+  .hero-bg-logo {
+    background-position: center bottom;
+    bottom: -300px;
+    width: 100%;
+    opacity: 0.3;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* TITOLO AGENTI */
+/* ------------------------------------------------------ */
+.hero-title-chisiamo {
   text-align: center;
+  margin: 80px 20px 0 20px;
 }
 
-.hero-title p {
-  color: #5b5b5b;
-  font-size: 1.1rem;
-  text-align: center;
-}
 
 /* ------------------------------------------------------ */
 /* FILTRO PROVINCIA */
@@ -77,7 +195,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 80px;
   position: relative;
 }
 
@@ -160,10 +278,6 @@
 /* ------------------------------------------------------ */
 /* CARD AGENTI */
 /* ------------------------------------------------------ */
-
-.card-agenti-section {
-  padding: 50px 120px 20px 120px;
-}
 
 .cards-container {
   display: grid;
@@ -506,31 +620,6 @@
 
 /* TABLET (max-width: 1024px) */
 @media (max-width: 1024px) {
-  
-  /* Hero Section */
-  .hero-content {
-    width: 85%;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-text h1 {
-    font-size: 3rem;
-    margin-top: 0;
-  }
-
-  .hero-text p {
-    max-width: 100%;
-  }
-
-  .hero-image {
-    height: 30vh;
-  }
-
-  .hero {
-    background-size: 40%;
-    background-position-y: -50px;
-  }
 
   /* Card Agenti */
   .card-agenti-section {
@@ -578,41 +667,6 @@
 
 /* MOBILE (max-width: 768px) */
 @media (max-width: 768px) {
-  
-  /* Hero Section */
-  .hero {
-    padding-top: 2rem;
-    border-radius: 0 0 40px 40px;
-    background-size: 60%;
-    background-position-y: -30px;
-  }
-
-  .hero-content {
-    width: 90%;
-  }
-
-  .hero-text h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-text p {
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-  }
-
-  .hero-image {
-    height: 25vh;
-  }
-
-  .hero-title h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-title p {
-    font-size: 1rem;
-    padding: 0 20px;
-  }
 
   /* Filtro Provincia */
   .provincia-selezionata-title {
@@ -753,18 +807,6 @@
 
 /* MOBILE SMALL (max-width: 480px) */
 @media (max-width: 480px) {
-  
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-
-  .hero-text p {
-    font-size: 0.9rem;
-  }
-
-  .hero-title h1 {
-    font-size: 1.5rem;
-  }
 
   .provincia-selezionata-title {
     font-size: 24px;

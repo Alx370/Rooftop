@@ -112,30 +112,21 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       {/* HERO */}
       {/* -------------------------------- */}
-      <section className="hero">
-        <div className="hero-content">
+      <section className="hero-chisiamo">
+        <div className="hero-bg-logo-chisiamo"></div>
+        <div className="hero-bg-palazzo-chisiamo"></div>
 
-          <div className="hero-text">
+        <div className="hero-content-chisiamo">
+          <div className="hero-text-chisiamo">
             <h1>Chi siamo</h1>
             <p>
-              <strong>Immobiliaris</strong> è l'agenzia immobiliare di riferimento a{" "}
-              <strong>Torino</strong>, specializzata nella vendita di case con{" "}
-              <strong>consulenza su misura</strong> e{" "}
-              <strong>profonda conoscenza</strong> del territorio.
+              <strong>Immobiliaris</strong> è l’agenzia immobiliare di riferimento a <strong>Torino</strong>, specializzata nella vendita di case con <strong>consulenza su misura</strong> e <strong>profonda conoscenza</strong> del territorio.
             </p>
           </div>
-
-          <div className="hero-image">
-            <img
-              src="src/pages/Home/img/PalazzoModerno.png"
-              alt="Palazzo moderno"
-            />
-          </div>
-
         </div>
       </section>
 
-      <section className="hero-title">
+      <section className="hero-title-chisiamo">
         <h1>Scopri tutti i nostri agenti</h1>
         <p>
           <strong>Immobiliaris</strong> è l'agenzia immobiliare di riferimento a{" "}

@@ -20,7 +20,7 @@ const Footer = () => {
         {/* Colonna: Chi siamo */}
         <div className="footer-column">
           <h4>Chi siamo</h4>
-          <a href="#">Link here</a>
+          <Link to="/agente">Accesso Dashboard</Link>
           <a href="#">Link here</a>
           <a href="#">Link here</a>
           <a href="#">Link here</a>

@@ -1,11 +1,14 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.EnumType;
 
@@ -47,6 +50,11 @@ public class Utente {
     @Enumerated(EnumType.STRING)
     @Column(name = "stato", nullable = false, length = 20)
     private Stato stato;
+
+    // Relazione OneToMany con Immobile (solo per proprietari)
+    @OneToMany(mappedBy = "proprietario")
+    private List<Immobile> immobili;
+
     public int getId_utente() {
         return id_utente;
     }
@@ -109,5 +117,13 @@ public class Utente {
 
     public void setStato(Stato stato) {
         this.stato = stato;
+    }
+
+    public List<Immobile> getImmobili() {
+        return immobili;
+    }
+
+    public void setImmobili(List<Immobile> immobili) {
+        this.immobili = immobili;
     }
 }

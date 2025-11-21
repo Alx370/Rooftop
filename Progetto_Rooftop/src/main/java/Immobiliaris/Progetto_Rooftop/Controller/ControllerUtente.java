@@ -114,6 +114,22 @@ public class ControllerUtente {
     }
 
     /**
+     * POST /api/utenti/registrati
+     * Public endpoint to register a new property owner
+     * This endpoint is accessible without authentication and forces the role to PROPRIETARIO
+     */
+    @PostMapping("/registrati")
+    public ResponseEntity<Utente> registraProprietario(@RequestBody Utente utente) {
+        // Force the role to PROPRIETARIO regardless of what is sent in the request
+        utente.setRuolo(Ruolo.PROPRIETARIO);
+        // Force the status to ATTIVO
+        utente.setStato(Stato.ATTIVO);
+        
+        Utente nuovoProprietario = serviceUtente.create(utente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovoProprietario);
+    }
+
+    /**
      * PUT /api/utenti/{id}
      * Updates an existing user
      */

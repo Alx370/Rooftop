@@ -75,7 +75,7 @@
   text-align: justify;
 }
 
-.btn {
+/* .btn {
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 10px;
@@ -93,33 +93,33 @@
 .btn.primary:hover {
   background-color: #e55a00;
   color: #fff;
-}
+} */
 
 /* RESPONSIVE PART */
 /* Tablet (max 1024px) */
 @media (max-width: 1024px) {
-  .hero {
+  .hero-chisiamo {
     height: 450px;
     padding: 0 2rem;
   }
 
-  .hero-content {
+  .hero-content-chisiamo {
     width: 80%;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
   }
 
-  .hero-text h1 {
+  .hero-text-chisiamo h1 {
     font-size: 3rem;
   }
 
-  .hero-bg-palazzo {
+  .hero-bg-palazzo-chisiamo {
     width: 70%;
     opacity: 0.7; /* meno invasiva */
   }
 
-  .hero-bg-logo {
+  .hero-bg-logo-chisiamo {
     background-position: 15% bottom;
     bottom: -320px;
     opacity: 0.6;
@@ -128,40 +128,35 @@
 
 /* Mobile grande (max 768px) */
 @media (max-width: 768px) {
-  .hero {
+  .hero-chisiamo {
     height: auto;
     padding: 4rem 1.5rem;
     flex-direction: column;
     text-align: center;
   }
 
-  .hero-content {
+  .hero-content-chisiamo {
     width: 100%;
     flex-direction: column;
     align-items: center;
   }
 
-  .hero-text {
+  .hero-text-chisiamo {
     align-items: center;
   }
 
-  .hero-text h1 {
+  .hero-text-chisiamo h1 {
     font-size: 2.4rem;
   }
 
-  .hero-text p {
+  .hero-text-chisiamo p {
     max-width: 90%;
     text-align: center;
     font-size: 1rem;
     font-family: Montserrat, sans-serif;
   }
 
-  .hero-buttons {
-    justify-content: center;
-    padding-top: 1.5rem;
-  }
-
-  .hero-bg-palazzo {
+  .hero-bg-palazzo-chisiamo {
     width: 100%;
     height: 350px;
     background-position: center bottom;
@@ -170,7 +165,7 @@
     bottom: 0;
   }
 
-  .hero-bg-logo {
+  .hero-bg-logo-chisiamo {
     background-position: center bottom;
     bottom: -300px;
     width: 100%;
@@ -185,6 +180,9 @@
   text-align: center;
   margin: 80px 20px 0 20px;
 }
+.hero-title-chisiamo p{
+  font-family: Montserrat, sans-serif;
+}
 
 
 /* ------------------------------------------------------ */
@@ -197,6 +195,7 @@
   align-items: center;
   margin-top: 80px;
   position: relative;
+  font-family: Montserrat, sans-serif;
 }
 
 .provincia-btn {
@@ -212,6 +211,7 @@
   gap: 10px;
   align-items: center;
   box-shadow: 0px 4px 12px rgba(255, 122, 0, 0.4);
+  font-family: Montserrat, sans-serif;
 }
 
 .arrow {
@@ -241,6 +241,10 @@
   max-width: 90%;
   box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.25);
   animation: slideDown 0.3s ease;
+}
+
+.modal-content h3 {
+  font-size: 1rem;
 }
 
 .dropdown-item {
@@ -279,9 +283,20 @@
 /* CARD AGENTI */
 /* ------------------------------------------------------ */
 
+.card-agenti-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-items: center;
 }
 
 .card-agente {
@@ -293,8 +308,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 350px;   
-  height: 500px;
+  width: 100%;
+  max-width: 320px;
+  min-height: 500px;
+  height: auto;
 }
 
 .card-agente h3 {
@@ -305,6 +322,7 @@
 .descr {
   font-size: 15px;
   margin-bottom: auto;
+  font-family: Montserrat, sans-serif;
 }
 
 .arrow-card {
@@ -430,17 +448,20 @@
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-family: Montserrat, sans-serif;
 }
 
 .modal-presentazione {
   font-size: 15px;
   line-height: 1.6;
   opacity: 0.95;
+  font-family: Montserrat, sans-serif;
 }
 
 .modal-contact {
   font-weight: 600;
   padding: 0px;
+  font-family: Montserrat, sans-serif;
 }
 
 /* Responsive */
@@ -479,6 +500,11 @@
   width: 50%;
   border-radius: 25px;
   margin-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.map-box img:hover {
+  transform: scale(1.05);
 }
 
 
@@ -568,6 +594,7 @@
 }
 
 .dati-section p {
+  font-family: Montserrat, sans-serif;
   color: #5b5b5b;
   font-size: 1.1rem;
   text-align: center;
@@ -624,6 +651,7 @@
   /* Card Agenti */
   .card-agenti-section {
     padding: 50px 60px 20px 60px;
+
   }
 
   .cards-container {

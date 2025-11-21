@@ -1,7 +1,20 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Agente.css";
 
 const Agente = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+    const logged = localStorage.getItem("adminLogged");
+
+    if (!logged) {
+      navigate("/login-admin"); // reindirizza chi non è loggato
+    }
+  }, []);
+
   const [clienti] = useState([
     { nome: "Vanessa Olmi", tipologia: "Venditore", contatto: "+39 235 534 2344", stato: "Nuova richiesta" },
     { nome: "Giovanna Scudi", tipologia: "Venditore", contatto: "+39 565 584 2322", stato: "Contatto avviato" },

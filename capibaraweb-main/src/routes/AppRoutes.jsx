@@ -10,6 +10,7 @@ import Valutazione from "../pages/Valutazione/valutazione.jsx";
 import FAQ from "../pages/FAQ/faq.jsx";
 import NotFound from "../pages/NotFound/notfound.jsx";
 import Agente from "../pages/Agente/agente.jsx";
+import LoginAdmin from "../components/LoginAdmin/loginadmin.jsx";
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/agente" element={<Agente />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/login-admin" element={<LoginAdmin />} />
           </Routes>
         </main>
         <Footer />

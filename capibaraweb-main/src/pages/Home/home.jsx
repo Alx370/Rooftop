@@ -55,29 +55,29 @@ const Home = () => {
       </section>
 
       {/* ---------------- INTRO ---------------- */}
-      <section className="intro">
+      <section className="intro-home">
         <h2>I nostri servizi</h2>
-        <p className="subtitle">Ti aiutiamo a valorizzare la tua casa e a venderla al giusto valore.</p>
+        <p className="subtitle-home">Ti aiutiamo a valorizzare la tua casa e a venderla al giusto valore.</p>
 
-        <div className="intro-cards">
+        <div className="intro-cards-home">
 
-          <div className="card">
+          <div className="card-home">
             <img src="src/pages/Home/img/finestra.png" alt="Interno casa" />
-            <div className="card-content">
+            <div className="card-content-home">
               <h3>Per venderlo</h3>
               <p>Ti guidiamo nella vendita con metodo, trasparenza e attenzione al valore.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="/valutazione" >Valuta</Link>
             </div>
           </div>
 
-          <div className="card">
+          <div className="card-home">
             <img src="src/pages/Home/img/letto.png" alt="Interno ufficio" />
-            <div className="card-content">
+            <div className="card-content-home">
               <h3>Per affittarlo</h3>
               <p>Gestiamo tutto noi: inquilini,
                 contratti e sicurezza del
                 tuo immobile.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="" >Valuta</Link>
             </div>
           </div>
 
@@ -101,7 +101,7 @@ const Home = () => {
 
           <div className="usp-item reverse">
             <div className="usp-img">
-              <img src="src/pages/Home/img/edificio.png" alt="Metodo user-centred" />
+              <img src="src/pages/Home/img/chiavi.jpg" alt="Metodo user-centred" />
             </div>
             <div className="usp-text">
               <h3 className="highlight1">Metodo user-centred</h3>
@@ -146,10 +146,10 @@ const Home = () => {
       <section className="faq">
         <div className="faq-left">
           <h2 className="faq-title">Qui per rispondere a tutte le tue domande</h2>
-          <div className="faq-text">
+          <div className="faq-text-home">
             <p>Abbiamo raccolto le domande più frequenti dei nostri clienti, con risposte semplici e trasparenti per aiutarti a trovare subito le informazioni che cerchi.</p>
           </div>
-          <button className="btn primary">Trova risposta</button>
+          <Link className="btn primary" to="/faq" >Trova Risposta</Link>
         </div>
         
         <div className="faq-boxes">
@@ -163,16 +163,14 @@ const Home = () => {
           <details className="faq-item">
             <summary><span>Devo pagare per la valutazione dell'immobile?</span></summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-              eiusmod tempor incididunt.
+              No, la valutazione del tuo immobile, tramite il nostro form, è completamente gratuita e senza impegno.
             </p>
           </details>
 
           <details className="faq-item">
             <summary><span>Gestite anche contratti di affitto a lungo termine?</span></summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-              eiusmod tempor incididunt.
+              Sì, gestiamo anche contratti di affitto a lungo termine, offrendo assistenza completa in ogni fase.
             </p>
           </details>
         </div>

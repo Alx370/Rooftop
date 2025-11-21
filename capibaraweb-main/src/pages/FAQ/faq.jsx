@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Faq.css";
 import Postino from "../../assets/images/Postino.png";
 import CasaHero from "../../assets/images/CasaHero.png";
 
 const Faq = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="faq-page">
       <section className="faq-hero">

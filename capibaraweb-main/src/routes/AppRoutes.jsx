@@ -26,6 +26,7 @@ const AppRoutes = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/agente" element={<Agente />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/formbuy/*" element={<FormBuy />} />
           </Routes>
         </main>
         <Footer />

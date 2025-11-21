@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
+import { login, setAuthToken } from "../../services/api"; 
 import "./Login.css";
 
 const Login = () => {
@@ -8,7 +9,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate(); // per il redirect dopo login
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validazione semplice
@@ -17,18 +20,32 @@ const Login = () => {
       return;
     }
 
-    // Simulazione invio login
-    console.log("Login effettuato con:", { email, password });
-    setError("");
+    try {
+      // Chiamata al backend: passiamo un oggetto { email, password }
+      const data = await login({ email, password });
+      console.log("Token ricevuto dal backend:", data.token);
+
+      // Salvataggio token in localStorage
+      localStorage.setItem("token", data.token);
+
+      // Imposta l'Authorization header per le chiamate future
+      setAuthToken(data.token);
+
+      setError("");
+
+      // Redirect alla dashboard o pagina protetta
+      navigate("/dashboard"); // modifica con la tua route
+    } catch (err) {
+      setError(err.message || "Credenziali non valide");
+      console.error(err);
+    }
   };
 
   return (
     <section className="login-section">
       <div className="login-card">
         <h2 className="login-title">Accedi ora</h2>
-        <p className="login-subtitle">
-          Bentornato a casa!
-        </p>
+        <p className="login-subtitle">Bentornato a casa!</p>
 
         <button className="google-btn">
           <img src={googleIcon} alt="Google" className="google-icon" />
@@ -75,7 +92,6 @@ const Login = () => {
             Login
           </button>
 
-          {/* Testo aggiuntivo sotto */}
           <p className="login-register">
             Non hai un account? <Link to="/registrati">Registrati</Link>
           </p>

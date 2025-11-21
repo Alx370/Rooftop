@@ -1,0 +1,73 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  text-align: center;
+}
+
+.stepContent {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.leftColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.rightColumn {
+  flex: 1;
+  min-height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.btnBack {
+  background-color: white;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 12px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.btnContinue {
+  background-color: rgb(255,115,0);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+}

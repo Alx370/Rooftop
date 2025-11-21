@@ -50,7 +50,7 @@ export default function ChiSiamo() {
       img: "../../src/assets/images/chisiamo/Torino/agente4.png",
     },
 
-    // Agenti di un'altra provincia (da finire di modificare)
+    // Agenti di Cuneo
     {
     id: 5,
     nome: "Luca Ferrero",
@@ -90,7 +90,91 @@ export default function ChiSiamo() {
     tel: "+393402556677",
     mail: "elena.bessone@immobiliaris.com",
     img: "../../src/assets/images/chisiamo/Torino/agente1.png",
-  }
+  },
+
+  // Agenti di Alessandria
+{
+  id: 9,
+  nome: "Giulia Roversi",
+  descrizione: "Creo percorsi immobiliari basati su fiducia e trasparenza.",
+  presentazione: "Ti accompagnerò con attenzione e competenza per trovare l'ambiente che possa davvero migliorare il tuo quotidiano.",
+  provincia: "Alessandria",
+  tel: "+393401234567",
+  mail: "giulia.roversi@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 10,
+  nome: "Matteo Cavazza",
+  descrizione: "Rendo ogni trattativa un'esperienza semplice e positiva.",
+  presentazione: "Con ascolto e professionalità ti guiderò verso la scelta della casa che rispecchia davvero le tue aspettative.",
+  provincia: "Alessandria",
+  tel: "+393474563210",
+  mail: "matteo.cavazza@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 11,
+  nome: "Irene Marchisio",
+  descrizione: "Ogni casa è un'opportunità per costruire nuovi inizi.",
+  presentazione: "Ti supporterò con chiarezza e dedizione per aiutarti a riconoscere il potenziale di ogni immobile.",
+  provincia: "Alessandria",
+  tel: "+393491122334",
+  mail: "irene.marchisio@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 12,
+  nome: "Federico Dalmonte",
+  descrizione: "Metto al centro le tue esigenze per offrirti un percorso valido.",
+  presentazione: "Sarò al tuo fianco per guidarti verso una scelta immobiliare consapevole e duratura.",
+  provincia: "Alessandria",
+  tel: "+393456778899",
+  mail: "federico.dalmonte@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+
+// Agenti di Asti
+{
+  id: 13,
+  nome: "Chiara Venturi",
+  descrizione: "Trasformo le esigenze abitative in soluzioni concrete e su misura.",
+  presentazione: "Ti accompagnerò con cura e disponibilità nella scelta dell'immobile che possa davvero rappresentarti.",
+  provincia: "Asti",
+  tel: "+393401987654",
+  mail: "chiara.venturi@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 14,
+  nome: "Lorenzo Malfatti",
+  descrizione: "Metto competenza e ascolto al servizio di ogni progetto.",
+  presentazione: "Con professionalità e trasparenza ti guiderò nel riconoscere il valore reale degli spazi che visiteremo.",
+  provincia: "Asti",
+  tel: "+393472223344",
+  mail: "lorenzo.malfatti@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 15,
+  nome: "Sofia Bellandi",
+  descrizione: "Credo nel potere degli ambienti di migliorare il benessere di chi li vive.",
+  presentazione: "Sarò al tuo fianco per aiutarti a scegliere la casa più adatta ai tuoi ritmi, ai tuoi sogni e alle tue priorità.",
+  provincia: "Asti",
+  tel: "+393498800112",
+  mail: "sofia.bellandi@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+},
+{
+  id: 16,
+  nome: "Davide Rossetti",
+  descrizione: "Rendo ogni percorso immobiliare semplice, chiaro e sereno.",
+  presentazione: "Ti supporterò con concretezza ed esperienza per accompagnarti verso una scelta sicura e senza stress.",
+  provincia: "Asti",
+  tel: "+393402225566",
+  mail: "davide.rossetti@immobiliaris.com",
+  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+}
   ];
 
   const filteredAgents =
@@ -112,30 +196,21 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       {/* HERO */}
       {/* -------------------------------- */}
-      <section className="hero">
-        <div className="hero-content">
+      <section className="hero-chisiamo">
+        <div className="hero-bg-logo-chisiamo"></div>
+        <div className="hero-bg-palazzo-chisiamo"></div>
 
-          <div className="hero-text">
+        <div className="hero-content-chisiamo">
+          <div className="hero-text-chisiamo">
             <h1>Chi siamo</h1>
             <p>
-              <strong>Immobiliaris</strong> è l'agenzia immobiliare di riferimento a{" "}
-              <strong>Torino</strong>, specializzata nella vendita di case con{" "}
-              <strong>consulenza su misura</strong> e{" "}
-              <strong>profonda conoscenza</strong> del territorio.
+              <strong>Immobiliaris</strong> è l’agenzia immobiliare di riferimento a <strong>Torino</strong>, specializzata nella vendita di case con <strong>consulenza su misura</strong> e <strong>profonda conoscenza</strong> del territorio.
             </p>
           </div>
-
-          <div className="hero-image">
-            <img
-              src="src/pages/Home/img/PalazzoModerno.png"
-              alt="Palazzo moderno"
-            />
-          </div>
-
         </div>
       </section>
 
-      <section className="hero-title">
+      <section className="hero-title-chisiamo">
         <h1>Scopri tutti i nostri agenti</h1>
         <p>
           <strong>Immobiliaris</strong> è l'agenzia immobiliare di riferimento a{" "}
@@ -253,7 +328,9 @@ export default function ChiSiamo() {
         <p>Via Margherite 56 (TO) CAP 10059</p>
 
         <div className="map-box">
-          <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" />
+          <a href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Carlo+Torino" target="_blank" rel="noopener noreferrer">
+            <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" style={{ cursor: 'pointer' }} />
+          </a>
         </div>
       </section>
 
@@ -262,11 +339,16 @@ export default function ChiSiamo() {
       {/* BOTTONI RECAPITI */}
       {/* -------------------------------- */}
       <section className="bottone-recapiti-section">
-        <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" > +39 123 456 7890 </button>
+        <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" >
+          <img src="../../src/assets/icons/phone-call.png" alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          +39 123 456 7890
+        </button>
       </section>
 
       <section className="bottone-recapiti-section">
-        <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > info@immobiliaris.com </button>
+        <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > 
+          <img src="../../src/assets/icons/email.png" alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          info@immobiliaris.com </button>
       </section>
 
 

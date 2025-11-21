@@ -204,7 +204,7 @@ export default function ChiSiamo() {
           <div className="hero-text-chisiamo">
             <h1>Chi siamo</h1>
             <p>
-              <strong>Immobiliaris</strong> è l’agenzia immobiliare di riferimento a <strong>Torino</strong>, specializzata nella vendita di case con <strong>consulenza su misura</strong> e <strong>profonda conoscenza</strong> del territorio.
+              <strong>Immobiliaris</strong> è l'agenzia immobiliare di riferimento a <strong>Torino</strong>, specializzata nella vendita di case con <strong>consulenza su misura</strong> e <strong>profonda conoscenza</strong> del territorio.
             </p>
           </div>
         </div>

@@ -1,4 +1,6 @@
-package Immobiliaris.Progetto_Rooftop.Model;
+package Immobiliaris.Progetto_Rooftop.Enum;
+
+import Immobiliaris.Progetto_Rooftop.Model.Nota;
 
 /**
  * Definisce la visibilità delle note interne.

@@ -1,4 +1,6 @@
-package Immobiliaris.Progetto_Rooftop.Model;
+package Immobiliaris.Progetto_Rooftop.Enum;
+
+import Immobiliaris.Progetto_Rooftop.Model.Utente;
 
 /**
  * Ruoli utente disponibili nel sistema.

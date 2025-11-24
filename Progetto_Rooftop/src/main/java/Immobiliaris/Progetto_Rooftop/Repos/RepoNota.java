@@ -1,7 +1,7 @@
 package Immobiliaris.Progetto_Rooftop.Repos;
 
+import Immobiliaris.Progetto_Rooftop.Enum.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Model.Nota;
-import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

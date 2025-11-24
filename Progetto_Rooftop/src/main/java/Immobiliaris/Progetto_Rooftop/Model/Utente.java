@@ -2,6 +2,8 @@ package Immobiliaris.Progetto_Rooftop.Model;
 
 import java.util.List;
 
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;

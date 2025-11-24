@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
 import { login, setAuthToken } from "../../services/api"; 
-import "./Login.css";
+import "./login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

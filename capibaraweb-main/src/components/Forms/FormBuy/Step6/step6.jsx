@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './Step6.module.css';
+import styles from './step6.module.css';
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Step6({ formData, setFormData, nextStep, prevStep }) {

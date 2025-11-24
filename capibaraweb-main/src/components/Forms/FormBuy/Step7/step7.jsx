@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './Step7.module.css';
+import styles from './step7.module.css';
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 // Icone esempio

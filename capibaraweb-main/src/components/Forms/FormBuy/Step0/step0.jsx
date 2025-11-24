@@ -1,6 +1,6 @@
 import React from "react";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import styles from "./Step0.module.css";
+import styles from "./step0.module.css";
 
 export default function Step0({ nextStep }) {
   const handleContinue = () => {

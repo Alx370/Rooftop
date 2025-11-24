@@ -94,9 +94,9 @@ CREATE TABLE IF NOT EXISTS valutazioni (
   valore_stimato DECIMAL(10,2) NOT NULL,
   valore_min DECIMAL(10,2),
   valore_max DECIMAL(10,2),
-  stato ENUM('IN_LAVORAZIONE', 'COMPLETATA', 'SCADUTA') DEFAULT 'IN_LAVORAZIONE',
-  metodo ENUM('AUTOMATICO', 'MANUALE') DEFAULT 'AUTOMATICO',
-  data_valutazione DATETIME DEFAULT CURRENT_TIMESTAMP,
+  stato ENUM('IN_LAVORAZIONE', 'COMPLETATA', 'SCADUTA', 'NUOVA_RICHIESTA') DEFAULT 'NUOVA_RICHIESTA',
+  metodo ENUM('MANUALE') DEFAULT 'MANUALE',
+  data_valutazione DATETIME,
   data_scadenza DATETIME,
   note TEXT,
   FOREIGN KEY (id_immobile) REFERENCES immobili(id_immobile) ON DELETE CASCADE,
@@ -281,18 +281,18 @@ INSERT INTO caratteristiche_immobile (id_immobile, ascensore, parcheggio, posti_
 (11, TRUE, FALSE, 0, FALSE, TRUE, 5.00, FALSE, NULL, FALSE, NULL, FALSE, TRUE, TRUE, FALSE, 'AUTONOMO', 'C', 'EST'),
 (12, FALSE, TRUE, 1, FALSE, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, FALSE, FALSE, FALSE, 'CENTRALIZZATO', 'D', 'NORD');
 
-INSERT INTO valutazioni (id_immobile, id_valutatore, valore_stimato, valore_min, valore_max, stato, metodo, data_valutazione, note) VALUES
+INSERT INTO valutazioni (id_immobile, id_valutatore, stato, metodo, data_valutazione, note) VALUES
 (1, 3, 485000.00, 465000.00, 505000.00, 'COMPLETATA', 'MANUALE', '2025-09-16 14:30:00', 'Valutazione basata su comparabili della zona. Immobile in ottime condizioni, prezzo allineato al mercato.'),
 (2, 3, 890000.00, 850000.00, 930000.00, 'COMPLETATA', 'MANUALE', '2025-09-21 10:00:00', 'Villa di pregio, giardino ben curato. Prezzo giustificato dalla posizione e dalle caratteristiche.'),
 (3, 3, 620000.00, 590000.00, 650000.00, 'COMPLETATA', 'MANUALE', '2025-10-02 11:15:00', 'Attico di nuova costruzione, terrazzo panoramico molto apprezzabile. Fascia alta del mercato.'),
-(4, 3, 145000.00, 138000.00, 152000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-05 15:00:00', 'Monolocale zona universitaria, valutazione automatica confermata. Buon investimento.'),
+(4, 3, 145000.00, 138000.00, 152000.00, 'COMPLETATA', 'MANUALE', '2025-10-05 15:00:00', 'Monolocale zona universitaria, valutazione automatica confermata. Buon investimento.'),
 (5, 3, 295000.00, 280000.00, 310000.00, 'COMPLETATA', 'MANUALE', '2025-10-11 09:30:00', 'Appartamento standard per la zona, posto auto rappresenta un plus.'),
 (6, 3, 380000.00, 350000.00, 420000.00, 'COMPLETATA', 'MANUALE', '2025-10-13 16:00:00', 'Terreno edificabile, vista mare eccellente. Prezzo competitivo per la zona.'),
-(7, 3, 235000.00, 225000.00, 245000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-16 10:00:00', 'Ristrutturazione completa recente, valore allineato.'),
+(7, 3, 235000.00, 225000.00, 245000.00, 'COMPLETATA', 'MANUALE', '2025-10-16 10:00:00', 'Ristrutturazione completa recente, valore allineato.'),
 (8, 3, 320000.00, 280000.00, 350000.00, 'COMPLETATA', 'MANUALE', '2025-10-19 14:00:00', 'Immobile da ristrutturare, prezzo tiene conto dei lavori necessari. Potenziale interessante.'),
 (9, 3, 195000.00, 185000.00, 205000.00, 'IN_LAVORAZIONE', 'MANUALE', '2025-10-26 08:00:00', 'Valutazione in corso, necessario sopralluogo approfondito.'),
 (10, 3, 1200000.00, 1150000.00, 1280000.00, 'COMPLETATA', 'MANUALE', '2025-10-29 11:30:00', 'Immobile di lusso, segmento premium. Prezzo giustificato dalle finiture e dalla posizione strategica.'),
-(11, 3, 165000.00, 158000.00, 172000.00, 'COMPLETATA', 'AUTOMATICO', '2025-10-31 09:00:00', 'Bilocale in buone condizioni, arredato. Prezzo di mercato.'),
+(11, 3, 165000.00, 158000.00, 172000.00, 'COMPLETATA', 'MANUALE', '2025-10-31 09:00:00', 'Bilocale in buone condizioni, arredato. Prezzo di mercato.'),
 (12, 3, 275000.00, 260000.00, 290000.00, 'COMPLETATA', 'MANUALE', '2025-11-02 10:00:00', 'Locale commerciale, posizione strategica su corso principale. Buona opportunità.');
 
 INSERT INTO contratti (id_immobile, id_proprietario, numero_contratto, tipo_contratto, durata_mesi, percentuale_provvigione, prezzo_concordato, data_proposta, data_accettazione, data_scadenza, stato, file_contratto) VALUES
@@ -358,27 +358,27 @@ INSERT INTO documenti (id_immobile, tipo, nome_file, path_file, created_at) VALU
 INSERT INTO recensioni (id_agente, id_immobile, nome_cliente, rating, titolo, commento, verificata, created_at) VALUES
 (2, 1, 'Marco S.', 5, 'Professionalità e competenza', 'Laura è stata eccezionale! Mi ha seguito passo passo nella ricerca del mio appartamento ideale. Sempre disponibile e molto preparata. Consigliatissima!', TRUE, '2025-09-25 14:30:00'),
 (3, 2, 'Famiglia Benedetti', 5, 'Esperienza fantastica', 'Giuseppe ci ha aiutato a trovare la villa perfetta per la nostra famiglia. Professionale, paziente e sempre pronto a rispondere alle nostre domande. Servizio impeccabile!', TRUE, '2025-10-15 10:00:00'),
-(2, 3, 'Andrea L.', 4, 'Molto soddisfatto', 'Ottima esperienza, Laura ha compreso subito le mie esigenze e mi ha proposto immobili perfetti. Unico neo: tempi un po\' lunghi per alcune pratiche burocratiche.', TRUE, '2025-10-22 16:45:00'),
-(5, 4, 'Chiara M.', 5, 'Agente top!', 'Alessandro è stato davvero in gamba. Mi ha trovato il monolocale perfetto per iniziare l\'università. Veloce, efficiente e simpatico. Lo consiglio!', TRUE, '2025-10-18 09:30:00'),
-(3, 5, 'Paolo e Silvia', 5, 'Consigliatissimo', 'Giuseppe ha gestito la vendita del nostro vecchio appartamento e l\'acquisto del nuovo con grande professionalità. Sempre disponibile e onesto nei consigli.', TRUE, '2025-10-28 11:15:00'),
+(2, 3, 'Andrea L.', 4, 'Molto soddisfatto', 'Ottima esperienza, Laura ha compreso subito le mie esigenze e mi ha proposto immobili perfetti. Unico neo: tempi un pò lunghi per alcune pratiche burocratiche.', TRUE, '2025-10-22 16:45:00'),
+(5, 4, 'Chiara M.', 5, 'Agente top!', 'Alessandro è stato davvero in gamba. Mi ha trovato il monolocale perfetto per iniziare l''università. Veloce, efficiente e simpatico. Lo consiglio!', TRUE, '2025-10-18 09:30:00'),
+(3, 5, 'Paolo e Silvia', 5, 'Consigliatissimo', 'Giuseppe ha gestito la vendita del nostro vecchio appartamento e l''acquisto del nuovo con grande professionalità. Sempre disponibile e onesto nei consigli.', TRUE, '2025-10-28 11:15:00'),
 (5, 7, 'Roberto F.', 4, 'Buon servizio', 'Alessandro mi ha seguito bene nella trattativa. Apprezzata la trasparenza e la chiarezza nelle comunicazioni. Buon agente immobiliare.', TRUE, '2025-10-30 15:00:00'),
 (2, NULL, 'Elena R.', 5, 'La migliore!', 'Ho lavorato con diversi agenti immobiliari, ma Laura è senza dubbio la migliore. Preparata, seria e molto umana. Grazie di tutto!', TRUE, '2025-11-01 12:00:00'),
 (3, NULL, 'Luca G.', 5, 'Ottimo professionista', 'Giuseppe è un vero professionista del settore. Mi ha consigliato al meglio e mi ha evitato diversi problemi. Affidabilità al 100%.', TRUE, '2025-11-02 14:30:00');
 
 INSERT INTO faq (categoria, domanda, risposta, ordine) VALUES
-('GENERALE', 'Chi è RoofTop Immobiliare?', 'RoofTop Immobiliare è un\'agenzia immobiliare moderna e dinamica, specializzata nella compravendita di immobili residenziali e commerciali. Operiamo con professionalità e trasparenza, mettendo al centro le esigenze dei nostri clienti.', 1),
+('GENERALE', 'Chi è RoofTop Immobiliare?', 'RoofTop Immobiliare è un''agenzia immobiliare moderna e dinamica, specializzata nella compravendita di immobili residenziali e commerciali. Operiamo con professionalità e trasparenza, mettendo al centro le esigenze dei nostri clienti.', 1),
 ('VENDITA', 'Come posso vendere il mio immobile con voi?', 'È molto semplice! Puoi contattarci tramite il form sul sito, via email o telefono. Un nostro agente ti contatterà per fissare un appuntamento gratuito di valutazione. Dopo la valutazione, se decidi di affidarti a noi, ti proporremo un contratto di incarico e ci occuperemo di tutto il processo di vendita.', 1),
-('VENDITA', 'Quanto costa la valutazione del mio immobile?', 'La valutazione preliminare del tuo immobile è completamente gratuita e senza impegno. Un nostro esperto valuterà l\'immobile entro 72 ore dalla richiesta.', 2),
-('VENDITA', 'Quali sono le provvigioni dell\'agenzia?', 'Le nostre provvigioni variano dal 2% al 4% a seconda del tipo di contratto (esclusiva o non esclusiva) e del valore dell\'immobile. Tutti i costi vengono comunicati in modo trasparente prima della firma del contratto.', 3),
-('ACQUISTO', 'Come posso cercare un immobile?', 'Puoi utilizzare il nostro motore di ricerca sul sito web, filtrando per zona, tipologia, prezzo e caratteristiche. In alternativa, puoi contattare direttamente un nostro agente che ti aiuterà a trovare l\'immobile perfetto per le tue esigenze.', 1),
-('ACQUISTO', 'Posso visitare gli immobili?', 'Certamente! Puoi prenotare una visita compilando il form presente nella scheda dell\'immobile o chiamando direttamente il nostro ufficio. Organizzeremo la visita nel più breve tempo possibile.', 2),
-('ACQUISTO', 'Offrite assistenza per il mutuo?', 'Sì, collaboriamo con i principali istituti di credito e possiamo assisterti nella ricerca della migliore soluzione di finanziamento per l\'acquisto del tuo immobile.', 3),
+('VENDITA', 'Quanto costa la valutazione del mio immobile?', 'La valutazione preliminare del tuo immobile è completamente gratuita e senza impegno. Un nostro esperto valuterà l''immobile entro 72 ore dalla richiesta.', 2),
+('VENDITA', 'Quali sono le provvigioni dell''agenzia?', 'Le nostre provvigioni variano dal 2% al 4% a seconda del tipo di contratto (esclusiva o non esclusiva) e del valore dell''immobile. Tutti i costi vengono comunicati in modo trasparente prima della firma del contratto.', 3),
+('ACQUISTO', 'Come posso cercare un immobile?', 'Puoi utilizzare il nostro motore di ricerca sul sito web, filtrando per zona, tipologia, prezzo e caratteristiche. In alternativa, puoi contattare direttamente un nostro agente che ti aiuterà a trovare l''immobile perfetto per le tue esigenze.', 1),
+('ACQUISTO', 'Posso visitare gli immobili?', 'Certamente! Puoi prenotare una visita compilando il form presente nella scheda dell''immobile o chiamando direttamente il nostro ufficio. Organizzeremo la visita nel più breve tempo possibile.', 2),
+('ACQUISTO', 'Offrite assistenza per il mutuo?', 'Sì, collaboriamo con i principali istituti di credito e possiamo assisterti nella ricerca della migliore soluzione di finanziamento per l''acquisto del tuo immobile.', 3),
 ('VALUTAZIONE', 'Quanto tempo ci vuole per la valutazione?', 'Ci impegniamo a completare la valutazione entro 72 ore dalla richiesta. Riceverai un report dettagliato con la stima di valore del tuo immobile e suggerimenti per massimizzare il prezzo di vendita.', 1),
 ('VALUTAZIONE', 'La valutazione è vincolante?', 'No, la valutazione è un servizio informativo gratuito e non ti vincola in alcun modo. Puoi decidere liberamente se affidarti a noi per la vendita del tuo immobile.', 2),
-('CONTRATTI', 'Cosa significa contratto in esclusiva?', 'Il contratto in esclusiva significa che affidi solo a RoofTop l\'incarico di vendere il tuo immobile per un periodo definito (generalmente 6-12 mesi). In cambio, garantiamo massimo impegno nella promozione e vendita, con provvigioni più vantaggiose.', 1),
-('CONTRATTI', 'Posso recedere dal contratto?', 'Le condizioni di recesso sono specificate nel contratto di incarico. Generalmente, per i contratti in esclusiva è previsto un periodo minimo, mentre per i contratti non esclusivi c\'è maggiore flessibilità.', 2),
+('CONTRATTI', 'Cosa significa contratto in esclusiva?', 'Il contratto in esclusiva significa che affidi solo a RoofTop l''incarico di vendere il tuo immobile per un periodo definito (generalmente 6-12 mesi). In cambio, garantiamo massimo impegno nella promozione e vendita, con provvigioni più vantaggiose.', 1),
+('CONTRATTI', 'Posso recedere dal contratto?', 'Le condizioni di recesso sono specificate nel contratto di incarico. Generalmente, per i contratti in esclusiva è previsto un periodo minimo, mentre per i contratti non esclusivi c''è maggiore flessibilità.', 2),
 ('DOCUMENTI', 'Quali documenti servono per vendere un immobile?', 'I documenti principali sono: atto di proprietà, planimetria catastale, APE (Attestato di Prestazione Energetica), visura catastale, regolamento condominiale (se applicabile). Il nostro team ti guiderà passo passo nella raccolta di tutta la documentazione necessaria.', 1),
-('DOCUMENTI', 'Cos\'è l\'APE e chi deve fornirlo?', 'L\'APE (Attestato di Prestazione Energetica) è un documento obbligatorio che attesta la classe energetica dell\'immobile. Deve essere fornito dal venditore e realizzato da un tecnico certificato. Possiamo assisterti nel procurarlo.', 2),
+('DOCUMENTI', 'Cos''è l''APE e chi deve fornirlo?', 'L''APE (Attestato di Prestazione Energetica) è un documento obbligatorio che attesta la classe energetica dell''immobile. Deve essere fornito dal venditore e realizzato da un tecnico certificato. Possiamo assisterti nel procurarlo.', 2),
 ('SERVIZI', 'Offrite servizi fotografici professionali?', 'Sì, per tutti gli immobili in vendita con noi offriamo un servizio fotografico professionale gratuito. Riteniamo che foto di qualità siano fondamentali per valorizzare al meglio il tuo immobile.', 1),
 ('SERVIZI', 'Fate pubblicità online degli immobili?', 'Assolutamente sì! Pubblichiamo gli immobili sul nostro sito, sui principali portali immobiliari nazionali e sui social media. Utilizziamo anche campagne pubblicitarie mirate per raggiungere il maggior numero di potenziali acquirenti.', 2),
 ('MUTUI', 'Mi aiutate a ottenere un mutuo?', 'Sì, il nostro servizio include la consulenza per il mutuo. Ti aiuteremo a preparare la documentazione necessaria e ti metteremo in contatto con i nostri partner bancari per ottenere le migliori condizioni.', 1);

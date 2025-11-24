@@ -12,6 +12,10 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
 import java.math.BigDecimal;
 
+import Immobiliaris.Progetto_Rooftop.Enum.ClasseEnergetica;
+import Immobiliaris.Progetto_Rooftop.Enum.Orientamento;
+import Immobiliaris.Progetto_Rooftop.Enum.Riscaldamento;
+
 @Entity
 @Table(name = "caratteristiche_immobile")
 public class CaratteristicheImmobile {

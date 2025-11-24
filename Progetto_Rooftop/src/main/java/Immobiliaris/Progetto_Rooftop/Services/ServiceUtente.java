@@ -1,6 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Services;
-import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import java.util.List;
 

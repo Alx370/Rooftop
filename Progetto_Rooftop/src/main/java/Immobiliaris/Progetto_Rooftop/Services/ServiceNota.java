@@ -1,7 +1,8 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
+import Immobiliaris.Progetto_Rooftop.Enum.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Model.Nota;
-import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

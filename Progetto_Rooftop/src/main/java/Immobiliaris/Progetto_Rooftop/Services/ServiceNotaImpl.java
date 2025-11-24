@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import Immobiliaris.Progetto_Rooftop.Enum.TipoNota;
+import Immobiliaris.Progetto_Rooftop.Enum.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Model.Nota;
-import Immobiliaris.Progetto_Rooftop.Model.TipoNota;
-import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoNota;
 
 /**

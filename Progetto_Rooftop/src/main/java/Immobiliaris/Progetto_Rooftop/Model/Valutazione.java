@@ -13,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import Immobiliaris.Progetto_Rooftop.Enum.MetodoValutazione;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoValutazione;
+
 @Entity
 @Table(name = "valutazioni")
 public class Valutazione {

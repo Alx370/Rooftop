@@ -1,7 +1,7 @@
 package Immobiliaris.Progetto_Rooftop.Repos;
 
-import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 
 import org.springframework.data.jpa.repository.JpaRepository;

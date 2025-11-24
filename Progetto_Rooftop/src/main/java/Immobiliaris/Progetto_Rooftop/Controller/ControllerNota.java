@@ -1,7 +1,7 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
+import Immobiliaris.Progetto_Rooftop.Enum.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Model.Nota;
-import Immobiliaris.Progetto_Rooftop.Model.VisibilitaNota;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceNota;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
-import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,6 +13,10 @@ import jakarta.persistence.EnumType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
+import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
+
 @Entity
 @Table(name = "immobili")
 public class Immobile {

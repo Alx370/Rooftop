@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Faq.css";
+import "./faq.css";
 import Postino from "../../assets/images/Postino.png";
 import CasaHero from "../../assets/images/CasaHero.png";
 

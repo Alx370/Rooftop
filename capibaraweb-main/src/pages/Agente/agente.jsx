@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Agente.css";
+import "./agente.css";
 
 const Agente = () => {
   const [clienti] = useState([

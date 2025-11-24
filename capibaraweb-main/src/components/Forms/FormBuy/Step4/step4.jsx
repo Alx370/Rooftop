@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Step4.module.css";
+import styles from "./step4.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Step4({ formData, setFormData, nextStep, prevStep }) {

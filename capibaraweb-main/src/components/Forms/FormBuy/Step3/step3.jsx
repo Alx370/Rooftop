@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Step3.module.css';
+import styles from './step3.module.css';
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 import newImg from '../../../../assets/images/nuovo.png';

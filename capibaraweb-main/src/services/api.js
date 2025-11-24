@@ -1,7 +1,11 @@
 import axios from "axios";
 
-// Base URL del backend (controlla che corrisponda alla tua configurazione)
-const API_BASE_URL = "http://localhost:8080/api";
+// Base URL del backend - usa il proxy nginx in produzione
+// In sviluppo locale usa vite proxy, in produzione nginx proxy
+const API_BASE_URL = import.meta.env.MODE === 'development' 
+  ? "http://localhost:8080/api"  // Sviluppo locale
+  : "/api";                       // Produzione (usa nginx proxy)
+
 // crea l'istanza axios qui (era mancante -> ReferenceError)
 const api = axios.create({ baseURL: API_BASE_URL, headers: { "Content-Type": "application/json" } });
 

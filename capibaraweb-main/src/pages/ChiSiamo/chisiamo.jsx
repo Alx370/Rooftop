@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ChiSiamo.css";
+import "./chisiamo.css";
 
 export default function ChiSiamo() {
   const [openMenu, setOpenMenu] = useState(false);

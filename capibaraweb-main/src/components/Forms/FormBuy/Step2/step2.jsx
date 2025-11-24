@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import styles from "./Step2.module.css";
+import styles from "./step2.module.css";
 import villaImg from "../../../../assets/images/Villa.png";
 import appartamentoImg from "../../../../assets/images/Appartamento.png";
 

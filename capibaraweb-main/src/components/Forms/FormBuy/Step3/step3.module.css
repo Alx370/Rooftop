@@ -1,75 +1,97 @@
+/* CONTAINER PRINCIPALE */
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.h2{
-  font-size: 28px;
+/* TITOLO */
+.title {
+  font-size: 30px;
+  font-weight: 700;
   text-align: center;
+  color: #0c0d26;
 }
+
+/* LAYOUT CONTENUTO */
 .content {
   display: flex;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
+/* COLONNA SINISTRA */
 .leftColumn {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-}
-
-.rightColumn {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.rightColumn img {
-  margin-top: 6rem;
-  max-height: 500px;
-  object-fit: contain;
-  border-radius: 12px;
+  gap: 12px;
 }
 
 .label {
   font-weight: 600;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.select, .textarea {
+/* SELECT & TEXTAREA */
+.select,
+.textarea {
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   font-size: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #ccc;
 }
 
 .textarea {
-  min-height: 100px;
+  min-height: 110px;
   resize: vertical;
 }
 
+/* ERRORE */
+.error {
+  color: red;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* BOTTONI */
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 15px; /* distanza tra Indietro e Continua */
-  margin-top: 15px;
+  gap: 15px;
+  margin-top: 18px;
 }
 
+.backButton,
+.continueButton {
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* INDIETRO */
+.backButton {
+  background-color: white;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.backButton:hover {
+  background-color: #f0f0f0;
+}
+
+/* CONTINUA */
 .continueButton {
   background-color: rgb(255, 94, 0);
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 12px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .continueButton:hover:not(:disabled) {
@@ -81,24 +103,58 @@
   cursor: not-allowed;
 }
 
-.backButton {
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
+/* COLONNA DESTRA (IMMAGINE) */
+.rightColumn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 420px;
+  object-fit: contain;
   border-radius: 12px;
-  padding: 12px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  animation: fadeIn 0.3s ease;
 }
 
-.backButton:hover {
-  background-color: #f0f0f0;
+/* ANIMAZIONE IMMAGINE */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.error {
-  color: red;
-  margin-top: 5px;
-  font-size: 14px;
+/* -------- RESPONSIVE -------- */
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .buttonContainer {
+    justify-content: flex-start;
+  }
 }
 
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+  }
+
+  .backButton,
+  .continueButton {
+    width: 100%;
+    text-align: center;
+  }
+}

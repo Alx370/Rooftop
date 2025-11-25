@@ -1,14 +1,17 @@
+/* CONTAINER PRINCIPALE */
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
+/* TITOLO */
 .title {
   text-align: center;
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 30px;
-  color: #333;
+  font-weight: 700;
+  color: #0c0d26;
 }
 
 /* GRIGLIA 2x2 */
@@ -18,6 +21,16 @@
   gap: 25px;
 }
 
+/* BOX SINGOLO */
+.box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* SOTTOTITOLO */
 .subtitle {
   font-size: 18px;
   font-weight: 600;
@@ -42,66 +55,100 @@
   align-items: center;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.3s;
   background: #fafafa;
+  transition: all 0.2s ease;
 }
 
 .optionBox:hover {
-  border-color: #ff7504;
+  border-color: #ff7300;
 }
 
 .selected {
-  border-color: #ff5709 !important;
-  background: #fff2e7;
+  border-color: #ff7300 !important;
+  background: #fff4e8;
 }
 
 /* SELECT */
 .select {
   width: 100%;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 2px solid #dcdcdc;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 /* ERROR */
 .error {
   color: red;
-  text-align: center;
-  margin-top: 10px;
   font-weight: 600;
+  text-align: center;
+  margin-top: 15px;
 }
 
-/* BUTTONS */
+/* BOTTONI */
 .buttonContainer {
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
   justify-content: space-between;
 }
 
-.backButton {
-  background: #ffffff;
-  padding: 12px 30px;
+.backButton,
+.continueButton {
+  padding: 12px 36px;
   border-radius: 12px;
   font-size: 16px;
-  border: 1px solid black;
   cursor: pointer;
+}
+
+/* BOTTONI - INDIETRO */
+.backButton {
+  background: #fff;
+  border: 2px solid #0c0d26;
+  color: #0c0d26;
 }
 
 .backButton:hover {
-  background: #ffffff;
+  background: #f6f6f6;
 }
 
+/* BOTTONI - CONTINUA */
 .continueButton {
-  background: #ff5e01;
+  background: #ff7300;
   color: white;
-  padding: 12px 40px;
-  border-radius: 12px;
-  font-size: 16px;
   border: none;
-  cursor: pointer;
 }
 
 .continueButton:hover {
-  background: #ff6600;
+  background: #e06600;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .backButton,
+  .continueButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .optionBox {
+    width: 60px;
+    height: 45px;
+    font-size: 14px;
+  }
 }

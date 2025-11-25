@@ -1,73 +1,137 @@
-.step {
+/* CONTAINER PRINCIPALE */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 90%;
-  max-width: 1200px;
-  margin: 2rem auto;
-  gap: 20px;
+  gap: 30px;
 }
 
-h2 {
-  font-size: 28px;
+/* TITOLO */
+.title {
+  font-size: 30px;
+  font-weight: 700;
   text-align: center;
+  color: #0c0d26;
 }
 
-.stepContent {
+/* CONTENITORE A DUE COLONNE */
+.content {
   display: flex;
+  gap: 25px;
   width: 100%;
-  gap: 20px;
 }
 
-.leftColumn {
+/* COLONNA SINISTRA */
+.left {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
 }
 
-.rightColumn {
+.label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+/* ERRORE */
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+/* PULSANTI */
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.back,
+.next {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* BOTTONE INDIETRO */
+.back {
+  background: white;
+  border: 2px solid #0c0d26;
+  color: #0c0d26;
+}
+
+.back:hover {
+  background: #f5f5f5;
+}
+
+/* BOTTONE CONTINUA */
+.next {
+  background: #ff7300;
+  border: none;
+  color: white;
+}
+
+.next:hover {
+  background: #e36600;
+}
+
+/* COLONNA DESTRA (MAPPA) */
+.right {
   flex: 1;
   min-height: 350px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
-input {
-  width: 80%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.btnBack {
-  background-color: white;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 12px;
-  padding: 10px 24px;
-  cursor: pointer;
-}
-
-.btnContinue {
-  background-color: rgb(255,115,0);
-  color: white;
+.map {
+  width: 100%;
+  height: 100%;
   border: none;
-  border-radius: 12px;
-  padding: 10px 24px;
-  cursor: pointer;
 }
 
-.error {
-  color: red;
-  margin-top: 5px;
+/* -------------- RESPONSIVE -------------- */
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .right {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .input {
+    font-size: 15px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .back,
+  .next {
+    width: 100%;
+    text-align: center;
+  }
 }

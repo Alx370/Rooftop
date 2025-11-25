@@ -1,32 +1,38 @@
 import { useState } from "react";
-import styles from './step6.module.css';
+import styles from "./step6.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Step6({ formData, setFormData, nextStep, prevStep }) {
-  const [surface, setSurface] = useState(formData.surface || '');
-  const [error, setError] = useState('');
+  const [surface, setSurface] = useState(formData.surface || "");
+  const [error, setError] = useState("");
 
   const handleContinue = () => {
-    if (!surface) {
-      setError("Inserisci la superficie dell'immobile");
+    if (!surface || Number(surface) <= 0) {
+      setError("Inserisci una superficie valida");
       return;
     }
-    setError('');
 
-    const updatedData = { ...formData, surface };
-    setFormData(updatedData);
+    if (Number(surface) > 999) {
+      setError("La superficie massima consentita è 999 m²");
+      return;
+    }
 
-    nextStep();  // nessuna chiamata API
+    setError("");
+
+    setFormData({
+      ...formData,
+      surface,
+    });
+
+    nextStep();
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.progressWrapper}>
-        <ProgressBar currentStep={6} totalSteps={9} />
-      </div>
+      <ProgressBar currentStep={6} totalSteps={8} />
 
-      <h2>Qual è la superficie totale dell’immobile</h2>
-      <p>Superficie immobile in m²</p>
+      <h2 className={styles.title}>Qual è la superficie totale dell’immobile?</h2>
+      <p className={styles.subtitle}>Indica la superficie in metri quadrati</p>
 
       <div className={styles.surfaceInputContainer}>
         <input
@@ -34,14 +40,14 @@ export default function Step6({ formData, setFormData, nextStep, prevStep }) {
           className={styles.inputNumber}
           value={surface}
           onChange={(e) => setSurface(e.target.value)}
-          min={0}
+          min={1}
           max={999}
           placeholder="0"
         />
         <span className={styles.m2}>m²</span>
       </div>
 
-      {error && <div style={{ color: 'red', marginTop: '5px' }}>{error}</div>}
+      {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.buttonContainer}>
         <button className={styles.backButton} onClick={prevStep}>

@@ -1,6 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
-import Immobiliaris.Progetto_Rooftop.Model.CategoriaFaq;
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaFaq;
 import Immobiliaris.Progetto_Rooftop.Model.Faq;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceFaq;
 import org.springframework.beans.factory.annotation.Autowired;

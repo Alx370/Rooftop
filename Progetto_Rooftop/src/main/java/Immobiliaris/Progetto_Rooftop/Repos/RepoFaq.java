@@ -1,6 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Repos;
 
-import Immobiliaris.Progetto_Rooftop.Model.CategoriaFaq;
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaFaq;
 import Immobiliaris.Progetto_Rooftop.Model.Faq;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

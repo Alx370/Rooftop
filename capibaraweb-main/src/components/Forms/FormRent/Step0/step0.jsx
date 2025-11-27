@@ -5,7 +5,7 @@ import styles from "./step0.module.css";
 export default function Step0({ nextStep }) {
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={0} totalSteps={8} />
+      <ProgressBar currentStep={0} totalSteps={10} />
 
       <div className={styles.content}>
         <h2 className={styles.title}>Benvenuto nel form di valutazione</h2>

@@ -52,7 +52,9 @@ const Valutazione = () => {
               Ci occupiamo di tutto per l’affitto della tua casa, dagli
               inquilini alla gestione dei contratti.
             </p>
+            <Link to="/formrent/step0">
             <button className="btn arancio">Stima affitto</button>
+            </Link>
           </div>
         </div>
 

@@ -21,7 +21,7 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={1} totalSteps={8} />
+      <ProgressBar currentStep={1} totalSteps={10} />
 
       <h2 className={styles.title}>Dove si trova l'immobile da valutare?</h2>
 

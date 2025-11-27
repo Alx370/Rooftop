@@ -2,6 +2,13 @@ import React, { useRef } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 
+// Import immagini
+import finestraImg from "./img/finestra.png";
+import lettoImg from "./img/letto.png";
+import edificioImg from "./img/edificio.png";
+import chiaviImg from "./img/chiavi.jpg";
+import lauraImg from "./img/laura.png";
+
 const Home = () => {
   // Ref per la griglia dei testimonial
   const testimonialGridRef = useRef(null);
@@ -26,11 +33,11 @@ const Home = () => {
 
   // Array dinamico dei testimonial
   const testimonials = [
-    { text: "Esperienza fantastica, servizio impeccabile e staff super disponibile. Consigliatissimo!", img: "laura.png", name: "Marco Rossi" },
-    { text: "Mi sono sentita seguita passo dopo passo. Hanno reso tutto semplice e veloce, anche nei momenti più stressanti.", img: "laura.png", name: "Giulia Verdi" },
-    { text: "Servizio eccellente! Il team è stato professionale e attento ai dettagli. Tornerò sicuramente per il prossimo progetto!", img: "laura.png", name: "Luca Bianchi" },
-    { text: "Professionalità e cortesia ineguagliabili. Consiglio vivamente a chiunque voglia vendere o affittare.", img: "laura.png", name: "Anna Neri" },
-    { text: "Ottima esperienza, tutto semplice e veloce grazie al team. Tornerò sicuramente.", img: "laura.png", name: "Marco L." }
+    { text: "Esperienza fantastica, servizio impeccabile e staff super disponibile. Consigliatissimo!", img: lauraImg, name: "Marco Rossi" },
+    { text: "Mi sono sentita seguita passo dopo passo. Hanno reso tutto semplice e veloce, anche nei momenti più stressanti.", img: lauraImg, name: "Giulia Verdi" },
+    { text: "Servizio eccellente! Il team è stato professionale e attento ai dettagli. Tornerò sicuramente per il prossimo progetto!", img: lauraImg, name: "Luca Bianchi" },
+    { text: "Professionalità e cortesia ineguagliabili. Consiglio vivamente a chiunque voglia vendere o affittare.", img: lauraImg, name: "Anna Neri" },
+    { text: "Ottima esperienza, tutto semplice e veloce grazie al team. Tornerò sicuramente.", img: lauraImg, name: "Marco L." }
   ];
 
 
@@ -62,7 +69,7 @@ const Home = () => {
         <div className="intro-cards-home">
 
           <div className="card-home">
-            <img src="src/pages/Home/img/finestra.png" alt="Interno casa" />
+            <img src={finestraImg} alt="Interno casa" />
             <div className="card-content-home">
               <h3>Per venderlo</h3>
               <p>Ti guidiamo nella vendita con metodo, trasparenza e attenzione al valore.</p>
@@ -71,7 +78,7 @@ const Home = () => {
           </div>
 
           <div className="card-home">
-            <img src="src/pages/Home/img/letto.png" alt="Interno ufficio" />
+            <img src={lettoImg} alt="Interno ufficio" />
             <div className="card-content-home">
               <h3>Per affittarlo</h3>
               <p>Gestiamo tutto noi: inquilini,
@@ -95,13 +102,13 @@ const Home = () => {
               <p><strong>Rapida, accurata, umana.</strong> Ti offriamo una valutazione <strong>entro 72 ore</strong>, verificata dai nostri esperti e basata su <strong>dati reali</strong>.</p>
             </div>
             <div className="usp-img">
-              <img src="src/pages/Home/img/edificio.png" alt="Valutazione in 72 ore" />
+              <img src={edificioImg} alt="Valutazione in 72 ore" />
             </div>
           </div>
 
           <div className="usp-item reverse">
             <div className="usp-img">
-              <img src="src/pages/Home/img/chiavi.jpg" alt="Metodo user-centred" />
+              <img src={chiaviImg} alt="Metodo user-centred" />
             </div>
             <div className="usp-text">
               <h3 className="highlight1">Metodo user-centred</h3>
@@ -133,7 +140,7 @@ const Home = () => {
             {testimonials.map((t, index) => (
               <div key={index} className="testimonial-card">
                 <p>{t.text}</p>
-                <img src={`src/pages/Home/img/${t.img}`} alt={t.name} />
+                <img src={t.img} alt={t.name} />
                 <h5>- {t.name}</h5>
               </div>
             ))}

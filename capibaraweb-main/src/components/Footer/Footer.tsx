@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import "./Footer";
+import "./Footer.css";
+import logo from "../../assets/images/Logo.png";
+import linkedinIcon from "../../assets/icons/linkedin.png";
+import instagramIcon from "../../assets/icons/instagram.png";
+import tiktokIcon from "../../assets/icons/tiktok.png";
+import facebookIcon from "../../assets/icons/facebook.png";
 
 const Footer = () => {
   return (
@@ -9,7 +14,7 @@ const Footer = () => {
         <div className="footer-left">
           <div className="footer-logo"><Link to="/">
             <img
-              src="/src/assets/images/Logo.png"
+              src={logo}
               alt="Capibara Web Logo"
               className="logo-image"
             />
@@ -51,22 +56,22 @@ const Footer = () => {
             <div className="footer-socials">
               <div className="icon">
                 <a href="">
-                  <img src="src/assets/icons/linkedin.png" alt="" />
+                  <img src={linkedinIcon} alt="" />
                 </a>
               </div>
               <div className="icon">
                 <a href="">
-                  <img src="src/assets/icons/instagram.png" alt="" />
+                  <img src={instagramIcon} alt="" />
                 </a>
               </div>
               <div className="icon">
                 <a href="">
-                  <img src="src/assets/icons/tiktok.png" alt="" />
+                  <img src={tiktokIcon} alt="" />
                 </a>
               </div>
               <div className="icon">
                 <a href="">
-                  <img src="src/assets/icons/facebook.png" alt="" />
+                  <img src={facebookIcon} alt="" />
                 </a>
               </div>
             </div>

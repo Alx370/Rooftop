@@ -1,6 +1,20 @@
 import { useState } from "react";
 import "./chisiamo.css";
 
+// Import immagini agenti
+import agente1Img from "../../assets/images/chisiamo/Torino/agente1.png";
+import agente2Img from "../../assets/images/chisiamo/Torino/agente2.png";
+import agente3Img from "../../assets/images/chisiamo/Torino/agente3.png";
+import agente4Img from "../../assets/images/chisiamo/Torino/agente4.png";
+
+// Import immagini sezioni
+import mappaImg from "../../assets/images/chisiamo/mappa.png";
+import panoramaImg from "../../assets/images/chisiamo/panorama.png";
+
+// Import icone
+import phoneIcon from "../../assets/icons/phone-call.png";
+import emailIcon from "../../assets/icons/email.png";
+
 export default function ChiSiamo() {
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState("Torino");
@@ -17,7 +31,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "mario.rossi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+      img: agente1Img,
     },
     {
       id: 2,
@@ -27,7 +41,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "pino.bianco@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente2.png",
+      img: agente2Img,
     },
     {
       id: 3,
@@ -37,7 +51,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "serena.fiocchi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente3.png",
+      img: agente3Img,
     },
     {
       id: 4,
@@ -47,7 +61,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "alma.cosi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente4.png",
+      img: agente4Img,
     },
 
     // Agenti di Cuneo
@@ -59,7 +73,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393441112233",
     mail: "luca.ferrero@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: agente1Img,
   },
   {
     id: 6,
@@ -69,7 +83,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393478889900",
     mail: "sara.montesi@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: agente1Img,
   },
   {
     id: 7,
@@ -79,7 +93,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393493225588",
     mail: "marco.galletto@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: agente1Img,
   },
   {
     id: 8,
@@ -89,7 +103,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393402556677",
     mail: "elena.bessone@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: agente1Img,
   },
 
   // Agenti di Alessandria
@@ -101,7 +115,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393401234567",
   mail: "giulia.roversi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 10,
@@ -111,7 +125,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393474563210",
   mail: "matteo.cavazza@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 11,
@@ -121,7 +135,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393491122334",
   mail: "irene.marchisio@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 12,
@@ -131,7 +145,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393456778899",
   mail: "federico.dalmonte@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 
 // Agenti di Asti
@@ -143,7 +157,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393401987654",
   mail: "chiara.venturi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 14,
@@ -153,7 +167,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393472223344",
   mail: "lorenzo.malfatti@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 15,
@@ -163,7 +177,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393498800112",
   mail: "sofia.bellandi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 },
 {
   id: 16,
@@ -173,7 +187,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393402225566",
   mail: "davide.rossetti@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: agente1Img,
 }
   ];
 
@@ -329,7 +343,7 @@ export default function ChiSiamo() {
 
         <div className="map-box">
           <a href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Carlo+Torino" target="_blank" rel="noopener noreferrer">
-            <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" style={{ cursor: 'pointer' }} />
+            <img src={mappaImg} alt="Mappa Google" style={{ cursor: 'pointer' }} />
           </a>
         </div>
       </section>
@@ -340,14 +354,14 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" >
-          <img src="../../src/assets/icons/phone-call.png" alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={phoneIcon} alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           +39 123 456 7890
         </button>
       </section>
 
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > 
-          <img src="../../src/assets/icons/email.png" alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={emailIcon} alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           info@immobiliaris.com </button>
       </section>
 
@@ -373,7 +387,7 @@ export default function ChiSiamo() {
         </div>
 
         <div className="map-box-storia">
-          <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino" />
+          <img src={panoramaImg} alt="Foto Panorama Torino" />
         </div>
 
       </section>

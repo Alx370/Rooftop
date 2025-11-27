@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header";
+import "./Header.css";
+import logoBlack from "../../assets/images/LogoBlack.png";
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
         <div className="logo">
           <Link to="/">
             <img
-              src="/src/assets/images/LogoBlack.png"
+              src={logoBlack}
               alt="Capibara Web Logo"
               className="logo-image"
             />

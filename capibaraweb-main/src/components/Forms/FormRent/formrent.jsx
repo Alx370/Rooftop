@@ -17,19 +17,25 @@ export default function FormRent() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    telefono: "",
-    indirizzo: "",
-    tipologia: "",
-    rooms: "",
-    bathrooms: "",
-    furnishing: "",
-    doubleExposure: "",
-    surface: "",
-    floor: "",
-    externalFeatures: [],
-    serviceType: "",
-    message: "",
-  });
+  nome: "",
+  cognome: "",
+  email: "",
+  telefono: "",
+  indirizzo: "",
+  tipologia: "",
+  rooms: "",
+  bathrooms: "",
+  furnishing: "",
+  doubleExposure: "",
+  surface: "",
+  floor: "",
+  externalFeatures: [],
+  serviceType: "",
+   contractType: "",
+  message: "",
+  password: "",
+});
+
 
   const nextStep = (currentStep) => navigate(`/formrent/step${currentStep + 1}`);
   const prevStep = (currentStep) => navigate(`/formrent/step${currentStep - 1}`);

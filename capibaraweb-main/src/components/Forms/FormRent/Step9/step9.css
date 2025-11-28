@@ -1,0 +1,138 @@
+/* =============================
+   WRAPPER
+============================= */
+.rent-step9-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* Progress bar centrata */
+.rent-step9-progress {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+}
+
+/* TITLE */
+.rent-step9-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+/* =============================
+   GRID (2 CARD)
+============================= */
+.rent-step9-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+
+/* =============================
+   CARD
+============================= */
+.rent-step9-card {
+  border: 2px solid #dcdcdc;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rent-step9-card:hover {
+  transform: translateY(-3px);
+}
+
+.rent-step9-card.rent-active {
+  border-color: #ff7a00;
+  background: #fff4e5;
+}
+
+.rent-step9-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rent-step9-wrapper h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.rent-step9-wrapper p {
+  margin-top: 10px;
+  font-size: 0.94rem;
+  color: #555;
+}
+
+
+/* =============================
+   RADIO BUTTON
+============================= */
+.rent-step9-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b5b5b5;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+.rent-step9-radio.rent-radio-on {
+  background: #ff7a00;
+  border-color: #ff7a00;
+}
+
+
+/* =============================
+   BUTTONS
+============================= */
+.rent-step9-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.rent-btn {
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rent-btn-secondary {
+  background: #fff;
+  border: 1.6px solid #444;
+}
+
+.rent-btn-primary {
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+}
+
+.rent-btn-primary:disabled {
+  background: #ffc9a1;
+  cursor: not-allowed;
+}
+
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 700px) {
+  .rent-step9-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rent-step9-title {
+    font-size: 1.7rem;
+  }
+}

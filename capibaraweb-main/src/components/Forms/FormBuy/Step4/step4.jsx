@@ -34,7 +34,7 @@ export default function Step4({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={4} totalSteps={8} />
+      <ProgressBar currentStep={4} totalSteps={9} />
 
       <h2 className={styles.title}>
         Da quanti locali è composto l'immobile?

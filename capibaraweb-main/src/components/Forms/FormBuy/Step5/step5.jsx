@@ -29,7 +29,7 @@ export default function Step5({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={5} totalSteps={8} />
+      <ProgressBar currentStep={5} totalSteps={9} />
 
       <h2 className={styles.title}>A quale piano è ubicato l’immobile?</h2>
       <p className={styles.subtitle}>Inserisci il piano dell’immobile</p>

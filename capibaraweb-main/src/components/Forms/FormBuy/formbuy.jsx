@@ -10,6 +10,7 @@ import Step5 from "./Step5/step5";
 import Step6 from "./Step6/step6";
 import Step7 from "./Step7/step7";
 import Step8 from "./Step8/step8";
+import Step9 from "./Step9/step9";
 
 export default function FormBuy() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function FormBuy() {
     floor: "",
     externalFeatures: [],
     serviceType: "",
+    sellingType: "",
     message: "",
     password: "",
   });
@@ -137,13 +139,26 @@ export default function FormBuy() {
           }
         />
 
-        <Route
+         <Route
           path="step8"
           element={
-            <Step8 
+            <Step8
               formData={formData} 
               setFormData={setFormData} 
+              nextStep={() => nextStep(8)} 
               prevStep={() => prevStep(8)} 
+            />
+          }
+        />
+
+
+        <Route
+          path="step9"
+          element={
+            <Step9
+              formData={formData} 
+              setFormData={setFormData} 
+              prevStep={() => prevStep(9)} 
             />
           }
         />

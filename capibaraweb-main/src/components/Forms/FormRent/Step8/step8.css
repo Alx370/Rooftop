@@ -1,0 +1,144 @@
+/* ============================
+   WRAPPER
+============================ */
+.rent-step8-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* progress bar centrata */
+.rent-step8-progress {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+}
+
+/* TITLE */
+.rent-step8-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #020122;
+}
+
+
+/* ============================
+   GRID
+============================ */
+.rent-step8-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+
+/* ============================
+   CARD
+============================ */
+.rent-step8-card {
+  border: 2px solid #dcdcdc;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rent-step8-card:hover {
+  transform: translateY(-3px);
+}
+
+.rent-step8-card.rent-active {
+  border-color: #ff7a00;
+  background: #fff4e5;
+}
+
+
+/* Card header (title + radio) */
+.rent-step8-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rent-step8-wrapper h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #020122;
+}
+
+.rent-step8-wrapper p {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  color: #020122;
+}
+
+
+/* ============================
+   RADIO
+============================ */
+.rent-step8-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b5b5b5;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+.rent-step8-radio.rent-radio-on {
+  background: #ff7a00;
+  border-color: #ff7a00;
+}
+
+
+/* ============================
+   BUTTONS
+============================ */
+.rent-step8-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.rent-btn {
+  padding: 12px 36px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Back */
+.rent-btn-secondary {
+  background: #fff;
+  border: 1px solid #020122;
+}
+
+/* Forward */
+.rent-btn-primary {
+  background: #ff7a00;
+  border: none;
+  color: white;
+}
+
+.rent-btn-primary:disabled {
+  background: #ffc9a1;
+  cursor: not-allowed;
+}
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 700px) {
+  .rent-step8-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rent-step8-title {
+    font-size: 1.7rem;
+  }
+}

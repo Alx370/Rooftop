@@ -22,7 +22,7 @@ export default function Step2({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={2} totalSteps={8} />
+      <ProgressBar currentStep={2} totalSteps={9} />
 
       <h2 className={styles.title}>Qual è la tipologia del tuo immobile?</h2>
 

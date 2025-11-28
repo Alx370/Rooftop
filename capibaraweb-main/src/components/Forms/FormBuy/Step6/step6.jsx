@@ -29,7 +29,7 @@ export default function Step6({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={6} totalSteps={8} />
+      <ProgressBar currentStep={6} totalSteps={9} />
 
       <h2 className={styles.title}>Qual è la superficie totale dell’immobile?</h2>
       <p className={styles.subtitle}>Indica la superficie in metri quadrati</p>

@@ -42,7 +42,7 @@ export default function Step3({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={3} totalSteps={8} />
+      <ProgressBar currentStep={3} totalSteps={9} />
 
       <h2 className={styles.title}>Quali sono le condizioni dell'immobile?</h2>
 

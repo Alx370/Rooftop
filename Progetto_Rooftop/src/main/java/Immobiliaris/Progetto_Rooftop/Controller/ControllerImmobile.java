@@ -1,6 +1,8 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
 import java.util.List;
+import java.util.Map;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import Immobiliaris.Progetto_Rooftop.Model.Immobile;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
+import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceImmobile;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 
@@ -32,6 +35,22 @@ public class ControllerImmobile {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(immobili);
+    }
+
+    @PostMapping("/{id}/valutazione/automatica")
+    public ResponseEntity<Valutazione> stimaAutomatica(@PathVariable Integer id, @RequestBody Map<String, BigDecimal> payload) {
+        BigDecimal prezzoMqZona = payload.get("prezzoMqZona");
+        if (prezzoMqZona == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "prezzoMqZona mancante");
+        }
+        Valutazione v = serviceImmobile.stimaAutomatica(id, prezzoMqZona);
+        return ResponseEntity.ok(v);
+    }
+
+    @PostMapping("/{id}/valutazione/automatica/omi")
+    public ResponseEntity<Valutazione> stimaAutomaticaDaOmi(@PathVariable Integer id) {
+        Valutazione v = serviceImmobile.stimaAutomaticaDaOMI(id);
+        return ResponseEntity.ok(v);
     }
 
     @GetMapping("/{id}")

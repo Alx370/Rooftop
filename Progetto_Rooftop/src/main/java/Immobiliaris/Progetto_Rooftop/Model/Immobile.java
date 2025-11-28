@@ -222,6 +222,14 @@ public class Immobile {
         this.anno_costruzione = anno_costruzione;
     }
 
+    public Integer getBagni() {
+        return bagni;
+    }
+
+    public void setBagni(Integer bagni) {
+        this.bagni = bagni;
+    }
+
     public BigDecimal getPrezzo_richiesto() {
         return prezzo_richiesto;
     }
@@ -254,3 +262,5 @@ public class Immobile {
         this.creato_il = creato_il;
     }
 }
+    @Column(name = "bagni")
+    private Integer bagni;

@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
 import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
 
 @Entity
 @Table(name = "immobili")
@@ -230,6 +231,14 @@ public class Immobile {
         this.bagni = bagni;
     }
 
+    public CategoriaAbitazione getCategoria_abitazione() {
+        return categoria_abitazione;
+    }
+
+    public void setCategoria_abitazione(CategoriaAbitazione categoria_abitazione) {
+        this.categoria_abitazione = categoria_abitazione;
+    }
+
     public BigDecimal getPrezzo_richiesto() {
         return prezzo_richiesto;
     }
@@ -262,5 +271,3 @@ public class Immobile {
         this.creato_il = creato_il;
     }
 }
-    @Column(name = "bagni")
-    private Integer bagni;

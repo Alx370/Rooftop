@@ -19,13 +19,17 @@ import Immobiliaris.Progetto_Rooftop.Enum.StatoValutazione;
 import Immobiliaris.Progetto_Rooftop.Enum.Riscaldamento;
 import Immobiliaris.Progetto_Rooftop.Enum.ClasseEnergetica;
 import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
 import Immobiliaris.Progetto_Rooftop.Model.Immobile;
 import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
 import Immobiliaris.Progetto_Rooftop.Model.CaratteristicheImmobile;
+import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoImmobili;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoValutazioni;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoCaratteristicheImmobile;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceOmi;
+import Immobiliaris.Progetto_Rooftop.Services.ServiceNominatim;
+import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 
 /**
  * Implementazione del servizio per la gestione degli Immobili.
@@ -46,6 +50,12 @@ public class ServiceImmobileImpl implements ServiceImmobile {
 
     @Autowired
     private ServiceOmi serviceOmi;
+
+    @Autowired
+    private ServiceNominatim serviceNominatim;
+
+    @Autowired
+    private ServiceUtente serviceUtente;
 
     public ServiceImmobileImpl(RepoImmobili repoImmobili) {
         this.repoImmobili = repoImmobili;
@@ -208,7 +218,53 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         }
         Immobile immobile = getById(idImmobile);
         CaratteristicheImmobile c = repoCaratteristicheImmobile.findByImmobile_Id_immobile(idImmobile).orElse(null);
+        return calcolaValutazione(immobile, c, prezzoMqZona);
+    }
 
+    @Override
+    public Valutazione stimaAutomaticaDaOMI(Integer idImmobile) {
+        Immobile immobile = getById(idImmobile);
+        String statoPreferito = immobile.getStato_immobile() == StatoImmobile.NUOVO ? "OTTIMO" : "NORMALE";
+        BigDecimal codiceTipologia = null;
+        if (immobile.getCategoria_abitazione() != null) {
+            if (immobile.getCategoria_abitazione() == CategoriaAbitazione.SIGNORILE) codiceTipologia = BigDecimal.valueOf(19.00);
+            else if (immobile.getCategoria_abitazione() == CategoriaAbitazione.CIVILE) codiceTipologia = BigDecimal.valueOf(20.00);
+            else if (immobile.getCategoria_abitazione() == CategoriaAbitazione.POPOLARE) codiceTipologia = BigDecimal.valueOf(21.00);
+        }
+        BigDecimal prezzo = null;
+        String quartiereLookup = immobile.getQuartiere();
+        if (quartiereLookup == null || quartiereLookup.isBlank()) {
+            String q = serviceNominatim.resolveQuartiere(immobile.getProvincia(), immobile.getCitta(), immobile.getIndirizzo(), immobile.getCivico());
+            if (q != null && !q.isBlank()) {
+                quartiereLookup = q;
+            }
+        }
+        if (quartiereLookup != null && !quartiereLookup.isBlank()) {
+            var opt = (codiceTipologia != null)
+                    ? serviceOmi.findPrezziByQuartiereTipologia(immobile.getProvincia(), immobile.getCitta(), quartiereLookup, statoPreferito, codiceTipologia)
+                    : serviceOmi.findPrezziByQuartiere(immobile.getProvincia(), immobile.getCitta(), quartiereLookup, statoPreferito);
+            if (opt.isPresent()) {
+                var p = opt.get();
+                if (immobile.getStato_immobile() == StatoImmobile.NUOVO) prezzo = p.max;
+                else if (immobile.getStato_immobile() == StatoImmobile.DA_RISTRUTTUARE) prezzo = p.min;
+                else prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                Valutazione v = calcolaValutazione(immobile, repoCaratteristicheImmobile.findByImmobile_Id_immobile(idImmobile).orElse(null), prezzo);
+                v.setNote("Zona OMI: " + p.zona);
+                return v;
+            }
+        }
+        var avgOpt = (codiceTipologia != null)
+                ? serviceOmi.findPrezzoMedioByComuneTipologia(immobile.getProvincia(), immobile.getCitta(), statoPreferito, codiceTipologia)
+                : serviceOmi.findPrezzoMedioByComune(immobile.getProvincia(), immobile.getCitta(), statoPreferito);
+        if (avgOpt.isPresent()) {
+            prezzo = avgOpt.get();
+            Valutazione v = calcolaValutazione(immobile, repoCaratteristicheImmobile.findByImmobile_Id_immobile(idImmobile).orElse(null), prezzo);
+            return v;
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prezzo OMI non disponibile");
+    }
+
+    private Valutazione calcolaValutazione(Immobile immobile, CaratteristicheImmobile c, BigDecimal prezzoMqZona) {
         BigDecimal base = immobile.getMetri_quadri().multiply(prezzoMqZona);
         BigDecimal multiplier = BigDecimal.ONE;
 
@@ -220,12 +276,10 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                 default -> multiplier = multiplier.multiply(BigDecimal.ONE);
             }
         }
-
         if (immobile.getBagni() != null && immobile.getBagni() > 1) {
             double extra = Math.min(immobile.getBagni() - 1, 3);
             multiplier = multiplier.multiply(BigDecimal.valueOf(1 + (0.02 * extra)));
         }
-
         if (c != null) {
             if (c.getAscensore() != null && c.getAscensore()) {
                 multiplier = multiplier.multiply(BigDecimal.valueOf(1.02));
@@ -258,7 +312,9 @@ public class ServiceImmobileImpl implements ServiceImmobile {
             if (c.getAllarme() != null && c.getAllarme()) {
                 multiplier = multiplier.multiply(BigDecimal.valueOf(1.006));
             }
-
+            if (c.getIndipendente() != null && c.getIndipendente()) {
+                multiplier = multiplier.multiply(BigDecimal.valueOf(1.03));
+            }
             if (c.getRiscaldamento() != null) {
                 BigDecimal rMult = switch (c.getRiscaldamento()) {
                     case AUTONOMO -> BigDecimal.valueOf(1.02);
@@ -267,7 +323,6 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                 };
                 multiplier = multiplier.multiply(rMult);
             }
-
             if (c.getClasse_energetica() != null) {
                 BigDecimal eMult = switch (c.getClasse_energetica()) {
                     case A4 -> BigDecimal.valueOf(1.05);
@@ -284,7 +339,6 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                 };
                 multiplier = multiplier.multiply(eMult);
             }
-
             if (c.getOrientamento() != null) {
                 BigDecimal oMult = switch (c.getOrientamento()) {
                     case SUD -> BigDecimal.valueOf(1.02);
@@ -296,7 +350,6 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                 multiplier = multiplier.multiply(oMult);
             }
         }
-
         BigDecimal addons = BigDecimal.ZERO;
         if (c != null) {
             if (c.getTerrazzo_mq() != null && c.getTerrazzo_mq().compareTo(BigDecimal.ZERO) > 0) {
@@ -309,12 +362,10 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                 addons = addons.add(c.getGiardino_mq().multiply(prezzoMqZona).multiply(BigDecimal.valueOf(0.20)));
             }
         }
-
         BigDecimal estimated = base.multiply(multiplier).add(addons).setScale(2, RoundingMode.HALF_UP);
         BigDecimal margin = BigDecimal.valueOf(0.07);
         BigDecimal min = estimated.multiply(BigDecimal.ONE.subtract(margin)).setScale(2, RoundingMode.HALF_UP);
         BigDecimal max = estimated.multiply(BigDecimal.ONE.add(margin)).setScale(2, RoundingMode.HALF_UP);
-
         Valutazione v = new Valutazione();
         v.setImmobile(immobile);
         v.setValore_stimato(estimated);
@@ -323,31 +374,64 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         v.setMetodo(MetodoValutazione.AUTOMATICO);
         v.setStato(StatoValutazione.COMPLETATA);
         v.setData_valutazione(LocalDateTime.now());
-
-        return repoValutazioni.save(v);
+        return v;
     }
 
     @Override
-    public Valutazione stimaAutomaticaDaOMI(Integer idImmobile) {
-        Immobile immobile = getById(idImmobile);
-        String statoPreferito = immobile.getStato_immobile() == StatoImmobile.NUOVO ? "OTTIMO" : "NORMALE";
+    public Valutazione stimaAutomaticaDaIndirizzo(String provincia, String citta, String indirizzo, String civico, BigDecimal metriQuadri, Tipologia tipologia, CategoriaAbitazione categoria, StatoImmobile statoImmobile, String piano, Integer bagni, CaratteristicheImmobile caratteristiche) {
+        Immobile temp = new Immobile();
+        temp.setProvincia(provincia);
+        temp.setCitta(citta);
+        temp.setIndirizzo(indirizzo);
+        temp.setCivico(civico);
+        temp.setMetri_quadri(metriQuadri);
+        temp.setTipologia(tipologia);
+        temp.setStato_immobile(statoImmobile);
+        temp.setPiano(piano);
+        temp.setBagni(bagni);
+        BigDecimal codiceTipologia = null;
+        if (categoria != null) {
+            if (categoria == CategoriaAbitazione.SIGNORILE) codiceTipologia = BigDecimal.valueOf(19.00);
+            else if (categoria == CategoriaAbitazione.CIVILE) codiceTipologia = BigDecimal.valueOf(20.00);
+            else if (categoria == CategoriaAbitazione.POPOLARE) codiceTipologia = BigDecimal.valueOf(21.00);
+        }
+        String quartiere = serviceNominatim.resolveQuartiere(provincia, citta, indirizzo, civico);
         BigDecimal prezzo = null;
-        if (immobile.getQuartiere() != null && !immobile.getQuartiere().isBlank()) {
-            var opt = serviceOmi.findPrezziByQuartiere(immobile.getProvincia(), immobile.getCitta(), immobile.getQuartiere(), statoPreferito);
+        String statoPreferito = statoImmobile == StatoImmobile.NUOVO ? "OTTIMO" : "NORMALE";
+        if (quartiere != null && !quartiere.isBlank()) {
+            var opt = (codiceTipologia != null)
+                    ? serviceOmi.findPrezziByQuartiereTipologia(provincia, citta, quartiere, statoPreferito, codiceTipologia)
+                    : serviceOmi.findPrezziByQuartiere(provincia, citta, quartiere, statoPreferito);
             if (opt.isPresent()) {
                 var p = opt.get();
-                if (immobile.getStato_immobile() == StatoImmobile.NUOVO) prezzo = p.max;
-                else if (immobile.getStato_immobile() == StatoImmobile.DA_RISTRUTTUARE) prezzo = p.min;
+                if (statoImmobile == StatoImmobile.NUOVO) prezzo = p.max;
+                else if (statoImmobile == StatoImmobile.DA_RISTRUTTUARE) prezzo = p.min;
                 else prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
-                return stimaAutomatica(idImmobile, prezzo);
+                Valutazione v = calcolaValutazione(temp, caratteristiche, prezzo);
+                v.setNote("Zona OMI: " + p.zona);
+                return v;
             }
         }
-        var avgOpt = serviceOmi.findPrezzoMedioByComune(immobile.getProvincia(), immobile.getCitta(), statoPreferito);
+        var avgOpt = (codiceTipologia != null)
+                ? serviceOmi.findPrezzoMedioByComuneTipologia(provincia, citta, statoPreferito, codiceTipologia)
+                : serviceOmi.findPrezzoMedioByComune(provincia, citta, statoPreferito);
         if (avgOpt.isPresent()) {
             prezzo = avgOpt.get();
-            return stimaAutomatica(idImmobile, prezzo);
+            return calcolaValutazione(temp, caratteristiche, prezzo);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prezzo OMI non disponibile");
+    }
+
+    @Override
+    public Valutazione creaValutazioneManuale(Integer idImmobile, Integer idValutatore, BigDecimal prezzoMqZona) {
+        Valutazione v = stimaAutomatica(idImmobile, prezzoMqZona);
+        v.setMetodo(MetodoValutazione.MANUALE);
+        v.setStato(StatoValutazione.IN_LAVORAZIONE);
+        if (idValutatore != null) {
+            Utente valutatore = serviceUtente.getById(idValutatore);
+            v.setValutatore(valutatore);
+        }
+        return repoValutazioni.save(v);
     }
 
     private int parseFloor(String s) {

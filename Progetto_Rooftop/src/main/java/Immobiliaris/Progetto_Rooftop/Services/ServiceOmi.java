@@ -15,17 +15,30 @@ public class ServiceOmi {
     public static class Prezzi {
         public final BigDecimal min;
         public final BigDecimal max;
-        public Prezzi(BigDecimal min, BigDecimal max) {
+        public final String zona;
+        public Prezzi(BigDecimal min, BigDecimal max, String zona) {
             this.min = min;
             this.max = max;
+            this.zona = zona;
         }
     }
 
     public Optional<Prezzi> findPrezziByQuartiere(String provincia, String comune, String quartiere, String statoPreferito) {
-        String sql = "SELECT prezzo_min_mq, prezzo_max_mq FROM omi_zone WHERE provincia = ? AND comune = ? AND LOWER(descrizione_quartiere) LIKE LOWER(CONCAT('%', ?, '%')) AND codice_tipologia IN (19.00,20.00,21.00) ORDER BY CASE WHEN stato = ? THEN 0 ELSE 1 END LIMIT 1";
+        String sql = "SELECT zona, prezzo_min_mq, prezzo_max_mq FROM omi_zone WHERE provincia = ? AND comune = ? AND LOWER(descrizione_quartiere) LIKE LOWER(CONCAT('%', ?, '%')) AND codice_tipologia IN (19.00,20.00,21.00) ORDER BY CASE WHEN stato = ? THEN 0 ELSE 1 END LIMIT 1";
         return jdbcTemplate.query(sql, ps -> { ps.setString(1, provincia); ps.setString(2, comune); ps.setString(3, quartiere); ps.setString(4, statoPreferito); }, rs -> {
             if (rs.next()) {
-                return Optional.of(new Prezzi(rs.getBigDecimal(1), rs.getBigDecimal(2)));
+                return Optional.of(new Prezzi(rs.getBigDecimal(2), rs.getBigDecimal(3), rs.getString(1)));
+            } else {
+                return Optional.empty();
+            }
+        });
+    }
+
+    public Optional<Prezzi> findPrezziByQuartiereTipologia(String provincia, String comune, String quartiere, String statoPreferito, BigDecimal codiceTipologia) {
+        String sql = "SELECT zona, prezzo_min_mq, prezzo_max_mq FROM omi_zone WHERE provincia = ? AND comune = ? AND LOWER(descrizione_quartiere) LIKE LOWER(CONCAT('%', ?, '%')) AND codice_tipologia = ? ORDER BY CASE WHEN stato = ? THEN 0 ELSE 1 END LIMIT 1";
+        return jdbcTemplate.query(sql, ps -> { ps.setString(1, provincia); ps.setString(2, comune); ps.setString(3, quartiere); ps.setBigDecimal(4, codiceTipologia); ps.setString(5, statoPreferito); }, rs -> {
+            if (rs.next()) {
+                return Optional.of(new Prezzi(rs.getBigDecimal(2), rs.getBigDecimal(3), rs.getString(1)));
             } else {
                 return Optional.empty();
             }
@@ -40,6 +53,18 @@ public class ServiceOmi {
         if (val == null) {
             String sql2 = "SELECT AVG((prezzo_min_mq + prezzo_max_mq)/2) FROM omi_zone WHERE provincia = ? AND comune = ? AND codice_tipologia IN (19.00,20.00,21.00) AND stato = 'NORMALE'";
             val = jdbcTemplate.query(sql2, ps -> { ps.setString(1, provincia); ps.setString(2, comune); }, rs -> { if (rs.next()) return rs.getBigDecimal(1); else return null; });
+        }
+        return Optional.ofNullable(val);
+    }
+
+    public Optional<BigDecimal> findPrezzoMedioByComuneTipologia(String provincia, String comune, String statoPreferito, BigDecimal codiceTipologia) {
+        String sql = "SELECT AVG((prezzo_min_mq + prezzo_max_mq)/2) FROM omi_zone WHERE provincia = ? AND comune = ? AND codice_tipologia = ? AND stato = ?";
+        BigDecimal val = jdbcTemplate.query(sql, ps -> { ps.setString(1, provincia); ps.setString(2, comune); ps.setBigDecimal(3, codiceTipologia); ps.setString(4, statoPreferito); }, rs -> {
+            if (rs.next()) return rs.getBigDecimal(1); else return null;
+        });
+        if (val == null) {
+            String sql2 = "SELECT AVG((prezzo_min_mq + prezzo_max_mq)/2) FROM omi_zone WHERE provincia = ? AND comune = ? AND codice_tipologia = ? AND stato = 'NORMALE'";
+            val = jdbcTemplate.query(sql2, ps -> { ps.setString(1, provincia); ps.setString(2, comune); ps.setBigDecimal(3, codiceTipologia); }, rs -> { if (rs.next()) return rs.getBigDecimal(1); else return null; });
         }
         return Optional.ofNullable(val);
     }

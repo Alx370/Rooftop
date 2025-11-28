@@ -24,4 +24,20 @@ public interface ServiceImmobile {
     Valutazione stimaAutomatica(Integer idImmobile, BigDecimal prezzoMqZona);
 
     Valutazione stimaAutomaticaDaOMI(Integer idImmobile);
+
+    Valutazione creaValutazioneManuale(Integer idImmobile, Integer idValutatore, BigDecimal prezzoMqZona);
+
+    Valutazione stimaAutomaticaDaIndirizzo(
+            String provincia,
+            String citta,
+            String indirizzo,
+            String civico,
+            BigDecimal metriQuadri,
+            Tipologia tipologia,
+            CategoriaAbitazione categoria,
+            StatoImmobile statoImmobile,
+            String piano,
+            Integer bagni,
+            CaratteristicheImmobile caratteristiche
+    );
 }

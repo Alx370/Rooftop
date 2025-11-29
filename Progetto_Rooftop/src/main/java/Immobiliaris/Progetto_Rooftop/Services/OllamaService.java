@@ -2,6 +2,14 @@ package Immobiliaris.Progetto_Rooftop.Services;
 
 import Immobiliaris.Progetto_Rooftop.Model.OllamaRequest;
 import Immobiliaris.Progetto_Rooftop.Model.OllamaResponse;
+import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -39,4 +47,31 @@ public class OllamaService {
             return "Errore nella comunicazione con Ollama: " + e.getMessage();
         }
     }
+
+    // Streaming chat method
+    public void chatStream(String userMessage, Consumer<String> onToken) {
+    OllamaRequest request = new OllamaRequest(ollamaModel, userMessage, systemPrompt);
+
+    webClient.post()
+            .bodyValue(request)
+            .retrieve()
+            .bodyToFlux(String.class) // recive as stream of strings
+            .subscribe(
+                    chunk -> {
+                        try {
+                            // Extracts the token from the JSON (Ollama sends JSON for each line)
+                            if (chunk.contains("\"response\"")) {
+                                String token = chunk.split("\"response\":\"")[1].split("\"")[0];
+                                onToken.accept(token);
+                            }
+                        } catch (Exception ignored) {}
+                    },
+                    error -> {
+                        onToken.accept("[STREAM ERROR] " + error.getMessage());
+                    }
+            );
+    }
+
+    
+
 }

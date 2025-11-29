@@ -45,3 +45,44 @@ public class ControllerFaq {
         return ResponseEntity.ok(faq);
     }
 
+    /**
+     * GET /api/faq/categorie
+     * Returns the available FAQ categories (enum names) for frontend consumption.
+     */
+    @GetMapping("/categorie")
+    public ResponseEntity<List<String>> getCategorie() {
+        List<String> categorie = Arrays.stream(CategoriaFaq.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(categorie);
+    }
+
+    /**
+     * GET /api/faq/categoria/{categoria}
+     * Returns FAQs filtered by category (case-insensitive), ordered by 'ordine'.
+     */
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<?> getFaqByCategoria(@PathVariable String categoria) {
+        try {
+            CategoriaFaq cat = CategoriaFaq.valueOf(categoria.toUpperCase());
+            List<Faq> faqs = serviceFaq.getByCategoria(cat);
+            return ResponseEntity.ok(faqs);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Invalid category: " + categoria));
+        }
+    }
+
+    /**
+     * POST /api/faq
+     * Creates a new FAQ.
+     */
+    @PostMapping
+    @PreAuthorize("hasAnyRole('AMMINISTRATORE', 'AGENTE')") // only admin or agent can create FAQs
+    public ResponseEntity<Faq> createFaq(@RequestBody Faq faq) {
+        Faq created = serviceFaq.create(faq);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+
+}

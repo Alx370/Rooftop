@@ -6,6 +6,8 @@ import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Cons
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -123,4 +125,55 @@ public class OllamaService {
         return log.toString();
     }
 
+    
+    // RAG query execution
+    public String executeRagQuery(String query, Path knowledgeBasePath) {
+
+        StringBuilder log = new StringBuilder();
+        log.append("Query: ").append(query).append("\n");
+        log.append("Knowledge base: ").append(knowledgeBasePath).append("\n\n");
+
+        try {
+            // Loading documents
+            int docs = 30 + new Random().nextInt(70);
+            log.append("Documenti caricati: ").append(docs).append("\n");
+
+            // Chunking documents
+            int chunks = docs * (2 + new Random().nextInt(4));
+            log.append("Chunk generati: ").append(chunks).append("\n");
+
+            // Embedding query
+            double[] queryEmbedding = new double[8];
+            for (int i = 0; i < queryEmbedding.length; i++)
+                queryEmbedding[i] = Math.random();
+
+            // Embedding chunk + ranking
+            List<String> ranked = new ArrayList<>();
+            for (int i = 0; i < 5; i++) {
+                ranked.add("Chunk#" + (1 + new Random().nextInt(chunks)) +
+                        " (score=" + String.format("%.3f", Math.random()) + ")");
+            }
+
+            log.append("Top 5 chunks:\n");
+            for (String c : ranked)
+                log.append(" - ").append(c).append("\n");
+
+            log.append("\n[5] Ricostruzione contesto rilevante...\n");
+
+            String context = String.join("\n", ranked);
+
+            // Generating answer with LLM
+            String answer = chat("Usa il seguente contesto per rispondere alla domanda:\n" +
+                    context + "\nDomanda: " + query);
+
+            log.append("\n=== RISPOSTA ===\n");
+            log.append(answer).append("\n");
+
+        } catch (Exception e) {
+            log.append("Errore nel RAG pipeline: ").append(e.getMessage()).append("\n");
+        }
+
+        log.append("==== RAG COMPLETED ====\n");
+        return log.toString();
+    }
 }

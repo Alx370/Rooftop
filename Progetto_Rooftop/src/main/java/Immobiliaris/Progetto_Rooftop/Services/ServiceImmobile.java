@@ -1,10 +1,14 @@
 package Immobiliaris.Progetto_Rooftop.Services;
 
-import java.util.List;
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
+import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
+import Immobiliaris.Progetto_Rooftop.Model.CaratteristicheImmobile;
 import Immobiliaris.Progetto_Rooftop.Model.Immobile;
 import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
 

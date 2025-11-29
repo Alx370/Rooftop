@@ -1,7 +1,15 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
+import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,14 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.EnumType;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
-import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
-import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
-import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
 
 @Entity
 @Table(name = "immobili")
@@ -102,6 +102,8 @@ public class Immobile {
     @Column(name = "creato_il", columnDefinition = "DATETIME")
     private LocalDateTime creato_il;
     // Creation timestamp - automatically set when property is created
+    private Integer bagni;
+    private CategoriaAbitazione categoria_abitazione;
 
     public Integer getId_immobile() {
         return id_immobile;

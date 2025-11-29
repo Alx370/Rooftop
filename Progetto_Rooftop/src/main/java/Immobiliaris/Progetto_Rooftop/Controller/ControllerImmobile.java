@@ -1,29 +1,36 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
+import Immobiliaris.Progetto_Rooftop.Enum.ClasseEnergetica;
+import Immobiliaris.Progetto_Rooftop.Enum.Orientamento;
+import Immobiliaris.Progetto_Rooftop.Enum.Riscaldamento;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
+import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
+import Immobiliaris.Progetto_Rooftop.Model.CaratteristicheImmobile;
 import Immobiliaris.Progetto_Rooftop.Model.Immobile;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceImmobile;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
-import Immobiliaris.Progetto_Rooftop.Model.CaratteristicheImmobile;
-import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
-import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
-import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
-import Immobiliaris.Progetto_Rooftop.Enum.Riscaldamento;
-import Immobiliaris.Progetto_Rooftop.Enum.ClasseEnergetica;
-import Immobiliaris.Progetto_Rooftop.Enum.Orientamento;
 
 @RestController
 @RequestMapping("/api/immobili")
@@ -87,21 +94,21 @@ public class ControllerImmobile {
         Integer bagni = payload.get("bagni") != null ? Integer.valueOf(payload.get("bagni")) : null;
 
         CaratteristicheImmobile c = new CaratteristicheImmobile();
-        if (payload.get("ascensore") != null) c.setAscensore(Boolean.parseBoolean(payload.get("ascensore")));
-        if (payload.get("parcheggio") != null) c.setParcheggio(Boolean.parseBoolean(payload.get("parcheggio")));
+        if (payload.get("ascensore") != null) c.setAscensore(Boolean.valueOf(payload.get("ascensore")));
+        if (payload.get("parcheggio") != null) c.setParcheggio(Boolean.valueOf(payload.get("parcheggio")));
         if (payload.get("posti_auto") != null) c.setPosti_auto(Integer.valueOf(payload.get("posti_auto")));
-        if (payload.get("garage") != null) c.setGarage(Boolean.parseBoolean(payload.get("garage")));
+        if (payload.get("garage") != null) c.setGarage(Boolean.valueOf(payload.get("garage")));
         if (payload.get("balcone_mq") != null) c.setBalcone_mq(new BigDecimal(payload.get("balcone_mq")));
         if (payload.get("terrazzo_mq") != null) c.setTerrazzo_mq(new BigDecimal(payload.get("terrazzo_mq")));
         if (payload.get("giardino_mq") != null) c.setGiardino_mq(new BigDecimal(payload.get("giardino_mq")));
-        if (payload.get("cantina") != null) c.setCantina(Boolean.parseBoolean(payload.get("cantina")));
-        if (payload.get("arredato") != null) c.setArredato(Boolean.parseBoolean(payload.get("arredato")));
-        if (payload.get("aria_condizionata") != null) c.setAria_condizionata(Boolean.parseBoolean(payload.get("aria_condizionata")));
-        if (payload.get("allarme") != null) c.setAllarme(Boolean.parseBoolean(payload.get("allarme")));
+        if (payload.get("cantina") != null) c.setCantina(Boolean.valueOf(payload.get("cantina")));
+        if (payload.get("arredato") != null) c.setArredato(Boolean.valueOf(payload.get("arredato")));
+        if (payload.get("aria_condizionata") != null) c.setAria_condizionata(Boolean.valueOf(payload.get("aria_condizionata")));
+        if (payload.get("allarme") != null) c.setAllarme(Boolean.valueOf(payload.get("allarme")));
         if (payload.get("riscaldamento") != null) c.setRiscaldamento(Riscaldamento.valueOf(payload.get("riscaldamento")));
         if (payload.get("classe_energetica") != null) c.setClasse_energetica(ClasseEnergetica.valueOf(payload.get("classe_energetica")));
         if (payload.get("orientamento") != null) c.setOrientamento(Orientamento.valueOf(payload.get("orientamento")));
-        if (payload.get("indipendente") != null) c.setIndipendente(Boolean.parseBoolean(payload.get("indipendente")));
+        if (payload.get("indipendente") != null) c.setIndipendente(Boolean.valueOf(payload.get("indipendente")));
 
         if (provincia == null || citta == null || indirizzo == null || mq == null || tipologia == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "campi obbligatori mancanti");
@@ -128,7 +135,7 @@ public class ControllerImmobile {
             
             if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
                 String userId = auth.getPrincipal().toString();
-                Utente utente = serviceUtente.getById(Integer.parseInt(userId));
+                Utente utente = serviceUtente.getById(Integer.valueOf(userId));
                 
                 // if the user is logged in as a PROPRIETARIO, find their proprietario profile
                 if ("PROPRIETARIO".equals(utente.getRuolo().name())) {

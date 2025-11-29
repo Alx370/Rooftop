@@ -11,25 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
 import Immobiliaris.Progetto_Rooftop.Enum.MetodoValutazione;
-import Immobiliaris.Progetto_Rooftop.Enum.Orientamento;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoValutazione;
-import Immobiliaris.Progetto_Rooftop.Enum.Riscaldamento;
-import Immobiliaris.Progetto_Rooftop.Enum.ClasseEnergetica;
 import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
-import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
-import Immobiliaris.Progetto_Rooftop.Model.Immobile;
-import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
 import Immobiliaris.Progetto_Rooftop.Model.CaratteristicheImmobile;
+import Immobiliaris.Progetto_Rooftop.Model.Immobile;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
+import Immobiliaris.Progetto_Rooftop.Model.Valutazione;
+import Immobiliaris.Progetto_Rooftop.Repos.RepoCaratteristicheImmobile;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoImmobili;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoValutazioni;
-import Immobiliaris.Progetto_Rooftop.Repos.RepoCaratteristicheImmobile;
-import Immobiliaris.Progetto_Rooftop.Services.ServiceOmi;
-import Immobiliaris.Progetto_Rooftop.Services.ServiceNominatim;
-import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 
 /**
  * Implementazione del servizio per la gestione degli Immobili.
@@ -227,9 +221,13 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         String statoPreferito = immobile.getStato_immobile() == StatoImmobile.NUOVO ? "OTTIMO" : "NORMALE";
         BigDecimal codiceTipologia = null;
         if (immobile.getCategoria_abitazione() != null) {
-            if (immobile.getCategoria_abitazione() == CategoriaAbitazione.SIGNORILE) codiceTipologia = BigDecimal.valueOf(19.00);
-            else if (immobile.getCategoria_abitazione() == CategoriaAbitazione.CIVILE) codiceTipologia = BigDecimal.valueOf(20.00);
-            else if (immobile.getCategoria_abitazione() == CategoriaAbitazione.POPOLARE) codiceTipologia = BigDecimal.valueOf(21.00);
+            if (null != immobile.getCategoria_abitazione()) switch (immobile.getCategoria_abitazione()) {
+                case SIGNORILE -> codiceTipologia = BigDecimal.valueOf(19.00);
+                case CIVILE -> codiceTipologia = BigDecimal.valueOf(20.00);
+                case POPOLARE -> codiceTipologia = BigDecimal.valueOf(21.00);
+                default -> {
+                }
+            }
         }
         BigDecimal prezzo = null;
         String quartiereLookup = immobile.getQuartiere();
@@ -245,9 +243,12 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                     : serviceOmi.findPrezziByQuartiere(immobile.getProvincia(), immobile.getCitta(), quartiereLookup, statoPreferito);
             if (opt.isPresent()) {
                 var p = opt.get();
-                if (immobile.getStato_immobile() == StatoImmobile.NUOVO) prezzo = p.max;
-                else if (immobile.getStato_immobile() == StatoImmobile.DA_RISTRUTTUARE) prezzo = p.min;
-                else prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                if (null == immobile.getStato_immobile()) prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                else prezzo = switch (immobile.getStato_immobile()) {
+                    case NUOVO -> p.max;
+                    case DA_RISTRUTTUARE -> p.min;
+                    default -> p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                };
                 Valutazione v = calcolaValutazione(immobile, repoCaratteristicheImmobile.findByImmobile_Id_immobile(idImmobile).orElse(null), prezzo);
                 v.setNote("Zona OMI: " + p.zona);
                 return v;
@@ -391,9 +392,13 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         temp.setBagni(bagni);
         BigDecimal codiceTipologia = null;
         if (categoria != null) {
-            if (categoria == CategoriaAbitazione.SIGNORILE) codiceTipologia = BigDecimal.valueOf(19.00);
-            else if (categoria == CategoriaAbitazione.CIVILE) codiceTipologia = BigDecimal.valueOf(20.00);
-            else if (categoria == CategoriaAbitazione.POPOLARE) codiceTipologia = BigDecimal.valueOf(21.00);
+            switch (categoria) {
+                case SIGNORILE -> codiceTipologia = BigDecimal.valueOf(19.00);
+                case CIVILE -> codiceTipologia = BigDecimal.valueOf(20.00);
+                case POPOLARE -> codiceTipologia = BigDecimal.valueOf(21.00);
+                default -> {
+                }
+            }
         }
         String quartiere = serviceNominatim.resolveQuartiere(provincia, citta, indirizzo, civico);
         BigDecimal prezzo = null;
@@ -404,9 +409,12 @@ public class ServiceImmobileImpl implements ServiceImmobile {
                     : serviceOmi.findPrezziByQuartiere(provincia, citta, quartiere, statoPreferito);
             if (opt.isPresent()) {
                 var p = opt.get();
-                if (statoImmobile == StatoImmobile.NUOVO) prezzo = p.max;
-                else if (statoImmobile == StatoImmobile.DA_RISTRUTTUARE) prezzo = p.min;
-                else prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                if (null == statoImmobile) prezzo = p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                else prezzo = switch (statoImmobile) {
+                    case NUOVO -> p.max;
+                    case DA_RISTRUTTUARE -> p.min;
+                    default -> p.min.add(p.max).divide(BigDecimal.valueOf(2));
+                };
                 Valutazione v = calcolaValutazione(temp, caratteristiche, prezzo);
                 v.setNote("Zona OMI: " + p.zona);
                 return v;

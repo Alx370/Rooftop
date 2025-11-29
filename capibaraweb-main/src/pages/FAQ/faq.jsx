@@ -1,115 +1,92 @@
 import React from "react";
 import "./Faq.css";
-import Postino from "../../assets/images/Postino.png";
-import CasaHero from "../../assets/images/CasaHero.png";
+
+// immagini
+import CasaFaq from "../../assets/images/casafaq.png";
+import GardenFaq from "../../assets/images/gardenfaq.png";
 
 const Faq = () => {
   return (
     <div className="faq-page">
-      <section className="faq-hero">
-        <div className="container hero-container">
-          <div className="hero-text">
-            <h1>Domande più frequenti</h1>
-            <p className="hero-sub">Lorem ipsum dolor sit amet consectetur</p>
-          </div>
 
-          <div className="hero-image">
-            <img src={CasaHero} alt="Casa Hero" />
-          </div>
-        </div>
-      </section>
-
+      {/* --- FAQ INTRO --- */}
       <section className="faq-section">
         <div className="faq-text">
-          <h2>Qui per rispondere a tutte le tue domande</h2>
+          <h2>Qui per rispondere a tutte<br />le tue domande</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur. Sit senectus amet nunc
-            viverra. Est diam nulla risus nam vitae quis.
+            Non hai trovato la risposta che cercavi? Nessun problema.
+            Ogni situazione è unica, e siamo qui proprio per ascoltarti.
           </p>
         </div>
 
+        {/* FAQ ITEMS */}
         <div className="faq-boxes">
+
           <details className="faq-item">
-            <summary><span>Lorem ipsum dolor sit amet consectetur</span></summary>
+            <summary><span>Come selezionate gli inquilini?</span></summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Pulvinar arcu mattis in
-              at sodales condimentum. Gravida arcu aliquet rutrum erat varius.
+              La nostra agenzia immobiliare seleziona gli inquilini verificando <b>documenti, reddito</b> e <b>referenze</b>, così da garantire che ogni immobile sia affidato a persone affidabili.
             </p>
           </details>
 
           <details className="faq-item">
-            <summary><span>Lorem ipsum dolor sit amet consectetur</span></summary>
+            <summary><span>Quali documenti servono per la valutazione?</span></summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-              eiusmod tempor incididunt.
+              Per la valutazione sono necessari: <b>titolo di proprietà</b>, <b>visura catastale</b>, <b>planimetria</b> e <b>APE</b>. Altri documenti possono rendere la stima più precisa.
             </p>
           </details>
 
           <details className="faq-item">
-            <summary><span>Lorem ipsum dolor sit amet consectetur</span></summary>
+            <summary><span>Offrite supporto anche dopo la firma?</span></summary>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-              eiusmod tempor incididunt.
+              Sì, offriamo un <b>supporto continuativo</b> per documenti, spese, adempimenti e assistenza diretta dei nostri consulenti.
             </p>
           </details>
+
+          <details className="faq-item">
+            <summary><span>Quanto dura in media una trattativa?</span></summary>
+            <p>
+              Una trattativa può durare da poche settimane a diversi mesi per le vendite, mentre per gli affitti i tempi variano da <b>15 a 30 giorni</b>.
+            </p>
+          </details>
+
+          <details className="faq-item">
+            <summary><span>Posso affidare la vendita a distanza?</span></summary>
+            <p>
+              Certo, grazie a strumenti digitali, documenti online e firma elettronica puoi gestire tutto anche senza essere presente.
+            </p>
+          </details>
+
         </div>
       </section>
 
-      {/* ---- FORM CON IMMAGINE ---- */}
+      {/* --- FORM + IMMAGINE --- */}
       <section className="faq-contact">
         <div className="contact-column">
           <h2>Non trovi la risposta alla tua domanda?</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur. Sit senectus amet nunc
-            viverra. Est diam nulla risus nam vitae quis.
+            Scrivici e un nostro consulente ti risponderà <b>personalmente</b> con la soluzione più adatta.
           </p>
         </div>
 
         <div className="contact-row">
-          <div className="faq-contact-text">
-            <form className="faq-form">
-              <div className="input-wrap">
-                <input type="text" placeholder="Nome e cognome" />
-              </div>
-              <div className="input-wrap">
-                <input type="email" placeholder="Mail" />
-              </div>
-              <div className="input-wrap">
-                <textarea placeholder="Messaggio..." />
-              </div>
-              <button type="submit" className="btn-primary">Invia</button>
-            </form>
-          </div>
+          <form className="faq-form">
+            <div className="input-wrap">
+              <input type="text" placeholder="Nome Cognome" />
+            </div>
+            <div className="input-wrap">
+              <input type="email" placeholder="Mail" />
+            </div>
+            <div className="input-wrap">
+              <textarea placeholder="Messaggio..." />
+            </div>
+
+            <button type="submit" className="btn-primary">Invia</button>
+          </form>
+
           <div className="faq-contact-image">
-            <img src={Postino} alt="Postino" />
-          </div>
-        </div>
-      </section>
-
-      <section className="faq-reviews">
-        <div className="container">
-          <h2 className="reviews-title">Cosa dicono i nostri clienti</h2>
-          <div className="reviews-grid">
-            <div className="review-card">
-              <p className="review-text">
-                “Servizio impeccabile! Gli agenti sono stati sempre disponibili e hanno trovato la casa perfetta per noi.”
-              </p>
-              <p className="review-author">— Martina B.</p>
-            </div>
-
-            <div className="review-card">
-              <p className="review-text">
-                “Esperienza molto positiva. Piattaforma chiara e contatti rapidi con i consulenti immobiliari.”
-              </p>
-              <p className="review-author">— Luca F.</p>
-            </div>
-
-            <div className="review-card">
-              <p className="review-text">
-                “Ho venduto il mio appartamento in due settimane. Consigliatissimo per la professionalità.”
-              </p>
-              <p className="review-author">— Giulia M.</p>
-            </div>
+            <img src={CasaFaq} alt="Casa FAQ" className="faq-image-main" />
+            <img src={GardenFaq} alt="Garden FAQ" className="faq-image-bg" />
           </div>
         </div>
       </section>

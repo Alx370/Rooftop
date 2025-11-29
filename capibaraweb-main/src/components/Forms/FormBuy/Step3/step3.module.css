@@ -1,0 +1,185 @@
+/* SELECT IDENTICO A STEP 2 */
+.select {
+  width: 80%;
+  max-width: 400px;
+  min-width: 200px;
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1.8px solid #bdbdbd;
+  background: #fafafa;
+  color: #575757;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* CENTRA DAVVERO IL TESTO DELLE OPTION */
+.select option {
+  text-align: center;
+}
+
+/* CONTAINER PRINCIPALE */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* TITOLO */
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  color: #020122;
+  margin-top:-1.4rem;
+  margin-bottom: 30px;
+}
+
+/* CONTENITORE A DUE COLONNE */
+.content {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+}
+
+/* COLONNA SINISTRA IDENTICA A STEP 2 */
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 2.5rem;
+  margin-left: 0;
+  margin-right: -5rem;
+}
+
+/* LABEL */
+.label {
+  font-size: 18px;
+  text-align: center;
+  color: #020122;
+}
+
+/* ERRORE */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* BOTTONI IDENTICI A STEP 2 */
+.buttons {
+  display: flex;
+  gap: 15px;
+  width: 50%;
+  max-width: 300px;
+  min-width: 200px;
+  justify-content: center;
+}
+
+/* BOTTONE */
+.back,
+.next {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* INDIETRO */
+.back {
+  background: white;
+  border: 1px solid #020122;
+  color: #020122;
+}
+
+.back:hover {
+  background: #f5f5f5;
+}
+
+/* CONTINUA — SEMPRE ATTIVO */
+.next {
+  background: #ff7300;
+  border: none;
+  color: white;
+}
+
+.next:hover {
+  background: #e36600;
+}
+
+/* COLONNA DESTRA IMMAGINI */
+.right {
+  flex: 1;
+  min-height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 85%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  animation: fadeIn 0.3s ease;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .right {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+    .title {
+    margin-top: -1rem;
+    font-size: 24px;
+    margin-bottom: -0.5rem;
+  }
+
+   .left {
+    margin-right: 0;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+
+  .select {
+    width: 90%;
+  }
+
+  .buttons {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+  }
+
+  .back,
+  .next {
+    width: 100%;
+  }
+
+    .image {
+    margin-top: -1.8rem;
+    max-width: 100%;
+  }
+}

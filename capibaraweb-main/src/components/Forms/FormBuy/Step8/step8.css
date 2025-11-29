@@ -1,0 +1,138 @@
+/* =============================
+   WRAPPER
+============================= */
+.sell-step8-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.sell-step8-progress {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+}
+
+.sell-step8-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+/* =============================
+   GRID (4 CARDS)
+============================= */
+.sell-step8-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+
+/* =============================
+   CARD
+============================= */
+.sell-step8-card {
+  border: 2px solid #dcdcdc;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sell-step8-card:hover {
+  transform: translateY(-3px);
+}
+
+.sell-step8-card.sell-active {
+  border-color: #ff7a00;
+  background: #fff4e5;
+}
+
+
+/* Card header */
+.sell-step8-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sell-step8-wrapper h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.sell-step8-wrapper p {
+  margin-top: 10px;
+  font-size: 0.94rem;
+  color: #555;
+}
+
+
+/* =============================
+   RADIO
+============================= */
+.sell-step8-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b5b5b5;
+  border-radius: 50%;
+  transition: 0.25s;
+}
+
+.sell-step8-radio.sell-radio-on {
+  background: #ff7a00;
+  border-color: #ff7a00;
+}
+
+
+/* =============================
+   BUTTONS
+============================= */
+.sell-step8-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.sell-btn {
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sell-btn-secondary {
+  background: #fff;
+  border: 1.6px solid #444;
+}
+
+.sell-btn-primary {
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+}
+
+.sell-btn-primary:disabled {
+  background: #ffc9a1;
+  cursor: not-allowed;
+}
+
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 700px) {
+  .sell-step8-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sell-step8-title {
+    font-size: 1.7rem;
+  }
+}

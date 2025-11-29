@@ -1,0 +1,192 @@
+/* ============================
+   CONTAINER PRINCIPALE
+============================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* ============================
+   TITOLO
+============================ */
+.title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #020122;
+  margin-left: 2rem;      /* OK DESKTOP – verrà rimosso mobile */
+}
+
+/* ============================
+   GRIGLIA 2x2
+============================ */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  place-items: center;
+  margin-left: 2rem;      /* OK DESKTOP – verrà rimosso mobile */
+}
+
+/* ============================
+   SOTTOTITOLO
+============================ */
+.subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 15px;
+  color: #020122;
+}
+
+/* ============================
+   SELEZIONE QUADRETTI
+============================ */
+.selectorGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* BOX NUMERI */
+.optionBox {
+  width: 55px;
+  height: 40px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.optionBox:hover {
+  border-color: #ff7300;
+}
+
+.selected {
+  border-color: #ff7300 !important;
+  background: #fff4e8;
+}
+
+/* ============================
+   SELECT
+============================ */
+.select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ============================
+   ERROR
+============================ */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* ============================
+   BOTTONI
+============================ */
+.buttonContainer {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.backButton,
+.continueButton {
+  padding: 12px 36px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.backButton {
+  background: #fff;
+  border: 1px solid #020122;
+  color: #020122;
+}
+
+.backButton:hover {
+  background: #f6f6f6;
+}
+
+.continueButton {
+  background: #ff7300;
+  color: white;
+  border: none;
+}
+
+.continueButton:hover {
+  background: #e06600;
+}
+
+/* ============================
+   RESPONSIVE TABLET
+============================ */
+@media (max-width: 768px) {
+
+  /* 🔥 RIMOZIONE SHIFT A DESTRA */
+  .title,
+  .grid {
+    margin-left: 0;  
+  }
+
+  .grid {
+    grid-template-columns: 1fr;  /* griglia verticale */
+    width: 100%;
+    justify-items: center;
+  }
+
+  .buttonContainer {
+    display: flex;
+    gap: 12px;
+    width: 90%;
+    margin-left:1rem;
+  }
+
+  .backButton,
+  .continueButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================
+   RESPONSIVE MOBILE
+============================ */
+@media (max-width: 480px) {
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .optionBox {
+    width: 50px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .select {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+}

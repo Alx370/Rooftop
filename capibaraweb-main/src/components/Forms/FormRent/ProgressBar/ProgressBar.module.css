@@ -1,0 +1,71 @@
+.container {
+  width: 100%;
+  position: relative;
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* CONTENITORE STEP */
+.steps {
+  width: 100%;
+  max-width: 12000px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3;
+}
+
+/* LINEA DI BASE (LILLA) */
+.baseLine {
+  position: absolute;
+  top: 50%;
+  left: 16px;              /* metà del primo cerchio */
+  right: 16px;             /* metà dell'ultimo cerchio */
+  height: 4px;
+  background: #c7c4ff;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* LINEA DI PROGRESSO (ARANCIONE) */
+.progressLine {
+  position: absolute;
+  top: 50%;
+  left: 14px;              /* inizia sotto metà cerchio 1 */
+  height: 4px;
+  background: #ff7a00;
+  transform: translateY(-50%);
+  z-index: 2;
+  transition: width 0.3s ease;
+
+  /* BLOCCO: non può superare il cerchio finale */
+  max-width: calc(100% - 32px); 
+}
+
+/* CERCHI */
+.stepWrapper {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #c7c4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.step.active {
+  background: #ff7a00;
+}

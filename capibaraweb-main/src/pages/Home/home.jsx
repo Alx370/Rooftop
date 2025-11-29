@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./Home.css";
+import "./home.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -55,28 +55,32 @@ const Home = () => {
       </section>
 
       {/* ---------------- INTRO ---------------- */}
-      <section className="intro">
+      <section className="intro-home">
         <h2>I nostri servizi</h2>
-        <p className="subtitle">Ti aiutiamo a valorizzare la tua casa e a venderla al giusto valore.</p>
-        <div className="intro-cards">
-          <div className="card">
+        <p className="subtitle-home">Ti aiutiamo a valorizzare la tua casa e a venderla al giusto valore.</p>
+
+        <div className="intro-cards-home">
+
+          <div className="card-home">
             <img src="src/pages/Home/img/finestra.png" alt="Interno casa" />
-            <div className="card-content">
+            <div className="card-content-home">
               <h3>Per venderlo</h3>
               <p>Ti guidiamo nella vendita con metodo, trasparenza e attenzione al valore.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="/valutazione" >Valuta</Link>
             </div>
           </div>
-          <div className="card">
+
+          <div className="card-home">
             <img src="src/pages/Home/img/letto.png" alt="Interno ufficio" />
-            <div className="card-content">
+            <div className="card-content-home">
               <h3>Per affittarlo</h3>
               <p>Gestiamo tutto noi: inquilini,
                 contratti e sicurezza del
                 tuo immobile.</p>
-              <button className="btn primary">Valuta</button>
+              <Link className="btn primary" to="" >Valuta</Link>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -84,6 +88,7 @@ const Home = () => {
       <section className="usp-section">
         <h2>Perchè scegliere noi</h2>
         <div className="usp-grid">
+
           <div className="usp-item">
             <div className="usp-text">
               <h3 className="highlight1">Valutazione in 72 ore</h3>
@@ -96,7 +101,7 @@ const Home = () => {
 
           <div className="usp-item reverse">
             <div className="usp-img">
-              <img src="src/pages/Home/img/chiavi.png" alt="Metodo user-centred" />
+              <img src="src/pages/Home/img/chiavi.jpg" alt="Metodo user-centred" />
             </div>
             <div className="usp-text">
               <h3 className="highlight1">Metodo user-centred</h3>
@@ -104,12 +109,13 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="usp-item centered">
-            <div className="usp-text">
+          <div className="usp-item-centered">
+            <div className="usp-text-centered">
               <h3 className="highlight">Vendita in esclusiva</h3>
               <p>Un impegno reciproco per risultati concreti. Ci dedichiamo al tuo immobile con <strong>strategie mirate</strong> e <strong>trasparenza</strong>, per vendere al giusto valore.</p>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -133,6 +139,40 @@ const Home = () => {
             ))}
           </div>
           <button className="scroll-btn right" onClick={() => smoothScroll(1)}>→</button>
+        </div>
+      </section>
+
+      {/* ---------------- FAQ ---------------- */}
+      <section className="faq">
+        <div className="faq-left">
+          <h2 className="faq-title">Qui per rispondere a tutte le tue domande</h2>
+          <div className="faq-text-home">
+            <p>Abbiamo raccolto le domande più frequenti dei nostri clienti, con risposte semplici e trasparenti per aiutarti a trovare subito le informazioni che cerchi.</p>
+          </div>
+          <Link className="btn primary" to="/faq" >Trova Risposta</Link>
+        </div>
+        
+        <div className="faq-boxes">
+          <details className="faq-item">
+            <summary><span>Posso affittare casa anche se vivo in un'altra città?</span></summary>
+            <p>
+              Certo. I nostri consulenti si occupano di tutto: selezione degli inquilini, contratti e gestione delle pratiche. Così puoi affittare in tranquillità, ovunque tu sia.
+            </p>
+          </details>
+
+          <details className="faq-item">
+            <summary><span>Devo pagare per la valutazione dell'immobile?</span></summary>
+            <p>
+              No, la valutazione del tuo immobile, tramite il nostro form, è completamente gratuita e senza impegno.
+            </p>
+          </details>
+
+          <details className="faq-item">
+            <summary><span>Gestite anche contratti di affitto a lungo termine?</span></summary>
+            <p>
+              Sì, gestiamo anche contratti di affitto a lungo termine, offrendo assistenza completa in ogni fase.
+            </p>
+          </details>
         </div>
       </section>
 

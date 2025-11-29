@@ -1,0 +1,138 @@
+/* --- HEADER --- */
+header.header {
+  background-color: #B6BDF7;
+  color: #020122;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 14px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Layout interno */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- LOGO --- */
+.logo-image {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* --- NAV DESKTOP --- */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* LOGIN BUTTON */
+.login-link {
+  background-color: #FF6400;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 15px;
+  font-weight: 600;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: 0.25s ease;
+}
+
+.login-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* --- HAMBURGER --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bar {
+  width: 28px;
+  height: 3px;
+  background-color: #020122;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* Animazioni hamburger */
+.bar1.active {
+  transform: rotate(45deg) translateY(8px);
+}
+.bar2.active {
+  opacity: 0;
+}
+.bar3.active {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* --- MOBILE MENU --- */
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #B6BDF7;
+  padding: 16px 0;
+  gap: 18px;
+  animation: fadeIn 0.25s ease;
+}
+
+.mobile-menu a {
+  font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+}
+
+/* Evita scroll orizzontale */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Compenso per header fisso */
+body {
+  padding-top: 70px;
+}

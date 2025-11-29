@@ -1,0 +1,378 @@
+/* ================================
+   CONTAINER GENERALE
+================================ */
+.faq-page {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   SEZIONE FAQ INTRO + DOMANDE
+================================ */
+.faq-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.faq-text h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #1f1b4b;
+}
+
+.faq-text p {
+  max-width: 520px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+
+/* ================================
+   FAQ ITEMS (SUMMARY + ANSWERS)
+================================ */
+.faq-boxes {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 1rem;
+}
+
+.faq-item {
+  background: #B6BDF7;
+  border: 1px solid #aab0ff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: #807f7f 0px 4px 6px -2px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item summary::after {
+  content: "+";
+  width: 28px;
+  height: 28px;
+  background: #B6BDF7;
+  color: #1f1b4b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin-top: 12px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+
+/* ================================
+   FORM + TESTO + IMMAGINI
+================================ */
+.faq-contact {
+  padding: 56px 0;
+}
+
+.contact-row {
+  display: flex;
+  gap: 10rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.contact-column {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 20px;
+  margin-left: 5rem;
+}
+
+.contact-column h2 {
+  font-size: 2rem;
+  color: #1f1b4b;
+  margin-bottom: 2rem;
+  margin-left:-5rem;
+}
+
+.contact-column p {
+  max-width: 400px;
+  margin-left:-5rem;
+}
+
+
+/* ================================
+   FORM CONTACT
+================================ */
+.faq-form {
+  flex: 1 1 420px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-wrap input,
+.input-wrap textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #1f1b4b;
+  font-size: 1rem;
+  box-shadow: #807f7f 0px 4px 6px -2px;
+}
+
+.input-wrap textarea {
+  min-height: 160px;
+}
+
+.btn-primary {
+  width: 140px;
+  height: 40px;
+  background: #FF6400;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-end;
+  box-shadow: #807f7f 0px 4px 6px -2px;
+}
+
+
+/* ================================
+   IMMAGINI FAQ — VERSIONE RESPONSIVA
+================================ */
+.faq-contact-image {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-image-bg {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin-top: 6rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.faq-image-main {
+  position: absolute;
+  bottom: 1.6rem;
+  right: 0;
+  width: 120%;
+  max-width: 480px;
+  pointer-events: none;
+}
+
+
+/* ================================
+   RESPONSIVE FIX
+================================ */
+@media (max-width: 900px) {
+  .faq-section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-row {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .faq-contact-image {
+    max-width: 380px;
+    margin-top: 2rem; 
+  }
+
+  .faq-image-bg {
+    margin-top: 2rem; 
+  }
+
+  .faq-image-main {
+    position: absolute;
+    bottom: 0;                
+    right: 50%;            
+    transform: translateX(50%);
+    width: 100%;              
+    max-width: 320px;         
+  }
+}
+
+@media screen and (max-height: 800px) {
+  
+   .contact-row {
+    padding-right:4rem;
+    align-items: center;
+    margin-left:4rem;
+    gap:5px;
+  }
+.contact-column h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-left:-1rem;
+}
+
+.contact-column p {
+  max-width: 400px;
+  margin-left:-1rem;
+}
+
+  .faq-contact-image {
+    max-width: 495px;
+    margin-top: 1rem;  
+  }
+
+  .faq-image-bg {
+    margin-top: 5rem; 
+    max-width: 440px;
+    margin-left:8.4rem;
+  }
+
+  .faq-image-main {
+    position: absolute;
+    bottom: -17.5%;        
+    transform: translateX(40px);
+    width: 100%;
+    max-width: 495px; 
+  }
+}
+
+
+@media screen and (max-height: 700px) {
+  
+   .contact-row {
+    padding-right:4rem;
+    align-items: center;
+    margin-left:3rem;
+    gap:5px;
+  }
+.contact-column h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-left:-2rem;
+}
+
+.contact-column p {
+  max-width: 400px;
+  margin-left:-2rem;
+}
+
+  .faq-contact-image {
+    max-width: 435px;
+    margin-top: 1rem;   
+  }
+
+  .faq-image-bg {
+    margin-top: 5rem; 
+    max-width: 380px;
+    margin-left:4rem;
+  }
+
+  .faq-image-main {
+    position: absolute;
+    bottom: -17%;          
+    right: 15.5%;
+    transform: translateX(40px);
+    width: 100%;
+    max-width: 435px;   
+    left: -2.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .faq-text h2 {
+    font-size: 2rem;
+  }
+
+  .faq-text p {
+    font-size: 1rem;
+  }
+
+  .faq-boxes {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .contact-column h2 {
+    font-size: 1.6rem;
+  }
+
+
+  .faq-contact-image {
+    max-width: 300px;
+    padding-right: 3rem;
+  }
+
+  .faq-image-main {
+    max-width: 240px;
+    bottom: -0.5rem;
+
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .faq-boxes {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+
+   .contact-row {
+    padding-right:0;
+    align-items: center;
+    margin-left:0;
+    gap:55px;
+    margin-bottom:-2rem;
+  }
+
+
+  .faq-image-bg {
+    margin-top: 7rem;
+    margin-left: 3rem;
+  }
+
+  .faq-image-main {
+    max-width: 350px ;
+    width: 95%;
+    margin-bottom: -0.89rem;
+    margin-right:1rem;
+  }
+}

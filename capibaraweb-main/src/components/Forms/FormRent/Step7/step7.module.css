@@ -1,0 +1,137 @@
+/* CONTAINER PRINCIPALE */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* TITOLO */
+.title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #020122;
+}
+
+/* GRIGLIA 3 COLONNE */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 25px;
+}
+
+/* CARD SINGOLA – VERSIONE PIÙ PICCOLA */
+.featureCard {
+  background: white;
+  padding: 14px 10px;               /* ridotto */
+  border: 1.5px solid #e0e0e0;      /* ridotto */
+  border-radius: 12px;              /* leggermente più compatto */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  margin: 0 auto;                   /* centra la card */
+}
+
+.featureCard:hover {
+  border-color: #ff7300;
+  background: #fff5ed;
+  transform: translateY(-2px);
+}
+
+/* SELEZIONATO */
+.selected {
+  border-color: #ff7300 !important;
+  background: #fff1e3;
+  transform: translateY(-2px);
+}
+
+/* ICONE – PIÙ PICCOLE */
+.icon {
+  width: 45px;                      /* da 55 → 45 */
+  height: 45px;
+  margin-bottom: 8px;
+}
+
+/* ERRORE */
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* BOTTONI */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.backButton,
+.continueButton {
+  padding: 12px 34px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* INDIETRO */
+.backButton {
+  background-color: white;
+  color: #020122;
+  border: 1px solid #020122;
+}
+
+.backButton:hover {
+  background: #f5f5f5;
+}
+
+/* CONTINUA */
+.continueButton {
+  background-color: #ff7300;
+  color: white;
+  border: none;
+}
+
+.continueButton:hover {
+  background-color: #e06600;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+
+  .featureCard {
+    max-width: 200px;  
+    display: flex;
+  }
+
+  .buttonContainer {
+    display: flex;
+    width: 90%;
+    margin-left:1rem;
+  }
+
+  .backButton,
+  .continueButton {
+    width: 100%;
+  }
+}

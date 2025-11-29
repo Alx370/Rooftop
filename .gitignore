@@ -1,0 +1,49 @@
+# BACKEND - MAVEN / JAVA / IDE
+
+# Maven
+Progetto_Rooftop/target/
+Progetto_Rooftop/.mvn/
+
+# IDE
+Progetto_Rooftop/.idea/
+Progetto_Rooftop/.vscode/
+Progetto_Rooftop/*.iml
+
+# FRONTEND - NODE / REACT / VITE
+
+# Logs
+capibaraweb-main/logs/
+capibaraweb-main/*.log
+capibaraweb-main/npm-debug.log*
+capibaraweb-main/yarn-debug.log*
+capibaraweb-main/yarn-error.log*
+capibaraweb-main/pnpm-debug.log*
+capibaraweb-main/lerna-debug.log*
+
+# Node output
+capibaraweb-main/node_modules/
+capibaraweb-main/dist/
+capibaraweb-main/dist-ssr/
+capibaraweb-main/*.local
+
+# Editor directories
+capibaraweb-main/.vscode/*
+!capibaraweb-main/.vscode/extensions.json
+capibaraweb-main/.idea
+
+# OS trash
+capibaraweb-main/.DS_Store
+
+# Misc editor files
+capibaraweb-main/*.suo
+capibaraweb-main/*.ntvs*
+capibaraweb-main/*.njsproj
+capibaraweb-main/*.sln
+capibaraweb-main/*.sw?
+
+# SYSTEM-WIDE IGNORE
+
+.DS_Store
+Thumbs.db
+*.log
+

@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+:root {
+  --primary: #ff6400;
+  /* Arancione accento */
+  --secondary: #048a81;
+  /* Verde acqua */
+  --hero-bg: #b6bdf7;
+  /* Lilla / azzurro chiaro */
+  --bg-light: #F5FBEF;
+  /* Sfondo sezioni chiare */
+  --text-dark: #020122;
+  /* Testo principale */
+  --text-light: #444;
+  /* Testo secondario */
+}
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: #474BCA;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #474BCA;
+}
+
+
+body {
+  background: 
+    radial-gradient(circle at 100px 600px,
+      rgba(182, 189, 247, 0.65) 0%,
+      transparent 15%),
+    radial-gradient(circle at 1800px 200px,
+      rgba(182, 189, 247, 0.75) 0%,
+      transparent 8%),
+    #ffffff;
+  background-size: 2060px 1600px;
+  background-repeat: repeat;
+  font-family: 'Merriweather', serif;
+  color: #020122;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  width: 100%;
+}
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+main {
+  width: 100%;
+  min-Height: 80vh;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+
+
+html,
+body,
+main,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}

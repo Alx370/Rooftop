@@ -1,0 +1,111 @@
+/* ============================
+   CONTAINER PRINCIPALE
+============================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================
+   CONTENUTO
+============================ */
+.content {
+  text-align: center;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #020122;
+  font-weight: 700;
+  margin-top:-1.4rem;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #020122;
+  margin-bottom: 40px;
+}
+
+/* ============================
+   BOTTONE
+============================ */
+.button {
+  padding: 12px 32px;
+  background-color: #ff7300;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s ease;
+  min-width: 200px;
+}
+
+.button:hover {
+  background-color: #e26600;
+}
+
+/* ============================
+   RESPONSIVE (TABLET)
+============================ */
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 25px ;    
+    align-items: center ;    
+    text-align: center ;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding: 20px 10px ;
+  }
+
+  .button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+}
+
+
+/* ============================
+   RESPONSIVE (MOBILE)
+============================ */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 12px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom:-1rem;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .button {
+    padding: 14px 0;
+    font-size: 16px;
+    min-width: unset;
+    width: 50%;
+  }
+}

@@ -1,0 +1,183 @@
+/* ===========================
+   BASE FOOTER
+=========================== */
+
+.footer {
+  background-color: #058b87;
+  color: #f2f2f2;
+  padding: 40px 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 70px; /* ridotto per non far scendere tutto */
+}
+
+/* LOGO + COPYRIGHT */
+.footer-left {
+  max-width: 180px; /* compatto */
+  text-align: left;
+}
+
+.footer-left img {
+  width: 70px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+/* ===========================
+   DESKTOP LAYOUT
+=========================== */
+
+.footer-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* logo & colonne sulla stessa riga */
+  width: 100%;
+  gap: 2rem;
+}
+
+/* Colonne */
+.footer-columns-desktop {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 3rem;
+  align-items: start;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+
+.footer-col h4 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.footer-col a {
+  color: #d9d9d9;
+  text-decoration: none;
+  margin: 6px 0;
+  transition: 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: #ffffff;
+}
+
+
+/* ===========================
+   SOCIAL ICONS
+=========================== */
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.icon {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ===========================
+   MOBILE — CARD A TENDINA
+=========================== */
+
+.footer-cards-mobile {
+  display: none; /* nascosto su desktop */
+}
+
+.footer-card {
+  width: 100%;
+  background-color: #058b87;
+  padding: 15px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.footer-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-card-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.arrow {
+  font-size: 1.5rem;
+}
+
+/* contenuto tendina */
+.footer-card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding-left: 5px;
+}
+
+.footer-card-content.open {
+  max-height: 500px; /* abbastanza per contenere tutto */
+  margin-top: 10px;
+}
+
+.footer-card-content a {
+  display: block;
+  color: #d9d9d9;
+  margin: 6px 0;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.footer-card-content a:hover {
+  color: #fff;
+}
+
+
+/* ===========================
+   RESPONSIVE MOBILE
+=========================== */
+
+@media (max-width: 480px) {
+
+  /* Desktop hidden */
+  .footer-desktop {
+    display: none;
+  }
+
+  /* Mobile visible */
+  .footer-cards-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    width: 100%;
+  }
+
+  .footer-left {
+    margin-bottom: 20px;
+  }
+
+  .footer-container {
+    gap: 30px;
+  }
+}

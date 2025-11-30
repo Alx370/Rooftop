@@ -12,6 +12,7 @@ import NotFound from "../pages/NotFound/notfound.jsx";
 import Agente from "../pages/Agente/agente.jsx";
 import FaqList from "../pages/FaqList/FaqList.jsx";
 import FormBuy from "../components/Forms/FormBuy/formbuy.jsx";
+import ScrollToTop from "../components/Scroll/ScrollToTop.jsx";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
       <BrowserRouter>
         <Header />
         <main >
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/registrati" element={<Registrati />} />

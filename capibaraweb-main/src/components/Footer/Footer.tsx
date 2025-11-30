@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import logo from "../../assets/images/Logo.png";
-import linkedinIcon from "../../assets/icons/linkedin.png";
-import instagramIcon from "../../assets/icons/instagram.png";
-import tiktokIcon from "../../assets/icons/tiktok.png";
-import facebookIcon from "../../assets/icons/facebook.png";
+import logo from "@assets/images/global/Logo.png";
+import linkedinIcon from "@assets/icons/linkedin.png";
+import instagramIcon from "@assets/icons/instagram.png";
+import tiktokIcon from "@assets/icons/tiktok.png";
+import facebookIcon from "@assets/icons/facebook.png";
 
 const Footer = () => {
   return (

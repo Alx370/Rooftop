@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, setAuthToken } from "../../services/api"; 
+
+import { login, setAuthToken } from "../../api/authApi.js"; 
 import "./login.css";
 
 const Login = () => {
@@ -9,35 +11,34 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // per il redirect dopo login
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validazione semplice
     if (!email || !password) {
       setError("Compila tutti i campi per procedere.");
       return;
     }
 
     try {
-      // Chiamata al backend: passiamo un oggetto { email, password }
-      const data = await login({ email, password });
-      console.log("Token ricevuto dal backend:", data.token);
+      const response = await login({ email, password });
 
-      // Salvataggio token in localStorage
-      localStorage.setItem("token", data.token);
+      console.log("Token ricevuto:", response.token);
 
-      // Imposta l'Authorization header per le chiamate future
-      setAuthToken(data.token);
+      if (!response.token) {
+        setError("Token non presente. Errore nel backend.");
+        return;
+      }
+
+      setAuthToken(response.token);
 
       setError("");
 
-      // Redirect alla dashboard o pagina protetta
-      navigate("/dashboard"); // modifica con la tua route
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Credenziali non valide");
-      console.error(err);
+      console.error("Errore login:", err);
+      setError("Credenziali non valide o server non raggiungibile.");
     }
   };
 
@@ -88,9 +89,7 @@ const Login = () => {
             </a>
           </div>
 
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <button type="submit" className="login-button">Login</button>
 
           <p className="login-register">
             Non hai un account? <Link to="/registrati">Registrati</Link>

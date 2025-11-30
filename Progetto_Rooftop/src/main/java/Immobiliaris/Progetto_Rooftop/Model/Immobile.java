@@ -20,6 +20,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "immobili")
+/**
+ * Entità JPA che rappresenta un immobile pubblicato sulla piattaforma.
+ * Mappa la tabella `immobili` e include dati anagrafici, stato e caratteristiche.
+ */
 public class Immobile {
 
     @Id
@@ -103,7 +107,9 @@ public class Immobile {
     private LocalDateTime creato_il;
     // Creation timestamp - automatically set when property is created
     private Integer bagni;
+    // Numero di bagni - campo opzionale.
     private CategoriaAbitazione categoria_abitazione;
+    // Categoria abitativa (es. RESIDENZIALE/TURISTICO) - opzionale.
 
     public Integer getId_immobile() {
         return id_immobile;

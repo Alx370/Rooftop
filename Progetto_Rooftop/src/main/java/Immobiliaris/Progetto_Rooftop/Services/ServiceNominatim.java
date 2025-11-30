@@ -14,11 +14,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
+/**
+ * Integrazione con Nominatim (OpenStreetMap) per risolvere quartieri/suburb.
+ * Utilizza una semplice chiamata HTTP con `User-Agent` dedicato.
+ */
 public class ServiceNominatim {
 
     private final RestTemplate rest = new RestTemplate();
     private final ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * Risolve il quartiere/suburb a partire da indirizzo completo.
+     * Prova i campi `neighbourhood`, `suburb`, `quarter`, `city_district`.
+     * @return nome del quartiere oppure null se non disponibile
+     */
     public String resolveQuartiere(String provincia, String citta, String indirizzo, String civico) {
         String q = indirizzo + (civico != null ? " " + civico : "") + ", " + citta + ", " + provincia + ", Italia";
         String url = UriComponentsBuilder.fromHttpUrl("https://nominatim.openstreetmap.org/search")

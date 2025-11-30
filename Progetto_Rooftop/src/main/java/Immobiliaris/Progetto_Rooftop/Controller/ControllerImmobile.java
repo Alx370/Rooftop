@@ -34,6 +34,11 @@ import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 
 @RestController
 @RequestMapping("/api/immobili")
+/**
+ * Controller REST per la gestione degli immobili.
+ * Espone endpoint CRUD e operazioni di valutazione.
+ * Base path: `/api/immobili`.
+ */
 public class ControllerImmobile {
 
     @Autowired
@@ -43,6 +48,10 @@ public class ControllerImmobile {
     private ServiceUtente serviceUtente;
 
     @GetMapping
+    /**
+     * Restituisce tutti gli immobili.
+     * Risponde 200 con la lista oppure 204 se vuota.
+     */
     public ResponseEntity<List<Immobile>> getAllImmobili() {
         List<Immobile> immobili = serviceImmobile.getAll();
         if (immobili.isEmpty()) {
@@ -52,6 +61,12 @@ public class ControllerImmobile {
     }
 
     @PostMapping("/{id}/valutazione/automatica")
+    /**
+     * Calcola una valutazione automatica basata sul prezzo al mq della zona.
+     * Richiede nel body `prezzoMqZona`.
+     * @param id id dell'immobile
+     * @return 200 con la valutazione calcolata
+     */
     public ResponseEntity<Valutazione> stimaAutomatica(@PathVariable Integer id, @RequestBody Map<String, BigDecimal> payload) {
         BigDecimal prezzoMqZona = payload.get("prezzoMqZona");
         if (prezzoMqZona == null) {
@@ -62,12 +77,23 @@ public class ControllerImmobile {
     }
 
     @PostMapping("/{id}/valutazione/automatica/omi")
+    /**
+     * Calcola una valutazione automatica usando i dati OMI della zona.
+     * @param id id dell'immobile
+     * @return 200 con la valutazione stimata
+     */
     public ResponseEntity<Valutazione> stimaAutomaticaDaOmi(@PathVariable Integer id) {
         Valutazione v = serviceImmobile.stimaAutomaticaDaOMI(id);
         return ResponseEntity.ok(v);
     }
 
     @PostMapping("/{id}/valutazione/manuale")
+    /**
+     * Crea una valutazione manuale associando opzionalmente un valutatore.
+     * Body: `prezzoMqZona` (string), `idValutatore` (string opzionale).
+     * @param id id dell'immobile
+     * @return 201 con la valutazione creata
+     */
     public ResponseEntity<Valutazione> creaValutazioneManuale(@PathVariable Integer id, @RequestBody Map<String, String> payload) {
         String prezzoStr = payload.get("prezzoMqZona");
         String idValStr = payload.get("idValutatore");
@@ -81,6 +107,11 @@ public class ControllerImmobile {
     }
 
     @PostMapping("/valutazione/automatica/omi/indirizzo")
+    /**
+     * Calcola la valutazione automatica a partire da un indirizzo e caratteristiche.
+     * Campi obbligatori: `provincia`, `citta`, `indirizzo`, `metri_quadri`, `tipologia`.
+     * @return 200 con la valutazione stimata; 400 se campi mancanti
+     */
     public ResponseEntity<Valutazione> stimaAutomaticaDaIndirizzo(@RequestBody Map<String, String> payload) {
         String provincia = payload.get("provincia");
         String citta = payload.get("citta");
@@ -118,6 +149,11 @@ public class ControllerImmobile {
     }
 
     @GetMapping("/{id}")
+    /**
+     * Restituisce l'immobile per id.
+     * @param id id dell'immobile
+     * @return 200 con l'immobile o 404 se non trovato
+     */
     public ResponseEntity<?> getImmobileById(@PathVariable Integer id) {
         try {
             Immobile immobile = serviceImmobile.getById(id);
@@ -128,6 +164,11 @@ public class ControllerImmobile {
     }
 
     @PostMapping
+    /**
+     * Crea un immobile associando il proprietario dall'utente autenticato.
+     * Permesso solo al ruolo `PROPRIETARIO`.
+     * @return 201 con l'immobile creato; 401/403/400 in caso di errori
+     */
     public ResponseEntity<?> createImmobile(@RequestBody Immobile immobile) {
         try {
             // Retrieve current authentication
@@ -159,6 +200,11 @@ public class ControllerImmobile {
     }
 
     @PutMapping("/{id}")
+    /**
+     * Aggiorna un immobile esistente con i campi forniti.
+     * @param id id dell'immobile
+     * @return 200 con l'immobile aggiornato o 404 se non trovato
+     */
     public ResponseEntity<?> updateImmobile(@PathVariable Integer id, @RequestBody Immobile immobile) {
         try {
             Immobile aggiornato = serviceImmobile.update(id, immobile);
@@ -169,6 +215,11 @@ public class ControllerImmobile {
     }
 
     @DeleteMapping("/{id}")
+    /**
+     * Elimina l'immobile per id.
+     * @param id id dell'immobile
+     * @return 204 se eliminato; 404 se non trovato
+     */
     public ResponseEntity<?> deleteImmobile(@PathVariable Integer id) {
         try {
             serviceImmobile.delete(id);

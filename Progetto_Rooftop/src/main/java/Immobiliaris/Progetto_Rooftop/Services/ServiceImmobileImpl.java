@@ -56,6 +56,11 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     /** Valida i campi obbligatori dell'immobile. */
+    /**
+     * Valida i campi obbligatori dell'immobile prima della persistenza.
+     * Lancia eccezioni HTTP 400 in caso di valori mancanti o non validi.
+     * @param immobile entità da validare
+     */
     private void validate(Immobile immobile) {
         if (immobile.getProprietario() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Proprietario e richiesto");
@@ -87,6 +92,12 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Crea un immobile dopo validazione e impostazione dei default.
+     * Inizializza stato annuncio e timestamp di creazione.
+     * @param immobile entità da salvare
+     * @return immobile persistito
+     */
     public Immobile create(Immobile immobile) {
         validate(immobile);
         
@@ -126,18 +137,34 @@ public class ServiceImmobileImpl implements ServiceImmobile {
 
     @Override
     @Transactional(readOnly = true)
+    /**
+     * Restituisce tutti gli immobili dal repository.
+     * @return lista di immobili
+     */
     public List<Immobile> getAll() {
         return repoImmobili.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
+    /**
+     * Recupera un immobile per id, lanciando 404 se non esiste.
+     * @param id identificativo immobile
+     * @return immobile trovato
+     */
     public Immobile getById(int id) {
         return repoImmobili.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Immobile non trovato"));
     }
 
     @Override
+    /**
+     * Aggiorna i campi non null dell'immobile esistente.
+     * Applica normalizzazioni su stringhe e validazioni di base.
+     * @param id identificativo immobile
+     * @param updated campi da aggiornare
+     * @return immobile aggiornato
+     */
     public Immobile update(int id, Immobile updated) {
         Immobile existing = getById(id);
 
@@ -198,6 +225,10 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Elimina l'immobile se esiste, altrimenti lancia 404.
+     * @param id identificativo immobile
+     */
     public void delete(int id) {
         if (!repoImmobili.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Immobile non trovato");
@@ -206,6 +237,13 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Calcola la valutazione automatica usando il prezzo al mq della zona.
+     * Applica moltiplicatori e add-on basati sulle caratteristiche.
+     * @param idImmobile id immobile
+     * @param prezzoMqZona prezzo al mq della zona
+     * @return valutazione stimata non persistita
+     */
     public Valutazione stimaAutomatica(Integer idImmobile, BigDecimal prezzoMqZona) {
         if (prezzoMqZona == null || prezzoMqZona.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prezzo mq zona non valido");
@@ -216,6 +254,12 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Calcola la valutazione automatica utilizzando i valori OMI della zona.
+     * Recupera l'immobile e le sue caratteristiche, poi applica la stima.
+     * @param idImmobile id immobile
+     * @return valutazione stimata non persistita
+     */
     public Valutazione stimaAutomaticaDaOMI(Integer idImmobile) {
         Immobile immobile = getById(idImmobile);
         String statoPreferito = immobile.getStato_immobile() == StatoImmobile.NUOVO ? "OTTIMO" : "NORMALE";
@@ -265,6 +309,14 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prezzo OMI non disponibile");
     }
 
+    /**
+     * Calcola la valutazione applicando moltiplicatori e add-on alle superfici.
+     * Tiene conto di tipologia, stato, piano e caratteristiche accessorie.
+     * @param immobile immobile oggetto della stima
+     * @param c caratteristiche aggiuntive (può essere null)
+     * @param prezzoMqZona prezzo al mq della zona
+     * @return valutazione calcolata non persistita
+     */
     private Valutazione calcolaValutazione(Immobile immobile, CaratteristicheImmobile c, BigDecimal prezzoMqZona) {
         BigDecimal base = immobile.getMetri_quadri().multiply(prezzoMqZona);
         BigDecimal multiplier = BigDecimal.ONE;
@@ -379,6 +431,11 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Calcola la valutazione automatica partendo da un indirizzo e dai metadati.
+     * Arricchisce il quartiere tramite Nominatim e normalizza alcune informazioni.
+     * @return valutazione stimata non persistita
+     */
     public Valutazione stimaAutomaticaDaIndirizzo(String provincia, String citta, String indirizzo, String civico, BigDecimal metriQuadri, Tipologia tipologia, CategoriaAbitazione categoria, StatoImmobile statoImmobile, String piano, Integer bagni, CaratteristicheImmobile caratteristiche) {
         Immobile temp = new Immobile();
         temp.setProvincia(provincia);
@@ -431,6 +488,14 @@ public class ServiceImmobileImpl implements ServiceImmobile {
     }
 
     @Override
+    /**
+     * Crea e persiste una valutazione manuale partendo dalla stima automatica.
+     * Se fornito, associa il valutatore.
+     * @param idImmobile id immobile
+     * @param idValutatore id valutatore (opzionale)
+     * @param prezzoMqZona prezzo al mq della zona
+     * @return valutazione salvata
+     */
     public Valutazione creaValutazioneManuale(Integer idImmobile, Integer idValutatore, BigDecimal prezzoMqZona) {
         Valutazione v = stimaAutomatica(idImmobile, prezzoMqZona);
         v.setMetodo(MetodoValutazione.MANUALE);
@@ -442,6 +507,10 @@ public class ServiceImmobileImpl implements ServiceImmobile {
         return repoValutazioni.save(v);
     }
 
+    /**
+     * Estrae il numero di piano da una stringa libera (es. "3", "P.T.").
+     * Ritorna -1 in caso di valore non parsabile.
+     */
     private int parseFloor(String s) {
         try {
             String digits = s.replaceAll("[^0-9]", "");

@@ -3,11 +3,11 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 // Import immagini
-import finestraImg from "./img/finestra.png";
-import lettoImg from "./img/letto.png";
-import edificioImg from "./img/edificio.png";
-import chiaviImg from "./img/chiavi.jpg";
-import lauraImg from "./img/laura.png";
+import finestraImg from "@assets/images/home/finestra.png";
+import lettoImg from "@assets/images/home/letto.png";
+import edificioImg from "@assets/images/home/edificio.png";
+import chiaviImg from "@assets/images/home/chiavi.jpg";
+import lauraImg from "@assets/images/home/laura.png";
 
 const Home = () => {
   // Ref per la griglia dei testimonial

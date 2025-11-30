@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logoBlack from "../../assets/images/LogoBlack.png";
+import logoBlack from "../../assets/images/global/LogoBlack.png";
 
 function Header() {
   return (

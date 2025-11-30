@@ -6,16 +6,18 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
 
-  // Alias per import come "@/components/Button"
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // permette import tipo "@/api/api"
+      '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@api': path.resolve(__dirname, './src/api'),
     },
   },
 
+
   // Live reload + proxy API verso backend
   server: {
-    host: true,      
+    host: true,
     port: 5173,
     proxy: {
       '/api': {

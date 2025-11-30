@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import { registerUser } from "../../api/registerApi.js";
 import "./registrati.css";
-
 
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    telefono: "",
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, email, password, confirmPassword } = formData;
+    const { name, email, telefono, password, confirmPassword } = formData;
 
-    if (!name || !email || !password || !confirmPassword) {
+    // VALIDAZIONE
+    if (!name || !email || !telefono || !password || !confirmPassword) {
       setError("Tutti i campi sono obbligatori.");
       return;
     }
@@ -31,8 +36,32 @@ const Register = () => {
       return;
     }
 
-    console.log("Registrazione effettuata con:", formData);
-    setError("");
+    // Divisione nome e cognome
+    const [nome, ...cognomeArr] = name.trim().split(" ");
+    const cognome = cognomeArr.join(" ") || "";
+
+    const payload = {
+      nome,
+      cognome,
+      email,
+      telefono,
+      password,
+    };
+
+    try {
+      const response = await registerUser(payload);
+
+      console.log("Registrazione OK:", response);
+
+      setError("");
+      setSuccess("Registrazione completata! Verrai reindirizzato…");
+
+      // Redirect dopo un secondo
+      setTimeout(() => navigate("/login"), 1500);
+    } catch (err) {
+      console.error("Errore registrazione:", err);
+      setError("Registrazione fallita. Email già registrata o dati non validi.");
+    }
   };
 
   return (
@@ -42,12 +71,13 @@ const Register = () => {
         <p className="register-subtitle">Crea il tuo account</p>
 
         <form className="register-form" onSubmit={handleSubmit}>
+          
           <div className="form-group">
             <label>Nome e Cognome</label>
             <input
               type="text"
               name="name"
-              placeholder="Inserisci il tuo nome completo"
+              placeholder="Mario Rossi"
               value={formData.name}
               onChange={handleChange}
             />
@@ -60,6 +90,17 @@ const Register = () => {
               name="email"
               placeholder="Inserisci la tua email"
               value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Telefono</label>
+            <input
+              type="tel"
+              name="telefono"
+              placeholder="+39 333 1234567"
+              value={formData.telefono}
               onChange={handleChange}
             />
           </div>
@@ -87,6 +128,7 @@ const Register = () => {
           </div>
 
           {error && <p className="register-error">{error}</p>}
+          {success && <p className="register-success">{success}</p>}
 
           <button type="submit" className="register-button">
             Registrati

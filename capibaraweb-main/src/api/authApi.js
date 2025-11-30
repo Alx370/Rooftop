@@ -1,13 +1,21 @@
-import { apiGet, apiPost } from "./apiClient";
+// src/api/authApi.js
+import { apiPost } from "./apiClient.js";
 
-export function login(email, password) {
-  return apiPost("/auth/login", { email, password });
+// LOGIN
+export async function login(credentials) {
+  return await apiPost("/auth/login", credentials);
 }
 
-export function logout() {
-  localStorage.removeItem("token");
+// Imposta il token per future richieste (opzionale)
+export function setAuthToken(token) {
+  if (token) {
+    localStorage.setItem("token", token);
+  } else {
+    localStorage.removeItem("token");
+  }
 }
 
-export function getMe() {
-  return apiGet("/auth/me", true);
+// Info utente loggato
+export async function getMe() {
+  return await apiPost("/auth/me", null, true);
 }

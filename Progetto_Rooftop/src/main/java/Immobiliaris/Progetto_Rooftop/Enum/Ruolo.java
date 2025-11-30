@@ -1,4 +1,6 @@
-package Immobiliaris.Progetto_Rooftop.Model;
+package Immobiliaris.Progetto_Rooftop.Enum;
+
+import Immobiliaris.Progetto_Rooftop.Model.Utente;
 
 /**
  * Ruoli utente disponibili nel sistema.
@@ -11,5 +13,7 @@ public enum Ruolo {
     /** Agente immobiliare operativo. */
     AGENTE,
     /** Utente dedicato alle valutazioni degli immobili. */
-    VALUTATORE
+    VALUTATORE,
+    /** Proprietario di immobili che utilizza il sistema per gestirli. */
+    PROPRIETARIO
 }

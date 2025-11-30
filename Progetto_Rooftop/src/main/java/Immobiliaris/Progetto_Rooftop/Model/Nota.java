@@ -2,6 +2,8 @@ package Immobiliaris.Progetto_Rooftop.Model;
 
 import java.time.LocalDateTime;
 
+import Immobiliaris.Progetto_Rooftop.Enum.TipoNota;
+import Immobiliaris.Progetto_Rooftop.Enum.VisibilitaNota;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

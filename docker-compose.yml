@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.40
+    container_name: rooftop_mysql_prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rooftop_immobiliare
+      MYSQL_USER: rooftop
+      MYSQL_PASSWORD: back3nd
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./Progetto_Rooftop
+      dockerfile: Dockerfile
+    container_name: rooftop_backend_prod
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/rooftop_immobiliare?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: rooftop
+      SPRING_DATASOURCE_PASSWORD: back3nd
+      MAIL_USERNAME: immobiliaris.noreply@gmail.com
+      MAIL_PASSWORD: ztkpilxvwtlowmoh
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: false
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./capibaraweb-main
+      dockerfile: Dockerfile
+    container_name: rooftop_frontend_prod
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

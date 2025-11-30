@@ -1,4 +1,4 @@
-package Immobiliaris.Progetto_Rooftop.Model;
+package Immobiliaris.Progetto_Rooftop.Enum;
 
 /**
  * Enum representing available categories for FAQs.

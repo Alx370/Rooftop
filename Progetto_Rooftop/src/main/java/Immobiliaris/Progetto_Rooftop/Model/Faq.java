@@ -1,5 +1,6 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
+import Immobiliaris.Progetto_Rooftop.Enum.CategoriaFaq;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,7 +1,7 @@
 package Immobiliaris.Progetto_Rooftop.Controller;
 
-import Immobiliaris.Progetto_Rooftop.Model.Ruolo;
-import Immobiliaris.Progetto_Rooftop.Model.Stato;
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +111,22 @@ public class ControllerUtente {
     public ResponseEntity<Utente> createUtente(@RequestBody Utente utente) {
         Utente nuovoUtente = serviceUtente.create(utente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoUtente);
+    }
+
+    /**
+     * POST /api/utenti/registrati
+     * Public endpoint to register a new property owner
+     * This endpoint is accessible without authentication and forces the role to PROPRIETARIO
+     */
+    @PostMapping("/registrati")
+    public ResponseEntity<Utente> registraProprietario(@RequestBody Utente utente) {
+        // Force the role to PROPRIETARIO regardless of what is sent in the request
+        utente.setRuolo(Ruolo.PROPRIETARIO);
+        // Force the status to ATTIVO
+        utente.setStato(Stato.ATTIVO);
+        
+        Utente nuovoProprietario = serviceUtente.create(utente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovoProprietario);
     }
 
     /**

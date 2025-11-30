@@ -1,21 +1,18 @@
-// src/api/authApi.js
-import { apiPost } from "./apiClient.js";
+
+import { apiPost, apiGet } from "./apiClient.js";
 
 // LOGIN
 export async function login(credentials) {
   return await apiPost("/auth/login", credentials);
 }
 
-// Imposta il token per future richieste (opzionale)
+// SALVA TOKEN IN LOCALSTORAGE
 export function setAuthToken(token) {
-  if (token) {
-    localStorage.setItem("token", token);
-  } else {
-    localStorage.removeItem("token");
-  }
+  if (token) localStorage.setItem("token", token);
+  else localStorage.removeItem("token");
 }
 
-// Info utente loggato
+// INFO UTENTE AUTENTICATO
 export async function getMe() {
-  return await apiPost("/auth/me", null, true);
+  return await apiGet("/auth/me", true);
 }

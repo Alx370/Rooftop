@@ -8,7 +8,6 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    telefono: "",
     password: "",
     confirmPassword: "",
   });
@@ -24,39 +23,31 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, email, telefono, password, confirmPassword } = formData;
+    const { name, email, password, confirmPassword } = formData;
 
     // VALIDAZIONE
-    if (!name || !email || !telefono || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
       setError("Tutti i campi sono obbligatori.");
       return;
     }
+
     if (password !== confirmPassword) {
       setError("Le password non coincidono.");
       return;
     }
 
-    // Divisione nome e cognome
-    const [nome, ...cognomeArr] = name.trim().split(" ");
-    const cognome = cognomeArr.join(" ") || "";
+    // Dividere in nome e cognome
+    const [nome, ...cognomeArray] = name.trim().split(" ");
+    const cognome = cognomeArray.join(" ") || "";
 
-    const payload = {
-      nome,
-      cognome,
-      email,
-      telefono,
-      password,
-    };
+    const payload = { nome, cognome, email, password };
 
     try {
-      const response = await registerUser(payload);
-
-      console.log("Registrazione OK:", response);
+      await registerUser(payload);
 
       setError("");
-      setSuccess("Registrazione completata! Verrai reindirizzato…");
+      setSuccess("Registrazione completata! Reindirizzamento…");
 
-      // Redirect dopo un secondo
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
       console.error("Errore registrazione:", err);
@@ -95,17 +86,6 @@ const Register = () => {
           </div>
 
           <div className="form-group">
-            <label>Telefono</label>
-            <input
-              type="tel"
-              name="telefono"
-              placeholder="+39 333 1234567"
-              value={formData.telefono}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
             <label>Password</label>
             <input
               type="password"
@@ -137,6 +117,7 @@ const Register = () => {
           <p className="register-login">
             Hai già un account? <Link to="/login">Accedi</Link>
           </p>
+
         </form>
       </div>
     </section>

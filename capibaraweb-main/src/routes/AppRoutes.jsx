@@ -18,9 +18,9 @@ const AppRoutes = () => {
   return (
     <div className="container">
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <main >
-          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/registrati" element={<Registrati />} />

@@ -46,8 +46,8 @@ public class ServiceRichiestaContatto {
         
         RichiestaContatto saved = richiestaRepository.save(richiesta);
 
-        // 2. Send notification email to the agent
-        emailService.inviaNotificaRichiestaContatto(emailAgente, nome, cognome, email, telefono, messaggio);
+        // 2. Send notification email to the agent (include the generated request ID)
+        emailService.inviaNotificaRichiestaContatto(emailAgente, saved.getIdRichiesta(), nome, cognome, email, telefono, messaggio);
 
         return saved;
     }

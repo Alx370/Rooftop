@@ -12,7 +12,12 @@ import NotFound from "../pages/NotFound/notfound.jsx";
 import Agente from "../pages/Agente/agente.jsx";
 import FaqList from "../pages/FaqList/FaqList.jsx";
 import FormBuy from "../components/Forms/FormBuy/formbuy.jsx";
+
+import FormRent from "../components/Forms/FormRent/formrent.jsx";
+import LoginAdmin from "../components/LoginAdmin/loginadmin.jsx";
+
 import ScrollToTop from "../components/Scroll/ScrollToTop.jsx";
+
 
 const AppRoutes = () => {
   return (
@@ -31,7 +36,9 @@ const AppRoutes = () => {
             <Route path="/agente" element={<Agente />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/formbuy/*" element={<FormBuy />} />
+             <Route path="/formrent/*" element={<FormRent />} />
             <Route path="/test-faq" element={<FaqList />} />
+            <Route path="/login-admin" element={<LoginAdmin />} />
           </Routes>
         </main>
         <Footer />

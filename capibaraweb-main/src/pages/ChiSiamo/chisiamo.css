@@ -558,6 +558,7 @@
   flex: 1;
   font-size: 20px;
   font-family: Montserrat, sans-serif;
+  margin-left:5rem;
 }
 
 .title-storia {
@@ -571,6 +572,7 @@
   flex: 1;
   display: flex;
   margin-bottom: 150px;
+  margin-left:6rem;
 }
 
 .map-box-storia img {
@@ -668,15 +670,20 @@
   /* Storia Section */
   .storia-container {
     flex-direction: column;
-    padding: 0px 30px 0px 30px;
+    padding: 0px 20px 0px 0px !important;
+    margin-right:1rem;
+    margin-left:-2rem;
+ 
   }
 
   .map-box-storia {
-    margin-bottom: 50px;
+    margin-bottom: 3rem ;
+    margin-left:4.5rem;
   }
 
   .title-storia {
-    text-align: center;
+    text-align: start ;
+   
   }
 
   /* Dati Section */

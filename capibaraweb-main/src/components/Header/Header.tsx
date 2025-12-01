@@ -1,44 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
-import logoBlack from "../../assets/images/global/LogoBlack.png";
-
-import { getMe } from "../../api/authApi.js";
 
 function Header() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  // Controllo se utente è loggato
-  useEffect(() => {
-    const checkUser = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      try {
-        const me = await getMe();
-        setUser(me);
-      } catch (err) {
-        console.warn("Token non valido. Logout.");
-        localStorage.removeItem("token");
-      }
-    };
-
-    checkUser();
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/");
-  };
-
-  // Gestione ruolo → redirect pagina corretta
-  const goDashboard = () => {
-    const ruolo = user?.authorities?.[0];
-    if (ruolo === "ROLE_AGENTE") navigate("/agente");
-    else navigate("/utente");
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="header">
@@ -47,38 +12,44 @@ function Header() {
         {/* LOGO */}
         <div className="logo">
           <Link to="/">
-            <img src={logoBlack} alt="Capibara Web Logo" className="logo-image" />
+            <img
+              src="/src/assets/images/LogoBlack.png"
+              alt="Capibara Web Logo"
+              className="logo-image"
+            />
           </Link>
         </div>
 
-        {/* NAVIGATION LINKS */}
+        {/* HAMBURGER MENU */}
+        <div
+          className="hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <div className={menuOpen ? "bar bar1 active" : "bar bar1"}></div>
+          <div className={menuOpen ? "bar bar2 active" : "bar bar2"}></div>
+          <div className={menuOpen ? "bar bar3 active" : "bar bar3"}></div>
+        </div>
+
+        {/* DESKTOP NAV */}
         <nav className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/chi-siamo">Chi Siamo</Link>
-          <Link to="/valutazione">Valuta</Link>
+          <Link to="/valutazione">Valutazione</Link>
           <Link to="/faq">FAQ</Link>
-
-          {/* SE NON LOGGATO */}
-          {!user && (
-            <Link to="/login" className="login-link">
-              Login
-            </Link>
-          )}
-
-          {/* SE LOGGATO */}
-          {user && (
-            <>
-              <button className="dashboard-btn" onClick={goDashboard}>
-                Dashboard
-              </button>
-
-              <button className="logout-btn" onClick={handleLogout}>
-                Logout
-              </button>
-            </>
-          )}
+          <Link to="/login" className="login-link">Login</Link>
         </nav>
       </div>
+
+      {/* MOBILE NAV */}
+      {menuOpen && (
+        <nav className="mobile-menu">
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/chi-siamo" onClick={() => setMenuOpen(false)}>Chi Siamo</Link>
+          <Link to="/valutazione" onClick={() => setMenuOpen(false)}>Valutazione</Link>
+          <Link to="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
+          <Link to="/login" className="login-link" onClick={() => setMenuOpen(false)}>Login</Link>
+        </nav>
+      )}
     </header>
   );
 }

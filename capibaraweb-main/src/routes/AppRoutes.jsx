@@ -13,6 +13,7 @@ import Agente from "../pages/Agente/agente.jsx";
 import FaqList from "../pages/FaqList/FaqList.jsx";
 import FormBuy from "../components/Forms/FormBuy/formbuy.jsx";
 import ScrollToTop from "../components/Scroll/ScrollToTop.jsx";
+import Utente from "../pages/Utente/utente.jsx";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/agente" element={<Agente />} />
+            <Route path="/utente" element={<Utente />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/formbuy/*" element={<FormBuy />} />
             <Route path="/test-faq" element={<FaqList />} />

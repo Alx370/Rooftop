@@ -1,0 +1,457 @@
+.utente {
+  padding: 40px 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+/* BENVENUTO */
+.benvenuto-section-utente {
+  margin-bottom: 40px;
+}
+
+.benvenuto-section-utente h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1b1b1b;
+}
+
+.benvenuto-section-utente p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* AGENTE SECTION */
+.agente-section-utente {
+  margin-bottom: 50px;
+}
+
+.agente-card-utente {
+  background: linear-gradient(135deg, #e8d4ff 0%, #d4c4ff 100%);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr 160px;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.agente-foto-utente {
+  width: 200px;
+  height: auto;
+  min-height: 250px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.agente-nome-utente {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 5px 0;
+  color: #1b1b1b;
+  text-align: left;
+  font-family: Montserrat, sans-serif;
+}
+
+.agente-descr-utente {
+  font-size: 1.2rem;
+  font-family: Montserrat, sans-serif;
+  margin-top: auto;
+  margin-bottom: 6px;
+}
+
+.agente-exp-utente {
+    margin-top: 2px;
+}
+
+.agente-info-utente {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.agente-buttons-utente {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px 30px 30px 0;
+  justify-content: center;
+}
+
+.btn-secondary-utente {
+  background-color: white;
+  color: #1b1b1b;
+  border: 2px solid #1b1b1b;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-secondary-utente:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-primary-utente {
+  background-color: #ff7a00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-primary-utente:hover {
+  background-color: #e56900;
+}
+
+/* PERCORSO SECTION */
+.percorso-section-utente {
+  background-color: #048A81;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.percorso-section-utente h2 {
+  color: white;
+  text-align: left;
+  font-family: Montserrat, sans-serif;
+}
+
+.timeline-utente {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  clear: both;
+  overflow: visible;
+}
+
+  /* display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  position: relative;
+} */
+
+.timeline-dot-utente {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-dot-utente.completed {
+  background-color: #ff7a00;
+  color: white;
+}
+
+.timeline-line-utente {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+
+.agente-buttons-utente {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+  text-align: center;
+  font-weight: 500;
+}
+
+/* PANORAMICA SECTION */
+.panoramica-section-utente {
+  margin-bottom: 50px;
+}
+
+.panoramica-section-utente h2 {
+  margin-bottom: 30px;
+  color: #1b1b1b;
+}
+
+.stats-grid-utente {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-card-utente {
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+}
+
+.stat-icon-utente {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.stat-numero-utente {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #048A81;
+  margin-bottom: 10px;
+}
+
+.stat-label-utente {
+  font-size: 1rem;
+  color: #1b1b1b;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.stat-subtitle-utente {
+  font-size: 0.9rem;
+  color: #048A81;
+}
+
+/* VISITE SECTION */
+.visite-section-utente {
+  margin-bottom: 50px;
+}
+
+.visite-section-utente h2 {
+  margin-bottom: 30px;
+  color: #1b1b1b;
+}
+
+.visite-container-utente {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.visite-list-utente {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.visita-item-utente {
+  background-color: white;
+  border-left: 4px solid #ff7a00;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.visita-item-utente.pending {
+  background-color: #f9f9f9;
+  border-left-color: #048A81;
+}
+
+.visita-left-utente {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 80px;
+}
+
+.visita-data-utente {
+  font-size: 0.9rem;
+  color: #048A81;
+  font-weight: 600;
+}
+
+.visita-ora-utente {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.visita-details-utente {
+  flex: 1;
+}
+
+.visita-tipo-utente {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1b1b1b;
+  margin-bottom: 5px;
+}
+
+.visita-indirizzo-utente {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.calendario-orari-utente {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.calendario-header-utente {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1b1b1b;
+  margin-bottom: 15px;
+}
+
+.calendario-grid-utente {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.calendario-day-header-utente {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.calendario-day-utente {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.calendario-day-utente:hover {
+  background-color: #f5f5f5;
+}
+
+.calendario-day-utente.highlighted {
+  background-color: #ff7a00;
+  color: white;
+  border-color: #ff7a00;
+}
+
+.orari-container-utente {
+  margin-bottom: 20px;
+}
+
+.orari-title-utente {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1b1b1b;
+  margin-bottom: 10px;
+}
+
+.orari-grid-utente {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.orario-slot-utente {
+  background-color: #f5f5f5;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.orario-slot-utente:hover {
+  background-color: #eee;
+}
+
+.orario-slot-utente.selected {
+  background-color: #048A81;
+  color: white;
+}
+
+.btn-full-utente {
+  width: 100%;
+}
+
+/* ATTIVITÀ SECTION */
+.attivita-section-utente {
+  margin-bottom: 50px;
+}
+
+.attivita-section-utente h2 {
+  margin-bottom: 30px;
+  color: #1b1b1b;
+}
+
+.attivita-list-utente {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.attivita-item-utente {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.attivita-icon-utente {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.attivita-content-utente {
+  flex: 1;
+}
+
+.attivita-data-utente {
+  font-size: 0.85rem;
+  color: #048A81;
+  margin-bottom: 5px;
+}
+
+.attivita-titolo-utente {
+  font-size: 1rem;
+  color: #1b1b1b;
+  font-weight: 500;
+}
+
+.btn-link-utente {
+  background: none;
+  border: none;
+  color: #048A81;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 0.95rem;
+}
+
+.btn-link-utente:hover {
+  color: #036d67;
+}

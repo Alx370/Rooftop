@@ -52,4 +52,14 @@ public interface ServiceFaq {
      * @param id identifier of the FAQ to delete
      */
     void delete(Integer id);
+
+    /**
+     * Creates a new FAQ from a contact request (RichiestaContatto).
+     * This method is used by admins to quickly transform a contact request into an FAQ.
+     * @param richiestaId identifier of the RichiestaContatto to convert
+     * @param risposta the answer to the question (provided by admin)
+     * @param categoria the FAQ category (provided by admin)
+     * @return the created FAQ entity
+     */
+    Faq createFromRequest(Integer richiestaId, String risposta, CategoriaFaq categoria);
 }

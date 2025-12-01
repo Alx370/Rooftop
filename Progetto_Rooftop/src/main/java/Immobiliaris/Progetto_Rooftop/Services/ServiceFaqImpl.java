@@ -2,6 +2,8 @@ package Immobiliaris.Progetto_Rooftop.Services;
 
 import Immobiliaris.Progetto_Rooftop.Enum.CategoriaFaq;
 import Immobiliaris.Progetto_Rooftop.Model.Faq;
+import Immobiliaris.Progetto_Rooftop.Mail.RichiestaContatto;
+import Immobiliaris.Progetto_Rooftop.Mail.RepoRichiestaContatto;
 import Immobiliaris.Progetto_Rooftop.Repos.RepoFaq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,12 @@ public class ServiceFaqImpl implements ServiceFaq {
      */
     @Autowired
     private RepoFaq faqRepo;
+
+    /**
+     * Repository backing the RichiestaContatto operations.
+     */
+    @Autowired
+    private RepoRichiestaContatto richiestaRepo;
 
     /**
      * Constructor for dependency injection.
@@ -159,5 +167,48 @@ public class ServiceFaqImpl implements ServiceFaq {
      */
     public void setFaqRepo(RepoFaq faqRepo) {
         this.faqRepo = faqRepo;
+    }
+
+    /**
+     * Creates a new FAQ from a contact request (RichiestaContatto).
+     * This method is used by admins to quickly transform a contact request into an FAQ.
+     * The question is taken from the request's message, and the answer is provided by the admin.
+     * @param richiestaId identifier of the RichiestaContatto to convert
+     * @param risposta the answer to the question (provided by admin)
+     * @param categoria the FAQ category (provided by admin)
+     * @return the created FAQ entity
+     */
+    @Override
+    public Faq createFromRequest(Integer richiestaId, String risposta, CategoriaFaq categoria) {
+        // Validate categoria
+        if (categoria == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria è richiesta");
+        }
+
+        // Validate risposta (answer)
+        if (risposta == null || risposta.trim().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Risposta è richiesta");
+        }
+
+        // Retrieve the contact request
+        RichiestaContatto richiesta = richiestaRepo.findById(richiestaId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Richiesta non trovata"));
+
+        // Create the FAQ from the request
+        Faq faq = new Faq();
+        faq.setCategoria(categoria);
+        faq.setDomanda(richiesta.getMessaggio().trim());
+        faq.setRisposta(risposta.trim());
+        faq.setOrdine(0); // Default order, can be adjusted later
+
+        // Save the FAQ
+        Faq created = faqRepo.save(faq);
+
+        // Mark the request as saved-as-FAQ and completed
+        richiesta.setSalvataComeFaq(true);
+        richiesta.setStato(RichiestaContatto.StatoRichiesta.COMPLETATA);
+        richiestaRepo.save(richiesta);
+
+        return created;
     }
 }

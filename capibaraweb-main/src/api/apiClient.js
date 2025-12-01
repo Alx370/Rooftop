@@ -1,6 +1,11 @@
 const BASE_URL = "http://localhost:8080/api";
 
-// GET
+/**
+ * Esegue una richiesta GET
+ * @param {string} endpoint - "/immobili", "/auth/me", ecc.
+ * @param {boolean} authenticated - se true aggiunge Authorization Bearer
+ */
+
 export async function apiGet(endpoint, authenticated = false) {
   const headers = {};
 
@@ -10,11 +15,18 @@ export async function apiGet(endpoint, authenticated = false) {
   }
 
   const res = await fetch(`${BASE_URL}${endpoint}`, { headers });
-  if (!res.ok) throw new Error(`GET ${endpoint} -> ${res.status}`);
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`GET ${endpoint} -> ${res.status}: ${text}`);
+  }
+
   return res.json();
 }
 
-// POST
+/**
+ * Esegue una richiesta POST
+ */
 export async function apiPost(endpoint, body, authenticated = false) {
   const headers = { "Content-Type": "application/json" };
 
@@ -29,17 +41,23 @@ export async function apiPost(endpoint, body, authenticated = false) {
     body: JSON.stringify(body),
   });
 
-  if (!res.ok) throw new Error(`POST ${endpoint} -> ${res.status}`);
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`POST ${endpoint} -> ${res.status}: ${text}`);
+  }
+
   return res.json();
 }
 
-// PUT
+/**
+ * Esegue una richiesta PUT
+ */
 export async function apiPut(endpoint, body, authenticated = false) {
   const headers = { "Content-Type": "application/json" };
 
   if (authenticated) {
     const token = localStorage.getItem("token");
-    headers["Authorization"] = `Bearer ${token}`;
+    if (token) headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${BASE_URL}${endpoint}`, {
@@ -48,11 +66,17 @@ export async function apiPut(endpoint, body, authenticated = false) {
     body: JSON.stringify(body),
   });
 
-  if (!res.ok) throw new Error(`PUT ${endpoint} -> ${res.status}`);
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`PUT ${endpoint} -> ${res.status}: ${text}`);
+  }
+
   return res.json();
 }
 
-// DELETE
+/**
+ * Esegue una DELETE
+ */
 export async function apiDelete(endpoint, authenticated = false) {
   const headers = {};
 
@@ -66,6 +90,10 @@ export async function apiDelete(endpoint, authenticated = false) {
     headers,
   });
 
-  if (!res.ok) throw new Error(`DELETE ${endpoint} -> ${res.status}`);
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`DELETE ${endpoint} -> ${res.status}: ${text}`);
+  }
+
   return true;
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, setAuthToken } from "../../services/api"; 
+import { login, setAuthToken, getMe } from "../../api/authApi.js";
 import "./login.css";
 
 const Login = () => {
@@ -9,35 +10,37 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // per il redirect dopo login
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validazione semplice
     if (!email || !password) {
-      setError("Compila tutti i campi per procedere.");
+      setError("Compila tutti i campi.");
       return;
     }
 
     try {
-      // Chiamata al backend: passiamo un oggetto { email, password }
+      // 1️⃣ LOGIN → ottieni token
       const data = await login({ email, password });
-      console.log("Token ricevuto dal backend:", data.token);
-
-      // Salvataggio token in localStorage
-      localStorage.setItem("token", data.token);
-
-      // Imposta l'Authorization header per le chiamate future
       setAuthToken(data.token);
+
+      // 2️⃣ PRENDI INFO UTENTE / RUOLO
+      const me = await getMe();
+      const ruolo = me.authorities?.[0]; // esempio: "ROLE_AGENTE"
+
+      console.log("Ruolo utente:", ruolo);
+
+      // 3️⃣ REDIRECT in base al ruolo
+      if (ruolo === "ROLE_AGENTE") navigate("/agente");
+      else if (ruolo === "ROLE_CLIENTE") navigate("/utente");
+      else navigate("/dashboard"); // fallback
 
       setError("");
 
-      // Redirect alla dashboard o pagina protetta
-      navigate("/dashboard"); // modifica con la tua route
     } catch (err) {
-      setError(err.message || "Credenziali non valide");
-      console.error(err);
+      console.error("Errore login:", err);
+      setError("Credenziali non valide o server non raggiungibile.");
     }
   };
 
@@ -45,55 +48,43 @@ const Login = () => {
     <section className="login-section">
       <div className="login-card">
         <h2 className="login-title">Accedi ora</h2>
-        <p className="login-subtitle">Bentornato a casa!</p>
+        <p className="login-subtitle">Bentornato!</p>
 
         <button className="google-btn">
           <img src={googleIcon} alt="Google" className="google-icon" />
           Accedi con Google
         </button>
 
-        <div className="divider">
-          <span>o accedi con l'email</span>
-        </div>
+        <div className="divider"><span>oppure</span></div>
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
-            <input
-              type="email"
-              placeholder="Inserisci la tua email"
-              value={email}
+            <input type="email" value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Inserisci email"
             />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              placeholder="Inserisci la tua password"
-              value={password}
+            <input type="password" value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Inserisci password"
             />
           </div>
 
           {error && <p className="login-error">{error}</p>}
 
           <div className="options">
-            <label className="remember">
-              <input type="checkbox" /> Ricordami
-            </label>
-            <a href="#" className="forgot-password">
-              Password dimenticata?
-            </a>
+            <label className="remember"><input type="checkbox" /> Ricordami</label>
+            <a className="forgot-password" href="#">Dimenticata?</a>
           </div>
 
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <button type="submit" className="login-button">Login</button>
 
-          <p className="login-register">
-            Non hai un account? <Link to="/registrati">Registrati</Link>
+          <p className="login-register">Non hai un account?
+            <Link to="/registrati"> Registrati</Link>
           </p>
         </form>
       </div>

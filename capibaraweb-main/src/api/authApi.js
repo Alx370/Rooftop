@@ -1,13 +1,18 @@
-import { apiGet, apiPost } from "./apiClient";
 
-export function login(email, password) {
-  return apiPost("/auth/login", { email, password });
+import { apiPost, apiGet } from "./apiClient.js";
+
+// LOGIN
+export async function login(credentials) {
+  return await apiPost("/auth/login", credentials);
 }
 
-export function logout() {
-  localStorage.removeItem("token");
+// SALVA TOKEN IN LOCALSTORAGE
+export function setAuthToken(token) {
+  if (token) localStorage.setItem("token", token);
+  else localStorage.removeItem("token");
 }
 
-export function getMe() {
-  return apiGet("/auth/me", true);
+// INFO UTENTE AUTENTICATO
+export async function getMe() {
+  return await apiGet("/auth/me", true);
 }

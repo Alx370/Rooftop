@@ -43,14 +43,7 @@ a:hover {
 
 
 body {
-  background: 
-    radial-gradient(circle at 100px 600px,
-      rgba(182, 189, 247, 0.65) 0%,
-      transparent 15%),
-    radial-gradient(circle at 1800px 200px,
-      rgba(182, 189, 247, 0.75) 0%,
-      transparent 8%),
-    #ffffff;
+  background: #F5FBEF;
   background-size: 2060px 1600px;
   background-repeat: repeat;
   font-family: 'Merriweather', serif;

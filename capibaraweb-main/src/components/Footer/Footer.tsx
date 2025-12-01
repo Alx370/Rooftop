@@ -6,7 +6,7 @@ import Facebook from "../../assets/icons/facebook.png";
 import Instagram from "../../assets/icons/instagram.png";
 import Linkedin from "../../assets/icons/linkedin.png";
 import Tiktok from "../../assets/icons/tiktok.png";
-import Logo from "../../assets/images/Logo.png";
+import Logo from "../../assets/images/global/Logo.png";
 
 const Footer = () => {
   const [open, setOpen] = useState(null);

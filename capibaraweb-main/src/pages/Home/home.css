@@ -58,7 +58,7 @@ h2 {
 
 .hero-bg-logo {
   width: 90%;
-  background-image: url(img/LogoImmobiliaris.png);
+  background-image: url(../../assets/home/LogoImmobiliaris.png);
   background-position: 18% center;
   bottom: -320px;
   background-size: contain;
@@ -67,7 +67,7 @@ h2 {
 
 .hero-bg-palazzo {
   width: 65%;
-  background-image: url(img/PalazzoModerno.png);
+  background-image: url(../../assets/home/PalazzoModerno.png);
   background-position: center right;
   background-size: contain;
   height: 440px;

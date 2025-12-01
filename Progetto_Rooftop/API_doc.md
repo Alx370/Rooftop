@@ -279,6 +279,27 @@ GET /api/note/immobili/8?visibilita=PRIVATA
 
 ---
 
+## Contact Requests (Richieste di Contatto)
+**Base URL**: `/api/contatto`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/contatto` | Invia una nuova richiesta di contatto (form pubblico) | Pubblico | Body: `{ nome, cognome, email, telefono, messaggio }` |
+| GET | `/api/contatto` | Recupera tutte le richieste | AMMINISTRATORE | - |
+| GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato (`NUOVA`, `IN_LAVORAZIONE`, `COMPLETATA`) | AMMINISTRATORE | Path: `stato` |
+| PUT | `/api/contatto/{id}/in-lavorazione` | Marca la richiesta come in lavorazione | AMMINISTRATORE | Path: `id` |
+| PUT | `/api/contatto/{id}/faq` | Salva la richiesta come FAQ (crea una FAQ con la domanda = messaggio) | AMMINISTRATORE | Path: `id` |
+| DELETE | `/api/contatto/{id}` | Elimina una richiesta | AMMINISTRATORE | Path: `id` |
+
+### Esempio: salvare come FAQ (curl)
+```bash
+curl -X PUT http://localhost:8080/api/contatto/123/faq \\
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+Quando un utente invia una richiesta con `POST /api/contatto`, il sistema invia una email di notifica all'indirizzo configurato (`app.email.agente`). Nell'email viene riportato l'ID della richiesta e un esempio `curl` per eseguire rapidamente l'azione di salvataggio come FAQ.
+
+
 ## Note Tecniche
 
 ### Formati Date/Timestamp

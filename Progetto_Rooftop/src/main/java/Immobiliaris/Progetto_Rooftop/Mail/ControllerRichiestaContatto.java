@@ -2,6 +2,7 @@ package Immobiliaris.Progetto_Rooftop.Mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,7 @@ public class ControllerRichiestaContatto {
      * URL: /api/contatto
      */
     @GetMapping
+    @PreAuthorize("hasRole('AMMINISTRATORE', 'AGENTE')")
     public ResponseEntity<List<RichiestaContatto>> getTutteLeRichieste() {
         return ResponseEntity.ok(serviceRichiestaContatto.getTutteLeRichieste());
     }
@@ -74,6 +76,7 @@ public class ControllerRichiestaContatto {
      * URL: /api/contatto/stato/NUOVA  (or LETTA, COMPLETATA)
      */
     @GetMapping("/stato/{stato}")
+    @PreAuthorize("hasRole('AMMINISTRATORE', 'AGENTE')")
     public ResponseEntity<List<RichiestaContatto>> getRichiestePerStato(
             @PathVariable RichiestaContatto.StatoRichiesta stato) {
         return ResponseEntity.ok(serviceRichiestaContatto.getRichiestePerStato(stato));
@@ -86,6 +89,7 @@ public class ControllerRichiestaContatto {
      * URL: /api/contatto/{id}/in-lavorazione
      */
     @PutMapping("/{id}/in-lavorazione")
+    @PreAuthorize("hasRole('AMMINISTRATORE', 'AGENTE')")
     public ResponseEntity<?> marcaComeInLavorazione(@PathVariable Integer id) {
         try {
             RichiestaContatto updated = serviceRichiestaContatto.marcaComeInLavorazione(id);
@@ -102,6 +106,7 @@ public class ControllerRichiestaContatto {
      * URL: /api/contatto/{id}/faq
      */
     @PutMapping("/{id}/faq")
+    @PreAuthorize("hasRole('AMMINISTRATORE', 'AGENTE')")
     public ResponseEntity<?> salvaComeFaq(@PathVariable Integer id) {
         try {
             RichiestaContatto updated = serviceRichiestaContatto.salvaComeFaq(id);
@@ -118,6 +123,7 @@ public class ControllerRichiestaContatto {
      * URL: /api/contatto/{id}
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('AMMINISTRATORE', 'AGENTE')")
     public ResponseEntity<?> eliminaRichiesta(@PathVariable Integer id) {
         try {
             serviceRichiestaContatto.eliminaRichiesta(id);

@@ -139,7 +139,6 @@ public class ControllerImmobile {
         if (payload.get("riscaldamento") != null) c.setRiscaldamento(Riscaldamento.valueOf(payload.get("riscaldamento")));
         if (payload.get("classe_energetica") != null) c.setClasse_energetica(ClasseEnergetica.valueOf(payload.get("classe_energetica")));
         if (payload.get("orientamento") != null) c.setOrientamento(Orientamento.valueOf(payload.get("orientamento")));
-        if (payload.get("indipendente") != null) c.setIndipendente(Boolean.valueOf(payload.get("indipendente")));
 
         if (provincia == null || citta == null || indirizzo == null || mq == null || tipologia == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "campi obbligatori mancanti");

@@ -100,8 +100,7 @@ public class CaratteristicheImmobile {
     @Column(name = "orientamento")
     private Orientamento orientamento;
 
-    @Column(name = "indipendente")
-    private Boolean indipendente;
+    
     // Property orientation (NORD, SUD, EST, OVEST) - stored as string.
 
     public Integer getId_caratteristica() {
@@ -256,11 +255,5 @@ public class CaratteristicheImmobile {
         this.orientamento = orientamento;
     }
 
-    public Boolean getIndipendente() {
-        return indipendente;
-    }
-
-    public void setIndipendente(Boolean indipendente) {
-        this.indipendente = indipendente;
-    }
+    
 }

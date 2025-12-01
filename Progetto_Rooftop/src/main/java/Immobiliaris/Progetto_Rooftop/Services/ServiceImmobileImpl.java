@@ -365,9 +365,6 @@ public class ServiceImmobileImpl implements ServiceImmobile {
             if (c.getAllarme() != null && c.getAllarme()) {
                 multiplier = multiplier.multiply(BigDecimal.valueOf(1.006));
             }
-            if (c.getIndipendente() != null && c.getIndipendente()) {
-                multiplier = multiplier.multiply(BigDecimal.valueOf(1.03));
-            }
             if (c.getRiscaldamento() != null) {
                 BigDecimal rMult = switch (c.getRiscaldamento()) {
                     case AUTONOMO -> BigDecimal.valueOf(1.02);

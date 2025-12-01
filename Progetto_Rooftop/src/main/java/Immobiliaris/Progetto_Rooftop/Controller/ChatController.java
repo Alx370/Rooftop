@@ -28,7 +28,7 @@ public class ChatController {
         return new ChatResponse(response);
     }
 
-    // Endpoint REST to stream chat messages
+    // Endpoint REST to stream chat messages. (Testing)
     @PostMapping("/api/chat/stream")
     @ResponseBody
     public SseEmitter chatStream(@RequestBody ChatRequest request) {

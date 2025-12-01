@@ -71,33 +71,45 @@ public class EmailService {
     }
 
     // CONTACT REQUEST NOTIFICATION EMAIL (to agent)
-    public void inviaNotificaRichiestaContatto(String emailAgente, String nome, String cognome, 
+    public void inviaNotificaRichiestaContatto(String emailAgente, Integer idRichiesta, String nome, String cognome,
                                                 String emailCliente, String telefono, String messaggio) {
-        String oggetto = "Nuova Richiesta di Contatto - " + nome + " " + cognome;
-        
+        String oggetto = "Nuova Richiesta di Contatto - " + nome + " " + cognome + " (ID: " + idRichiesta + ")";
+
+        String curlExample = "curl -X PUT http://localhost:8080/api/contatto/" + idRichiesta + 
+                "/faq -H \"Authorization: Bearer <TOKEN_ADMIN>\"";
+
         String html = """
             <html>
             <body style="font-family: Arial; padding: 20px;">
                 <h1 style="color: #28a745;"> Nuova Richiesta di Contatto</h1>
-                
+
                 <div style="background: #f0f0f0; padding: 15px; border-radius: 5px;">
                     <p><strong>Nome:</strong> %s %s</p>
                     <p><strong>Email:</strong> %s</p>
                     <p><strong>Telefono:</strong> %s</p>
                 </div>
-                
+
                 <h3>Messaggio:</h3>
                 <p style="background: #fff; padding: 15px; border-left: 4px solid #28a745;">%s</p>
-                
-                <p><em>Accedi al pannello per gestire questa richiesta.</em></p>
+
+                <p><em>Per salvare questa richiesta come FAQ puoi:</em></p>
+                <ol>
+                  <li>Accedere al pannello di amministrazione (se disponibile).</li>
+                  <li>Eseguire il seguente comando curl (sostituire <TOKEN_ADMIN> con il tuo token):</li>
+                </ol>
+                <pre style="background:#f8f8f8;padding:10px;border-radius:4px;">%s</pre>
+
+                <p>Oppure visita l'endpoint API `/api/contatto/%d/faq` con una richiesta HTTP PUT autenticata.</p>
                 <hr>
                 <p style="color: #666; font-size: 12px;">Sistema automatico Immobiliaris</p>
             </body>
             </html>
-            """.formatted(nome, cognome, emailCliente, 
-                         telefono != null ? telefono : "Non fornito", 
-                         messaggio);
-        
+            """.formatted(nome, cognome, emailCliente,
+                         telefono != null ? telefono : "Non fornito",
+                         messaggio,
+                         curlExample,
+                         idRichiesta);
+
         inviaEmail(emailAgente, oggetto, html);
     }
 }

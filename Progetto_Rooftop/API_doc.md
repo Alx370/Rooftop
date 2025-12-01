@@ -299,6 +299,81 @@ curl -X PUT http://localhost:8080/api/contatto/123/faq \\
 
 Quando un utente invia una richiesta con `POST /api/contatto`, il sistema invia una email di notifica all'indirizzo configurato (`app.email.agente`). Nell'email viene riportato l'ID della richiesta e un esempio `curl` per eseguire rapidamente l'azione di salvataggio come FAQ.
 
+---
+
+## Quick FAQ Creation (Click-to-Create)
+**Base URL**: `/api/faq`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/faq/from-request/{richiestaId}` | Crea una FAQ da una richiesta di contatto | AMMINISTRATORE, AGENTE | Path: `richiestaId`, Body: `{ risposta, categoria }` |
+
+### Endpoint Details
+- **URL**: `POST /api/faq/from-request/{richiestaId}`
+- **Authentication**: Bearer Token (JWT)
+- **Authorization**: AMMINISTRATORE, AGENTE
+- **Path Parameter**: `richiestaId` (Integer) - ID della richiesta di contatto
+- **Request Body**: JSON object with required fields
+- **Response**: JSON object with created FAQ details
+
+### Esempio Body (Click-to-Create FAQ)
+```json
+{
+  "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+  "categoria": "VENDITA"
+}
+```
+
+### Esempio Response (Success)
+```json
+{
+  "success": true,
+  "message": "FAQ creata con successo dalla richiesta",
+  "data": {
+    "id_faq": 42,
+    "categoria": "VENDITA",
+    "domanda": "Come posso pubblicare un annuncio?",
+    "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+    "ordine": 0
+  }
+}
+```
+
+### Esempio Response (Error - Categoria non valida)
+```json
+{
+  "error": "Categoria non valida: INVALIDA"
+}
+```
+
+### Esempio Response (Error - Risposta mancante)
+```json
+{
+  "error": "Risposta è richiesta"
+}
+```
+
+### Test via cURL per prototipizzazione
+```bash
+# 1. Get a list of contact requests to find a richiestaId
+curl -X GET http://localhost:8080/api/contatto \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+
+# 2. Create a FAQ from request with ID 5
+curl -X POST http://localhost:8080/api/faq/from-request/5 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <TOKEN_ADMIN>" \
+  -d '{
+    "risposta": "La risposta alla domanda è...",
+    "categoria": "GENERALE"
+  }'
+
+# 3. Verify the FAQ was created
+curl -X GET http://localhost:8080/api/faq \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+---
 
 ## Note Tecniche
 

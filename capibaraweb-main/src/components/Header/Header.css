@@ -136,3 +136,20 @@ html, body {
 body {
   padding-top: 70px;
 }
+
+.dashboard-btn,
+.logout-btn {
+  background: #ff6400;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.dashboard-btn:hover,
+.logout-btn:hover {
+  opacity: 0.85;
+}

@@ -17,3 +17,5 @@ export const aggiornaPassword = (id, nuovaPassword) =>
   apiPut(`/utenti/${id}/password`, { newPassword: nuovaPassword }, true);
 
 export const eliminaUtente = (id) => apiDelete(`/utenti/${id}`, true);
+
+export const getMeAgente = () => apiGet("/auth/me", true);

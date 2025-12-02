@@ -153,6 +153,7 @@ Authorization: Bearer <token>
 |--------|----------|-------------|----------------|-------------|
 | GET | `/api/immobili` | Recupera tutti gli immobili | Pubblico | - |
 | GET | `/api/immobili/{id}` | Recupera un immobile per ID | Pubblico | Path: `id` |
+| GET | `/api/immobili/{id}/contratto-esclusiva` | Genera contratto esclusiva per immobile | AMMINISTRATORE, AGENTE | Path: `id` |
 | POST | `/api/immobili` | Crea un nuovo immobile | AMMINISTRATORE, AGENTE, PROPRIETARIO | Body: `Immobile` JSON |
 | PUT | `/api/immobili/{id}` | Aggiorna un immobile esistente | AMMINISTRATORE, AGENTE, PROPRIETARIO | Path: `id`, Body: `Immobile` JSON |
 | DELETE | `/api/immobili/{id}` | Elimina un immobile | AMMINISTRATORE | Path: `id` |
@@ -190,9 +191,11 @@ APPARTAMENTO, VILLA, CASA_INDIPENDENTE, ATTICO, LOFT, MANSARDA, RUSTICO, CASALE
 OTTIMO, BUONO, DA_RISTRUTTURARE, NUOVO
 ```
 
-### Enum Stato Annuncio
-```
-VALUTAZIONE, PUBBLICATO, VENDUTO, RITIRATO, SOSPESO
+### Esempio Response Contratto Esclusiva
+```json
+{
+  "html": "<html>Contratto di incarico di vendita in esclusiva...</html>"
+}
 ```
 
 ---
@@ -279,6 +282,122 @@ GET /api/note/immobili/8?visibilita=PRIVATA
 
 ---
 
+## Contatto
+**Base URL**: `/api/contatto`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/contatto` | Crea una nuova richiesta di contatto | Pubblico | Body: `{"nome": "...", "cognome": "...", "email": "...", "telefono": "...", "messaggio": "..."}` |
+| GET | `/api/contatto` | Recupera tutte le richieste di contatto | AMMINISTRATORE, AGENTE | - |
+| GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato | AMMINISTRATORE, AGENTE | Path: `stato` |
+| PUT | `/api/contatto/{id}/in-lavorazione` | Marca richiesta come in lavorazione | AMMINISTRATORE, AGENTE | Path: `id` |
+| PUT | `/api/contatto/{id}/faq` | Salva richiesta come FAQ | AMMINISTRATORE, AGENTE | Path: `id` |
+| DELETE | `/api/contatto/{id}` | Elimina richiesta | AMMINISTRATORE | Path: `id` |
+
+### Esempio Body Richiesta Contatto
+```json
+{
+  "nome": "Mario",
+  "cognome": "Rossi",
+  "email": "mario.rossi@example.com",
+  "telefono": "+39 333 1234567",
+  "messaggio": "Vorrei informazioni su un appartamento in centro."
+}
+```
+
+### Esempio Response Richiesta Contatto
+```json
+{
+  "success": true,
+  "message": "Richiesta inviata! Ti contatteremo presto.",
+  "data": {
+    "id": 1,
+    "nome": "Mario",
+    "cognome": "Rossi",
+    "email": "mario.rossi@example.com",
+    "telefono": "+39 333 1234567",
+    "messaggio": "Vorrei informazioni su un appartamento in centro.",
+    "stato": "NUOVA",
+    "dataCreazione": "2025-12-02T10:00:00Z"
+  }
+}
+```
+
+## Newsletter
+**Base URL**: `/api/newsletter`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/newsletter/iscriviti` | Iscrivi email alla newsletter | Pubblico | Body: `{"email": "..."}` |
+| DELETE | `/api/newsletter/disiscrivi/{email}` | Disiscrivi email dalla newsletter | Pubblico | Path: `email` |
+
+### Esempio Body Iscrizione Newsletter
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+### Esempio Response Iscrizione Newsletter
+```json
+{
+  "success": true,
+  "message": "Iscrizione alla newsletter effettuata con successo."
+}
+```
+
+## Valutazione
+**Base URL**: `/api/valutazione`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/valutazione/automatica` | Valutazione automatica immobile | Pubblico | Body: `RichiestaValutazioneDTO` |
+
+### Esempio Body Valutazione Automatica
+```json
+{
+  "provincia": "TO",
+  "cap": "10121",
+  "indirizzo": "Via Garibaldi",
+  "civico": "45",
+  "metriQuadri": 85.0,
+  "tipologia": "APPARTAMENTO",
+  "statoImmobile": "BUONO",
+  "piano": "3",
+  "locali": 4,
+  "bagni": 2,
+  "annoCost": 1980,
+  "ascensore": true,
+  "parcheggio": false,
+  "postiAuto": 0,
+  "garage": false,
+  "balconeMq": 8.0,
+  "terrazzoMq": null,
+  "giardinoMq": null,
+  "cantina": true,
+  "arredato": false,
+  "ariaCondizionata": true,
+  "allarme": false,
+  "riscaldamento": "CENTRALIZZATO",
+  "classeEnergetica": "C",
+  "orientamento": "SUD_EST"
+}
+```
+
+### Esempio Response Valutazione Automatica
+```json
+{
+  "valoreStimato": 285000.00,
+  "valoreMin": 270000.00,
+  "valoreMax": 300000.00,
+  "zonaOMI": "Torino Centro",
+  "coefficienteZona": 1.2,
+  "dataValutazione": "2025-12-02T10:00:00Z"
+}
+```
+
+---
+
 ## Note Tecniche
 
 ### Formati Date/Timestamp
@@ -328,5 +447,5 @@ GENERALE, VENDITA, ACQUISTO, VALUTAZIONE, CONTATTI
 PRIVATA, CONDIVISA, PUBBLICA
 ```
 
-**Versione Documento**: 1.1  
-**Data Ultimo Aggiornamento**: 17 Novembre 2025
+**Versione Documento**: 1.2  
+**Data Ultimo Aggiornamento**: 2 Dicembre 2025

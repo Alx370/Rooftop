@@ -32,8 +32,8 @@ const Login = () => {
       console.log("Ruolo utente:", ruolo);
 
       // 3️⃣ REDIRECT in base al ruolo
-      if (ruolo === "ROLE_AGENTE") navigate("/agente");
-      else if (ruolo === "ROLE_CLIENTE") navigate("/utente");
+      if (ruolo === "AGENTE") navigate("/agente");
+      else if (ruolo === "PROPRIETARIO") navigate("/utente");
       else navigate("/dashboard"); // fallback
 
       setError("");

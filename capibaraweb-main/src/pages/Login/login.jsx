@@ -53,15 +53,19 @@ export default function Login() {
       switch (ruolo) {
         case "AGENTE":
           navigate("/agente");
+          window.location.reload();
           break;
         case "AMMINISTRATORE":
           navigate("/admin");
+          window.location.reload();
           break;
         case "VALUTATORE":
           navigate("/agente");
+          window.location.reload();
           break;
         case "PROPRIETARIO":
           navigate("/utente");
+          window.location.reload();
           break;
         default:
           navigate("/");

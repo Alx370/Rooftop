@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import googleIcon from "../../assets/icons/Google-icon1.png";
 import { login } from "../../api/authApi.js";
 import { decodeJWT } from "../../utils/jwt_decoder.js";
+import "./login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -72,26 +74,62 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Accedi</h2>
+    <section className="login-section">
+      <div className="login-card">
+        <h2 className="login-title">Accedi ora</h2>
+        <p className="login-subtitle">Bentornato a casa!</p>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <button className="google-btn">
+          <img src={googleIcon} alt="Google" className="google-icon" />
+          Accedi con Google
+        </button>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div className="divider">
+          <span>o accedi con l'email</span>
+        </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* FORM CON ONSUBMIT FUNZIONANTE */}
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Inserisci la tua email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-      <button type="submit">Login</button>
-    </form>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Inserisci la tua password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          {error && <p className="login-error">{error}</p>}
+
+          <div className="options">
+            <label className="remember">
+              <input type="checkbox" /> Ricordami
+            </label>
+            <a href="#" className="forgot-password">
+              Password dimenticata?
+            </a>
+          </div>
+
+          <button type="submit" className="login-button">
+            Login
+          </button>
+
+          <p className="login-register">
+            Non hai un account? <Link to="/registrati">Registrati</Link>
+          </p>
+        </form>
+      </div>
+    </section>
   );
 }

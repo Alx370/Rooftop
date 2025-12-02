@@ -1,10 +1,74 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
-function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+import { getSession, clearSession } from "../../utils/session.js";
 
+/* ===========================
+   TIPI DELLA SESSIONE
+=========================== */
+interface SessionData {
+  userId: string;
+  ruolo: string;
+  email: string;
+  issuedAt: number;
+  expiresAt: number;
+  token: string;
+}
+
+/* ===========================
+   COMPONENTE HEADER
+=========================== */
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [session, setSession] = useState<SessionData | null>(null);
+
+  const navigate = useNavigate();
+
+  /* ===========================
+     CARICA SESSIONE AL MOUNT
+  =========================== */
+  useEffect(() => {
+    const s = getSession();
+    setSession(s);
+  }, []);
+
+  /* ===========================
+     LOGOUT
+  =========================== */
+  const handleLogout = () => {
+    clearSession();
+    setSession(null);
+    navigate("/");
+  };
+
+  /* ===========================
+     REDIRECT DASHBOARD
+  =========================== */
+  const goDashboard = () => {
+    const ruolo = session?.ruolo;
+
+    switch (ruolo) {
+      case "AGENTE":
+        navigate("/agente");
+        break;
+      case "AMMINISTRATORE":
+        navigate("/admin");
+        break;
+      case "VALUTATORE":
+        navigate("/agente");
+        break;
+      case "PROPRIETARIO":
+        navigate("/utente");
+        break;
+      default:
+        navigate("/");
+    }
+  };
+
+  /* ===========================
+     RENDER COMPONENT
+  =========================== */
   return (
     <header className="header">
       <div className="header-container">
@@ -13,14 +77,14 @@ function Header() {
         <div className="logo">
           <Link to="/">
             <img
-              src="@assets/images/global/LogoBlack.png"
+              src="/src/assets/images/LogoBlack.png"
               alt="Capibara Web Logo"
               className="logo-image"
             />
           </Link>
         </div>
 
-        {/* HAMBURGER MENU */}
+        {/* HAMBURGER */}
         <div
           className="hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -30,28 +94,70 @@ function Header() {
           <div className={menuOpen ? "bar bar3 active" : "bar bar3"}></div>
         </div>
 
-        {/* DESKTOP NAV */}
+        {/* NAV DESKTOP */}
         <nav className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/chi-siamo">Chi Siamo</Link>
           <Link to="/valutazione">Valutazione</Link>
           <Link to="/faq">FAQ</Link>
-          <Link to="/login" className="login-link">Login</Link>
+
+          {/* SWITCH LOGIN / DASHBOARD */}
+          {!session ? (
+            <Link to="/login" className="login-link">Login</Link>
+          ) : (
+            <>
+              <button className="login-link" onClick={goDashboard}>
+                Dashboard
+              </button>
+              <button className="login-link logout" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          )}
         </nav>
       </div>
 
-      {/* MOBILE NAV */}
+      {/* MOBILE MENU */}
       {menuOpen && (
         <nav className="mobile-menu">
           <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/chi-siamo" onClick={() => setMenuOpen(false)}>Chi Siamo</Link>
           <Link to="/valutazione" onClick={() => setMenuOpen(false)}>Valutazione</Link>
           <Link to="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
-          <Link to="/login" className="login-link" onClick={() => setMenuOpen(false)}>Login</Link>
+
+          {!session ? (
+            <Link
+              to="/login"
+              className="login-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Login
+            </Link>
+          ) : (
+            <>
+              <button
+                className="login-link"
+                onClick={() => {
+                  goDashboard();
+                  setMenuOpen(false);
+                }}
+              >
+                Dashboard
+              </button>
+
+              <button
+                className="login-link logout"
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+              >
+                Logout
+              </button>
+            </>
+          )}
         </nav>
       )}
     </header>
   );
 }
-
-export default Header;

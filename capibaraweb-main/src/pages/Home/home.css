@@ -1,14 +1,19 @@
-/* ============ RESET ============ */
+/* =========================================================
+   ===================== VARIABILI ==========================
+   ========================================================= */
 :root {
-  --primary: #ff6400;    /* Arancione accento */
-  --secondary: #048a81;  /* Verde acqua */
-  --hero-bg: #b6bdf7;    /* Lilla / azzurro chiaro */
-  --bg-light: #F5FBEF;   /* Sfondo sezioni chiare */
-  --text-dark: #020122;  /* Testo principale */
-  --text-light: #444;    /* Testo secondario */
+  --primary: #ff6400;         /* Arancione accento */
+  --secondary: #048a81;       /* Verde acqua */
+  --hero-bg: #b6bdf7;         /* Lilla / azzurro chiaro */
+  --bg-light: #Faf6f0;       /* Sfondo sezioni chiare */
+  --text-dark: #020122;       /* Testo principale */
+  --text-light: #444;         /* Testo secondario */
 }
 
-/* ============ GLOBAL ============ */
+
+/* =========================================================
+   ====================== GLOBAL ============================
+   ========================================================= */
 
 .home {
   color: var(--text-dark);
@@ -24,15 +29,39 @@ h2 {
 
 .subtitle {
   text-align: center;
-  color: var(--text-light);
+  color: var(--text-dark);
   margin-bottom: 2rem;
-  font-family: Montserrat, sans-serif;;
+  font-family: Montserrat, sans-serif;
+}
+
+/* Bottoni */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn.primary {
+  background-color: var(--primary);
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+}
+
+.btn.primary:hover {
+  background-color: #e55a00;
+  color: #fff;
 }
 
 
+/* =========================================================
+   ========================= HERO ===========================
+   ========================================================= */
 
-
-/* ============ HERO ============ */
 .hero {
   position: relative;
   height: 530px;
@@ -47,34 +76,29 @@ h2 {
   top: -1.5rem;
 }
 
-/* --- Background images --- */
-.hero-bg-logo,
-.hero-bg-palazzo {
+/* Immagini background */
+.hero-bg-logo-img {
   position: absolute;
-  height: 100%;
-  background-repeat: no-repeat;
-  z-index: 0;
-}
-
-.hero-bg-logo {
   width: 90%;
-  background-image: url(../../assets/home/LogoImmobiliaris.png);
-  background-position: 18% center;
   bottom: -320px;
-  background-size: contain;
   height: 920px;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.hero-bg-palazzo {
+.hero-bg-palazzo-img {
+  position: absolute;
   width: 65%;
-  background-image: url(../../assets/home/PalazzoModerno.png);
-  background-position: center right;
-  background-size: contain;
   height: 440px;
   top: 90px;
+  right: 0;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* --- Content --- */
+/* Contenuto centrale */
 .hero-content {
   position: relative;
   z-index: 1;
@@ -99,7 +123,7 @@ h2 {
 }
 
 .hero-text p {
-  color: var(--text-light);
+  color: var(--text-dark);
   margin-bottom: 3rem;
   max-width: 400px;
   text-align: justify;
@@ -111,112 +135,11 @@ h2 {
   padding-top: 2rem;
 }
 
-.btn {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-}
 
-.btn.primary {
-  background-color: var(--primary);
-  color: #fff;
-  font-family: Montserrat, sans-serif;
-}
+/* =========================================================
+   ==================== INTRO (SERVIZI) =====================
+   ========================================================= */
 
-.btn.primary:hover {
-  background-color: #e55a00;
-  color: #fff;
-}
-
-/* RESPONSIVE PART */
-/* Tablet (max 1024px) */
-@media (max-width: 1024px) {
-  .hero {
-    height: 450px;
-    padding: 0 2rem;
-  }
-
-  .hero-content {
-    width: 80%;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .hero-text h1 {
-    font-size: 3rem;
-  }
-
-  .hero-bg-palazzo {
-    width: 70%;
-    opacity: 0.7; /* meno invasiva */
-  }
-
-  .hero-bg-logo {
-    background-position: 15% bottom;
-    bottom: -320px;
-    opacity: 0.6;
-  }
-}
-
-/* Mobile grande (max 768px) */
-@media (max-width: 768px) {
-  .hero {
-    height: auto;
-    padding: 4rem 1.5rem;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-content {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-text {
-    align-items: center;
-  }
-
-  .hero-text h1 {
-    font-size: 2.4rem;
-  }
-
-  .hero-text p {
-    max-width: 90%;
-    text-align: center;
-    font-size: 1rem;
-    font-family: Montserrat, sans-serif;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-    padding-top: 1.5rem;
-  }
-
-  .hero-bg-palazzo {
-    width: 100%;
-    height: 350px;
-    background-position: center bottom;
-    opacity: 0.4;
-    top: auto;
-    bottom: 0;
-  }
-
-  .hero-bg-logo {
-    background-position: center bottom;
-    bottom: -300px;
-    width: 100%;
-    opacity: 0.3;
-  }
-}
-
-
-
-/* ===== INTRO SECTION ===== */
 .intro-home {
   padding: 6rem 0;
   display: flex;
@@ -232,37 +155,32 @@ h2 {
 }
 
 .subtitle-home {
-  color: var(--text-light);
+  color: var(--text-dark);
   margin-bottom: 3rem;
   text-align: center;
   max-width: 90%;
   font-size: 1.2rem;
 }
 
-/* ===== CARD CONTAINER ===== */
 .intro-cards-home {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
-  margin: 0 auto;
-  background-size: cover;
-  background-position: center;   /* centra l'immagine */
-  background-repeat: no-repeat;
 }
 
-/* ===== CARD ===== */
+/* Card servizi */
 .card-home {
   position: relative;
   width: 100%;
-  max-width: 600px; /* mantiene il limite massimo */
+  max-width: 600px;
   height: 350px;
   border-radius: 30px;
   overflow: hidden;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-  min-width: 280px; /* per schermi piccoli */
+  min-width: 280px;
 }
 
 .card-home:hover {
@@ -286,7 +204,6 @@ h2 {
   margin-bottom: 35px;
   position: absolute;
   bottom: 1.5rem;
-  /* left: 1.5rem; */
   color: white;
   text-align: left;
 }
@@ -294,7 +211,7 @@ h2 {
 .card-content-home h3 {
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: rgb(255, 255, 255);
+  color: #fff;
   font-size: 1.5rem;
   font-family: Montserrat, sans-serif;
 }
@@ -302,57 +219,15 @@ h2 {
 .card-content-home p {
   margin-bottom: 1rem;
   max-width: 85%;
-  color: rgb(255, 255, 255);
+  color: #fff;
   font-family: Montserrat, sans-serif;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  .card-home {
-    height: 300px;
-  }
-}
 
-@media (max-width: 768px) {
-  .intro-home h2 {
-    font-size: 2rem;
-  }
+/* =========================================================
+   ======================= USP BLOCK ========================
+   ========================================================= */
 
-  .card-home {
-    height: 250px;
-  }
-
-  .card-content-home p {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .intro-home {
-    padding: 4rem 1rem;
-  }
-
-  .intro-cards-home {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .card-home {
-    height: 220px;
-    border-radius: 20px;
-  }
-
-  .card-content-home h3 {
-    font-size: 1.2rem;
-  }
-
-  .card-content-home p {
-    font-size: 0.8rem;
-  }
-}
-
-
-/* --- SEZIONE USP --- */
 .usp-section {
   padding: 4rem 2rem;
   color: var(--text-dark);
@@ -361,202 +236,82 @@ h2 {
 .usp-section h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   text-align: center;
 }
 
-/* --- GRIGLIA USP --- */
 .usp-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.usp h2 {
-  text-align: center;
-  font-size: 40px;
-  margin-bottom: 3rem;
-}
-
-.usp-grid {
-  grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   width: 67%;
-  max-width: 1200px;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* --- ELEMENTO USP --- */
 .usp-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 4rem;
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
 }
 
-/* --- TESTO --- */
-.usp-text { 
+.usp-item-centered {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.usp-text,
+.usp-text-centered {
   font-family: Montserrat, sans-serif;
 }
 
-.highlight1 { 
-  font-family: Montserrat, sans-serif;
+.highlight1 {
   text-align: center;
   color: var(--primary);
   font-size: 2rem;
   margin-bottom: 0.6rem;
 }
 
-.usp-text-centered h3 { 
-  font-family: Montserrat, sans-serif;
-  text-align: center;
+.usp-text h3,
+.usp-text-centered h3 {
   color: var(--primary);
   font-size: 2rem;
   margin-bottom: 0.6rem;
+
 }
 
-.usp-text-centered p { 
-  font-family: Montserrat, sans-serif;
-  text-align: center;
-  color: var(--text-light);
+.usp-text p,
+.usp-text-centered p {
+  color: var(--text-dark);
   font-size: 1rem;
   line-height: 1.6;
+  text-align: center;
+ 
 }
 
-.usp-text h3 {
-  color: var(--primary);
-  font-size: 2rem;
-  margin-bottom: 0.6rem;
-}
-
-.usp-text p {
-  color: var(--text-light);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-/* --- IMMAGINE --- */
 .usp-img {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 .usp-img img {
   width: 100%;
-  max-width: 400px; /* immagine edificio più piccola */
+  max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.15);
-  height: auto;
   object-fit: cover;
- 
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  .usp-item {
-    gap: 3rem;
-  }
-
-  .usp-text h3 {
-    font-size: 2rem;
-  }
-
-  .usp-img img {
-    max-width: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .usp-item {
-    flex-direction: column; /* alternanza verticale */
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-  }
-
-  /* Alternanza testo/immagine: testo sopra, immagine sotto nei pari */
-  .usp-item:nth-child(even) {
-    flex-direction: column-reverse;
-  }
-
-  .usp-text {
-    text-align: center;
-  }
-
-  .usp-img {
-    justify-content: center;
-  }
-
-  .usp-text h3 {
-    font-size: 2rem;
-  }
-
-  .usp-text p {
-    font-size: 0.95rem;
-  }
-
-  .usp-img img {
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .usp-section {
-    padding: 3rem 1rem;
-  }
-
-  .usp-section h2 {
-    font-size: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .usp-text h3 {
-    font-size: 2rem;
-  }
-
-  .usp-text p {
-    font-size: 0.9rem;
-  }
-
-  .usp-img {
-    display: none;
-  }
-}
-
-@media (max-width: 425px) {
-  .usp-img {
-    display: none;
-  }
-
-  .usp-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    grid-template-columns: 1fr;
-  }
-
-  .usp-text {
-    text-align: center;
-    width: 100%;
-  }
-
-  .usp-text h3 {
-    text-align: center;
-  }
-
-  .usp-text p {
-    text-align: center;
-  }
 }
 
 
+/* =========================================================
+   ===================== TESTIMONIALS =======================
+   ========================================================= */
 
-/* ================= TESTIMONIALS ================= */
 .testimonials {
   padding: 6rem 2rem;
   display: flex;
@@ -572,20 +327,19 @@ h2 {
 
 .testimonials .subtitle {
   text-align: center;
-  color: var(--text-light);
-  max-width: 600px;
+  color: var(--text-dark);
   margin-bottom: 3rem;
+  
 }
 
-/* Container del carosello */
+/* Carosello */
 .testimonial-container {
   position: relative;
-  width: 80%; /* più flessibile del 67% */
+  width: 80%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Griglia scrollabile */
 .testimonial-grid {
   display: flex;
   overflow-x: auto;
@@ -598,13 +352,13 @@ h2 {
 }
 
 .testimonial-grid::-webkit-scrollbar {
-  display: none; /* nasconde la scrollbar */
+  display: none;
 }
 
-/* Card */
+/* Card testimonial */
 .testimonial-card {
-  flex: 0 0 auto; /* impedisce ridimensionamento */
-  width: 300px; /* larghezza fissa per più card visibili */
+  flex: 0 0 auto;
+  width: 300px;
   height: 300px;
   background-color: var(--secondary);
   padding: 2rem;
@@ -640,14 +394,14 @@ h2 {
   border: 2px solid #fff;
 }
 
-/* Pulsanti scroll */
+/* Pulsanti */
 .scroll-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  border: black 1px solid;
-  color: #000000;
+  border: 1px solid #000;
+  color: #000;
   font-size: 1.5rem;
   width: 50px;
   height: 50px;
@@ -665,7 +419,10 @@ h2 {
 }
 
 
-/* ============ FAQ ============ */
+/* =========================================================
+   =========================== FAQ ==========================
+   ========================================================= */
+
 .faq {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -677,35 +434,25 @@ h2 {
 }
 
 .faq-left {
+  display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
+  align-items: flex-start;
   position: sticky;
   top: 100px;
-}
-
-.faq-left .btn {
-  align-self: flex-start;
-  width: auto;
 }
 
 .faq-title {
   text-align: left;
   font-size: 2rem;
-  margin: 0;
-}
-
-.faq-text-home {
-  text-align: left;
-  font-family: Montserrat, sans-serif;
+  margin-top:-0.6rem;
 }
 
 .faq-text-home p {
-  color: var(--text-light);
+  color: var(--text-dark);
   line-height: 1.6;
 }
 
-/* CSS delle card a dx delle FAQ */
 .faq-boxes {
   flex: 1 1 420px;
   min-width: 300px;
@@ -741,74 +488,11 @@ h2 {
   line-height: 1.5;
 }
 
-/* Responsive FAQ */
-@media (max-width: 1024px) {
-  .faq {
-    padding: 4rem 3rem;
-    gap: 3rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .faq {
-    grid-template-columns: 1fr;
-    padding: 3rem 2rem;
-    gap: 2rem;
-    align-items: center;
-  }
+/* =========================================================
+   ======================== NEWSLETTER ======================
+   ========================================================= */
 
-  .faq-left {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  .faq-title {
-    text-align: center;
-    font-size: 1.8rem;
-  }
-
-  .faq-text {
-    text-align: center;
-  }
-
-  .faq-left .btn {
-    align-self: center;
-  }
-
-  .faq-boxes {
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .faq-item {
-    max-width: 520px;
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .faq {
-    padding: 2rem 1rem;
-  }
-
-  .faq-title {
-    font-size: 1.5rem;
-  }
-
-  .faq-text p {
-    font-size: 0.9rem;
-  }
-}
-
-
-/* ============ NEWSLETTER ============ */
 .newsletter {
   text-align: center;
   padding: 5rem 2rem 0 2rem;
@@ -817,6 +501,7 @@ h2 {
 
 .newsletter p {
   margin-top: -0.5rem;
+  margin-top: 1.2rem;
 }
 
 .newsletter h2 {
@@ -836,13 +521,12 @@ h2 {
 
 .newsletter-form input {
   background-color: white;
-  color: #000000;
+  color: #000;
   padding: 0.8rem 1rem;
   border-radius: 8px;
-  border: 1px solid #000000;
+  border: 1px solid #000;
   width: 550px;
-  max-width: 90%; /* si adatta agli schermi piccoli */
-  box-sizing: border-box;
+  max-width: 90%;
 }
 
 .newsletter .btn {
@@ -850,7 +534,7 @@ h2 {
   margin-top: 1rem;
   background-color: var(--primary);
   border: 2px solid var(--primary);
-  color: #ffffff;
+  color: #fff;
   padding: 0.7rem 1rem;
   border-radius: 8px;
   cursor: pointer;
@@ -859,61 +543,364 @@ h2 {
 
 .newsletter .btn:hover {
   background-color: #e55a00;
-  color: #ffffff;
+  color: #fff;
   transform: scale(1.02);
 }
 
-/* ================= RESPONSIVE ================= */
 
-/* Tablet */
+/* =========================================================
+   ======================= RESPONSIVE =======================
+   ========================================================= */
+/* -------- HERO -------- */
 @media (max-width: 1024px) {
-  .newsletter h2 {
-    font-size: 2rem;
+  .hero {
+    height: 450px;
+    padding: 0 2rem;
+  }
+  .hero-content {
+    width: 80%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+  .hero-bg-palazzo-img {
+    width: 70%;
+    opacity: 0.7;
+  }
+  .hero-bg-logo-img {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 4rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+   .card-content-home {
+    margin-left: 0;
+    margin-bottom: 20px;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-content-home p {
+    max-width: 90%;
+    text-align: center;
   }
 
+  .card-content-home .btn {
+    margin-top: 0.3rem;
+    width: 70%;
+    max-width: 220px;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .hero-text {
+    align-items: center;
+  }
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+  .hero-text p {
+    max-width: 90%;
+    text-align: center;
+    font-size: 1rem;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .hero-bg-palazzo-img {
+    width: 100%;
+    opacity: 0.4;
+  }
+  .hero-bg-logo-img {
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-content-home .btn {
+    width: 40%;
+    max-width: 250px;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* -------- INTRO -------- */
+@media (max-width: 1024px) {
+  .card-home {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-home h2 {
+    font-size: 1.8rem;
+  }
+  .subtitle-home{
+    font-size: 1rem;
+  }
+  .card-home {
+    height: 250px;
+  }
+  .card-content-home p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-home {
+    padding: 4rem 1rem;
+  }
+  .intro-cards-home {
+    flex-direction: column;
+  }
+  .card-home {
+    height: 220px;
+  }
+  .card-content-home h3 {
+    font-size: 1.2rem;
+  }
+  .card-content-home p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- USP – Tablet ---------- */
+@media (max-width: 1024px) {
+
+  .usp-item {
+    gap: 2rem;
+  }
+
+  .usp-img img {
+    max-width: 320px;
+  }
+}
+
+
+/* ---------- USP – Mobile ---------- */
+@media (max-width: 768px) {
+
+  /* Layout mobile in verticale */
+  .usp-item {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  /* Tutte le immagini centrate */
+  .usp-img {
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+  }
+
+  /* Immagini proporzionate e grandi */
+  .usp-img img {
+    width: 90%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  /* Titoli */
+  .usp-text h3,
+  .usp-text-centered h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Testi */
+  .usp-text p,
+  .usp-text-centered p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+
+/* ---------- USP – Smartphone piccoli ---------- */
+@media (max-width: 480px) {
+   
+
+  .usp-section h2{
+    font-size: 1.8rem;
+  }
+  .usp-section {
+    padding: 3rem 1rem;
+  }
+
+  /* Immagini ancora più grandi ma senza uscire */
+  .usp-img img {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  /* Titoli + compatti */
+  .usp-text h3,
+  .usp-text-centered h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Testi */
+  .usp-text p,
+  .usp-text-centered p {
+    font-size: 1rem;
+    margin-bottom:0.5rem;
+  }
+}
+
+
+/* -------- TESTIMONIALS -------- */
+/* TESTIMONIAL – Mobile general */
+@media (max-width: 768px) {
+  .testimonial-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .testimonial-track {
+    display: flex;
+    justify-content: center;   
+    width: 100%;
+  }
+
+  /* Pulsanti spostati più vicini alle card */
+  .scroll-btn.left {
+    left: 15px;
+  }
+  
+  .scroll-btn.right {
+    right: 15px;
+  }
+  .usp-item {
+    flex-direction: column !important;
+  }
+  /* Card leggermente più piccole e ben centrate */
+  .testimonial-card {
+    margin: 0 auto !important;
+  }
+  .usp-item:nth-child(even) {
+    flex-direction: column-reverse !important;
+  } 
+}
+
+/* TESTIMONIAL – Small phones */
+@media (max-width: 480px) {
+  .testimonial-card {
+    width: 260px;      
+    margin: 0 auto;    
+   
+  }
+
+  .scroll-btn.left {
+    left: -50px;
+    width: 15%;
+    height: 15%;
+  }
+  
+  .scroll-btn.right {
+    right: -50px;
+    width: 15%;
+    height: 15% ;
+  }
+  .testimonials h2 {
+    font-size: 1.8rem;
+    margin-top:-1rem;
+  }
+}
+
+
+/* -------- FAQ -------- */
+@media (max-width: 1024px) {
+  .faq {
+    padding: 4rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq {
+    grid-template-columns: 1fr;
+    padding: 3rem 2rem;
+  }
+  .faq-left {
+    align-items: center;
+    text-align: center;
+    position: static;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq {
+    padding: 2rem 1rem;
+  }
+  .faq-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .faq-left .btn{
+    width: 50%;
+  }
+
+  .faq-left p{
+    font-size: 1rem;
+  }
+}
+
+
+/* -------- NEWSLETTER -------- */
+@media (max-width: 1024px) {
   .newsletter-form input {
     width: 450px;
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .newsletter {
     padding: 5rem 1.5rem;
   }
-
-  .newsletter h2 {
-    font-size: 1.8rem;
-  }
-
   .newsletter-form input {
     width: 350px;
   }
-
-  .newsletter .btn {
-    max-width: 90px;
-    padding: 0.6rem 0.9rem;
-  }
 }
 
-/* Mobile piccolo */
 @media (max-width: 480px) {
   .newsletter {
     padding: 4rem 1rem;
   }
-
-  .newsletter h2 {
-    font-size: 1.6rem;
-  }
-
   .newsletter-form input {
-    width: 90%; /* si adatta completamente allo schermo */
+    width: 90%;
   }
 
-  .newsletter .btn {
-    width: 80px;
-    padding: 0.5rem 0.8rem;
+  .newsletter h2{
+    font-size: 1.5rem;
+  }
+  
+  .newsletter p{
+    font-size: 1rem;
   }
 }
-
-

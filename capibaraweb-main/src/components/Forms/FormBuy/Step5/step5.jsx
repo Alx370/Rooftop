@@ -1,55 +1,58 @@
 import { useState } from "react";
-import styles from './step5.module.css';
+import styles from "./step5.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Step5({ formData, setFormData, nextStep, prevStep }) {
-  const [floor, setFloor] = useState(formData.floor || '');
-  const [error, setError] = useState('');
+  const [floor, setFloor] = useState(formData.floor || "");
+  const [error, setError] = useState("");
 
   const handleContinue = () => {
-    if (!floor) {
+    if (!floor && floor !== 0) {
       setError("Inserisci il piano dell'immobile");
       return;
     }
 
     if (Number(floor) > 45) {
-      setError("Il piano massimo è 45");
+      setError("Il piano massimo consentito è 45");
       return;
     }
 
     setError("");
 
-    const updatedData = { ...formData, floor };
-    setFormData(updatedData);
+    setFormData({
+      ...formData,
+      floor,
+    });
 
-    nextStep();  // NESSUNA chiamata API qui!
+    nextStep();
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.progressWrapper}>
-        <ProgressBar currentStep={5} totalSteps={9} />
+      <ProgressBar currentStep={5} totalSteps={9} />
+
+      <h2 className={styles.title}>A quale piano è ubicato l’immobile?</h2>
+      <p className={styles.subtitle}>Inserisci il piano dell’immobile</p>
+
+      <div className={styles.inputWrapper}>
+        <input
+          type="number"
+          className={styles.inputNumber}
+          value={floor}
+          onChange={(e) => setFloor(e.target.value)}
+          min={0}
+          max={45}
+          placeholder="0"
+        />
       </div>
 
-      <h2>A quale piano è ubicato l’immobile</h2>
-      <p>Piano immobile</p>
-
-      <input
-        type="number"
-        className={styles.inputNumber}
-        value={floor}
-        onChange={(e) => setFloor(e.target.value)}
-        min={0}
-        max={45}
-        placeholder="0"
-      />
-
-      {error && <div style={{ color: 'red', marginTop: '5px' }}>{error}</div>}
+      {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.buttonContainer}>
         <button className={styles.backButton} onClick={prevStep}>
           Indietro
         </button>
+
         <button className={styles.continueButton} onClick={handleContinue}>
           Continua
         </button>

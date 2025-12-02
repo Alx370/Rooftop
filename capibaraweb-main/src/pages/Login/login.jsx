@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import "./login.css";
-import googleIcon from "../../assets/icons/Google-icon1.png";
-
 import { login } from "../../api/authApi.js";
-import { decodeJwt } from "../../utils/jwt.js";
+import { decodeJWT } from "../../utils/jwt_decoder.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,78 +12,86 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      setError("Inserisci email e password.");
-      return;
-    }
+    setError("");
 
     try {
-      const res = await login({ email, password });
+      const data = await login({ email, password });
+      const token = data.token;
 
-      console.log("TOKEN RICEVUTO:", res.token);
-
-      const payload = decodeJwt(res.token);
-
-      console.log("PAYLOAD JWT:", payload);
-
-      if (!payload || !payload.authorities) {
-        setError("Token non valido o senza ruolo.");
+      if (!token) {
+        setError("Token non ricevuto dal server.");
         return;
       }
 
-      const ruolo = payload.authorities[0];
+      // Salva il token nel localStorage
+      localStorage.setItem("token", token);
 
-      // salviamo tutto
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("ruolo", ruolo);
-      localStorage.setItem("user", JSON.stringify(payload));
+      // Decodifica il payload del JWT
+      const payload = decodeJWT(token);
+      console.log("PAYLOAD JWT:", payload);
 
-      // redirect dinamico
-      if (ruolo === "AGENTE") {
-        navigate("/agente");
-      } else if (ruolo === "PROPRIETARIO") {
-        navigate("/utente");
-      } else {
-        navigate("Ruolo Null");
-        console.log("Errore di ruolo");
+      if (!payload) {
+        setError("Token non valido.");
+        return;
       }
+
+      // Il ruolo è nel claim "ruolo" del token
+      const ruolo = payload.ruolo;
+
+      if (!ruolo) {
+        setError("Ruolo non trovato nel token.");
+        return;
+      }
+
+      // Salva il ruolo nel localStorage per accesso rapido
+      localStorage.setItem("ruolo", ruolo);
+      localStorage.setItem("email", payload.email || "");
+
+      // Redirect in base al ruolo
+      switch (ruolo) {
+        case "AGENTE":
+          navigate("/agente");
+          break;
+        case "AMMINISTRATORE":
+          navigate("/admin");
+          break;
+        case "VALUTATORE":
+          navigate("/agente");
+          break;
+        case "PROPRIETARIO":
+          navigate("/utente");
+          break;
+        default:
+          navigate("/");
+      }
+
     } catch (err) {
-      console.error("ERRORE LOGIN:", err);
+      console.error("Errore login:", err);
       setError("Credenziali non valide");
     }
   };
 
   return (
-    <section className="login-section">
-      <div className="login-card">
+    <form onSubmit={handleSubmit}>
+      <h2>Accedi</h2>
 
-        <h2>Accedi ora</h2>
-        <p className="login-subtitle">Bentornato!</p>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <button className="google-btn">
-          <img src={googleIcon} alt="" className="google-icon" />
-          Accedi con Google
-        </button>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <div className="divider"><span>oppure</span></div>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <label>Email</label>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} />
-
-          <label>Password</label>
-          <input type="password" onChange={(e) => setPassword(e.target.value)} />
-
-          {error && <p className="login-error">{error}</p>}
-
-          <button className="login-button">Login</button>
-
-          <p className="login-register">
-            Non hai un account? <Link to="/registrati">Registrati</Link>
-          </p>
-        </form>
-      </div>
-    </section>
+      <button type="submit">Login</button>
+    </form>
   );
 }

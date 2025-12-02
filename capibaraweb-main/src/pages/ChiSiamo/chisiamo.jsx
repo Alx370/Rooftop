@@ -1,5 +1,13 @@
 import { useState } from "react";
 import "./chisiamo.css";
+import Agente1 from "@assets/images/chisiamo/Torino/agente1.png";
+import Agente2 from "@assets/images/chisiamo/Torino/agente2.png";
+import Agente3 from "@assets/images/chisiamo/Torino/agente3.png";
+import Agente4 from "@assets/images/chisiamo/Torino/agente4.png";
+import Mappa from "@assets/images/chisiamo/mappa.png";
+import Panorama from "@assets/images/chisiamo/panorama.png";
+import PhoneIcon from "@assets/icons/phone-call.png";
+import EmailIcon from "@assets/icons/email.png";
 
 export default function ChiSiamo() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -7,6 +15,14 @@ export default function ChiSiamo() {
   const [selectedAgent, setSelectedAgent] = useState(null);
 
   const provinces = ["Torino", "Cuneo", "Alessandria", "Asti", "Tutti"];
+
+  const getAgentImg = (path) => {
+    if (!path) return Agente1;
+    if (path.includes("agente2")) return Agente2;
+    if (path.includes("agente3")) return Agente3;
+    if (path.includes("agente4")) return Agente4;
+    return Agente1;
+  };
 
   const agentsData = [
     {
@@ -273,7 +289,7 @@ export default function ChiSiamo() {
               <p className="descr">{agent.descrizione}</p>
 
               <div className="foto-box">
-                <img src={agent.img} alt={agent.nome} />
+                <img src={getAgentImg(agent.img)} alt={agent.nome} />
                 <div 
                   className="arrow-card"
                   onClick={() => setSelectedAgent(agent)}
@@ -301,7 +317,7 @@ export default function ChiSiamo() {
             </button>
             
             <div className="modal-left">
-              <img src={selectedAgent.img} alt={selectedAgent.nome} />
+              <img src={getAgentImg(selectedAgent.img)} alt={selectedAgent.nome} />
             </div>
             
             <div className="modal-right">
@@ -329,7 +345,7 @@ export default function ChiSiamo() {
 
         <div className="map-box">
           <a href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Carlo+Torino" target="_blank" rel="noopener noreferrer">
-            <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" style={{ cursor: 'pointer' }} />
+            <img src={Mappa} alt="Mappa Google" style={{ cursor: 'pointer' }} />
           </a>
         </div>
       </section>
@@ -340,14 +356,14 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" >
-          <img src="../../src/assets/icons/phone-call.png" alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={PhoneIcon} alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           +39 123 456 7890
         </button>
       </section>
 
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > 
-          <img src="../../src/assets/icons/email.png" alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={EmailIcon} alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           info@immobiliaris.com </button>
       </section>
 
@@ -373,7 +389,7 @@ export default function ChiSiamo() {
         </div>
 
         <div className="map-box-storia">
-          <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino" />
+          <img src={Panorama} alt="Foto Panorama Torino" />
         </div>
 
       </section>

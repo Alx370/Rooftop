@@ -15,7 +15,7 @@ const Valutazione = () => {
       description:
         'Valutiamo il tuo immobile in pochi step: servizi per vendita e affitto, analisi professionale e report dettagliato.',
       url: window.location.href,
-      image: '/src/assets/images/valutazione/vendita.png',
+      image: Vendita,
     });
 
     setStructuredData({

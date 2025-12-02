@@ -40,11 +40,9 @@ export default function FormBuy({ manual = false }) {
   const prevStep = (currentStep) => navigate(`${basePath}/step${currentStep - 1}`);
 
   useEffect(() => {
-    if (manual) {
-      const token = localStorage.getItem("token");
-      if (!token) navigate(`/login?redirect=${basePath}/step0`);
-    }
-  }, [manual, basePath]);
+    const token = localStorage.getItem("token");
+    if (!token) navigate(`/login?redirect=${basePath}/step0`);
+  }, [basePath]);
 
   return (
     <div className="form-container">

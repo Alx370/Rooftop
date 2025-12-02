@@ -42,6 +42,27 @@ public class EmailService {
             System.out.println("Errore invio email a " + destinatario + ": " + e.getMessage());
         }
     }
+
+    @Async
+    public void inviaEmailConReplyTo(String destinatario, String oggetto, String contenutoHtml, String replyTo) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom(mittente);
+            helper.setTo(destinatario);
+            helper.setSubject(oggetto);
+            helper.setText(contenutoHtml, true);
+            if (replyTo != null && !replyTo.isBlank()) {
+                helper.setReplyTo(replyTo);
+            }
+
+            mailSender.send(message);
+            System.out.println("Email inviata a: " + destinatario);
+        } catch (Exception e) {
+            System.out.println("Errore invio email a " + destinatario + ": " + e.getMessage());
+        }
+    }
     
     /**
      * Send confirmation email when someone subscribes to the newsletter

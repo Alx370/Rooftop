@@ -60,7 +60,8 @@ public class ControllerValutazioneManuale {
                 + body.toString()
                 + "</pre><p>Rispondere al cliente entro 3 giorni.</p></body></html>";
 
-        emailService.inviaEmail(emailAgente, oggetto, html);
+        String replyTo = userId != null ? serviceUtente.getById(Integer.parseInt(userId)).getEmail() : null;
+        emailService.inviaEmailConReplyTo(emailAgente, oggetto, html, replyTo);
         return ResponseEntity.ok(Map.of("success", true, "message", "Valutazione inviata, risposta entro 3 giorni"));
     }
 }

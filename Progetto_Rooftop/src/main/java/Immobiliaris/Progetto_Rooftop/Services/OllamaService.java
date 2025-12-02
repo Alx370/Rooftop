@@ -3,12 +3,6 @@ package Immobiliaris.Progetto_Rooftop.Services;
 import Immobiliaris.Progetto_Rooftop.Model.OllamaRequest;
 import Immobiliaris.Progetto_Rooftop.Model.OllamaResponse;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

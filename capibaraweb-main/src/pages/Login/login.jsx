@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, decodeJwt } from "../../api/authApi.js";
+import { login, setAuthToken, getMe } from "../../api/authApi.js";
+import "./login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirectTo = searchParams.get("redirect");
 
   const navigate = useNavigate();
 
@@ -21,44 +24,32 @@ const Login = () => {
     }
 
     try {
-      // Login → ricevi il token
+      // 1️⃣ LOGIN → ottieni token
       const data = await login({ email, password });
+      setAuthToken(data.token);
 
-      if (!data?.token) {
-        setError("Token non ricevuto dal server.");
-        return;
-      }
+      // 2️⃣ PRENDI INFO UTENTE / RUOLO
+      const me = await getMe();
+      const ruolo = me.authorities?.[0]; // esempio: "ROLE_AGENTE"
 
-      // Salva token
-      localStorage.setItem("token", data.token);
+      console.log("Ruolo utente:", ruolo);
 
-      // Decodifica token
-      const user = decodeJwt(data.token);
-
-      if (!user) {
-        setError("Errore nel token ricevuto.");
-        return;
-      }
-
-      console.log("Utente loggato:", user);
-      // 3️⃣ REDIRECT in base al ruolo
-      if (ruolo === "AGENTE") navigate("/agente");
-      else if (ruolo === "PROPRIETARIO") navigate("/utente");
-      else navigate("/dashboard"); // fallback
-
-      // Salva ruolo e id nella sessione
-      localStorage.setItem("ruolo", user.ruolo);
-      localStorage.setItem("id", user.id);
-
-      // Redirect dinamico in base al ruolo
-      if (user.ruolo === "AGENTE" || user.ruolo === "ROLE_AGENTE") {
+      // 3️⃣ REDIRECT
+      if (redirectTo) {
+        navigate(redirectTo);
+      } else if (ruolo === "ROLE_AGENTE") {
         navigate("/agente");
-      } else {
+      } else if (ruolo === "ROLE_CLIENTE") {
         navigate("/utente");
+      } else {
+        navigate("/dashboard");
       }
+
+      setError("");
+
     } catch (err) {
       console.error("Errore login:", err);
-      setError("Credenziali non valide.");
+      setError("Credenziali non valide o server non raggiungibile.");
     }
   };
 
@@ -66,55 +57,43 @@ const Login = () => {
     <section className="login-section">
       <div className="login-card">
         <h2 className="login-title">Accedi ora</h2>
-        <p className="login-subtitle">Bentornato a casa!</p>
+        <p className="login-subtitle">Bentornato!</p>
 
         <button className="google-btn">
           <img src={googleIcon} alt="Google" className="google-icon" />
           Accedi con Google
         </button>
 
-        <div className="divider">
-          <span>o accedi con l'email</span>
-        </div>
+        <div className="divider"><span>oppure</span></div>
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
-            <input
-              type="email"
-              placeholder="Inserisci la tua email"
-              value={email}
+            <input type="email" value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Inserisci email"
             />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              placeholder="Inserisci la tua password"
-              value={password}
+            <input type="password" value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Inserisci password"
             />
           </div>
 
           {error && <p className="login-error">{error}</p>}
 
           <div className="options">
-            <label className="remember">
-              <input type="checkbox" /> Ricordami
-            </label>
-            <a href="#" className="forgot-password">
-              Password dimenticata?
-            </a>
+            <label className="remember"><input type="checkbox" /> Ricordami</label>
+            <a className="forgot-password" href="#">Dimenticata?</a>
           </div>
 
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <button type="submit" className="login-button">Login</button>
 
-          <p className="login-register">
-            Non hai un account? <Link to="/registrati">Registrati</Link>
+          <p className="login-register">Non hai un account?
+            <Link to="/registrati"> Registrati</Link>
           </p>
         </form>
       </div>

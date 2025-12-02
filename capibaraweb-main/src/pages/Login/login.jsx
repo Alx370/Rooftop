@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import "./login.css";
-
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, decodeJwt } from "../../api/authApi.js";
 
-const Login = () => {
+import { login } from "../../api/authApi.js";
+import { decodeJwt } from "../../utils/jwt.js";
+
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,102 +18,70 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError("Compila tutti i campi.");
+      setError("Inserisci email e password.");
       return;
     }
 
     try {
-      // Login → ricevi il token
-      const data = await login({ email, password });
+      const res = await login({ email, password });
 
-      if (!data?.token) {
-        setError("Token non ricevuto dal server.");
+      console.log("TOKEN RICEVUTO:", res.token);
+
+      const payload = decodeJwt(res.token);
+
+      console.log("PAYLOAD JWT:", payload);
+
+      if (!payload || !payload.authorities) {
+        setError("Token non valido o senza ruolo.");
         return;
       }
 
-      // Salva token
-      localStorage.setItem("token", data.token);
+      const ruolo = payload.authorities[0];
 
-      // Decodifica token
-      const user = decodeJwt(data.token);
+      // salviamo tutto
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("ruolo", ruolo);
+      localStorage.setItem("user", JSON.stringify(payload));
 
-      if (!user) {
-        setError("Errore nel token ricevuto.");
-        return;
-      }
-
-      console.log("Utente loggato:", user);
-      // 3️⃣ REDIRECT in base al ruolo
-      if (ruolo === "AGENTE") navigate("/agente");
-      else if (ruolo === "PROPRIETARIO") navigate("/utente");
-      else navigate("/dashboard"); // fallback
-
-      // Salva ruolo e id nella sessione
-      localStorage.setItem("ruolo", user.ruolo);
-      localStorage.setItem("id", user.id);
-
-      // Redirect dinamico in base al ruolo
-      if (user.ruolo === "AGENTE" || user.ruolo === "ROLE_AGENTE") {
+      // redirect dinamico
+      if (ruolo === "AGENTE") {
         navigate("/agente");
-      } else {
+      } else if (ruolo === "PROPRIETARIO") {
         navigate("/utente");
+      } else {
+        navigate("Ruolo Null");
+        console.log("Errore di ruolo");
       }
     } catch (err) {
-      console.error("Errore login:", err);
-      setError("Credenziali non valide.");
+      console.error("ERRORE LOGIN:", err);
+      setError("Credenziali non valide");
     }
   };
 
   return (
     <section className="login-section">
       <div className="login-card">
-        <h2 className="login-title">Accedi ora</h2>
-        <p className="login-subtitle">Bentornato a casa!</p>
+
+        <h2>Accedi ora</h2>
+        <p className="login-subtitle">Bentornato!</p>
 
         <button className="google-btn">
-          <img src={googleIcon} alt="Google" className="google-icon" />
+          <img src={googleIcon} alt="" className="google-icon" />
           Accedi con Google
         </button>
 
-        <div className="divider">
-          <span>o accedi con l'email</span>
-        </div>
+        <div className="divider"><span>oppure</span></div>
 
-        <form className="login-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              placeholder="Inserisci la tua email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="login-form">
+          <label>Email</label>
+          <input type="email" onChange={(e) => setEmail(e.target.value)} />
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Inserisci la tua password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <label>Password</label>
+          <input type="password" onChange={(e) => setPassword(e.target.value)} />
 
           {error && <p className="login-error">{error}</p>}
 
-          <div className="options">
-            <label className="remember">
-              <input type="checkbox" /> Ricordami
-            </label>
-            <a href="#" className="forgot-password">
-              Password dimenticata?
-            </a>
-          </div>
-
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <button className="login-button">Login</button>
 
           <p className="login-register">
             Non hai un account? <Link to="/registrati">Registrati</Link>
@@ -120,6 +90,4 @@ const Login = () => {
       </div>
     </section>
   );
-};
-
-export default Login;
+}

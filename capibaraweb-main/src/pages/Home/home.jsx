@@ -3,11 +3,11 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 // Import immagini
-import finestraImg from "../../assets/images/home/finestra.png";
-import lettoImg from "../../assets/images/home/letto.png";
-import edificioImg from "../../assets/images/home/edificio.png";
-import chiaviImg from "../../assets/images/home/chiavi.jpg";
-import lauraImg from "../../assets/images/home/laura.png";
+import finestraImg from "@assets/images/home/finestra.png";
+import lettoImg from "@assets/images/home/letto.png";
+import edificioImg from "@assets/images/home/edificio.png";
+import chiaviImg from "@assets/images/home/chiavi.jpg";
+import lauraImg from "@assets/images/home/laura.png";
 
 
 const Home = () => {

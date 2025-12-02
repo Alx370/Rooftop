@@ -5,6 +5,43 @@ import styles from "./step1.module.css";
 export default function Step1({ formData, setFormData, nextStep, prevStep }) {
   const [error, setError] = useState("");
 
+  const provincePiemonte = {
+    TORINO: "TO",
+    VERCELLI: "VC",
+    BIELLA: "BI",
+    VERBANIA: "VB",
+    NOVARA: "NO",
+    CUNEO: "CN",
+    ASTI: "AT",
+    ALESSANDRIA: "AL",
+  };
+
+  // VALIDAZIONE CAP (solo numeri, 5 cifre)
+  const validateCAP = (cap) => {
+    const capRegex = /^[0-9]{5}$/;
+    return capRegex.test(cap);
+  };
+
+  // VALIDAZIONE INDIRIZZO (formato realistico)
+  const validateIndirizzo = (indirizzo) => {
+    const indirizzoRegex =
+      /^(via|viale|corso|piazza|vicolo|lungo|piazzale)\s+[a-zA-ZÀ-ÿ\s']+\s+[0-9]{1,4}[a-zA-Z]?$/i;
+    return indirizzoRegex.test(indirizzo);
+  };
+
+  // VALIDAZIONE PROVINCIA
+  const validateProvincia = (provincia) => {
+    if (!provincia) return false;
+
+    const upper = provincia.trim().toUpperCase();
+
+    // controllo abbreviazione (TO)
+    if (Object.values(provincePiemonte).includes(upper)) return true;
+
+    // controllo nome provincia (Torino)
+    return Object.keys(provincePiemonte).includes(upper);
+  };
+
   const handleContinue = () => {
     if (
       !formData.cap.trim() ||
@@ -15,18 +52,36 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
       return;
     }
 
+    if (!validateCAP(formData.cap)) {
+      setError("Il CAP deve contenere solo numeri ed essere lungo 5 cifre.");
+      return;
+    }
+
+    if (!validateIndirizzo(formData.indirizzo)) {
+      setError(
+        "Inserisci un indirizzo valido (Es: Via Roma 12, Corso Francia 22)."
+      );
+      return;
+    }
+
+    if (!validateProvincia(formData.provincia)) {
+      setError(
+        "Inserisci una provincia valida del Piemonte (Es: Torino o TO)."
+      );
+      return;
+    }
+
     setError("");
     nextStep();
   };
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={1} totalSteps={10} />
+      <ProgressBar currentStep={1} totalSteps={9} />
 
       <h2 className={styles.title}>Dove si trova l'immobile da valutare?</h2>
 
       <div className={styles.content}>
-        {/* COLONNA SINISTRA */}
         <div className={styles.left}>
           {/* CAP */}
           <label className={styles.label}>CAP</label>
@@ -34,7 +89,9 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
             type="text"
             placeholder="Inserisci il CAP"
             value={formData.cap}
-            onChange={(e) => setFormData({ ...formData, cap: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, cap: e.target.value })
+            }
             className={styles.input}
           />
 
@@ -42,7 +99,7 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
           <label className={styles.label}>Indirizzo dell'immobile</label>
           <input
             type="text"
-            placeholder="Inserisci l'indirizzo"
+            placeholder="Via Roma 10"
             value={formData.indirizzo}
             onChange={(e) =>
               setFormData({ ...formData, indirizzo: e.target.value })
@@ -54,7 +111,7 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
           <label className={styles.label}>Provincia</label>
           <input
             type="text"
-            placeholder="Es. Torino, Roma, Milano"
+            placeholder="Es. Torino o TO"
             value={formData.provincia}
             onChange={(e) =>
               setFormData({ ...formData, provincia: e.target.value })
@@ -75,7 +132,7 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
           </div>
         </div>
 
-        {/* COLONNA DESTRA: MAPPA */}
+        {/* MAPPA */}
         <div className={styles.right}>
           <iframe
             title="mappa"

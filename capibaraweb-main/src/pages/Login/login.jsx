@@ -41,6 +41,10 @@ const Login = () => {
       }
 
       console.log("Utente loggato:", user);
+      // 3️⃣ REDIRECT in base al ruolo
+      if (ruolo === "AGENTE") navigate("/agente");
+      else if (ruolo === "PROPRIETARIO") navigate("/utente");
+      else navigate("/dashboard"); // fallback
 
       // Salva ruolo e id nella sessione
       localStorage.setItem("ruolo", user.ruolo);

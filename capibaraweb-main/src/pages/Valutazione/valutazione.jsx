@@ -101,14 +101,16 @@ const Valutazione = () => {
 
       {/* --- ACCESSO --- */}
       <section className="access-section">
-        <h2>Hai già compilato il nostro form o hai<br />già ricevuto la valutazione?</h2>
-        <p>
-          Se hai già iniziato il percorso, siamo pronti ad accompagnarti nel passo successivo
-          con competenza e trasparenza.
-        </p>
-        <button className="btn arancio access-btn">Accedi</button>
-      </section>
+  <h2>Hai già compilato il nostro form o hai<br />già ricevuto la valutazione?</h2>
+  <p>
+    Se hai già iniziato il percorso, siamo pronti ad accompagnarti nel passo successivo
+    con competenza e trasparenza.
+  </p>
 
+  <Link to="/login">
+    <button className="btn arancio access-btn">Accedi</button>
+  </Link>
+</section>
     </main>
   );
 };

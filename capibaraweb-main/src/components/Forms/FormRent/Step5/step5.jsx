@@ -3,16 +3,56 @@ import styles from "./step5.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Step5({ formData, setFormData, nextStep, prevStep }) {
-  const [floor, setFloor] = useState(formData.floor || "");
+  const [floor, setFloor] = useState(
+    formData.floor === 0 || formData.floor ? formData.floor : ""
+  );
   const [error, setError] = useState("");
 
+  const handleChange = (e) => {
+    const rawValue = e.target.value;
+
+    // Permetti di cancellare il campo
+    if (rawValue === "") {
+      setFloor("");
+      setError("");
+      return;
+    }
+
+    const value = Number(rawValue);
+
+    // Se l'utente prova a inserire un numero negativo
+    if (value < 0) {
+      setError("Non è possibile inserire un numero negativo");
+      setFloor(""); // svuota il campo
+      return;
+    }
+
+    // Controllo max 45 in tempo reale (opzionale)
+    if (value > 45) {
+      setError("Il piano massimo consentito è 45");
+    } else {
+      setError("");
+    }
+
+    setFloor(rawValue);
+  };
+
   const handleContinue = () => {
-    if (!floor && floor !== 0) {
+    const numericFloor = Number(floor);
+
+    // Campo vuoto o non valido
+    if (floor === "" || Number.isNaN(numericFloor)) {
       setError("Inserisci il piano dell'immobile");
       return;
     }
 
-    if (Number(floor) > 45) {
+    // Ulteriore safety check per negativi
+    if (numericFloor < 0) {
+      setError("Non è possibile inserire un numero negativo");
+      return;
+    }
+
+    if (numericFloor > 45) {
       setError("Il piano massimo consentito è 45");
       return;
     }
@@ -21,7 +61,7 @@ export default function Step5({ formData, setFormData, nextStep, prevStep }) {
 
     setFormData({
       ...formData,
-      floor,
+      floor: numericFloor,
     });
 
     nextStep();
@@ -39,10 +79,16 @@ export default function Step5({ formData, setFormData, nextStep, prevStep }) {
           type="number"
           className={styles.inputNumber}
           value={floor}
-          onChange={(e) => setFloor(e.target.value)}
+          onChange={handleChange}
           min={0}
           max={45}
           placeholder="0"
+          onKeyDown={(e) => {
+            // Blocca la digitazione diretta del "-" e di caratteri non numerici comuni
+            if (e.key === "-" || e.key === "+" || e.key === "e") {
+              e.preventDefault();
+            }
+          }}
         />
       </div>
 

@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   mysql:
     image: mysql:8.0.40
@@ -33,6 +31,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/rooftop_immobiliare?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: rooftop
       SPRING_DATASOURCE_PASSWORD: back3nd
+      MAIL_USERNAME: immobiliaris.noreply@gmail.com
+      MAIL_PASSWORD: ztkpilxvwtlowmoh
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_JPA_SHOW_SQL: false
     ports:

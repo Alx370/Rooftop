@@ -1,185 +1,257 @@
 .valutazione-container {
   font-family: "Poppins", sans-serif;
-  color: #1b1b1b;
-  text-align: center;
-  background: #fff;
+  color: #020122;
+  text-align: start;
 }
 
-/* ===== HERO ===== */
+/* ---------------- HERO ---------------- */
 .hero-section {
-  margin: 4rem 1rem 2rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-section h1 {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: #1b1b1b;
+  color: #020122;
+  line-height: 1.2;
+  max-width: 600px;
+  text-align: center !important;
 }
 
 .hero-section p {
-  margin-top: 0.5rem;
-  color: #5b5b5b;
-  font-size: 1.1rem;
+  margin-top: -1rem;
+  color: #020122;
+  font-size: 1.2rem;
 }
 
-/* ===== SERVIZI ===== */
+/* ---------------- CARDS ---------------- */
 .servizi-section {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
   flex-wrap: wrap;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 .card {
-  width: 550px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
-  background: #fff;
+  width: 520px;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: flex-end;  
+  align-items: flex-start;     /* CONTENUTI A SINISTRA */
 }
 
-.card img {
+.card-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.card-bg img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.38);
+}
+
 .card-content {
-  padding: 1.2rem;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 3rem;
+  text-align: left;
+  margin-top: 2rem;
 }
 
 .card-content h2 {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 700;
+  color: #020122 !important;
+  text-align: left;
 }
 
 .card-content p {
-  color: #444;
-  font-size: 0.95rem;
-  margin: 0.5rem 0 1rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #020122 !important;
 }
 
-.testo-card {
-  text-align: center;
-  color: #444;
-  font-size: 0.95rem;
-  margin: 0.5rem 0 1rem;
-}
-
+/* BOTTONI */
 .btn {
-  padding: 0.7rem 1.2rem;
+  padding: 0.8rem 2rem;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 10px;
   cursor: pointer;
-  align-items: center;
+  font-weight: 600;
 }
 
-.btn.blu {
-  background-color: #276ef1;
-  color: white;
-  align-items: center;
-}
-
+.btn.blu,
 .btn.arancio {
-  background-color: #ff7a00;
+  background: #FF6400;
   color: white;
-  align-items: center;
 }
 
-/* ===== STEPS ===== */
+/* ---------------- STEPS ---------------- */
 .steps-section {
-  padding-top: 5rem;
+  padding-top: 6rem;
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  align-items: flex-start;
+  gap: 8rem;
   flex-wrap: wrap;
   margin: 3rem 1rem;
 }
 
 .step {
   max-width: 220px;
+  text-align: center;
 }
 
 .step img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 1rem;
+  width: 90px;
+  display: block;
+  margin: 0 auto 1.4rem;
 }
 
 .step h3 {
   color: #ff7a00;
-  font-size: 1.1rem;
-  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .step p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #333;
 }
 
-/* ===== ACCESSO ===== */
+/* ---------------- ACCESS ---------------- */
 .access-section {
-  background: linear-gradient(to bottom, #ffffff, #f2f4ff);
-  padding: 3rem 1rem;
+  padding: 4rem 1rem 5rem;
+  text-align: center;       /* CENTRA TUTTO */
 }
 
 .access-section h2 {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .access-section p {
-  max-width: 600px;
-  margin: 0 auto 2rem;
+  max-width: 650px;
+  margin: 0 auto 3rem;
   color: #333;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* ===== RESPONSIVE ===== */
+.access-btn {
+  padding: 0.9rem 2.4rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin: 0 auto;           /* CENTRATO */
+  display: inline-block;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
+
   .hero-section h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    margin-top: 3rem;
   }
 
   .servizi-section {
-    flex-direction: column;
+
     align-items: center;
+    gap: 3rem;
   }
 
-  .steps-section {
-    flex-direction: column;
-    align-items: center;
+  .card {
+    display: flex;
+    width: 75%;
+    height: 300px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+
+  .hero-section h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+  }
+
+   .servizi-section {
+    flex-wrap: nowrap !important;
+    justify-content: center;
     gap: 2rem;
   }
 
   .card {
-    width: 90%;
+    width: 45% ;
+    height: 300px;
   }
 
-  .access-section h2 {
-    font-size: 1.2rem;
+    .access-section h2 {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
   }
+
+  .access-section p {
+    max-width: 90%;
+    font-size: 1rem;
+    margin-bottom:2rem;
+  }
+
 }
 
 @media (max-width: 480px) {
+
   .hero-section h1 {
-    font-size: 1.5rem;
+    font-size: 1.45em;
+  }
+  .hero-section p{
+    margin-top:.0rem;
+    font-size: 1rem ;
   }
 
-  .hero-section p {
-    font-size: 0.95rem;
+  .card {
+    width: 80%;
+    height: 300px ;
   }
 
-  .card-content p,
-  .step p {
-    font-size: 0.9rem;
+  .card-content {
+    padding: 1.5rem;
   }
 
   .btn {
     width: 100%;
+    padding: 0.9rem;
+  }
+
+  .access-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .access-section p {
+    max-width: 90%;
+    font-size: 0.9rem;
+    margin-bottom:2rem;
+  }
+
+  .access-btn {
+    width: 50%;
   }
 }

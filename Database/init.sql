@@ -226,6 +226,34 @@ CREATE TABLE IF NOT EXISTS omi_zone (
   poligono JSON NULL
 );
 
+-- ============================
+-- NEWSLETTER
+-- ============================
+CREATE TABLE IF NOT EXISTS newsletter (
+  id_newsletter INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(150) UNIQUE NOT NULL,
+  data_iscrizione DATETIME DEFAULT CURRENT_TIMESTAMP,
+  attivo BOOLEAN DEFAULT TRUE
+);
+
+-- ============================
+-- RICHIESTE CONTATTO
+-- ============================
+CREATE TABLE IF NOT EXISTS richieste_contatto (
+  id_richiesta INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  cognome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  telefono VARCHAR(20),
+  messaggio TEXT NOT NULL,
+  data_richiesta DATETIME DEFAULT CURRENT_TIMESTAMP,
+  stato ENUM('NUOVA', 'LETTA', 'IN_LAVORAZIONE', 'COMPLETATA', 'ARCHIVIATA') DEFAULT 'NUOVA',
+  id_agente_assegnato INT,
+  note_agente TEXT,
+  salvata_come_faq BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (id_agente_assegnato) REFERENCES utenti(id_utente) ON DELETE SET NULL
+);
+
 
 -- ============================
 -- DATI
@@ -301,7 +329,7 @@ INSERT INTO caratteristiche_immobile (id_immobile, ascensore, parcheggio, posti_
 (11, TRUE, FALSE, 0, FALSE, TRUE, 5.00, FALSE, NULL, FALSE, NULL, FALSE, TRUE, TRUE, FALSE, 'AUTONOMO', 'C', 'EST'),
 (12, FALSE, TRUE, 1, FALSE, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, FALSE, FALSE, FALSE, 'CENTRALIZZATO', 'D', 'NORD');
 
-INSERT INTO valutazioni (id_immobile, id_valutatore, stato, metodo, data_valutazione, note) VALUES
+INSERT INTO valutazioni (id_immobile, id_valutatore, valore_stimato, valore_min, valore_max, stato, metodo, data_valutazione, note) VALUES
 (1, 3, 485000.00, 465000.00, 505000.00, 'COMPLETATA', 'MANUALE', '2025-09-16 14:30:00', 'Valutazione basata su comparabili della zona. Immobile in ottime condizioni, prezzo allineato al mercato.'),
 (2, 3, 890000.00, 850000.00, 930000.00, 'COMPLETATA', 'MANUALE', '2025-09-21 10:00:00', 'Villa di pregio, giardino ben curato. Prezzo giustificato dalla posizione e dalle caratteristiche.'),
 (3, 3, 620000.00, 590000.00, 650000.00, 'COMPLETATA', 'MANUALE', '2025-10-02 11:15:00', 'Attico di nuova costruzione, terrazzo panoramico molto apprezzabile. Fascia alta del mercato.'),

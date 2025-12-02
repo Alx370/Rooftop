@@ -1,13 +1,17 @@
-import { apiGet, apiPost } from "./apiClient";
+import { apiPost, apiGet } from "./apiClient.js";
 
-export function login(email, password) {
-  return apiPost("/auth/login", { email, password });
+// LOGIN → ricevi token
+export async function login(credentials) {
+  const data = await apiPost("/auth/login", credentials);
+
+  if (!data.token) {
+    throw new Error("Token non presente nella risposta");
+  }
+
+  return data; // { token: "..." }
 }
 
-export function logout() {
-  localStorage.removeItem("token");
-}
-
+// GET /auth/me
 export function getMe() {
   return apiGet("/auth/me", true);
 }

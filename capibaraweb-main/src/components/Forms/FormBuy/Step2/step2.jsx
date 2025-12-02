@@ -1,36 +1,39 @@
 import React, { useState } from "react";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step2.module.css";
+
+import defaultImg from "../../../../assets/images/tipologia di casa.png";
 import villaImg from "../../../../assets/images/Villa.png";
 import appartamentoImg from "../../../../assets/images/Appartamento.png";
 
 export default function Step2({ formData, setFormData, nextStep, prevStep }) {
-  const [error, setError] = useState("");
   const [selectedType, setSelectedType] = useState(formData.tipologia || "");
+  const [error, setError] = useState("");
 
   const handleContinue = () => {
     if (!selectedType) {
-      setError("*Inserire tipologia");
+      setError("Seleziona una tipologia");
       return;
     }
 
-    // Salvo la tipologia nello stato globale
     setFormData({ ...formData, tipologia: selectedType });
-
-    setError("");
-    nextStep(); // Vai allo step 3
+    nextStep();
   };
 
   return (
-    <div className={styles.step}>
+    <div className={styles.container}>
       <ProgressBar currentStep={2} totalSteps={9} />
-      <h2>Qual è la tipologia del tuo immobile?</h2>
 
-      <div className={styles.stepContent}>
-        <div className={styles.leftColumn}>
-          <p>Tipologia immobile</p>
+      <h2 className={styles.title}>Qual è la tipologia del tuo immobile?</h2>
+
+      <div className={styles.content}>
+        
+        {/* SINISTRA */}
+        <div className={styles.left}>
+          <label className={styles.label}>Tipologia immobile</label>
 
           <select
+            className={styles.select}
             value={selectedType}
             onChange={(e) => {
               setSelectedType(e.target.value);
@@ -42,22 +45,32 @@ export default function Step2({ formData, setFormData, nextStep, prevStep }) {
             <option value="appartamento">Appartamento</option>
           </select>
 
-          {error && <div className={styles.error}>{error}</div>}
+          {error && <p className={styles.error}>{error}</p>}
 
           <div className={styles.buttons}>
-            <button className={styles.btnBack} onClick={prevStep}>
+            <button className={styles.back} onClick={prevStep}>
               Indietro
             </button>
-            <button className={styles.btnContinue} onClick={handleContinue}>
+
+            <button className={styles.next} onClick={handleContinue}>
               Continua
             </button>
           </div>
         </div>
 
-        <div className={styles.rightColumn}>
-          {selectedType === "villa" && <img src={villaImg} alt="Villa" />}
-          {selectedType === "appartamento" && <img src={appartamentoImg} alt="Appartamento" />}
+        {/* DESTRA (IMMAGINI) */}
+        <div className={styles.right}>
+          {!selectedType && (
+            <img src={defaultImg} alt="Tipologia immobile" className={styles.image} />
+          )}
+          {selectedType === "villa" && (
+            <img src={villaImg} alt="Villa" className={styles.image} />
+          )}
+          {selectedType === "appartamento" && (
+            <img src={appartamentoImg} alt="Appartamento" className={styles.image} />
+          )}
         </div>
+
       </div>
     </div>
   );

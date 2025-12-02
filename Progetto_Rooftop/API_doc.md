@@ -9,6 +9,9 @@
 - [Recensioni](#recensioni)
 - [Note](#note)
 - [FAQ](#faq)
+- [Contact Requests](#contact-requests-richieste-di-contatto)
+- [Newsletter](#newsletter)
+- [Quick FAQ Creation](#quick-faq-creation-click-to-create)
 - [Autenticazione e Autorizzazioni](#autenticazione-e-autorizzazioni)
 
 ---
@@ -153,6 +156,7 @@ Authorization: Bearer <token>
 |--------|----------|-------------|----------------|-------------|
 | GET | `/api/immobili` | Recupera tutti gli immobili | Pubblico | - |
 | GET | `/api/immobili/{id}` | Recupera un immobile per ID | Pubblico | Path: `id` |
+| GET | `/api/immobili/{id}/contratto-esclusiva` | Genera contratto esclusiva per immobile | AMMINISTRATORE, AGENTE | Path: `id` |
 | POST | `/api/immobili` | Crea un nuovo immobile | AMMINISTRATORE, AGENTE, PROPRIETARIO | Body: `Immobile` JSON |
 | PUT | `/api/immobili/{id}` | Aggiorna un immobile esistente | AMMINISTRATORE, AGENTE, PROPRIETARIO | Path: `id`, Body: `Immobile` JSON |
 | DELETE | `/api/immobili/{id}` | Elimina un immobile | AMMINISTRATORE | Path: `id` |
@@ -190,9 +194,11 @@ APPARTAMENTO, VILLA, CASA_INDIPENDENTE, ATTICO, LOFT, MANSARDA, RUSTICO, CASALE
 OTTIMO, BUONO, DA_RISTRUTTURARE, NUOVO
 ```
 
-### Enum Stato Annuncio
-```
-VALUTAZIONE, PUBBLICATO, VENDUTO, RITIRATO, SOSPESO
+### Esempio Response Contratto Esclusiva
+```json
+{
+  "html": "<html>Contratto di incarico di vendita in esclusiva...</html>"
+}
 ```
 
 ---
@@ -279,6 +285,257 @@ GET /api/note/immobili/8?visibilita=PRIVATA
 
 ---
 
+## Contact Requests (Richieste di Contatto)
+**Base URL**: `/api/contatto`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/contatto` | Invia una nuova richiesta di contatto (form pubblico) | Pubblico | Body: `{ nome, cognome, email, telefono, messaggio }` |
+| GET | `/api/contatto` | Recupera tutte le richieste | AMMINISTRATORE | - |
+| GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato (`NUOVA`, `IN_LAVORAZIONE`, `COMPLETATA`) | AMMINISTRATORE | Path: `stato` |
+| PUT | `/api/contatto/{id}/in-lavorazione` | Marca la richiesta come in lavorazione | AMMINISTRATORE | Path: `id` |
+| PUT | `/api/contatto/{id}/faq` | Salva la richiesta come FAQ (crea una FAQ con la domanda = messaggio) | AMMINISTRATORE | Path: `id` |
+| DELETE | `/api/contatto/{id}` | Elimina una richiesta | AMMINISTRATORE | Path: `id` |
+
+### Esempio: salvare come FAQ (curl)
+```bash
+curl -X PUT http://localhost:8080/api/contatto/123/faq \\
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+Quando un utente invia una richiesta con `POST /api/contatto`, il sistema invia una email di notifica all'indirizzo configurato (`app.email.agente`). Nell'email viene riportato l'ID della richiesta e un esempio `curl` per eseguire rapidamente l'azione di salvataggio come FAQ.
+
+---
+
+## Newsletter
+**Base URL**: `/api/newsletter`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/newsletter/iscriviti` | Iscrizione alla newsletter | Pubblico | Body: `{ "email": "..." }` |
+| DELETE | `/api/newsletter/disiscrivi/{email}` | Disiscrizione dalla newsletter | Pubblico | Path: `email` |
+
+### Esempio Body Iscrizione Newsletter
+```json
+{
+  "email": "mario.rossi@example.com"
+}
+```
+
+### Esempio Response Iscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Iscrizione completata! Ti abbiamo inviato una email di conferma.",
+  "data": {
+    "id_newsletter": 1,
+    "email": "mario.rossi@example.com",
+    "data_iscrizione": "2025-12-02T10:30:00"
+  }
+}
+```
+
+### Esempio Response Disiscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Disiscrizione completata."
+}
+```
+
+### Esempio Response (Error)
+```json
+{
+  "success": false,
+  "message": "Email già iscritta alla newsletter"
+}
+```
+
+---
+
+## Quick FAQ Creation (Click-to-Create)
+**Base URL**: `/api/faq`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/faq/from-request/{richiestaId}` | Crea una FAQ da una richiesta di contatto | AMMINISTRATORE, AGENTE | Path: `richiestaId`, Body: `{ risposta, categoria }` |
+
+### Endpoint Details
+- **URL**: `POST /api/faq/from-request/{richiestaId}`
+- **Authentication**: Bearer Token (JWT)
+- **Authorization**: AMMINISTRATORE, AGENTE
+- **Path Parameter**: `richiestaId` (Integer) - ID della richiesta di contatto
+- **Request Body**: JSON object with required fields
+- **Response**: JSON object with created FAQ details
+
+### Esempio Body (Click-to-Create FAQ)
+```json
+{
+  "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+  "categoria": "VENDITA"
+}
+```
+
+### Esempio Response (Success)
+```json
+{
+  "success": true,
+  "message": "FAQ creata con successo dalla richiesta",
+  "data": {
+    "id_faq": 42,
+    "categoria": "VENDITA",
+    "domanda": "Come posso pubblicare un annuncio?",
+    "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+    "ordine": 0
+  }
+}
+```
+
+### Esempio Response (Error - Categoria non valida)
+```json
+{
+  "error": "Categoria non valida: INVALIDA"
+}
+```
+
+### Esempio Response (Error - Risposta mancante)
+```json
+{
+  "error": "Risposta è richiesta"
+}
+```
+
+### Test via cURL per prototipizzazione
+```bash
+# 1. Get a list of contact requests to find a richiestaId
+curl -X GET http://localhost:8080/api/contatto \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+
+# 2. Create a FAQ from request with ID 5
+curl -X POST http://localhost:8080/api/faq/from-request/5 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <TOKEN_ADMIN>" \
+  -d '{
+    "risposta": "La risposta alla domanda è...",
+    "categoria": "GENERALE"
+  }'
+
+# 3. Verify the FAQ was created
+curl -X GET http://localhost:8080/api/faq \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+=======
+| POST | `/api/contatto` | Crea una nuova richiesta di contatto | Pubblico | Body: `{"nome": "...", "cognome": "...", "email": "...", "telefono": "...", "messaggio": "..."}` |
+| GET | `/api/contatto` | Recupera tutte le richieste di contatto | AMMINISTRATORE, AGENTE | - |
+| GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato | AMMINISTRATORE, AGENTE | Path: `stato` |
+| PUT | `/api/contatto/{id}/in-lavorazione` | Marca richiesta come in lavorazione | AMMINISTRATORE, AGENTE | Path: `id` |
+| PUT | `/api/contatto/{id}/faq` | Salva richiesta come FAQ | AMMINISTRATORE, AGENTE | Path: `id` |
+| DELETE | `/api/contatto/{id}` | Elimina richiesta | AMMINISTRATORE | Path: `id` |
+
+### Esempio Body Richiesta Contatto
+```json
+{
+  "nome": "Mario",
+  "cognome": "Rossi",
+  "email": "mario.rossi@example.com",
+  "telefono": "+39 333 1234567",
+  "messaggio": "Vorrei informazioni su un appartamento in centro."
+}
+```
+
+### Esempio Response Richiesta Contatto
+```json
+{
+  "success": true,
+  "message": "Richiesta inviata! Ti contatteremo presto.",
+  "data": {
+    "id": 1,
+    "nome": "Mario",
+    "cognome": "Rossi",
+    "email": "mario.rossi@example.com",
+    "telefono": "+39 333 1234567",
+    "messaggio": "Vorrei informazioni su un appartamento in centro.",
+    "stato": "NUOVA",
+    "dataCreazione": "2025-12-02T10:00:00Z"
+  }
+}
+```
+
+## Newsletter
+**Base URL**: `/api/newsletter`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/newsletter/iscriviti` | Iscrivi email alla newsletter | Pubblico | Body: `{"email": "..."}` |
+| DELETE | `/api/newsletter/disiscrivi/{email}` | Disiscrivi email dalla newsletter | Pubblico | Path: `email` |
+
+### Esempio Body Iscrizione Newsletter
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+### Esempio Response Iscrizione Newsletter
+```json
+{
+  "success": true,
+  "message": "Iscrizione alla newsletter effettuata con successo."
+}
+```
+
+## Valutazione
+**Base URL**: `/api/valutazione`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/valutazione/automatica` | Valutazione automatica immobile | Pubblico | Body: `RichiestaValutazioneDTO` |
+
+### Esempio Body Valutazione Automatica
+```json
+{
+  "provincia": "TO",
+  "cap": "10121",
+  "indirizzo": "Via Garibaldi",
+  "civico": "45",
+  "metriQuadri": 85.0,
+  "tipologia": "APPARTAMENTO",
+  "statoImmobile": "BUONO",
+  "piano": "3",
+  "locali": 4,
+  "bagni": 2,
+  "annoCost": 1980,
+  "ascensore": true,
+  "parcheggio": false,
+  "postiAuto": 0,
+  "garage": false,
+  "balconeMq": 8.0,
+  "terrazzoMq": null,
+  "giardinoMq": null,
+  "cantina": true,
+  "arredato": false,
+  "ariaCondizionata": true,
+  "allarme": false,
+  "riscaldamento": "CENTRALIZZATO",
+  "classeEnergetica": "C",
+  "orientamento": "SUD_EST"
+}
+```
+
+### Esempio Response Valutazione Automatica
+```json
+{
+  "valoreStimato": 285000.00,
+  "valoreMin": 270000.00,
+  "valoreMax": 300000.00,
+  "zonaOMI": "Torino Centro",
+  "coefficienteZona": 1.2,
+  "dataValutazione": "2025-12-02T10:00:00Z"
+}
+```
+---
+
 ## Note Tecniche
 
 ### Formati Date/Timestamp
@@ -328,5 +585,5 @@ GENERALE, VENDITA, ACQUISTO, VALUTAZIONE, CONTATTI
 PRIVATA, CONDIVISA, PUBBLICA
 ```
 
-**Versione Documento**: 1.1  
-**Data Ultimo Aggiornamento**: 17 Novembre 2025
+**Versione Documento**: 1.2  
+**Data Ultimo Aggiornamento**: 2 Dicembre 2025

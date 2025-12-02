@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProgettoRooftopApplication<Progetto_Rooftop>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "Immobiliaris.Progetto_Rooftop.ProgettoRooftopApplication",
+            "projectName": "Progetto_Rooftop",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

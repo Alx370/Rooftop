@@ -1,43 +1,75 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, setAuthToken } from "../../services/api"; 
+import { login } from "../../api/authApi.js";
+import { decodeJWT } from "../../utils/jwt_decoder.js";
 import "./login.css";
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // per il redirect dopo login
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validazione semplice
-    if (!email || !password) {
-      setError("Compila tutti i campi per procedere.");
-      return;
-    }
+    setError("");
 
     try {
-      // Chiamata al backend: passiamo un oggetto { email, password }
       const data = await login({ email, password });
-      console.log("Token ricevuto dal backend:", data.token);
+      const token = data.token;
 
-      // Salvataggio token in localStorage
-      localStorage.setItem("token", data.token);
+      if (!token) {
+        setError("Token non ricevuto dal server.");
+        return;
+      }
 
-      // Imposta l'Authorization header per le chiamate future
-      setAuthToken(data.token);
+      // Salva il token nel localStorage
+      localStorage.setItem("token", token);
 
-      setError("");
+      // Decodifica il payload del JWT
+      const payload = decodeJWT(token);
+      console.log("PAYLOAD JWT:", payload);
 
-      // Redirect alla dashboard o pagina protetta
-      navigate("/dashboard"); // modifica con la tua route
+      if (!payload) {
+        setError("Token non valido.");
+        return;
+      }
+
+      // Il ruolo è nel claim "ruolo" del token
+      const ruolo = payload.ruolo;
+
+      if (!ruolo) {
+        setError("Ruolo non trovato nel token.");
+        return;
+      }
+
+      // Salva il ruolo nel localStorage per accesso rapido
+      localStorage.setItem("ruolo", ruolo);
+      localStorage.setItem("email", payload.email || "");
+
+      // Redirect in base al ruolo
+      switch (ruolo) {
+        case "AGENTE":
+          navigate("/agente");
+          break;
+        case "AMMINISTRATORE":
+          navigate("/admin");
+          break;
+        case "VALUTATORE":
+          navigate("/agente");
+          break;
+        case "PROPRIETARIO":
+          navigate("/utente");
+          break;
+        default:
+          navigate("/");
+      }
+
     } catch (err) {
-      setError(err.message || "Credenziali non valide");
-      console.error(err);
+      console.error("Errore login:", err);
+      setError("Credenziali non valide");
     }
   };
 
@@ -56,6 +88,7 @@ const Login = () => {
           <span>o accedi con l'email</span>
         </div>
 
+        {/* FORM CON ONSUBMIT FUNZIONANTE */}
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
@@ -99,6 +132,4 @@ const Login = () => {
       </div>
     </section>
   );
-};
-
-export default Login;
+}

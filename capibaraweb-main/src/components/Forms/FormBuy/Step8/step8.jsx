@@ -1,58 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import styles from "./step8.module.css";
-import { createUser } from "../../../../services/api";
+import "./step8.css";
 
-export default function Step9({ formData }) {
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+export default function Step8({ formData, setFormData, nextStep, prevStep }) {
 
-  useEffect(() => {
-    const sendFinalData = async () => {
-      try {
-        await createUser({ ...formData, step: 8}); // invio dati finali
-        setLoading(false);
-      } catch (err) {
-        console.error("Errore invio dati finali:", err);
-        setError("Si è verificato un errore durante l'invio dei dati. Riprova.");
-        setLoading(false);
-      }
-    };
+  const sellOptions = [
+    {
+      value: "standard",
+      title: "Vendita standard",
+      desc: "Percorso tradizionale con analisi accurata e supporto completo dell’agente.",
+    },
+    {
+      value: "veloce",
+      title: "Vendita veloce",
+      desc: "Procedura accelerata con selezione rapida di acquirenti qualificati.",
+    },
+  ];
 
-    sendFinalData();
-  }, []); // <-- esegue solo al montaggio
-
-  const handleGoHome = () => {
-    navigate("/"); // torna alla home
+  const selectOption = (value) => {
+    setFormData({ ...formData, sellingType: value });
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.progressWrapper}>
-        <ProgressBar currentStep={9} totalSteps={9} />
+    <div className="sell-step8-wrapper">
+
+      {/* Progress Bar */}
+      <div className="sell-step8-progress">
+        <ProgressBar currentStep={8} totalSteps={9} />
       </div>
 
-      <div className={styles.content}>
-        <div className={styles.iconCircle}>
-          <span className={styles.checkmark}>✔</span>
-        </div>
+      {/* Title */}
+      <h2 className="sell-step8-title">
+        In che modalità preferisci vendere il tuo immobile?
+      </h2>
 
-        <h2 className={styles.title}>Registrazione completata con successo</h2>
+      {/* Cards */}
+      <div className="sell-step8-grid">
+        {sellOptions.map((opt) => (
+          <div
+            key={opt.value}
+            className={
+              "sell-step8-card" +
+              (formData.sellingType === opt.value ? " sell-active" : "")
+            }
+            onClick={() => selectOption(opt.value)}
+          >
+            <div className="sell-step8-card-header">
+              <h3>{opt.title}</h3>
+              <span
+                className={
+                  "sell-step8-radio" +
+                  (formData.sellingType === opt.value ? " sell-radio-on" : "")
+                }
+              ></span>
+            </div>
+            <p>{opt.desc}</p>
+          </div>
+        ))}
+      </div>
 
-        {loading && <p className={styles.text}>Invio dati in corso...</p>}
+      {/* Buttons */}
+      <div className="sell-step8-buttons">
+        <button className="sell-btn sell-btn-secondary" onClick={prevStep}>
+          Indietro
+        </button>
 
-        {!loading && !error && (
-          <p className={styles.text}>
-            Abbiamo ricevuto tutte le informazioni sul tuo immobile. Entro 72 ore un nostro agente ti invierà una mail di riepilogo con il range di prezzo stimato e ti accompagnerà nel percorso di valutazione dettagliata e acquisizione con Immobiliaris.
-          </p>
-        )}
-
-        {error && <p className={styles.error}>{error}</p>}
-
-        <button className={styles.homeButton} onClick={handleGoHome}>
-          Torna alla home
+        <button
+          className="sell-btn sell-btn-primary"
+          onClick={nextStep}
+          disabled={!formData.sellingType}
+        >
+          Continua
         </button>
       </div>
     </div>

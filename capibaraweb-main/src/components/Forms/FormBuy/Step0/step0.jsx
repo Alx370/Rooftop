@@ -3,23 +3,21 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step0.module.css";
 
 export default function Step0({ nextStep }) {
-  const handleContinue = () => {
-    nextStep(); // Passa direttamente allo step successivo
-  };
-
   return (
-    <div className={styles.step}>
+    <div className={styles.container}>
       <ProgressBar currentStep={0} totalSteps={9} />
-      <h2>Benvenuto nel form di valutazione</h2>
-      <p>
-        Compilando questo form fornirai tutte le informazioni necessarie per
-        stimare il valore dell’affitto del tuo immobile.<br />
-        Una volta completata la registrazione, i tuoi dati saranno trattati in
-        modo sicuro e,<br /> entro 72 ore, riceverai una mail da un nostro agente
-        con un riepilogo e un primo range di prezzo stimato.
-      </p>
-      <div className={styles.buttons}>
-        <button className={styles.btn} onClick={handleContinue}>
+
+      <div className={styles.content}>
+        <h2 className={styles.title}>Benvenuto nel form di valutazione</h2>
+
+        <p className={styles.description}>
+         Compilando questo form fornirai tutte le informazioni necessarie per <br/>
+         <b>stimare il valore della tua casa.</b> Una volta completata la registrazione, i <br/>
+         tuoi dati saranno trattati in <b>modo sicuro</b> e, entro <b>72 ore</b>, riceverai una mail <br/> 
+         da un nostro agente con un <b>riepilogo</b> e un primo range di <b>prezzo stimato.</b> 
+        </p>
+
+        <button className={styles.button} onClick={nextStep}>
           Continua
         </button>
       </div>

@@ -3,7 +3,6 @@ package Immobiliaris.Progetto_Rooftop.Model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import Immobiliaris.Progetto_Rooftop.Enum.CategoriaAbitazione;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
 import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
 import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
@@ -108,8 +107,6 @@ public class Immobile {
     // Creation timestamp - automatically set when property is created
     private Integer bagni;
     // Numero di bagni - campo opzionale.
-    private CategoriaAbitazione categoria_abitazione;
-    // Categoria abitativa (es. RESIDENZIALE/TURISTICO) - opzionale.
 
     public Integer getId_immobile() {
         return id_immobile;
@@ -237,14 +234,6 @@ public class Immobile {
 
     public void setBagni(Integer bagni) {
         this.bagni = bagni;
-    }
-
-    public CategoriaAbitazione getCategoria_abitazione() {
-        return categoria_abitazione;
-    }
-
-    public void setCategoria_abitazione(CategoriaAbitazione categoria_abitazione) {
-        this.categoria_abitazione = categoria_abitazione;
     }
 
     public BigDecimal getPrezzo_richiesto() {

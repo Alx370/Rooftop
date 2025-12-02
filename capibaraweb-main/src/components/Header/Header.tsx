@@ -13,7 +13,7 @@ function Header() {
         <div className="logo">
           <Link to="/">
             <img
-              src="/src/assets/images/LogoBlack.png"
+              src="@assets/images/global/LogoBlack.png"
               alt="Capibara Web Logo"
               className="logo-image"
             />

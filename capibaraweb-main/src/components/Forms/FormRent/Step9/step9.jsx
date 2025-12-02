@@ -1,5 +1,5 @@
 import React from "react";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/Progressbar";
 import "./step9.css";
 
 export default function Step9({ formData, setFormData, nextStep, prevStep }) {

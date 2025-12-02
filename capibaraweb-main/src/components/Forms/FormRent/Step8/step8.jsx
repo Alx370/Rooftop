@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/Progressbar";
 import "./step8.css";
 
 export default function Step8({ formData, setFormData, nextStep, prevStep }) {

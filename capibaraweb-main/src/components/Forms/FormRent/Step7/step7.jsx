@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./step7.module.css";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/Progressbar";
 
 // Icone
 import balconyIcon from "../../../../assets/icons/balcony.png";

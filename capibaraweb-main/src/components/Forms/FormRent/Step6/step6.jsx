@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./step6.module.css";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/Progressbar";
 
 export default function Step6({ formData, setFormData, nextStep, prevStep }) {
   const [surface, setSurface] = useState(formData.surface || "");

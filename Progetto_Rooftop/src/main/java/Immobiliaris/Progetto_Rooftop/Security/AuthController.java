@@ -6,6 +6,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import java.util.Collections;
+import org.springframework.beans.factory.annotation.Value;
+import Immobiliaris.Progetto_Rooftop.Enum.Ruolo;
+import Immobiliaris.Progetto_Rooftop.Enum.Stato;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -15,6 +24,8 @@ public class AuthController {
     private final ServiceUtente serviceUtente;
     private final PasswordEncoder encoder;
     private final JwtService jwt;
+    @Value("${app.google.client-id}")
+    private String googleClientId;
 
     public AuthController(ServiceUtente serviceUtente, PasswordEncoder encoder, JwtService jwt) {
         this.serviceUtente = serviceUtente;
@@ -24,6 +35,7 @@ public class AuthController {
 
     public static record LoginReq(String email, String password) {}
     public static record LoginRes(String token) {}
+    public static record GoogleLoginReq(String idToken) {}
 
     @PostMapping("/login")
     public LoginRes login(@RequestBody LoginReq req) {
@@ -36,6 +48,54 @@ public class AuthController {
                 Map.of("ruolo", u.getRuolo().name(), "email", u.getEmail())
         );
         return new LoginRes(token);
+    }
+
+    @PostMapping("/google")
+    public LoginRes google(@RequestBody GoogleLoginReq req) {
+        try {
+            var verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
+                    .setAudience(Collections.singletonList(googleClientId))
+                    .build();
+            GoogleIdToken idToken = verifier.verify(req.idToken());
+            if (idToken == null) {
+                throw new RuntimeException("Token Google non valido");
+            }
+            var payload = idToken.getPayload();
+            String email = payload.getEmail();
+            String givenName = (String) payload.get("given_name");
+            String familyName = (String) payload.get("family_name");
+            if (givenName == null || givenName.isBlank()) {
+                String localPart = email != null ? email.split("@")[0] : "Utente";
+                givenName = localPart;
+            }
+            if (familyName == null || familyName.isBlank()) {
+                familyName = "Google";
+            }
+
+            Utente u;
+            try {
+                u = serviceUtente.getByEmail(email);
+            } catch (Exception e) {
+                u = new Utente();
+                u.setNome(givenName);
+                u.setCognome(familyName);
+                u.setEmail(email);
+                u.setPassword(UUID.randomUUID().toString());
+                u.setRuolo(Ruolo.PROPRIETARIO);
+                u.setStato(Stato.ATTIVO);
+                u = serviceUtente.create(u);
+            }
+
+            String token = jwt.generateToken(
+                    String.valueOf(u.getId_utente()),
+                    Map.of("ruolo", u.getRuolo().name(), "email", u.getEmail())
+            );
+            return new LoginRes(token);
+        } catch (RuntimeException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new RuntimeException("Errore login Google");
+        }
     }
 
     /**

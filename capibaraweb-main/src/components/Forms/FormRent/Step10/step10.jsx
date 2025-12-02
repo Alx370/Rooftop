@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/Progressbar";
 import styles from "./step10.module.css";
 import { inviaValutazioneManuale, valutaAutomatica } from "../../../../api/valutazioneApi.js";
 

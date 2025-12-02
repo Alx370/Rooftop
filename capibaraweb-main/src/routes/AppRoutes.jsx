@@ -17,6 +17,7 @@ import FormRent from "../components/Forms/FormRent/formrent.jsx";
 import LoginAdmin from "../components/LoginAdmin/loginadmin.jsx";
 
 import ScrollToTop from "../components/Scroll/ScrollToTop.jsx";
+import Utente from "../pages/Utente/utente.jsx";
 
 
 const AppRoutes = () => {
@@ -34,6 +35,7 @@ const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/agente" element={<Agente />} />
+            <Route path="/utente" element={<Utente />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/formbuy/*" element={<FormBuy />} />
              <Route path="/formrent/*" element={<FormRent />} />

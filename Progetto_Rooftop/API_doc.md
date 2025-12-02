@@ -9,6 +9,9 @@
 - [Recensioni](#recensioni)
 - [Note](#note)
 - [FAQ](#faq)
+- [Contact Requests](#contact-requests-richieste-di-contatto)
+- [Newsletter](#newsletter)
+- [Quick FAQ Creation](#quick-faq-creation-click-to-create)
 - [Autenticazione e Autorizzazioni](#autenticazione-e-autorizzazioni)
 
 ---
@@ -298,6 +301,52 @@ curl -X PUT http://localhost:8080/api/contatto/123/faq \\
 ```
 
 Quando un utente invia una richiesta con `POST /api/contatto`, il sistema invia una email di notifica all'indirizzo configurato (`app.email.agente`). Nell'email viene riportato l'ID della richiesta e un esempio `curl` per eseguire rapidamente l'azione di salvataggio come FAQ.
+
+---
+
+## Newsletter
+**Base URL**: `/api/newsletter`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/newsletter/iscriviti` | Iscrizione alla newsletter | Pubblico | Body: `{ "email": "..." }` |
+| DELETE | `/api/newsletter/disiscrivi/{email}` | Disiscrizione dalla newsletter | Pubblico | Path: `email` |
+
+### Esempio Body Iscrizione Newsletter
+```json
+{
+  "email": "mario.rossi@example.com"
+}
+```
+
+### Esempio Response Iscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Iscrizione completata! Ti abbiamo inviato una email di conferma.",
+  "data": {
+    "id_newsletter": 1,
+    "email": "mario.rossi@example.com",
+    "data_iscrizione": "2025-12-02T10:30:00"
+  }
+}
+```
+
+### Esempio Response Disiscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Disiscrizione completata."
+}
+```
+
+### Esempio Response (Error)
+```json
+{
+  "success": false,
+  "message": "Email già iscritta alla newsletter"
+}
+```
 
 ---
 

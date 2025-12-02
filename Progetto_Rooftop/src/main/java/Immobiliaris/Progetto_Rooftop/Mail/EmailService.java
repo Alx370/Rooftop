@@ -70,6 +70,76 @@ public class EmailService {
         inviaEmail(email, oggetto, html);
     }
 
+    /**
+     * Send confirmation email to user when they submit a contact request
+     */
+    @Async
+    public void inviaConfermaRichiestaContatto(String emailUtente, String nome, Integer idRichiesta) {
+        String oggetto = "La tua richiesta è stata presa in carico - Immobiliaris";
+        
+        String html = """
+            <html>
+            <body style="font-family: Arial; padding: 20px;">
+                <h1 style="color: #28a745;">✓ Richiesta Ricevuta!</h1>
+                
+                <p>Ciao <strong>%s</strong>,</p>
+                
+                <p>Grazie per averci contattato! La tua richiesta è stata <strong>presa in considerazione</strong> 
+                e un nostro agente ti risponderà al più presto.</p>
+                
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <p><strong>Numero richiesta:</strong> #%d</p>
+                </div>
+                
+                <p>Nel frattempo, ti invitiamo a visitare la nostra sezione 
+                <a href="https://immobiliaris.it/faq">FAQ</a> per trovare risposte alle domande più frequenti.</p>
+                
+                <hr>
+                <p style="color: #666; font-size: 12px;">© 2025 Immobiliaris - Questo è un messaggio automatico.</p>
+            </body>
+            </html>
+            """.formatted(nome, idRichiesta);
+        
+        inviaEmail(emailUtente, oggetto, html);
+    }
+
+    /**
+     * Notify the user that their question has been added to FAQs
+     */
+    @Async
+    public void inviaNotificaFaqCreata(String emailUtente, String nome, String domanda, String risposta) {
+        String oggetto = "La tua domanda è ora nelle FAQ - Immobiliaris";
+        
+        String html = """
+            <html>
+            <body style="font-family: Arial; padding: 20px;">
+                <h1 style="color: #667eea;">La tua domanda è stata aggiunta alle FAQ!</h1>
+                
+                <p>Ciao <strong>%s</strong>,</p>
+                
+                <p>Grazie per la tua domanda! Abbiamo ritenuto che potesse essere utile anche ad altri utenti, 
+                quindi l'abbiamo aggiunta alla nostra sezione FAQ.</p>
+                
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <p><strong>La tua domanda:</strong></p>
+                    <p style="font-style: italic;">"%s"</p>
+                    
+                    <p><strong>La nostra risposta:</strong></p>
+                    <p>%s</p>
+                </div>
+                
+                <p>Puoi consultare tutte le FAQ sul nostro sito: 
+                <a href="https://immobiliaris.it/faq">Visita le FAQ</a></p>
+                
+                <hr>
+                <p style="color: #666; font-size: 12px;">© 2025 Immobiliaris</p>
+            </body>
+            </html>
+            """.formatted(nome, domanda, risposta);
+        
+        inviaEmail(emailUtente, oggetto, html);
+    }
+
     // CONTACT REQUEST NOTIFICATION EMAIL (to agent)
     public void inviaNotificaRichiestaContatto(String emailAgente, Integer idRichiesta, String nome, String cognome,
                                                 String emailCliente, String telefono, String messaggio) {

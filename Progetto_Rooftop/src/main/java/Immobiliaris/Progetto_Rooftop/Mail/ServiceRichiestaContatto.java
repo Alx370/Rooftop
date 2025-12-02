@@ -46,7 +46,10 @@ public class ServiceRichiestaContatto {
         
         RichiestaContatto saved = richiestaRepository.save(richiesta);
 
-        // 2. Send notification email to the agent (include the generated request ID)
+        // 2. Send confirmation email to the user
+        emailService.inviaConfermaRichiestaContatto(email, nome, saved.getIdRichiesta());
+
+        // 3. Send notification email to the agent (include the generated request ID)
         emailService.inviaNotificaRichiestaContatto(emailAgente, saved.getIdRichiesta(), nome, cognome, email, telefono, messaggio);
 
         return saved;
@@ -77,24 +80,34 @@ public class ServiceRichiestaContatto {
     }
 
     /**
-     * Agent saves the request as an FAQ
+     * Agent saves the request as an FAQ with a response
      */
-    public RichiestaContatto salvaComeFaq(Integer id) {
+    public RichiestaContatto salvaComeFaq(Integer id, String risposta, CategoriaFaq categoria) {
         RichiestaContatto richiesta = richiestaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Richiesta non trovata"));
 
+        if (risposta == null || risposta.isBlank()) {
+            throw new RuntimeException("La risposta è obbligatoria per salvare come FAQ");
+        }
+
         // 1. Create a new FAQ entry from the contact request
         Faq faq = new Faq();
-        faq.setCategoria(CategoriaFaq.GENERALE);
+        faq.setCategoria(categoria != null ? categoria : CategoriaFaq.GENERALE);
         faq.setDomanda(richiesta.getMessaggio());
-        faq.setRisposta(""); // Agent can fill in the answer later
-        faq.setOrdine(1);
+        faq.setRisposta(risposta);
+        faq.setOrdine(faqRepository.findAll().size() + 1);
         faqRepository.save(faq);
 
         // 2. Mark contact request as saved-as-FAQ and completed
         richiesta.setSalvataComeFaq(true);
         richiesta.setStato(RichiestaContatto.StatoRichiesta.COMPLETATA);
-        return richiestaRepository.save(richiesta);
+        RichiestaContatto saved = richiestaRepository.save(richiesta);
+
+        // 3. Notify the user that their question has been added to FAQs
+        emailService.inviaNotificaFaqCreata(richiesta.getEmail(), richiesta.getNome(), 
+            richiesta.getMessaggio(), risposta);
+
+        return saved;
     }
 
     /**

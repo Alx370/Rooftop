@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step10.module.css";
-import { createUser } from "../../../../services/api";
+// import { createUser } from "../../../../services/api";
 
 export default function Step10({ formData }) {
   const navigate = useNavigate();

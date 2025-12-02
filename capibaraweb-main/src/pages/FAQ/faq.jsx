@@ -1,5 +1,5 @@
 import React from "react";
-import "./Faq.css";
+import "./faq.css";
 
 // immagini
 import CasaFaq from "../../assets/images/casafaq.png";

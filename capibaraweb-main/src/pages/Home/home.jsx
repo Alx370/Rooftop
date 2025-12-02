@@ -2,13 +2,13 @@ import React, { useRef } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 
+
 // Immagini card e USP
 import finestraImg from "../../assets/images/home/finestra.png";
 import lettoImg from "../../assets/images/home/letto.png";
 import edificioImg from "../../assets/images/home/edificio.png";
 import chiaviImg from "../../assets/images/home/chiavi.jpg";
 import lauraImg from "../../assets/images/home/laura.png";
-
 
 import logoImg from "../../assets/images/home/LogoImmobiliaris.png";
 import palazzoImg from "../../assets/images/home/PalazzoModerno.png";

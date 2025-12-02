@@ -1,7 +1,14 @@
 package Immobiliaris.Progetto_Rooftop.Model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
+import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
+import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,16 +16,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.EnumType;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-import Immobiliaris.Progetto_Rooftop.Enum.StatoAnnuncio;
-import Immobiliaris.Progetto_Rooftop.Enum.StatoImmobile;
-import Immobiliaris.Progetto_Rooftop.Enum.Tipologia;
 
 @Entity
 @Table(name = "immobili")
+/**
+ * Entità JPA che rappresenta un immobile pubblicato sulla piattaforma.
+ * Mappa la tabella `immobili` e include dati anagrafici, stato e caratteristiche.
+ */
 public class Immobile {
 
     @Id
@@ -101,6 +105,8 @@ public class Immobile {
     @Column(name = "creato_il", columnDefinition = "DATETIME")
     private LocalDateTime creato_il;
     // Creation timestamp - automatically set when property is created
+    private Integer bagni;
+    // Numero di bagni - campo opzionale.
 
     public Integer getId_immobile() {
         return id_immobile;
@@ -220,6 +226,14 @@ public class Immobile {
 
     public void setAnno_costruzione(Integer anno_costruzione) {
         this.anno_costruzione = anno_costruzione;
+    }
+
+    public Integer getBagni() {
+        return bagni;
+    }
+
+    public void setBagni(Integer bagni) {
+        this.bagni = bagni;
     }
 
     public BigDecimal getPrezzo_richiesto() {

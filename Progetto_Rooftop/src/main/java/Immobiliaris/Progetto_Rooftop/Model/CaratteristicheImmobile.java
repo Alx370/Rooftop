@@ -99,6 +99,8 @@ public class CaratteristicheImmobile {
     @Enumerated(EnumType.STRING)
     @Column(name = "orientamento")
     private Orientamento orientamento;
+
+    
     // Property orientation (NORD, SUD, EST, OVEST) - stored as string.
 
     public Integer getId_caratteristica() {
@@ -252,4 +254,6 @@ public class CaratteristicheImmobile {
     public void setOrientamento(Orientamento orientamento) {
         this.orientamento = orientamento;
     }
+
+    
 }

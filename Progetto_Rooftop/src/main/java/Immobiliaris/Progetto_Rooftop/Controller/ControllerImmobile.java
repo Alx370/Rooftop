@@ -15,6 +15,11 @@ import Immobiliaris.Progetto_Rooftop.Model.Utente;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceImmobile;
 import Immobiliaris.Progetto_Rooftop.Services.ServiceUtente;
 
+/**
+ * Controller per la gestione CRUD degli immobili.
+ * Le funzionalità di valutazione automatica sono state spostate in ControllerValutazione.
+ */
+
 @RestController
 @RequestMapping("/api/immobili")
 public class ControllerImmobile {
@@ -47,14 +52,12 @@ public class ControllerImmobile {
     @PostMapping
     public ResponseEntity<?> createImmobile(@RequestBody Immobile immobile) {
         try {
-            // Retrieve current authentication
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             
             if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
                 String userId = auth.getPrincipal().toString();
                 Utente utente = serviceUtente.getById(Integer.parseInt(userId));
                 
-                // if the user is logged in as a PROPRIETARIO, find their proprietario profile
                 if ("PROPRIETARIO".equals(utente.getRuolo().name())) {
                     immobile.setProprietario(utente);
                 } else {
@@ -79,7 +82,7 @@ public class ControllerImmobile {
     public ResponseEntity<?> updateImmobile(@PathVariable Integer id, @RequestBody Immobile immobile) {
         try {
             Immobile aggiornato = serviceImmobile.update(id, immobile);
-            return ResponseEntity.ok(aggiornato); // 200 OK
+            return ResponseEntity.ok(aggiornato);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

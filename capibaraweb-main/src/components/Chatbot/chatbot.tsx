@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './chatbot.css';
 import chatbotIcon from '../../assets/icons/chatbot.png';
 import { sendMessage } from '../../api/chatBotApi';
+import ReactMarkdown from 'react-markdown';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; sender: 'user' | 'bot' }>>([]);
   const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // ⬅️ nuovo
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -21,27 +23,33 @@ const Chatbot: React.FC = () => {
     setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
     setInputMessage('');
 
+    // Mostra "Sto pensando..."
+    setIsLoading(true);
+    setMessages(prev => [...prev, { text: "Sto pensando...", sender: 'bot' }]);
+
     try {
       // Chiamata API reale
       const response = await sendMessage(userMessage);
 
-      // Aggiungi risposta del bot
-      if (response?.message) {
-        setMessages(prev => [...prev, { text: response.message, sender: 'bot' }]);
+      // Rimuovi messaggio "Sto pensando..."
+      setMessages(prev => prev.filter(msg => msg.text !== "Sto pensando..."));
+
+      // Aggiungi risposta reale
+      if (response?.response) {
+        setMessages(prev => [...prev, { text: response.response, sender: 'bot' }]);
       }
     } catch (error) {
-      // Gestione errori
-      setMessages(prev => [
-        ...prev,
-        { text: "Errore nel contattare il server. Riprova più tardi.", sender: 'bot' }
-      ]);
+      setMessages(prev =>
+        [...prev.filter(msg => msg.text !== "Sto pensando..."),
+         { text: "Errore nel contattare il server. Riprova più tardi.", sender: 'bot' }]
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
-    }
+    if (e.key === 'Enter') handleSendMessage();
   };
 
   return (
@@ -54,9 +62,7 @@ const Chatbot: React.FC = () => {
         <div className="chatbot-dropdown">
           <div className="chatbot-header">
             <h3>Chat Assistente</h3>
-            <button className="chatbot-close" onClick={toggleChat}>
-              ✕
-            </button>
+            <button className="chatbot-close" onClick={toggleChat}>✕</button>
           </div>
 
           <div className="chatbot-messages">
@@ -67,7 +73,11 @@ const Chatbot: React.FC = () => {
             ) : (
               messages.map((msg, index) => (
                 <div key={index} className={`chatbot-message ${msg.sender}`}>
-                  {msg.text}
+                  {msg.sender === 'bot' ? (
+                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                  ) : (
+                    msg.text
+                  )}
                 </div>
               ))
             )}
@@ -82,9 +92,7 @@ const Chatbot: React.FC = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
             />
-            <button className="chatbot-send" onClick={handleSendMessage}>
-              ➤
-            </button>
+            <button className="chatbot-send" onClick={handleSendMessage}>➤</button>
           </div>
         </div>
       )}

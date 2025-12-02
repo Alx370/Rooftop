@@ -44,7 +44,14 @@ export default function FormRent({ manual = false }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) navigate(`/login?redirect=${basePath}/step0`);
-  }, [basePath]);
+  }, [basePath, navigate]);
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      evaluationType: manual ? "manuale" : "automatica",
+    }));
+  }, [manual]);
 
   return (
     <div className="form-container">

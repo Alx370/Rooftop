@@ -16,7 +16,8 @@ export default function Step9({ formData, manual = false }) {
     hasSent.current = true;
     const sendFinalData = async () => {
       try {
-        if (manual) {
+        const isManual = manual || formData?.evaluationType === "manuale";
+        if (isManual) {
           await inviaValutazioneManuale({ ...formData, step: 9, tipo: "VENDITA" });
         } else {
           const provinciaMap = { torino: "TO", cuneo: "CN", asti: "AT", alessandria: "AL" };
@@ -81,7 +82,7 @@ export default function Step9({ formData, manual = false }) {
             </div>
           ) : (
             <p className={styles.text}>
-              {manual
+              {(manual || formData?.evaluationType === "manuale")
                 ? "Abbiamo inviato i tuoi dati a un agente. Riceverai una risposta entro tre giorni."
                 : "Stima completata. Consulta il valore stimato qui sopra."}
             </p>

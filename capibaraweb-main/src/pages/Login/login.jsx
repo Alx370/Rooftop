@@ -75,7 +75,7 @@ const Login = () => {
           } else {
             navigate("/");
           }
-        } catch (err) {
+        } catch {
           setError("Accesso Google non riuscito");
         }
       },
@@ -89,7 +89,7 @@ const Login = () => {
       });
     }
     window.google.accounts.id.prompt();
-  }, [redirectTo]);
+  }, [redirectTo, navigate]);
 
   return (
     <section className="login-section">
@@ -97,7 +97,7 @@ const Login = () => {
         <h2 className="login-title">Accedi ora</h2>
         <p className="login-subtitle">Bentornato!</p>
 
-        <div className="google-btn">
+        <div className="google-btn" onClick={() => window.google?.accounts.id.prompt()}>
           <img src={googleIcon} alt="Google" className="google-icon" />
           <div id="googleSignInDiv" ref={googleDivRef} />
         </div>

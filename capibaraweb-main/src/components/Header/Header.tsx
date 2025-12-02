@@ -77,7 +77,7 @@ export default function Header() {
         <div className="logo">
           <Link to="/">
             <img
-              src="/src/assets/images/LogoBlack.png"
+              src="@assets/images/LogoBlack.png"
               alt="Capibara Web Logo"
               className="logo-image"
             />
@@ -106,7 +106,7 @@ export default function Header() {
             <Link to="/login" className="login-link">Login</Link>
           ) : (
             <>
-              <button className="login-link" onClick={goDashboard}>
+              <button onClick={goDashboard}>
                 Dashboard
               </button>
               <button className="login-link logout" onClick={handleLogout}>

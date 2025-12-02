@@ -37,6 +37,8 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="/formbuy/*" element={<FormBuy />} />
              <Route path="/formrent/*" element={<FormRent />} />
+            <Route path="/formbuy-manuale/*" element={<FormBuy manual />} />
+            <Route path="/formrent-manuale/*" element={<FormRent manual />} />
             <Route path="/test-faq" element={<FaqList />} />
             <Route path="/login-admin" element={<LoginAdmin />} />
           </Routes>

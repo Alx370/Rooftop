@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 
 import Step0 from "./Step0/step0";
@@ -12,7 +12,7 @@ import Step7 from "./Step7/step7";
 import Step8 from "./Step8/step8";
 import Step9 from "./Step9/step9";
 
-export default function FormBuy() {
+export default function FormBuy({ manual = false }) {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -35,8 +35,16 @@ export default function FormBuy() {
     password: "",
   });
 
-  const nextStep = (currentStep) => navigate(`/formbuy/step${currentStep + 1}`);
-  const prevStep = (currentStep) => navigate(`/formbuy/step${currentStep - 1}`);
+  const basePath = manual ? "/formbuy-manuale" : "/formbuy";
+  const nextStep = (currentStep) => navigate(`${basePath}/step${currentStep + 1}`);
+  const prevStep = (currentStep) => navigate(`${basePath}/step${currentStep - 1}`);
+
+  useEffect(() => {
+    if (manual) {
+      const token = localStorage.getItem("token");
+      if (!token) navigate(`/login?redirect=${basePath}/step0`);
+    }
+  }, [manual, basePath]);
 
   return (
     <div className="form-container">
@@ -158,6 +166,7 @@ export default function FormBuy() {
             <Step9
               formData={formData} 
               setFormData={setFormData} 
+              manual={manual}
               prevStep={() => prevStep(9)} 
             />
           }

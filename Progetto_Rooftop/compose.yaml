@@ -1,10 +1,37 @@
 services:
   mysql:
-    image: 'mysql:latest'
+    image: mysql:8.0.44
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - MYSQL_DATABASE=rooftop_immobiliare
+      - MYSQL_USER=rooftop
+      - MYSQL_PASSWORD=back3nd
+      - MYSQL_ROOT_PASSWORD=verysecret
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/rooftop_immobiliare?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=rooftop
+      - SPRING_DATASOURCE_PASSWORD=back3nd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=false
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - AGENT_EMAIL=alessandro.formicola@edu-its.it
     ports:
-      - '3306'
+      - "8080:8080"
+
+volumes:
+  db_data:

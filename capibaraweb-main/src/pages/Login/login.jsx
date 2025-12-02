@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import googleIcon from "../../assets/icons/Google-icon1.png";
 import { login, setAuthToken, getMe } from "../../api/authApi.js";
@@ -9,6 +9,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirectTo = searchParams.get("redirect");
 
   const navigate = useNavigate();
 
@@ -31,10 +34,16 @@ const Login = () => {
 
       console.log("Ruolo utente:", ruolo);
 
-      // 3️⃣ REDIRECT in base al ruolo
-      if (ruolo === "ROLE_AGENTE") navigate("/agente");
-      else if (ruolo === "ROLE_CLIENTE") navigate("/utente");
-      else navigate("/dashboard"); // fallback
+      // 3️⃣ REDIRECT
+      if (redirectTo) {
+        navigate(redirectTo);
+      } else if (ruolo === "ROLE_AGENTE") {
+        navigate("/agente");
+      } else if (ruolo === "ROLE_CLIENTE") {
+        navigate("/utente");
+      } else {
+        navigate("/dashboard");
+      }
 
       setError("");
 

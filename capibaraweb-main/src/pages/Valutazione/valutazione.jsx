@@ -54,6 +54,10 @@ const Valutazione = () => {
             <Link to="/formbuy/step0">
               <button className="btn blu">Valuta ora</button>
             </Link>
+            <Link to="/formbuy-manuale/step0" style={{ marginLeft: 12 }}>
+              <button className="btn bianco">Valutazione manuale</button>
+            </Link>
+            <p style={{ marginTop: 8, fontSize: 14 }}>Per la valutazione manuale è necessario effettuare l’accesso.</p>
           </div>
         </div>
 
@@ -71,8 +75,12 @@ const Valutazione = () => {
               inquilini alla gestione dei contratti.
             </p>
             <Link to="/formrent/step0">
-            <button className="btn arancio">Stima affitto</button>
+              <button className="btn arancio">Stima affitto</button>
             </Link>
+            <Link to="/formrent-manuale/step0" style={{ marginLeft: 12 }}>
+              <button className="btn bianco">Stima manuale</button>
+            </Link>
+            <p style={{ marginTop: 8, fontSize: 14 }}>Per la stima manuale è necessario effettuare l’accesso.</p>
           </div>
         </div>
 

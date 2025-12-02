@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step10.module.css";
-// import { createUser } from "../../../../services/api";
+import { registraCliente } from "../../../../api/clientiApi.js";
+import { inviaValutazioneManuale } from "../../../../api/valutazioneApi.js";
 
-export default function Step10({ formData }) {
+export default function Step10({ formData, manual = false }) {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const hasSent = useRef(false);
   useEffect(() => {
+    if (hasSent.current) return;
+    hasSent.current = true;
     const sendFinalData = async () => {
       try {
-        await createUser({ ...formData, step: 10 });
+        if (manual) {
+          await inviaValutazioneManuale({ ...formData, step: 10, tipo: "AFFITTO" });
+        } else {
+          await registraCliente({ ...formData, step: 10 });
+        }
         setLoading(false);
       } catch (err) {
         console.error("Errore invio dati finali:", err);
@@ -20,9 +28,8 @@ export default function Step10({ formData }) {
         setLoading(false);
       }
     };
-
     sendFinalData();
-  }, []);
+  }, [formData, manual]);
 
   return (
     <div className={styles.container}>
@@ -40,9 +47,9 @@ export default function Step10({ formData }) {
 
         {!loading && !error && (
           <p className={styles.text}>
-            Abbiamo ricevuto tutte le informazioni relative al tuo immobile.
-            Entro 72 ore un nostro agente ti contatterà via email con un
-            riepilogo completo e una prima stima del valore di affitto.
+            {manual
+              ? "Abbiamo inviato i tuoi dati a un agente. Riceverai una risposta entro tre giorni."
+              : "Abbiamo ricevuto tutte le informazioni relative al tuo immobile. Entro 72 ore un nostro agente ti contatterà via email con un riepilogo completo e una prima stima del valore di affitto."}
           </p>
         )}
 

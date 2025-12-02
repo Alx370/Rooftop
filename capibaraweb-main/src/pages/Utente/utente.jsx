@@ -1,34 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./utente.css";
 import utenteHomeImg from "../../assets/images/utente/casa.png";
 import CalendarioImg from "../../assets/images/utente/calendario.png";
 import DocumentoImg from "../../assets/images/utente/documento.png";
+import { getMe } from "../../api/authApi";
 
 export default function Utente() {
   const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = useState("09:30");
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  // Appuntamenti locali per questa pagina
+  const [appuntamenti, setAppuntamenti] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(18);
 
-  // Gestione click "Vedi profilo" con dati hardcoded
-const handleVediProfilo = () => {
-  const almaCosi = {
-    nome: "Alma Cosi",
-    descrizione: "Esperta in immobili residenziali",
-    esperienza: "+8 anni di esperienza",
-    foto: "../../src/assets/images/chisiamo/Torino/agente4.png"
+  // Dati / stati copia della sezione appuntamenti dell'agente
+  const [agenteAppuntamenti] = useState([]);
+  const [agenteSelectedDate, setAgenteSelectedDate] = useState(18);
+  const [agenteSelectedTime, setAgenteSelectedTime] = useState(null);
+
+  // Recupera dati utente dal backend
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setLoading(true);
+        const data = await getMe();
+        setUserData(data);
+        setError(null);
+      } catch (err) {
+        console.error("Errore nel recupero dati utente:", err);
+        setError("Impossibile caricare i dati utente");
+        // Se non autenticato, reindirizza al login
+        if (err.message.includes("401")) {
+          navigate("/login");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  // Gestione click "Vedi profilo" con dati statici
+  const handleVediProfilo = () => {
+    const almaCosi = {
+      nome: "Alma Cosi",
+      descrizione: "Esperta in immobili residenziali",
+      esperienza: "+8 anni di esperienza",
+      foto: "../../src/assets/images/chisiamo/Torino/agente4.png"
+    };
+    navigate("/chi-siamo", { state: { selectedAgent: almaCosi } });
   };
-  navigate("/chi-siamo", { state: { selectedAgent: almaCosi } });
-};
 
-  // Dati utente
-  const user = {
-    nome: "Elisa",
-    sesso: "F",
+  // Dati utente (ora dinamici dal backend o placeholder durante il caricamento)
+  const user = userData ? {
+    nome: userData.nome || "Utente",
+    cognome: userData.cognome || "",
+    sesso: "F", // Nota: il backend non fornisce questo campo, andrà gestito diversamente
+    email: userData.email || "",
+    telefono: userData.telefono || "",
     agent: {
       nome: "Alma Cosi",
       descrizione: "Esperta in immobili residenziali",
       esperienza: "+8 anni di esperienza",
       foto: "../../src/assets/images/chisiamo/Torino/agente4.png"
+    }
+  } : {
+    nome: "Caricamento...",
+    sesso: "F",
+    agent: {
+      nome: "",
+      descrizione: "",
+      esperienza: "",
+      foto: ""
     }
   };
 
@@ -100,16 +148,28 @@ const handleVediProfilo = () => {
   ];
 
   const orari = ["09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30"];
-
-  // Appuntamenti locali per questa pagina
-  const [appuntamenti, setAppuntamenti] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(18);
-
-  // Dati / stati copia della sezione appuntamenti dell'agente
-  const [agenteAppuntamenti] = useState([]); // placeholder come in `agente.jsx`
-  const [agenteSelectedDate, setAgenteSelectedDate] = useState(18);
-  const [agenteSelectedTime, setAgenteSelectedTime] = useState(null);
   const agenteOrari = ["9:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00", "18:00"];
+
+  // Gestione stati di caricamento ed errore
+  if (loading) {
+    return (
+      <div className="utente">
+        <div style={{ textAlign: "center", padding: "2rem" }}>
+          <p>Caricamento dati utente...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="utente">
+        <div style={{ textAlign: "center", padding: "2rem", color: "red" }}>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="utente">

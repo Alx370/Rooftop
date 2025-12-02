@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './chatbot.css';
 import chatbotIcon from '../../assets/icons/chatbot.png';
+import { sendMessage } from '../../api/chatBotApi';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,21 +12,30 @@ const Chatbot: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
 
-    // Aggiungi il messaggio dell'utente
-    setMessages([...messages, { text: inputMessage, sender: 'user' }]);
-    
-    // Simula una risposta del bot (qui puoi integrare la tua API)
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        text: 'Grazie per il tuo messaggio! Come posso aiutarti?', 
-        sender: 'bot' 
-      }]);
-    }, 500);
+    const userMessage = inputMessage;
 
+    // Mostra subito il messaggio dell’utente
+    setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
     setInputMessage('');
+
+    try {
+      // Chiamata API reale
+      const response = await sendMessage(userMessage);
+
+      // Aggiungi risposta del bot
+      if (response?.message) {
+        setMessages(prev => [...prev, { text: response.message, sender: 'bot' }]);
+      }
+    } catch (error) {
+      // Gestione errori
+      setMessages(prev => [
+        ...prev,
+        { text: "Errore nel contattare il server. Riprova più tardi.", sender: 'bot' }
+      ]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -36,12 +46,10 @@ const Chatbot: React.FC = () => {
 
   return (
     <div className="chatbot-container">
-      {/* Icona circolare */}
       <div className="chatbot-icon" onClick={toggleChat}>
         <img src={chatbotIcon} alt="Chatbot" />
       </div>
 
-      {/* Menu a tendina della chat */}
       {isOpen && (
         <div className="chatbot-dropdown">
           <div className="chatbot-header">

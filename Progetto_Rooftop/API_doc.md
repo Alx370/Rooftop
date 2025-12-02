@@ -9,6 +9,9 @@
 - [Recensioni](#recensioni)
 - [Note](#note)
 - [FAQ](#faq)
+- [Contact Requests](#contact-requests-richieste-di-contatto)
+- [Newsletter](#newsletter)
+- [Quick FAQ Creation](#quick-faq-creation-click-to-create)
 - [Autenticazione e Autorizzazioni](#autenticazione-e-autorizzazioni)
 
 ---
@@ -282,11 +285,147 @@ GET /api/note/immobili/8?visibilita=PRIVATA
 
 ---
 
-## Contatto
+## Contact Requests (Richieste di Contatto)
 **Base URL**: `/api/contatto`
 
 | Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
 |--------|----------|-------------|----------------|-------------|
+| POST | `/api/contatto` | Invia una nuova richiesta di contatto (form pubblico) | Pubblico | Body: `{ nome, cognome, email, telefono, messaggio }` |
+| GET | `/api/contatto` | Recupera tutte le richieste | AMMINISTRATORE | - |
+| GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato (`NUOVA`, `IN_LAVORAZIONE`, `COMPLETATA`) | AMMINISTRATORE | Path: `stato` |
+| PUT | `/api/contatto/{id}/in-lavorazione` | Marca la richiesta come in lavorazione | AMMINISTRATORE | Path: `id` |
+| PUT | `/api/contatto/{id}/faq` | Salva la richiesta come FAQ (crea una FAQ con la domanda = messaggio) | AMMINISTRATORE | Path: `id` |
+| DELETE | `/api/contatto/{id}` | Elimina una richiesta | AMMINISTRATORE | Path: `id` |
+
+### Esempio: salvare come FAQ (curl)
+```bash
+curl -X PUT http://localhost:8080/api/contatto/123/faq \\
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+Quando un utente invia una richiesta con `POST /api/contatto`, il sistema invia una email di notifica all'indirizzo configurato (`app.email.agente`). Nell'email viene riportato l'ID della richiesta e un esempio `curl` per eseguire rapidamente l'azione di salvataggio come FAQ.
+
+---
+
+## Newsletter
+**Base URL**: `/api/newsletter`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/newsletter/iscriviti` | Iscrizione alla newsletter | Pubblico | Body: `{ "email": "..." }` |
+| DELETE | `/api/newsletter/disiscrivi/{email}` | Disiscrizione dalla newsletter | Pubblico | Path: `email` |
+
+### Esempio Body Iscrizione Newsletter
+```json
+{
+  "email": "mario.rossi@example.com"
+}
+```
+
+### Esempio Response Iscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Iscrizione completata! Ti abbiamo inviato una email di conferma.",
+  "data": {
+    "id_newsletter": 1,
+    "email": "mario.rossi@example.com",
+    "data_iscrizione": "2025-12-02T10:30:00"
+  }
+}
+```
+
+### Esempio Response Disiscrizione (Success)
+```json
+{
+  "success": true,
+  "message": "Disiscrizione completata."
+}
+```
+
+### Esempio Response (Error)
+```json
+{
+  "success": false,
+  "message": "Email già iscritta alla newsletter"
+}
+```
+
+---
+
+## Quick FAQ Creation (Click-to-Create)
+**Base URL**: `/api/faq`
+
+| Metodo | Endpoint | Descrizione | Autorizzazione | Body/Params |
+|--------|----------|-------------|----------------|-------------|
+| POST | `/api/faq/from-request/{richiestaId}` | Crea una FAQ da una richiesta di contatto | AMMINISTRATORE, AGENTE | Path: `richiestaId`, Body: `{ risposta, categoria }` |
+
+### Endpoint Details
+- **URL**: `POST /api/faq/from-request/{richiestaId}`
+- **Authentication**: Bearer Token (JWT)
+- **Authorization**: AMMINISTRATORE, AGENTE
+- **Path Parameter**: `richiestaId` (Integer) - ID della richiesta di contatto
+- **Request Body**: JSON object with required fields
+- **Response**: JSON object with created FAQ details
+
+### Esempio Body (Click-to-Create FAQ)
+```json
+{
+  "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+  "categoria": "VENDITA"
+}
+```
+
+### Esempio Response (Success)
+```json
+{
+  "success": true,
+  "message": "FAQ creata con successo dalla richiesta",
+  "data": {
+    "id_faq": 42,
+    "categoria": "VENDITA",
+    "domanda": "Come posso pubblicare un annuncio?",
+    "risposta": "Per pubblicare un annuncio devi prima registrarti come proprietario e verificare la tua identità. Puoi farlo seguendo questi passaggi...",
+    "ordine": 0
+  }
+}
+```
+
+### Esempio Response (Error - Categoria non valida)
+```json
+{
+  "error": "Categoria non valida: INVALIDA"
+}
+```
+
+### Esempio Response (Error - Risposta mancante)
+```json
+{
+  "error": "Risposta è richiesta"
+}
+```
+
+### Test via cURL per prototipizzazione
+```bash
+# 1. Get a list of contact requests to find a richiestaId
+curl -X GET http://localhost:8080/api/contatto \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+
+# 2. Create a FAQ from request with ID 5
+curl -X POST http://localhost:8080/api/faq/from-request/5 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <TOKEN_ADMIN>" \
+  -d '{
+    "risposta": "La risposta alla domanda è...",
+    "categoria": "GENERALE"
+  }'
+
+# 3. Verify the FAQ was created
+curl -X GET http://localhost:8080/api/faq \
+  -H "Authorization: Bearer <TOKEN_ADMIN>"
+```
+
+=======
 | POST | `/api/contatto` | Crea una nuova richiesta di contatto | Pubblico | Body: `{"nome": "...", "cognome": "...", "email": "...", "telefono": "...", "messaggio": "..."}` |
 | GET | `/api/contatto` | Recupera tutte le richieste di contatto | AMMINISTRATORE, AGENTE | - |
 | GET | `/api/contatto/stato/{stato}` | Recupera richieste per stato | AMMINISTRATORE, AGENTE | Path: `stato` |
@@ -395,7 +534,6 @@ GET /api/note/immobili/8?visibilita=PRIVATA
   "dataValutazione": "2025-12-02T10:00:00Z"
 }
 ```
-
 ---
 
 ## Note Tecniche

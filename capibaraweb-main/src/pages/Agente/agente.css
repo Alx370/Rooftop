@@ -10,6 +10,7 @@
 }
 
 .hero-section-agente h1 {
+    font-family: 'Merriweather', serif;
     text-align: left;
     font-size: 3rem;
     font-weight: 700;
@@ -27,12 +28,13 @@
 
 /* Area clienti */
 .area-clienti-agente {
+    font-family: 'Merriweather', serif;
     margin-bottom: 60px;
 }
 
 
 .clienti-table-agente {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
@@ -88,12 +90,14 @@
 }
 
 .azioni {
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     gap: 40px;
     align-items: center;
 }
 
 .btn-icon {
+    font-family: 'Montserrat', sans-serif;
     background: none;
     background-color: #e55a28;
     border-radius: 5px;
@@ -115,7 +119,7 @@
 }
 
 .btn-arancione {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: #FF6B35;
     color: white;
     border: none;
@@ -131,7 +135,7 @@
 }
 
 .btn-bianco {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: white;
     color: #FF6B35;
     border: 2px solid #FF6B35;
@@ -149,6 +153,7 @@
 
 /* Elenco immobili */
 .elenco-immobili {
+    font-family: 'Merriweather', serif;
     padding-top: 40px;
     padding-bottom: 40px;
     margin-bottom: 60px;
@@ -177,7 +182,7 @@
     font-size: 0.85rem;
     font-weight: 600;
     z-index: 1;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .badge-affitto {
@@ -203,7 +208,7 @@
     font-weight: 600;
     margin-bottom: 8px;
     color: #000;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .immobile-card h2 {
@@ -211,14 +216,14 @@
     font-weight: 600;
     margin-bottom: 8px;
     color: #000;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .indirizzo {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 15px;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .valutazione-card {
@@ -231,7 +236,7 @@
     font-size: 0.9rem;
     color: #333;
     text-align: center;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .valutazione-select {
@@ -244,7 +249,7 @@
     font-size: 0.9rem;
     color: #333;
     text-align: center;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     transition: border-color 0.2s;
 }
@@ -266,11 +271,12 @@
 
 /* Appuntamenti */
 .appuntamenti-section {
+    font-family: 'Merriweather', serif;
     margin-bottom: 40px;
 }
 
 .appuntamenti-container {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 30px;
@@ -332,6 +338,7 @@
 }
 
 .giorni-settimana {
+    font-family: 'Montserrat', sans-serif;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
@@ -346,12 +353,14 @@
 }
 
 .date-grid {
+    font-family: 'Montserrat', sans-serif;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
 }
 
 .date-grid .day {
+    font-family: 'Montserrat', sans-serif;
     aspect-ratio: 1;
     border: none;
     background: transparent;
@@ -390,12 +399,14 @@
 }
 
 .orario-lista {
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .orario-slot {
+    font-family: 'Montserrat', sans-serif;
     padding: 12px;
     border: 1px solid #ddd;
     background: white;

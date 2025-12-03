@@ -23,6 +23,7 @@
 }
 
 .faq-text h2 {
+  font-family: 'Merriweather', serif;
   font-size: 3rem;
   margin-bottom: 20px;
   color: #1f1b4b;
@@ -106,7 +107,7 @@
   margin-bottom: 6rem;
 }
 
-.contact-column {
+.contact-column { 
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -115,6 +116,7 @@
 }
 
 .contact-column h2 {
+  font-family: 'Merriweather', serif;
   font-size: 2rem;
   color: #1f1b4b;
   margin-bottom: 2rem;
@@ -122,6 +124,7 @@
 }
 
 .contact-column p {
+  font-family: 'Montserrat', sans-serif;
   max-width: 400px;
   margin-left:-5rem;
 }
@@ -140,12 +143,14 @@
 
 .input-wrap input,
 .input-wrap textarea {
+  font-family: 'Montserrat', sans-serif;
   width: 100%;
   padding: 14px 16px;
   background: white;
   border-radius: 12px;
   border: 1px solid #1f1b4b;
   font-size: 1rem;
+  color: #000;
   box-shadow: #807f7f 0px 4px 6px -2px;
 }
 
@@ -154,6 +159,7 @@
 }
 
 .btn-primary {
+  font-family: 'Montserrat', sans-serif;
   width: 140px;
   height: 40px;
   background: #FF6400;

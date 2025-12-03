@@ -14,7 +14,7 @@
   overflow: hidden;
   padding: 0 4rem;
   top: -1.5rem;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* --- Background images --- */
@@ -153,7 +153,7 @@
     max-width: 90%;
     text-align: center;
     font-size: 1rem;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .hero-bg-palazzo-chisiamo {
@@ -184,7 +184,7 @@
   font-family: 'Merriweather', serif;
 }
 .hero-title-chisiamo p{
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -198,7 +198,7 @@
   align-items: center;
   margin-top: 80px;
   position: relative;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .provincia-btn {
@@ -214,7 +214,7 @@
   gap: 10px;
   align-items: center;
   box-shadow: 0px 4px 12px rgba(255, 122, 0, 0.4);
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .arrow {
@@ -326,7 +326,7 @@
 .descr {
   font-size: 15px;
   margin-bottom: auto;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .arrow-card {
@@ -453,7 +453,7 @@
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modal-presentazione {
@@ -621,7 +621,7 @@
 }
 
 .dati-section p {
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #5b5b5b;
   font-size: 1.1rem;
   text-align: center;

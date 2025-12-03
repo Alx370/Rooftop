@@ -9,17 +9,30 @@ import normalImg from "../../../../assets/images/normale.png";
 import renovateImg from "../../../../assets/images/darestrutturare.png";
 
 export default function Step3({ formData, setFormData, nextStep, prevStep }) {
-  const [selectedCondition, setSelectedCondition] = useState(
-    formData.serviceType || ""
-  );
+  // mappa i possibili valori UI legacy a token enum backend
+  const toToken = {
+    new: "NUOVO",
+    good: "BUONO",
+    renovated: "OTTIMO",
+    renovate: "DA_RISTRUTTURARE",
+  };
+
+  const initialCondition = (() => {
+    if (!formData.serviceType) return "";
+    const raw = String(formData.serviceType);
+    const mapped = toToken[raw.toLowerCase()];
+    return mapped || raw;
+  })();
+
+  const [selectedCondition, setSelectedCondition] = useState(initialCondition);
   const [error, setError] = useState("");
 
-  // Condizioni disponibili (Normale è default, NON una scelta)
+  // Condizioni disponibili (usiamo i token enum attesi dal backend)
   const conditions = [
-    { id: "new", label: "Nuovo", img: newImg },
-    { id: "good", label: "Buono stato", img: goodImg },
-    { id: "renovated", label: "Ottimo stato", img: renovatedImg },
-    { id: "renovate", label: "Da ristrutturare", img: renovateImg },
+    { id: "NUOVO", label: "Nuovo", img: newImg },
+    { id: "BUONO", label: "Buono stato", img: goodImg },
+    { id: "OTTIMO", label: "Ottimo stato", img: renovatedImg },
+    { id: "DA_RISTRUTTURARE", label: "Da ristrutturare", img: renovateImg },
   ];
 
   const handleContinue = () => {
@@ -42,7 +55,7 @@ export default function Step3({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={3} totalSteps={9} />
+      <ProgressBar currentStep={3} totalSteps={10} />
 
       <h2 className={styles.title}>Quali sono le condizioni dell'immobile?</h2>
 

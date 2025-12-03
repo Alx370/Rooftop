@@ -10,7 +10,7 @@
 }
 
 .select {
-  width: 100%;
+  width: 70%;
   padding: 12px 14px;
   font-size: 15px;
   border-radius: 12px;
@@ -219,5 +219,10 @@
   .image {
     margin-top: -1.8rem;
     max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .select{
+    width: 90%;
   }
 }

@@ -22,7 +22,7 @@ export default function Step2({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={2} totalSteps={9} />
+      <ProgressBar currentStep={2} totalSteps={10} />
 
       <h2 className={styles.title}>Qual è la tipologia del tuo immobile?</h2>
 
@@ -41,8 +41,8 @@ export default function Step2({ formData, setFormData, nextStep, prevStep }) {
             }}
           >
             <option value="">Seleziona tipologia</option>
-            <option value="villa">Villa indipendente</option>
-            <option value="appartamento">Appartamento</option>
+            <option value="VILLA">Villa indipendente</option>
+            <option value="APPARTAMENTO">Appartamento</option>
           </select>
 
           {error && <p className={styles.error}>{error}</p>}
@@ -63,10 +63,10 @@ export default function Step2({ formData, setFormData, nextStep, prevStep }) {
           {!selectedType && (
             <img src={defaultImg} alt="Tipologia immobile" className={styles.image} />
           )}
-          {selectedType === "villa" && (
+          {selectedType === "VILLA" && (
             <img src={villaImg} alt="Villa" className={styles.image} />
           )}
-          {selectedType === "appartamento" && (
+          {selectedType === "APPARTAMENTO" && (
             <img src={appartamentoImg} alt="Appartamento" className={styles.image} />
           )}
         </div>

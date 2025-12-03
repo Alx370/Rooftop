@@ -1,123 +1,89 @@
-/* CONTAINER PRINCIPALE */
 .container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* PROGRESS BAR */
-.progressWrapper {
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 40px;
-}
-
-/* CONTENUTO */
-.content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-/* CERCHIO CHECK */
-.iconCircle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: #ff7300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-  animation: pop 0.4s ease-out;
-}
-
-/* ANIMAZIONE CHECK */
-@keyframes pop {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* CHECKMARK */
-.checkmark {
-  color: white;
-  font-size: 60px;
-  font-weight: bold;
-}
-
-/* TITOLO */
 .title {
-  font-size: 30px;
+  text-align: center;
+  font-size: 28px;
   font-weight: 700;
-  color: #020122;
+  margin-bottom: 25px;
 }
 
-/* TESTO */
-.text {
-  font-size: 18px;
-  max-width: 650px;
-  color: #020122;
-  line-height: 1.6;
-}
-
-/* ERRORE */
 .error {
-  color: red;
+  color: #d40000;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.buttons,
+.buttonsResult {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.backButton,
+.submitButton,
+.continueButton {
+  padding: 12px 28px;
   font-size: 16px;
-}
-
-/* BOTTONE */
-.homeButton {
-  margin-top: 25px;
-  padding: 14px 40px;
-  background-color: #ff7300;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
+  border-radius: 14px;
   cursor: pointer;
+  transition: 0.25s ease;
 }
 
-.homeButton:hover {
-  background-color: #e66700;
+.backButton {
+  background: white;
+  border: 2px solid #020122;
+  color: #020122;
 }
 
-.homeButton:active {
-  transform: translateY(0px);
+.backButton:hover {
+  background: #020122;
+  color: white;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .title {
-    font-size: 24px;
-  }
+.submitButton {
+  background: #ff7300;
+  border: none;
+  color: white;
+}
 
-  .text {
-    font-size: 16px;
-    padding: 0 10px;
-  }
+.submitButton:hover {
+  background: #e06400;
+}
 
-  .homeButton {
-    width: 80%;
-  }
+.continueButton {
+  background: #008f4c;
+  border: none;
+  color: white;
+}
 
-  .iconCircle {
-    width: 100px;
-    height: 100px;
-  }
+.continueButton:hover {
+  background: #006f3a;
+}
 
-  .checkmark {
-    font-size: 48px;
-  }
+.resultBox {
+  background: white;
+  padding: 40px 25px;
+  border-radius: 18px;
+  margin-top: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.resultTitle {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.resultValue {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ff7300;
+  margin-bottom: 30px;
 }

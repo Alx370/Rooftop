@@ -31,6 +31,7 @@
 }
 
 .google-btn {
+  color: black;
   width: 100%;
   display: flex;
   align-items: center;
@@ -91,6 +92,8 @@
 }
 
 .form-group input {
+  color: black;
+  background-color: transparent;
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 10px;

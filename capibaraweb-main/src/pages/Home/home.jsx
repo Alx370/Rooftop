@@ -1,21 +1,87 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { setPageMeta, setStructuredData } from "../../utils/seo";
+
 
 // Immagini card e USP
-import finestraImg from "../../assets/images/home/finestra.png";
-import lettoImg from "../../assets/images/home/letto.png";
-import edificioImg from "../../assets/images/home/edificio.png";
-import chiaviImg from "../../assets/images/home/chiavi.jpg";
-import lauraImg from "../../assets/images/home/laura.png";
+import finestraImg from "../../assets/images/home/finestra.webp";
+import lettoImg from "../../assets/images/home/letto.webp";
+import edificioImg from "../../assets/images/home/edificio.webp";
+import chiaviImg from "../../assets/images/home/chiavi.webp";
+import lauraImg from "../../assets/images/home/laura.webp";
 
-
-import logoImg from "../../assets/images/home/LogoImmobiliaris.png";
-import palazzoImg from "../../assets/images/home/PalazzoModerno.png";
+import logoImg from "../../assets/images/home/LogoImmobiliaris.webp";
+import palazzoImg from "../../assets/images/home/PalazzoModerno.webp";
 
 const Home = () => {
   // Ref per la griglia dei testimonial
   const testimonialGridRef = useRef(null);
+
+  // SEO: Imposta meta tag e structured data al caricamento
+  useEffect(() => {
+    // Meta tag per SEO e Open Graph
+    setPageMeta({
+      title: 'Immobiliaris - Valutazione e Vendita Immobili | Agenzia Immobiliare',
+      description: 'Vendi o affitta casa con Immobiliaris. Valutazione gratuita in 72 ore, consulenza personalizzata e vendita in esclusiva. Affidati ai nostri esperti immobiliari per vendere al giusto valore.',
+      url: window.location.href,
+      image: logoImg,
+      type: 'website'
+    });
+
+    // Structured Data (JSON-LD) per migliorare la visibilità nei motori di ricerca
+    setStructuredData({
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Immobiliaris",
+      "description": "Agenzia immobiliare specializzata in vendita e affitto di immobili con valutazione gratuita in 72 ore",
+      "url": window.location.origin,
+      "logo": logoImg,
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IT"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127"
+      },
+      "sameAs": [
+        // Aggiungi qui i link ai social media quando disponibili
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi Immobiliari",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Valutazione Immobile Gratuita",
+              "description": "Valutazione professionale del tuo immobile in 72 ore"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vendita Immobile in Esclusiva",
+              "description": "Servizio completo di vendita con strategie mirate e trasparenza"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Gestione Affitti",
+              "description": "Gestione completa di inquilini, contratti e pratiche per affitto"
+            }
+          }
+        ]
+      }
+    });
+  }, []);
 
   // Funzione per scroll fluido
   const smoothScroll = (direction) => {
@@ -70,29 +136,35 @@ const Home = () => {
   return (
     <div className="home">
       {/* ---------------- HERO ---------------- */}
-      <section className="hero">
+      <section className="hero" aria-label="Sezione principale">
         {/* Immagini di sfondo ora in HTML, non più nel CSS */}
         <img
           src={logoImg}
-          alt="Logo Immobiliaris"
+          alt="Logo Immobiliaris - Agenzia Immobiliare"
           className="hero-bg-logo-img"
+          loading="eager"
         />
         <img
           src={palazzoImg}
-          alt="Palazzo moderno"
+          alt="Palazzo moderno - Immobili di prestigio"
           className="hero-bg-palazzo-img"
+          loading="eager"
         />
 
         <div className="hero-content">
           <div className="hero-text">
-            <h1>Immobiliaris</h1>
+            <h1><span>Immobiliaris</span></h1>
             <p>
               Vendere casa è un percorso importante. Noi lo rendiamo più
               semplice. Affidati ai nostri esperti per una valutazione accurata
               e un supporto concreto, dal primo passo alla firma.
             </p>
             <div className="hero-buttons">
-              <Link className="btn primary" to="/valutazione">
+              <Link 
+                className="btn primary" 
+                to="/valutazione"
+                aria-label="Richiedi valutazione gratuita del tuo immobile"
+              >
                 Ottieni valutazione
               </Link>
             </div>
@@ -101,48 +173,56 @@ const Home = () => {
       </section>
 
       {/* ---------------- INTRO ---------------- */}
-      <section className="intro-home">
-        <h2>I nostri servizi</h2>
+      <section className="intro-home" aria-labelledby="servizi-heading">
+        <h2 id="servizi-heading">I nostri servizi</h2>
         <p className="subtitle-home">
           Ti aiutiamo a valorizzare la tua casa e a venderla al giusto valore.
         </p>
 
         <div className="intro-cards-home">
-          <div className="card-home">
-            <img src={finestraImg} alt="Interno casa" />
+          <article className="card-home">
+            <img src={finestraImg} alt="Interno casa elegante con finestra" loading="lazy" />
             <div className="card-content-home">
               <h3>Per venderlo</h3>
               <p>
                 Ti guidiamo nella vendita con metodo, trasparenza e attenzione
                 al valore.
               </p>
-              <Link className="btn primary" to="/valutazione">
+              <Link 
+                className="btn primary" 
+                to="/valutazione"
+                aria-label="Valuta il tuo immobile per la vendita"
+              >
                 Valuta
               </Link>
             </div>
-          </div>
+          </article>
 
-          <div className="card-home">
-            <img src={lettoImg} alt="Interno ufficio" />
+          <article className="card-home">
+            <img src={lettoImg} alt="Camera da letto moderna" loading="lazy" />
             <div className="card-content-home">
               <h3>Per affittarlo</h3>
               <p>
                 Gestiamo tutto noi: inquilini, contratti e sicurezza del
                 tuo immobile.
               </p>
-              <Link className="btn primary" to="">
+              <Link 
+                className="btn primary" 
+                to="/valutazione"
+                aria-label="Valuta il tuo immobile per l'affitto"
+              >
                 Valuta
               </Link>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
       {/* ---------------- USP ---------------- */}
-      <section className="usp-section">
-        <h2>Perchè scegliere noi</h2>
+      <section className="usp-section" aria-labelledby="vantaggi-heading">
+        <h2 id="vantaggi-heading">Perché scegliere noi</h2>
         <div className="usp-grid">
-          <div className="usp-item">
+          <article className="usp-item">
             <div className="usp-text">
               <h3 className="highlight1">Valutazione in 72 ore</h3>
               <p>
@@ -152,13 +232,13 @@ const Home = () => {
               </p>
             </div>
             <div className="usp-img">
-              <img src={edificioImg} alt="Valutazione in 72 ore" />
+              <img src={edificioImg} alt="Edificio moderno - valutazione professionale" loading="lazy" />
             </div>
-          </div>
+          </article>
 
-          <div className="usp-item reverse">
+          <article className="usp-item reverse">
             <div className="usp-img">
-              <img src={chiaviImg} alt="Metodo user-centred" />
+              <img src={chiaviImg} alt="Chiavi di casa - vendita sicura" loading="lazy" />
             </div>
             <div className="usp-text">
               <h3 className="highlight1">Metodo user-centred</h3>
@@ -168,9 +248,9 @@ const Home = () => {
                 immobile.
               </p>
             </div>
-          </div>
+          </article>
 
-          <div className="usp-item-centered">
+          <article className="usp-item-centered">
             <div className="usp-text-centered">
               <h3 className="highlight">Vendita in esclusiva</h3>
               <p>
@@ -179,13 +259,13 @@ const Home = () => {
                 <strong>trasparenza</strong>, per vendere al giusto valore.
               </p>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <section className="testimonials">
-        <h2>Cosa dicono di noi</h2>
+      <section className="testimonials" aria-labelledby="recensioni-heading">
+        <h2 id="recensioni-heading">Cosa dicono di noi</h2>
         <p className="subtitle">
           La fiducia dei nostri clienti, raccontata da loro. Le loro parole
           parlano di ascolto, professionalità e risultati concreti.
@@ -196,17 +276,21 @@ const Home = () => {
             className="scroll-btn left"
             type="button"
             onClick={() => smoothScroll(-1)}
+            aria-label="Scorri recensioni precedenti"
           >
             ←
           </button>
 
           <div className="testimonial-grid" ref={testimonialGridRef}>
             {testimonials.map((t, index) => (
-              <div key={index} className="testimonial-card">
-                <p>{t.text}</p>
-                <img src={t.img} alt={t.name} />
-                <h5>- {t.name}</h5>
-              </div>
+              <article key={index} className="testimonial-card" itemScope itemType="https://schema.org/Review">
+                <p itemProp="reviewBody">{t.text}</p>
+                <img src={t.img} alt={`Foto profilo di ${t.name}`} loading="lazy" />
+                <h5 itemProp="author" itemScope itemType="https://schema.org/Person">
+                  - <span itemProp="name">{t.name}</span>
+                </h5>
+                <meta itemProp="reviewRating" content="5" />
+              </article>
             ))}
           </div>
 
@@ -214,6 +298,7 @@ const Home = () => {
             className="scroll-btn right"
             type="button"
             onClick={() => smoothScroll(1)}
+            aria-label="Scorri recensioni successive"
           >
             →
           </button>
@@ -221,9 +306,9 @@ const Home = () => {
       </section>
 
       {/* ---------------- FAQ ---------------- */}
-      <section className="faq">
+      <section className="faq" aria-labelledby="faq-heading" itemScope itemType="https://schema.org/FAQPage">
         <div className="faq-left">
-          <h2 className="faq-title">
+          <h2 id="faq-heading" className="faq-title">
             Qui per rispondere a tutte le tue domande
           </h2>
           <div className="faq-text-home">
@@ -233,55 +318,71 @@ const Home = () => {
               informazioni che cerchi.
             </p>
           </div>
-          <Link className="btn primary" to="/faq">
+          <Link 
+            className="btn primary" 
+            to="/faq"
+            aria-label="Visualizza tutte le domande frequenti"
+          >
             Trova Risposta
           </Link>
         </div>
 
         <div className="faq-boxes">
-          <details className="faq-item">
+          <details className="faq-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
             <summary>
-              <span>Posso affittare casa anche se vivo in un'altra città?</span>
+              <span itemProp="name">Posso affittare casa anche se vivo in un'altra città?</span>
             </summary>
-            <p>
-              Certo. I nostri consulenti si occupano di tutto: selezione degli
-              inquilini, contratti e gestione delle pratiche. Così puoi
-              affittare in tranquillità, ovunque tu sia.
-            </p>
+            <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+              <p itemProp="text">
+                Certo. I nostri consulenti si occupano di tutto: selezione degli
+                inquilini, contratti e gestione delle pratiche. Così puoi
+                affittare in tranquillità, ovunque tu sia.
+              </p>
+            </div>
           </details>
 
-          <details className="faq-item">
+          <details className="faq-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
             <summary>
-              <span>Devo pagare per la valutazione dell'immobile?</span>
+              <span itemProp="name">Devo pagare per la valutazione dell'immobile?</span>
             </summary>
-            <p>
-              No, la valutazione del tuo immobile, tramite il nostro form, è
-              completamente gratuita e senza impegno.
-            </p>
+            <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+              <p itemProp="text">
+                No, la valutazione del tuo immobile, tramite il nostro form, è
+                completamente gratuita e senza impegno.
+              </p>
+            </div>
           </details>
 
-          <details className="faq-item">
+          <details className="faq-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
             <summary>
-              <span>Gestite anche contratti di affitto a lungo termine?</span>
+              <span itemProp="name">Gestite anche contratti di affitto a lungo termine?</span>
             </summary>
-            <p>
-              Sì, gestiamo anche contratti di affitto a lungo termine, offrendo
-              assistenza completa in ogni fase.
-            </p>
+            <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+              <p itemProp="text">
+                Sì, gestiamo anche contratti di affitto a lungo termine, offrendo
+                assistenza completa in ogni fase.
+              </p>
+            </div>
           </details>
         </div>
       </section>
 
       {/* ---------------- NEWSLETTER ---------------- */}
-      <section className="newsletter">
-        <h2>Iscriviti alla newsletter</h2>
+      <section className="newsletter" aria-labelledby="newsletter-heading">
+        <h2 id="newsletter-heading">Iscriviti alla newsletter</h2>
         <p>
           Resta aggiornato con consigli e approfondimenti dai nostri esperti per{" "}
         </p>
         <p>vendere o affittare in modo consapevole.</p>
-        <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-          <input type="email" placeholder="Inserisci la tua email" />
-          <button className="btn primary" type="submit">
+        <form className="newsletter-form" onSubmit={(e) => e.preventDefault()} aria-label="Form iscrizione newsletter">
+          <input 
+            type="email" 
+            placeholder="Inserisci la tua email" 
+            required
+            aria-label="Indirizzo email per newsletter"
+            name="email"
+          />
+          <button className="btn primary" type="submit" aria-label="Iscriviti alla newsletter">
             Iscriviti
           </button>
         </form>

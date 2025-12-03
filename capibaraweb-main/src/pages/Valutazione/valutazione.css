@@ -5,7 +5,7 @@
 }
 
 /* ---------------- HERO ---------------- */
-.hero-section {
+.hero-section-valutazione {
   width: 100%;
   text-align: center;
   display: flex;
@@ -14,7 +14,8 @@
   justify-content: center;
 }
 
-.hero-section h1 {
+.hero-section-valutazione h1 {
+  font-family: "Merriweather", serif;
   font-size: 2.8rem;
   font-weight: 700;
   color: #020122;
@@ -23,7 +24,8 @@
   text-align: center !important;
 }
 
-.hero-section p {
+.hero-section-valutazione p {
+  font-family: "Montserrat", sans-serif;
   margin-top: -1rem;
   color: #020122;
   font-size: 1.2rem;
@@ -77,6 +79,7 @@
 }
 
 .card-content h2 {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
   color: #020122 !important;
@@ -84,6 +87,7 @@
 }
 
 .card-content p {
+  font-family: "Montserrat", sans-serif;
   margin: 1rem 0;
   font-size: 1rem;
   color: #020122 !important;
@@ -91,6 +95,7 @@
 
 /* BOTTONI */
 .btn {
+  font-family: "Montserrat", sans-serif;
   padding: 0.8rem 2rem;
   border: none;
   border-radius: 10px;
@@ -127,12 +132,14 @@
 }
 
 .step h3 {
+  font-family: "Montserrat", sans-serif;
   color: #ff7a00;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
 .step p {
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   color: #333;
 }
@@ -144,12 +151,14 @@
 }
 
 .access-section h2 {
+  font-family: "Merriweather", serif;
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .access-section p {
+  font-family: "Montserrat", sans-serif;
   max-width: 650px;
   margin: 0 auto 3rem;
   color: #333;
@@ -167,7 +176,8 @@
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
 
-  .hero-section h1 {
+  .hero-section-valutazione h1 {
+    font-family: "Merriweather", serif;
     font-size: 2rem;
     margin-top: 3rem;
   }
@@ -187,7 +197,8 @@
 
 @media (min-width: 601px) and (max-width: 1200px) {
 
-  .hero-section h1 {
+  .hero-section-valutazione h1 {
+    font-family: "Merriweather", serif;
     font-size: 2rem;
     margin-top: 3rem;
   }
@@ -218,10 +229,12 @@
 
 @media (max-width: 480px) {
 
-  .hero-section h1 {
+  .hero-section-valutazione h1 {
+    font-family: "Merriweather", serif;
     font-size: 1.45em;
   }
-  .hero-section p{
+  .hero-section-valutazione p{
+    font-family: "Montserrat", sans-serif;
     margin-top:.0rem;
     font-size: 1rem ;
   }

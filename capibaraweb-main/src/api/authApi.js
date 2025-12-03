@@ -1,18 +1,17 @@
-
 import { apiPost, apiGet } from "./apiClient.js";
 
-// LOGIN
+// LOGIN → ricevi token
 export async function login(credentials) {
-  return await apiPost("/auth/login", credentials);
+  const data = await apiPost("/auth/login", credentials);
+
+  if (!data.token) {
+    throw new Error("Token non presente nella risposta");
+  }
+
+  return data; // { token: "..." }
 }
 
-// SALVA TOKEN IN LOCALSTORAGE
-export function setAuthToken(token) {
-  if (token) localStorage.setItem("token", token);
-  else localStorage.removeItem("token");
-}
-
-// INFO UTENTE AUTENTICATO
-export async function getMe() {
-  return await apiGet("/auth/me", true);
+// GET /auth/me
+export function getMe() {
+  return apiGet("/auth/me", true);
 }

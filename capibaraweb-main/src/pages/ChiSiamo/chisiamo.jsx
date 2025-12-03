@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./chisiamo.css";
+import { setPageMeta, setStructuredData } from "../../utils/seo";
+
+// Helper to resolve assets via Vite. Use like: asset('images/chisiamo/Torino/agente1.webp')
+const asset = (p) => new URL(`/src/assets/${p}`, import.meta.url).href;
 
 export default function ChiSiamo() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -17,7 +21,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "mario.rossi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+      img: asset('images/chisiamo/Torino/agente1.webp'),
     },
     {
       id: 2,
@@ -27,7 +31,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "pino.bianco@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente2.png",
+      img: asset('images/chisiamo/Torino/agente2.webp'),
     },
     {
       id: 3,
@@ -37,7 +41,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "serena.fiocchi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente3.png",
+      img: asset('images/chisiamo/Torino/agente3.webp'),
     },
     {
       id: 4,
@@ -47,7 +51,7 @@ export default function ChiSiamo() {
       provincia: "Torino",
       tel: "+391234567890",
       mail: "alma.cosi@immobiliaris.com",
-      img: "../../src/assets/images/chisiamo/Torino/agente4.png",
+      img: asset('images/chisiamo/Torino/agente4.webp'),
     },
 
     // Agenti di Cuneo
@@ -59,7 +63,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393441112233",
     mail: "luca.ferrero@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: asset('images/chisiamo/Torino/agente1.webp'),
   },
   {
     id: 6,
@@ -69,7 +73,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393478889900",
     mail: "sara.montesi@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: asset('images/chisiamo/Torino/agente1.webp'),
   },
   {
     id: 7,
@@ -79,7 +83,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393493225588",
     mail: "marco.galletto@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: asset('images/chisiamo/Torino/agente1.webp'),
   },
   {
     id: 8,
@@ -89,7 +93,7 @@ export default function ChiSiamo() {
     provincia: "Cuneo",
     tel: "+393402556677",
     mail: "elena.bessone@immobiliaris.com",
-    img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+    img: asset('images/chisiamo/Torino/agente1.webp'),
   },
 
   // Agenti di Alessandria
@@ -101,7 +105,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393401234567",
   mail: "giulia.roversi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 10,
@@ -111,7 +115,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393474563210",
   mail: "matteo.cavazza@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 11,
@@ -121,7 +125,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393491122334",
   mail: "irene.marchisio@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 12,
@@ -131,7 +135,7 @@ export default function ChiSiamo() {
   provincia: "Alessandria",
   tel: "+393456778899",
   mail: "federico.dalmonte@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 
 // Agenti di Asti
@@ -143,7 +147,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393401987654",
   mail: "chiara.venturi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 14,
@@ -153,7 +157,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393472223344",
   mail: "lorenzo.malfatti@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 15,
@@ -163,7 +167,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393498800112",
   mail: "sofia.bellandi@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 },
 {
   id: 16,
@@ -173,7 +177,7 @@ export default function ChiSiamo() {
   provincia: "Asti",
   tel: "+393402225566",
   mail: "davide.rossetti@immobiliaris.com",
-  img: "../../src/assets/images/chisiamo/Torino/agente1.png",
+  img: asset('images/chisiamo/Torino/agente1.webp'),
 }
   ];
 
@@ -184,6 +188,62 @@ export default function ChiSiamo() {
 
   const phoneNumber = "+391234567890";
   const emailAddress = "info@immobiliaris.com";
+
+  useEffect(() => {
+    setPageMeta({
+      title: 'Chi Siamo - Team di Agenti Immobiliari Esperti | Immobiliaris',
+      description:
+        'Scopri il team di Immobiliaris: oltre 56 agenti immobiliari esperti a Torino, Cuneo, Alessandria e Asti. 15 anni di esperienza, 462+ case vendute e consulenza personalizzata.',
+      url: window.location.href,
+      image: asset('images/chisiamo/Torino/agente1.webp'),
+      type: 'website'
+    });
+
+    setStructuredData({
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Immobiliaris",
+      "description": "Agenzia immobiliare con oltre 56 agenti esperti operanti in Piemonte. Fondata nel 2005, offriamo consulenza personalizzata per vendita e affitto immobili.",
+      "url": window.location.href,
+      "foundingDate": "2005",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Margherite 56",
+        "addressLocality": "Torino",
+        "postalCode": "10059",
+        "addressCountry": "IT"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Torino"
+        },
+        {
+          "@type": "City",
+          "name": "Cuneo"
+        },
+        {
+          "@type": "City",
+          "name": "Alessandria"
+        },
+        {
+          "@type": "City",
+          "name": "Asti"
+        }
+      ],
+      "telephone": "+391234567890",
+      "email": "info@immobiliaris.com",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "56"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "462"
+      }
+    });
+  }, []);
 
 
   {/* -------------------------------- */ }
@@ -328,8 +388,8 @@ export default function ChiSiamo() {
         <p>Via Margherite 56 (TO) CAP 10059</p>
 
         <div className="map-box">
-          <a href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Carlo+Torino" target="_blank" rel="noopener noreferrer">
-            <img src="src/assets/images/chisiamo/mappa.png" alt="Mappa Google" style={{ cursor: 'pointer' }} />
+            <a href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Carlo+Torino" target="_blank" rel="noopener noreferrer">
+            <img src={asset('images/chisiamo/mappa.webp')} alt="Mappa Google" style={{ cursor: 'pointer' }} />
           </a>
         </div>
       </section>
@@ -340,14 +400,14 @@ export default function ChiSiamo() {
       {/* -------------------------------- */}
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `tel:${phoneNumber}`} className="recapiti-btn" >
-          <img src="../../src/assets/icons/phone-call.png" alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={asset('icons/phone-call.png')} alt="Phone icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           +39 123 456 7890
         </button>
       </section>
 
       <section className="bottone-recapiti-section">
         <button onClick={() => window.location.href = `mailTo:${emailAddress}`} className="recapiti-btn" > 
-          <img src="../../src/assets/icons/email.png" alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
+          <img src={asset('icons/email.png')} alt="Email icon" style={{ width: '24px', height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
           info@immobiliaris.com </button>
       </section>
 
@@ -373,7 +433,7 @@ export default function ChiSiamo() {
         </div>
 
         <div className="map-box-storia">
-          <img src="src/assets/images/chisiamo/panorama.png" alt="Foto Panorama Torino" />
+          <img src={asset('images/chisiamo/panorama.webp')} alt="Foto Panorama Torino" />
         </div>
 
       </section>
@@ -383,7 +443,7 @@ export default function ChiSiamo() {
       {/* I DATI */}
       {/* -------------------------------- */}
       <section className="dati-section">
-        <h1>Cosa abbiamo costruito insieme</h1>
+        <h2>Cosa abbiamo costruito insieme</h2>
         <p>
           In oltre 15 anni di attività, abbiamo aiutato centinaia di clienti a vendere casa, 
           valutare immobili e trovare la soluzione abitativa ideale, costruendo relazioni basate 

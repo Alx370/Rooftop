@@ -12,7 +12,3 @@ export function setAuthToken(token) {
 export async function getMe() {
   return apiGet("/auth/me", true);
 }
-
-export async function googleLogin(idToken) {
-  return apiPost("/auth/google", { idToken });
-}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ProgressBar from "../ProgressBar/Progressbar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step10.module.css";
-import { inviaValutazioneManuale, valutaAutomatica } from "../../../../api/valutazioneApi.js";
+import { inviaValutazioneManuale } from "../../../../api/valutazioneApi.js";
+import { registraCliente } from "../../../../api/clientiApi.js";
 
 export default function Step10({ formData, manual = false }) {
   const navigate = useNavigate();
@@ -20,29 +21,7 @@ export default function Step10({ formData, manual = false }) {
         if (isManual) {
           await inviaValutazioneManuale({ ...formData, step: 10, tipo: "AFFITTO" });
         } else {
-          const provinciaMap = { torino: "TO", cuneo: "CN", asti: "AT", alessandria: "AL" };
-          const provinciaKey = (formData.provincia || "").trim().toLowerCase();
-          const provincia = provinciaMap[provinciaKey] || provinciaKey.slice(0,2).toUpperCase();
-          const tipologiaMap = { villa: "VILLA", appartamento: "APPARTAMENTO" };
-          const statoMap = { new: "NUOVO", good: "BUONO", renovated: "OTTIMO", renovate: "DA_RISTRUTTURARE" };
-
-          const payload = {
-            provincia,
-            cap: formData.cap,
-            indirizzo: formData.indirizzo,
-            metriQuadri: formData.surface ? Number(formData.surface) : null,
-            tipologia: tipologiaMap[formData.tipologia] || "APPARTAMENTO",
-            statoImmobile: statoMap[formData.serviceType] || null,
-            piano: formData.floor != null ? String(formData.floor) : null,
-            locali: formData.rooms ? Number(formData.rooms) : null,
-            bagni: formData.bathrooms ? Number(formData.bathrooms) : null,
-            parcheggio: Array.isArray(formData.externalFeatures) ? formData.externalFeatures.includes("parking") : null,
-            garage: Array.isArray(formData.externalFeatures) ? formData.externalFeatures.includes("garage") : null,
-            cantina: Array.isArray(formData.externalFeatures) ? formData.externalFeatures.includes("cellar") : null,
-          };
-
-          const resp = await valutaAutomatica(payload);
-          setResult(resp);
+          await registraCliente({ ...formData, step: 10 });
         }
         setLoading(false);
       } catch (err) {
@@ -69,20 +48,11 @@ export default function Step10({ formData, manual = false }) {
         {loading && <p className={styles.text}>Invio dei dati in corso...</p>}
 
         {!loading && !error && (
-          result ? (
-            <div className={styles.text}>
-              <div>Valore stimato: <strong>{result.valoreStimato} €</strong></div>
-              <div>Range: <strong>{result.valoreMin} €</strong> — <strong>{result.valoreMax} €</strong></div>
-              {result.prezzoMqZona && <div>Prezzo mq zona: <strong>{result.prezzoMqZona} €</strong></div>}
-              {result.zonaOmi && <div>Zona OMI: <strong>{result.zonaOmi}</strong></div>}
-            </div>
-          ) : (
-            <p className={styles.text}>
-              {manual || formData.evaluationType === "manuale"
-                ? "Abbiamo inviato i tuoi dati a un agente. Riceverai una risposta entro tre giorni."
-                : "Stima completata. Consulta il valore stimato qui sopra."}
-            </p>
-          )
+          <p className={styles.text}>
+            {manual || formData.evaluationType === "manuale"
+              ? "Abbiamo inviato i tuoi dati a un agente. Riceverai una risposta entro tre giorni."
+              : "Abbiamo ricevuto tutte le informazioni relative al tuo immobile. Entro 72 ore un nostro agente ti contatterà via email con un riepilogo completo."}
+          </p>
         )}
 
         {error && <p className={styles.error}>{error}</p>}

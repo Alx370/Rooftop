@@ -2,10 +2,7 @@ import React, { useRef } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 
-import finestraImg from "@assets/images/home/finestra.png";
-import lettoImg from "@assets/images/home/letto.png";
-import edificioImg from "@assets/images/home/edificio.png";
-import chiaviImg from "@assets/images/home/chiavi.jpg";
+// ripristina riferimenti originali alle immagini
 
 const Home = () => {
   // Ref per la griglia dei testimonial
@@ -67,7 +64,7 @@ const Home = () => {
         <div className="intro-cards-home">
 
           <div className="card-home">
-            <img src={finestraImg} alt="Interno casa" />
+            <img src="src/pages/Home/img/finestra.png" alt="Interno casa" />
             <div className="card-content-home">
               <h3>Per venderlo</h3>
               <p>Ti guidiamo nella vendita con metodo, trasparenza e attenzione al valore.</p>
@@ -76,7 +73,7 @@ const Home = () => {
           </div>
 
           <div className="card-home">
-            <img src={lettoImg} alt="Interno ufficio" />
+            <img src="src/pages/Home/img/letto.png" alt="Interno ufficio" />
             <div className="card-content-home">
               <h3>Per affittarlo</h3>
               <p>Gestiamo tutto noi: inquilini,
@@ -100,13 +97,13 @@ const Home = () => {
               <p><strong>Rapida, accurata, umana.</strong> Ti offriamo una valutazione <strong>entro 72 ore</strong>, verificata dai nostri esperti e basata su <strong>dati reali</strong>.</p>
             </div>
             <div className="usp-img">
-              <img src={edificioImg} alt="Valutazione in 72 ore" />
+              <img src="src/pages/Home/img/edificio.png" alt="Valutazione in 72 ore" />
             </div>
           </div>
 
           <div className="usp-item reverse">
             <div className="usp-img">
-              <img src={chiaviImg} alt="Metodo user-centred" />
+              <img src="src/pages/Home/img/chiavi.jpg" alt="Metodo user-centred" />
             </div>
             <div className="usp-text">
               <h3 className="highlight1">Metodo user-centred</h3>
@@ -138,7 +135,7 @@ const Home = () => {
             {testimonials.map((t, index) => (
               <div key={index} className="testimonial-card">
                 <p>{t.text}</p>
-                <img src={edificioImg} alt={t.name} />
+                <img src="src/pages/Home/img/edificio.png" alt={t.name} />
                 <h5>- {t.name}</h5>
               </div>
             ))}

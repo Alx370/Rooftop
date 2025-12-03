@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ProgressBar from "../ProgressBar/Progressbar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import "./step9.css";
 
 export default function Step9({ formData, setFormData, nextStep, prevStep }) {
@@ -21,11 +21,7 @@ export default function Step9({ formData, setFormData, nextStep, prevStep }) {
     setFormData({ ...formData, evaluationType: value });
   };
 
-  useEffect(() => {
-    if (formData?.evaluationType) {
-      nextStep();
-    }
-  }, [formData?.evaluationType, nextStep]);
+  
 
   return (
     <div className="rent-step9-wrapper">

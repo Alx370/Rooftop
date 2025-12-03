@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProgressBar from "../ProgressBar/Progressbar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step2.module.css";
 
 import defaultImg from "../../../../assets/images/tipologia di casa.png";

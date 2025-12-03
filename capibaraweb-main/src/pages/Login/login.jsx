@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import googleIcon from "../../assets/icons/Google-icon1.png";
-import { login, setAuthToken, getMe, googleLogin } from "../../api/authApi.js";
+import { login, setAuthToken, getMe } from "../../api/authApi.js";
 import "./login.css";
 
 const Login = () => {
@@ -53,43 +52,7 @@ const Login = () => {
     }
   };
 
-  const googleDivRef = useRef(null);
-
-  useEffect(() => {
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!clientId || !window.google) {
-      return;
-    }
-    window.google.accounts.id.initialize({
-      client_id: clientId,
-      callback: async (response) => {
-        try {
-          const data = await googleLogin(response.credential);
-          setAuthToken(data.token);
-          const me = await getMe();
-          const ruolo = me.authorities?.[0];
-          if (redirectTo) {
-            navigate(redirectTo);
-          } else if (ruolo === "ROLE_AGENTE") {
-            navigate("/agente");
-          } else {
-            navigate("/");
-          }
-        } catch {
-          setError("Accesso Google non riuscito");
-        }
-      },
-    });
-    if (googleDivRef.current) {
-      window.google.accounts.id.renderButton(googleDivRef.current, {
-        theme: "filled_blue",
-        size: "large",
-        text: "signin_with",
-        shape: "rectangular",
-      });
-    }
-    window.google.accounts.id.prompt();
-  }, [redirectTo, navigate]);
+  
 
   return (
     <section className="login-section">
@@ -97,10 +60,7 @@ const Login = () => {
         <h2 className="login-title">Accedi ora</h2>
         <p className="login-subtitle">Bentornato!</p>
 
-        <div className="google-btn" onClick={() => window.google?.accounts.id.prompt()}>
-          <img src={googleIcon} alt="Google" className="google-icon" />
-          <div id="googleSignInDiv" ref={googleDivRef} />
-        </div>
+        
 
         <div className="divider"><span>oppure</span></div>
 

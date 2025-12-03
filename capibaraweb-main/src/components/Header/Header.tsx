@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import LogoBlack from "@assets/images/global/LogoBlack.png";
+// usa percorso originale
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,7 +13,11 @@ function Header() {
         {/* LOGO */}
         <div className="logo">
           <Link to="/">
-            <img src={LogoBlack} alt="Capibara Web Logo" className="logo-image" />
+            <img
+              src="/src/assets/images/LogoBlack.png"
+              alt="Capibara Web Logo"
+              className="logo-image"
+            />
           </Link>
         </div>
 

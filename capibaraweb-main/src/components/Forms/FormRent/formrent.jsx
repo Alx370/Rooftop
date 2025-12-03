@@ -46,12 +46,7 @@ export default function FormRent({ manual = false }) {
     if (!token) navigate(`/login?redirect=${basePath}/step0`);
   }, [basePath, navigate]);
 
-  useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      evaluationType: manual ? "manuale" : "automatica",
-    }));
-  }, [manual]);
+  
 
   return (
     <div className="form-container">

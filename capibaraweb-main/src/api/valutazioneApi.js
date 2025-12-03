@@ -6,6 +6,3 @@ export const inviaValutazioneManuale = (data) =>
 export const inviaRichiestaContatto = (data) =>
   apiPost("/contatto", data);
 
-export const valutaAutomatica = (data) =>
-  apiPost("/valutazione/automatica", data, true);
-

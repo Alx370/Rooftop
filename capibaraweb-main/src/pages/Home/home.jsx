@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 import { setPageMeta, setStructuredData } from "../../utils/seo";
-import { subscribeNewsletter } from "../api/newsletterApi.js";
+import { subscribeNewsletter } from "../../api/newsletterApi.js";
 
 
 // Immagini card e USP
@@ -144,7 +144,7 @@ const Home = () => {
 
   try {
     const res = await subscribeNewsletter(email);
-    alert("Iscrizione completata! 🎉");
+    alert("Iscrizione completata!");
     e.target.reset();
   } catch (err) {
     console.error(err);

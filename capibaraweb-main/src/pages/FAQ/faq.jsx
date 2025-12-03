@@ -151,13 +151,13 @@ const Faq = () => {
         <div className="contact-row">
           <form className="faq-form" onSubmit={handleFaqSubmit}>
             <div className="input-wrap">
-              <input type="text" placeholder="Nome Cognome" />
+              <input name="nome" type="text" placeholder="Nome Cognome" />
             </div>
             <div className="input-wrap">
-              <input type="email" placeholder="Mail" />
+              <input name="email" type="email" placeholder="Mail" />
             </div>
             <div className="input-wrap">
-              <textarea placeholder="Messaggio..." />
+              <textarea name="messaggio" placeholder="Messaggio..." />
             </div>
 
             <button type="submit" className="btn-primary">Invia</button>

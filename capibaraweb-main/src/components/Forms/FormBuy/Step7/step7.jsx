@@ -50,7 +50,7 @@ export default function Step7({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={7} totalSteps={9} />
+      <ProgressBar currentStep={7} totalSteps={10} />
 
       <h2 className={styles.title}>Quali sono le dotazioni esterne dell'immobile?</h2>
 

@@ -103,13 +103,12 @@
   padding: 12px 26px;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
 }
 
 .sell-btn-secondary {
   background: #fff;
-  border: 1.6px solid #444;
+  border: 1px solid #02020c;
 }
 
 .sell-btn-primary {

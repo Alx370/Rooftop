@@ -17,7 +17,7 @@
   margin-bottom: 30px;
   font-weight: 700;
   color: #020122;
-  margin-left: 2rem;      /* OK DESKTOP – verrà rimosso mobile */
+  margin-left: 2rem;
 }
 
 /* ============================
@@ -28,7 +28,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   place-items: center;
-  margin-left: 2rem;      /* OK DESKTOP – verrà rimosso mobile */
+  margin-left: 2rem;
 }
 
 /* ============================
@@ -51,7 +51,7 @@
   justify-content: center;
 }
 
-/* BOX NUMERI */
+/* BOX */
 .optionBox {
   width: 55px;
   height: 40px;
@@ -77,15 +77,68 @@
 }
 
 /* ============================
-   SELECT
+   SELECT MODERNO COME STEP 2
 ============================ */
+
+/* WRAPPER PER LA FRECCIA */
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* SELECT */
 .select {
   width: 100%;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #dcdcdc;
+  border: 2px solid #dcdcdc;
   font-size: 16px;
   text-align: center;
+  background: #fafafa;
+  color: #575757;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* CENTRA LE OPTION */
+.select option {
+  text-align: center;
+}
+
+/* HOVER */
+.select:hover {
+  border-color: #b6b6b6;
+}
+
+/* FOCUS */
+.select:focus {
+  border-color: #ff7300;
+}
+
+/* OPTION SELEZIONATA */
+.select option:checked {
+  background: #ff7300 !important;
+  color: white !important;
+}
+
+/* FRECCIA PERSONALIZZATA */
+.selectWrapper::after {
+  content: "▼";
+  font-size: 13px;
+  color: #555;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.2s ease;
+}
+
+/* FRECCIA RUOTA QUANDO APERTO */
+.select:focus + .selectWrapper::after {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 /* ============================
@@ -140,29 +193,26 @@
 ============================ */
 @media (max-width: 768px) {
 
-  /* 🔥 RIMOZIONE SHIFT A DESTRA */
   .title,
   .grid {
-    margin-left: 0;  
+    margin-left: 0;
   }
 
   .grid {
-    grid-template-columns: 1fr;  /* griglia verticale */
+    grid-template-columns: 1fr;
     width: 100%;
     justify-items: center;
   }
 
   .buttonContainer {
-    display: flex;
     gap: 12px;
     width: 90%;
-    margin-left:1rem;
+    margin-left: 1rem;
   }
 
   .backButton,
   .continueButton {
     width: 100%;
-    text-align: center;
   }
 }
 

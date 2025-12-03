@@ -1,6 +1,6 @@
 import styles from "./ProgressBar.module.css";
 
-export default function ProgressBar({ currentStep = 1, totalSteps = 9 }) {
+export default function ProgressBar({ currentStep = 1, totalSteps = 10 }) {
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
   return (

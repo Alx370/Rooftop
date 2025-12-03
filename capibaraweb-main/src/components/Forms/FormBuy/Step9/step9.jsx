@@ -83,6 +83,18 @@ export default function Step9({ formData, prevStep, nextStep }) {
 
           <p className={styles.resultValue}>€ {result.valoreStimato}</p>
 
+          <div className={styles.rangeBox}>
+            <div className={styles.rangeItem}>
+              <span className={styles.rangeLabel}>Min:</span>
+              <span className={styles.rangeValue}>€ {result.valoreMin}</span>
+            </div>
+
+            <div className={styles.rangeItem}>
+              <span className={styles.rangeLabel}>Max:</span>
+              <span className={styles.rangeValue}>€ {result.valoreMax}</span>
+            </div>
+          </div>
+
           <div className={styles.buttonsResult}>
             <button className={styles.backButton} onClick={prevStep}>
               Indietro

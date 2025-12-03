@@ -26,7 +26,7 @@ export default function Step8({ formData, setFormData, nextStep, prevStep }) {
 
       {/* Progress Bar */}
       <div className="sell-step8-progress">
-        <ProgressBar currentStep={8} totalSteps={9} />
+        <ProgressBar currentStep={8} totalSteps={10} />
       </div>
 
       {/* Title */}

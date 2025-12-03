@@ -7,10 +7,6 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
 
   const provincePiemonte = {
     TORINO: "TO",
-    VERCELLI: "VC",
-    BIELLA: "BI",
-    VERBANIA: "VB",
-    NOVARA: "NO",
     CUNEO: "CN",
     ASTI: "AT",
     ALESSANDRIA: "AL",
@@ -77,7 +73,7 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={1} totalSteps={9} />
+      <ProgressBar currentStep={1} totalSteps={10} />
 
       <h2 className={styles.title}>Dove si trova l'immobile da valutare?</h2>
 

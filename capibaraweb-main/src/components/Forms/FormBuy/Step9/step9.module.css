@@ -1,123 +1,52 @@
-/* CONTAINER PRINCIPALE */
 .container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* PROGRESS BAR */
-.progressWrapper {
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 40px;
-}
-
-/* CONTENUTO */
-.content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-/* CERCHIO CHECK */
-.iconCircle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: #ff7300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-  animation: pop 0.4s ease-out;
-}
-
-/* ANIMAZIONE CHECK */
-@keyframes pop {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* CHECKMARK */
-.checkmark {
-  color: white;
-  font-size: 60px;
-  font-weight: bold;
-}
-
-/* TITOLO */
 .title {
-  font-size: 30px;
+  text-align: center;
+  font-size: 28px;
   font-weight: 700;
-  color: #020122;
+  margin-bottom: 25px;
 }
 
-/* TESTO */
-.text {
-  font-size: 18px;
-  max-width: 650px;
-  color: #020122;
-  line-height: 1.6;
-}
-
-/* ERRORE */
 .error {
   color: red;
-  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
-/* BOTTONE */
-.homeButton {
-  margin-top: 25px;
-  padding: 14px 40px;
-  background-color: #ff7300;
-  color: white;
-  border: none;
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.backButton,
+.submitButton {
+  padding: 12px 28px;
+  font-size: 16px;
   border-radius: 12px;
-  font-size: 18px;
   cursor: pointer;
 }
 
-.homeButton:hover {
-  background-color: #e66700;
+.backButton {
+  background: white;
+  border: 1px solid #020122;
+  color: #020122;
 }
 
-.homeButton:active {
-  transform: translateY(0px);
+.submitButton {
+  background: #ff7300;
+  border: none;
+  color: white;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .title {
-    font-size: 24px;
-  }
-
-  .text {
-    font-size: 16px;
-    padding: 0 10px;
-  }
-
-  .homeButton {
-    width: 80%;
-  }
-
-  .iconCircle {
-    width: 100px;
-    height: 100px;
-  }
-
-  .checkmark {
-    font-size: 48px;
-  }
+.resultBox {
+  background: #f7f7f7;
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 30px;
+  text-align: left;
 }

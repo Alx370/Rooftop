@@ -1,57 +1,97 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import { useState } from "react";
 import styles from "./step9.module.css";
-// import { createUser } from "../../../../services/api";
+import ProgressBar from "../ProgressBar/ProgressBar";
+import { valutaImmobileAutomatico } from "../../../../api/valutazioneApi";
 
-export default function Step9({ formData }) {
-  const navigate = useNavigate();
+export default function Step9({ formData, prevStep }) {
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const sendFinalData = async () => {
-      try {
-        await createUser({ ...formData, step: 8 });
-        setLoading(false);
-      } catch (err) {
-        console.error("Errore invio dati finali:", err);
-        setError("Si è verificato un errore durante l'invio dei dati. Riprova.");
-        setLoading(false);
-      }
+  const handleValutazione = async () => {
+    setLoading(true);
+    setError("");
+    setResult(null);
+
+    const payload = {
+      provincia: formData.provincia,
+      cap: formData.cap,
+      indirizzo: formData.indirizzo,
+      civico: formData.civico || "",
+      metriQuadri: Number(formData.surface),
+      tipologia: formData.tipologia, // deve combaciare con enum backend
+      statoImmobile: formData.serviceType, 
+      piano: formData.floor || null,
+      locali: Number(formData.rooms),
+      bagni: Number(formData.bathrooms),
+      annoCost: formData.annoCost || null,
+      ascensore: formData.ascensore || false,
+      parcheggio: formData.parcheggio || false,
+      postiAuto: formData.postiAuto || 0,
+      garage: formData.garage || false,
+      balconeMq: formData.balconeMq || null,
+      terrazzoMq: formData.terrazzoMq || null,
+      giardinoMq: formData.giardinoMq || null,
+      cantina: formData.externalFeatures?.includes("cellar") || false,
+      arredato: formData.furnishing === "ARREDATO",
+      ariaCondizionata: formData.externalFeatures?.includes("veranda") || false,
+      allarme: false,
+      riscaldamento: formData.riscaldamento || "CENTRALIZZATO",
+      classeEnergetica: formData.classeEnergetica || "C",
+      orientamento: formData.orientamento || "NORD"
     };
 
-    sendFinalData();
-  }, []);
+    try {
+      const response = await valutaImmobileAutomatico(payload);
+      setResult(response);
+    } catch (err) {
+      setError(err.message || "Errore durante la valutazione");
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className={styles.container}>
-      <ProgressBar currentStep={9} totalSteps={9} />
+      <ProgressBar currentStep={9} totalSteps={10} />
 
-      <div className={styles.content}>
-        <div className={styles.iconCircle}>
-          <span className={styles.checkmark}>✔</span>
+      <h2 className={styles.title}>Pronto a ottenere la valutazione?</h2>
+
+      {!result && (
+        <>
+          {error && <p className={styles.error}>{error}</p>}
+
+          <div className={styles.buttons}>
+            <button className={styles.backButton} onClick={prevStep}>
+              Indietro
+            </button>
+
+            <button
+              className={styles.submitButton}
+              onClick={handleValutazione}
+              disabled={loading}
+            >
+              {loading ? "Calcolo in corso..." : "Ottieni Valutazione"}
+            </button>
+          </div>
+        </>
+      )}
+
+      {result && (
+        <div className={styles.resultBox}>
+          <h3>Valutazione stimata</h3>
+          <p><strong>Valore stimato:</strong> € {result.valoreStimato}</p>
+          <p><strong>Minimo:</strong> € {result.valoreMin}</p>
+          <p><strong>Massimo:</strong> € {result.valoreMax}</p>
+          <p><strong>Zona OMI:</strong> {result.zonaOMI}</p>
+          <p><strong>Coeff. Zona:</strong> {result.coefficienteZona}</p>
+          <p><strong>Data:</strong> {result.dataValutazione}</p>
+
+          <button className={styles.backButton} onClick={prevStep}>
+            Torna indietro
+          </button>
         </div>
-
-        <h2 className={styles.title}>Registrazione completata con successo</h2>
-
-        {/* MESSAGGI */}
-        {loading && <p className={styles.text}>Invio dei dati in corso...</p>}
-
-        {!loading && !error && (
-          <p className={styles.text}>
-            Abbiamo ricevuto tutte le informazioni relative al tuo immobile.
-            Entro 72 ore un nostro agente ti contatterà via email con un
-            riepilogo completo e una prima stima del valore di affitto.
-          </p>
-        )}
-
-        {error && <p className={styles.error}>{error}</p>}
-
-        <button className={styles.homeButton} onClick={() => navigate("/")}>
-          Torna alla home
-        </button>
-      </div>
+      )}
     </div>
   );
 }

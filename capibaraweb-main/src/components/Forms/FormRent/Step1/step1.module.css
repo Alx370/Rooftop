@@ -55,7 +55,7 @@
   max-width: 350px;     
   text-align: start;
   color: #5d5d5d;
-
+  background-color: #ffffff;
   margin-left: 0;            
   margin-right: 0;
 }
@@ -94,7 +94,7 @@
 .back {
   background: white;
   border: 1px solid #020122;
-  color: #020122;
+  color: #020122 !important;
 }
 
 .back:hover {

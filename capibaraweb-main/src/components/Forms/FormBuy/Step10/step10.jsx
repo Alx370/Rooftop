@@ -4,7 +4,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import styles from "./step10.module.css";
 //import { createUser } from "../../../../services/api";
 
-export default function Step10({ formData }) {
+export default function Step9({ formData }) {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ export default function Step10({ formData }) {
   useEffect(() => {
     const sendFinalData = async () => {
       try {
-        await createUser({ ...formData, step: 10 });
+        await createUser({ ...formData, step: 8 });
         setLoading(false);
       } catch (err) {
         console.error("Errore invio dati finali:", err);

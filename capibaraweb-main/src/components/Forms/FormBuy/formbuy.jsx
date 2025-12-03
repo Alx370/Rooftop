@@ -11,29 +11,49 @@ import Step6 from "./Step6/step6";
 import Step7 from "./Step7/step7";
 import Step8 from "./Step8/step8";
 import Step9 from "./Step9/step9";
+import Step10 from "./Step10/step10";
 
 export default function FormBuy() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    nome: "",
-    cognome: "",
-    email: "",
-    telefono: "",
-    indirizzo: "",
-    tipologia: "",
-    rooms: "",
-    bathrooms: "",
-    furnishing: "",
-    doubleExposure: "",
-    surface: "",
-    floor: "",
-    externalFeatures: [],
-    serviceType: "",
-    sellingType: "",
-    message: "",
-    password: "",
-  });
+  nome: "",
+  cognome: "",
+  email: "",
+  telefono: "",
+
+  provincia: "",
+  cap: "",
+  indirizzo: "",
+  civico: "",
+
+  tipologia: null,            // ENUM Tipologia
+  statoImmobile: null,        // ENUM (es: NUOVO, BUONO, OTTIMO, DA_RISTRUTTURARE)
+  rooms: null,                // Integer
+  bathrooms: null,            // Integer
+  furnishing: null,           // ENUM (ARREDATO, NON_ARREDATO, PARZIALMENTE_ARREDATO)
+  doubleExposure: null,       // ENUM (SI, NO)
+
+  metriQuadri: null,          // Numeric, richiesto dal backend
+  piano: null,                // Numeric
+  ascensore: null,            // Boolean
+  garage: null,               // Boolean
+  postiAuto: null,            // Numeric
+  balconeMq: null,            // Numeric
+  terrazzoMq: null,           // Numeric
+  giardinoMq: null,           // Numeric
+  cantina: null,              // Boolean
+
+  riscaldamento: null,        // ENUM
+  classeEnergetica: null,     // ENUM (A, B, C, D, E, F, G)
+  orientamento: null,         // ENUM (NORD, SUD, EST, OVEST, ecc.)
+
+  externalFeatures: [],       // Array<String> per step7
+
+  message: "",
+  password: ""
+});
+
 
   const nextStep = (currentStep) => navigate(`/formbuy/step${currentStep + 1}`);
   const prevStep = (currentStep) => navigate(`/formbuy/step${currentStep - 1}`);
@@ -151,14 +171,25 @@ export default function FormBuy() {
           }
         />
 
-
-        <Route
+           <Route
           path="step9"
           element={
             <Step9
               formData={formData} 
               setFormData={setFormData} 
+              nextStep={() => nextStep(9)} 
               prevStep={() => prevStep(9)} 
+            />
+          }
+        />
+
+        <Route
+          path="step10"
+          element={
+            <Step10
+              formData={formData} 
+              setFormData={setFormData} 
+              prevStep={() => prevStep(10)} 
             />
           }
         />

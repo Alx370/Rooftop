@@ -60,7 +60,7 @@
 .rent-step8-wrapper p {
   margin-top: 10px;
   font-size: 0.92rem;
-  color: #020122;
+  color: #020122 !important;
 }
 
 /* Radio */
@@ -91,17 +91,29 @@
   font-size: 1rem;
   cursor: pointer;
   transition: 0.2s;
+  font-weight: 1 !important;
 }
 
+/* 🔹 CORRETTO: Pulsante Indietro */
 .rent-btn-secondary {
-  background: #fff;
+  background: #ffffff;
   border: 1px solid #020122 ;
+        
 }
 
+.rent-btn-secondary:hover {
+  background: #f6f6f6;
+}
+
+/* Pulsante Continua */
 .rent-btn-primary {
   background: #ff7a00;
   border: none;
   color: white;
+}
+
+.rent-btn-primary:hover {
+  background: #e06600;
 }
 
 /* Error */
@@ -109,11 +121,12 @@
   color: red !important;
   text-align: center;
   margin-top: 20px;
-
 }
 
 /* Responsive */
 @media (max-width: 700px) {
+
+
   .rent-step8-grid {
     grid-template-columns: 1fr;
   }

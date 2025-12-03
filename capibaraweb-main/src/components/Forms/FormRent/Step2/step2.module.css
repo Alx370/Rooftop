@@ -1,18 +1,65 @@
+/* MENU A TENDINA MODERNO */
 .select {
   width: 80%;
   max-width: 400px;
   min-width: 200px;
-  padding: 8px;
-  font-size: 15px;
+  padding: 12px 14px;
+  font-size: 16px;
   border-radius: 12px;
-  border: 1.8px solid #bdbdbd;
-  background: #fafafa;
-  color: #575757;
-  text-align: center;
+  border: 2px solid #dcdcdc;
+  background: #ffffff;
+  color: #020122;
   cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  text-align: left;
 }
 
-/* CONTAINER PRINCIPALE */
+/* HOVER SELECT */
+.select:hover {
+  border-color: #020122;
+}
+
+/* FOCUS */
+.select:focus {
+  border-color: #020122;
+
+}
+
+
+.select option:checked {
+  background-color: #020122 !important;
+  color: white !important;
+}
+
+/* WRAPPER PER LA FRECCIA */
+.selectWrapper {
+  position: relative;
+  width: 70%;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+/* FRECCIA PERSONALIZZATA */
+.selectWrapper::after {
+  content: "▼";
+  font-size: 13px;
+  color: #020122;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+/* FRECCIA ANIMATA */
+.select:focus + .selectWrapper::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -23,7 +70,6 @@
   gap: 30px;
 }
 
-/* TITOLO */
 .title {
   font-size: 30px;
   font-weight: 700;
@@ -33,14 +79,12 @@
   margin-bottom: 30px;
 }
 
-/* CONTENITORE A DUE COLONNE */
 .content {
   display: flex;
   gap: 25px;
   width: 100%;
 }
 
-/* COLONNA SINISTRA CENTRATA */
 .left {
   flex: 1;
   display: flex;
@@ -48,24 +92,21 @@
   align-items: center;
   gap: 18px;
   margin-top: 2.5rem;
-  margin-right: -6rem;   /* 🔥 OK SU DESKTOP, MA NON SU MOBILE */
+  margin-right: -6rem;
 }
 
-/* LABEL */
 .label {
   font-size: 18px;
   text-align: center;
   color: #020122;
 }
 
-/* ERRORE */
 .error {
   color: red;
   font-size: 14px;
   text-align: center;
 }
 
-/* PULSANTI */
 .buttons {
   display: flex;
   gap: 15px;
@@ -75,7 +116,6 @@
   justify-content: center;
 }
 
-/* BOTTONE */
 .back,
 .next {
   padding: 12px 28px;
@@ -88,7 +128,7 @@
 .back {
   background: white;
   border: 1px solid #020122;
-  color: #020122;
+  color: #020122 !important;
 }
 
 .back:hover {
@@ -105,7 +145,6 @@
   background: #e36600;
 }
 
-/* COLONNA DESTRA (IMMAGINI) */
 .right {
   flex: 1;
   min-height: 350px;
@@ -124,6 +163,7 @@
   object-fit: cover;
   animation: fadeIn 0.3s ease;
 }
+
 
 /* RESPONSIVE TABLET */
 @media (max-width: 900px) {
@@ -147,7 +187,6 @@
     margin-bottom: -0.5rem;
   }
 
-  
   .left {
     margin-right: 0;
     margin-top: 1.5rem;

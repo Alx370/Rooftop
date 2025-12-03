@@ -4,7 +4,6 @@ import "./Footer.css";
 
 import Facebook from "../../assets/icons/facebook.png";
 import Instagram from "../../assets/icons/instagram.png";
-import Linkedin from "../../assets/icons/linkedin.png";
 import Tiktok from "../../assets/icons/tiktok.png";
 import Logo from "../../assets/images/global/Logo.png";
 
@@ -29,44 +28,33 @@ const Footer = () => {
                 <img src={Logo} alt="Logo" className="logo-image" />
               </Link>
             </div>
-            <p>© 2025 ImmobiliareS. Tutti i diritti riservati.</p>
+            <p>© 2025 Immobiliaris. Tutti i diritti riservati.</p>
           </div>
 
-          {/* Colonne desktop */}
+          {/* Colonne Desktop */}
           <div className="footer-columns-desktop">
 
-            {/* Chi siamo */}
+            {/* Colonna 1 */}
             <div className="footer-col">
-              <h4>Chi siamo</h4>
+              <Link to="/">Home</Link>
+              <Link to="/chi-siamo">Chi siamo</Link>
+              <Link to="/valutazione">Valutazione</Link>
+              <Link to="/faq">FAQ</Link>
+            </div>
+
+            {/* Colonna 2 */}
+            <div className="footer-col">
+              <Link to="/agente">Agenti</Link>
               <Link to="/login-admin">Accesso Dashboard</Link>
-              <Link to="/agente">Agenti</Link>          
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
+
+              {/* Non cliccabili */}
+              <span className="disabled-link">Privacy</span>
+              <span className="disabled-link">Policy</span>
             </div>
 
-            {/* Valutazione */}
+            {/* Colonna Social */}
             <div className="footer-col">
-              <h4>Valutazione</h4>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-            </div>
-
-            {/* FAQ */}
-            <div className="footer-col">
-              <h4>FAQ</h4>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-            </div>
-
-            {/* Contatti */}
-            <div className="footer-col">
-              <h4>Contatti</h4>
               <div className="footer-socials">
-                <div className="icon"><img src={Linkedin} alt="Linkedin" /></div>
                 <div className="icon"><img src={Instagram} alt="Instagram" /></div>
                 <div className="icon"><img src={Tiktok} alt="TikTok" /></div>
                 <div className="icon"><img src={Facebook} alt="Facebook" /></div>
@@ -77,7 +65,7 @@ const Footer = () => {
         </div>
 
         {/* ===========================
-            AREE MOBILE (accordion)
+            MOBILE – Accordion
         ============================ */}
         <div className="footer-cards-mobile">
 
@@ -87,15 +75,21 @@ const Footer = () => {
               <h4>Chi siamo</h4>
               <span className="arrow">{open === "chi" ? "−" : "+"}</span>
             </div>
-
             <div className={`footer-card-content ${open === "chi" ? "open" : ""}`}>
-              <Link to="/login-admin">Accesso Dashboard</Link>
+              <Link to="/chi-siamo">Chi siamo</Link>
+            </div>
+          </div>
 
-              {/* AGGIUNTO IN MOBILE */}
+          {/* Area utenti */}
+          <div className="footer-card">
+            <div className="footer-card-header" onClick={() => toggle("area")}>
+              <h4>Area utenti</h4>
+              <span className="arrow">{open === "area" ? "−" : "+"}</span>
+            </div>
+            <div className={`footer-card-content ${open === "area" ? "open" : ""}`}>
+              <Link to="/">Home</Link>
               <Link to="/agente">Agenti</Link>
-
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
+              <Link to="/login-admin">Accesso Dashboard</Link>
             </div>
           </div>
 
@@ -105,12 +99,8 @@ const Footer = () => {
               <h4>Valutazione</h4>
               <span className="arrow">{open === "val" ? "−" : "+"}</span>
             </div>
-
             <div className={`footer-card-content ${open === "val" ? "open" : ""}`}>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
+              <Link to="/valutazione">Valutazione</Link>
             </div>
           </div>
 
@@ -120,12 +110,20 @@ const Footer = () => {
               <h4>FAQ</h4>
               <span className="arrow">{open === "faq" ? "−" : "+"}</span>
             </div>
-
             <div className={`footer-card-content ${open === "faq" ? "open" : ""}`}>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
-              <a href="#">Link here</a>
+              <Link to="/faq">FAQ</Link>
+            </div>
+          </div>
+
+          {/* Documenti */}
+          <div className="footer-card">
+            <div className="footer-card-header" onClick={() => toggle("doc")}>
+              <h4>Documenti</h4>
+              <span className="arrow">{open === "doc" ? "−" : "+"}</span>
+            </div>
+            <div className={`footer-card-content ${open === "doc" ? "open" : ""}`}>
+              <span className="disabled-link">Privacy</span>
+              <span className="disabled-link">Policy</span>
             </div>
           </div>
 
@@ -135,10 +133,8 @@ const Footer = () => {
               <h4>Contatti</h4>
               <span className="arrow">{open === "cont" ? "−" : "+"}</span>
             </div>
-
             <div className={`footer-card-content ${open === "cont" ? "open" : ""}`}>
               <div className="footer-socials">
-                <div className="icon"><img src={Linkedin} alt="Linkedin" /></div>
                 <div className="icon"><img src={Instagram} alt="Instagram" /></div>
                 <div className="icon"><img src={Tiktok} alt="TikTok" /></div>
                 <div className="icon"><img src={Facebook} alt="Facebook" /></div>

@@ -1,24 +1,69 @@
-/* SELECT IDENTICO A STEP 2 */
-.select {
+/* ========================= */
+/* SELECT MODERNO COME STEP 2 */
+/* ========================= */
+
+.selectWrapper {
+  position: relative;
   width: 80%;
   max-width: 400px;
   min-width: 200px;
-  padding: 8px;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 1.8px solid #bdbdbd;
-  background: #fafafa;
-  color: #575757;
-  text-align: center;
-  cursor: pointer;
 }
 
-/* CENTRA DAVVERO IL TESTO DELLE OPTION */
+.select {
+  width: 70%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 2px solid #dcdcdc;
+  background: #fafafa;
+  color: #575757;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* CENTRA LE OPTION */
 .select option {
   text-align: center;
 }
 
-/* CONTAINER PRINCIPALE */
+/* HOVER SELECT */
+.select:hover {
+  border-color: #b6b6b6;
+}
+
+/* FOCUS */
+.select:focus {
+  border-color: #020122;
+}
+
+/* OPTION SELEZIONATA → #020122 */
+.select option:checked {
+  background-color: #020122 !important;
+  color: white !important;
+}
+
+/* FRECCIA PERSONALIZZATA */
+.selectWrapper::after {
+  content: "▼";
+  font-size: 13px;
+  color: #555;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+/* FRECCIA RUOTA QUANDO APERTO */
+.select:focus + .selectWrapper::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -29,7 +74,6 @@
   gap: 30px;
 }
 
-/* TITOLO */
 .title {
   font-size: 30px;
   font-weight: 700;
@@ -39,14 +83,12 @@
   margin-bottom: 30px;
 }
 
-/* CONTENITORE A DUE COLONNE */
 .content {
   display: flex;
   gap: 25px;
   width: 100%;
 }
 
-/* COLONNA SINISTRA IDENTICA A STEP 2 */
 .left {
   flex: 1;
   display: flex;
@@ -58,21 +100,18 @@
   margin-right: -5rem;
 }
 
-/* LABEL */
 .label {
   font-size: 18px;
   text-align: center;
   color: #020122;
 }
 
-/* ERRORE */
 .error {
   color: red;
   font-size: 14px;
   text-align: center;
 }
 
-/* BOTTONI IDENTICI A STEP 2 */
 .buttons {
   display: flex;
   gap: 15px;
@@ -82,7 +121,6 @@
   justify-content: center;
 }
 
-/* BOTTONE */
 .back,
 .next {
   padding: 12px 28px;
@@ -92,18 +130,18 @@
   flex: 1;
 }
 
-/* INDIETRO */
+/* BACK */
 .back {
   background: white;
   border: 1px solid #020122;
-  color: #020122;
+  color: #020122 !important;
 }
 
 .back:hover {
   background: #f5f5f5;
 }
 
-/* CONTINUA — SEMPRE ATTIVO */
+/* NEXT */
 .next {
   background: #ff7300;
   border: none;
@@ -114,7 +152,6 @@
   background: #e36600;
 }
 
-/* COLONNA DESTRA IMMAGINI */
 .right {
   flex: 1;
   min-height: 350px;
@@ -135,9 +172,11 @@
 }
 
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
+/* ========================= */
+/* RESPONSIVE                */
+/* ========================= */
 
+@media (max-width: 900px) {
   .content {
     flex-direction: column;
     align-items: center;
@@ -150,27 +189,26 @@
 }
 
 @media (max-width: 600px) {
-    .title {
+
+  .title {
     margin-top: -1rem;
     font-size: 24px;
     margin-bottom: -0.5rem;
   }
 
-   .left {
+  .left {
     margin-right: 0;
     margin-top: 1.5rem;
     width: 100%;
   }
 
-
-  .select {
+  .selectWrapper {
     width: 90%;
   }
 
   .buttons {
     width: 90%;
     max-width: 400px;
-    display: flex;
   }
 
   .back,
@@ -178,8 +216,13 @@
     width: 100%;
   }
 
-    .image {
+  .image {
     margin-top: -1.8rem;
     max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .select{
+    width: 90%;
   }
 }

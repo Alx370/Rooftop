@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 import { setPageMeta, setStructuredData } from "../../utils/seo";
+import { subscribeNewsletter } from "../api/newsletterApi.js";
 
 
 // Immagini card e USP
@@ -132,6 +133,25 @@ const Home = () => {
       name: "Marco L.",
     },
   ];
+
+  const handleNewsletter = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const email = formData.get("email");
+
+  if (!email) return;
+
+  try {
+    const res = await subscribeNewsletter(email);
+    alert("Iscrizione completata! 🎉");
+    e.target.reset();
+  } catch (err) {
+    console.error(err);
+    alert("Errore nell'iscrizione alla newsletter.");
+  }
+};
+
 
   return (
     <div className="home">
@@ -374,7 +394,7 @@ const Home = () => {
           Resta aggiornato con consigli e approfondimenti dai nostri esperti per{" "}
         </p>
         <p>vendere o affittare in modo consapevole.</p>
-        <form className="newsletter-form" onSubmit={(e) => e.preventDefault()} aria-label="Form iscrizione newsletter">
+        <form className="newsletter-form" onSubmit={handleNewsletter} aria-label="Form iscrizione newsletter">
           <input 
             type="email" 
             placeholder="Inserisci la tua email" 

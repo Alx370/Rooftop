@@ -10,7 +10,6 @@ import Valutazione from "../pages/Valutazione/valutazione.jsx";
 import FAQ from "../pages/FAQ/faq.jsx";
 import NotFound from "../pages/NotFound/notfound.jsx";
 import Agente from "../pages/Agente/agente.jsx";
-import FaqList from "../pages/FaqList/FaqList.jsx";
 import FormBuy from "../components/Forms/FormBuy/formbuy.jsx";
 
 import FormRent from "../components/Forms/FormRent/formrent.jsx";
@@ -39,7 +38,6 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="/formbuy/*" element={<FormBuy />} />
              <Route path="/formrent/*" element={<FormRent />} />
-            <Route path="/test-faq" element={<FaqList />} />
             <Route path="/login-admin" element={<LoginAdmin />} />
           </Routes>
         </main>

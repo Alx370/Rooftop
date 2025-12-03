@@ -180,6 +180,9 @@
   text-align: center;
   margin: 80px 20px 0 20px;
 }
+.hero-title-chisiamo h1{
+  font-family: 'Merriweather', serif;
+}
 .hero-title-chisiamo p{
   font-family: Montserrat, sans-serif;
 }
@@ -317,6 +320,7 @@
 .card-agente h3 {
   font-size: 24px;
   margin-bottom: 10px;
+  font-family: 'Merriweather', serif;
 }
 
 .descr {
@@ -440,6 +444,7 @@
   font-size: 36px;
   margin-bottom: 15px;
   font-weight: 700;
+  font-family: 'Merriweather', serif;
 }
 
 .modal-provincia {
@@ -461,7 +466,15 @@
 .modal-contact {
   font-weight: 600;
   padding: 0px;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-contact h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-contact p {
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Responsive */
@@ -494,6 +507,11 @@
 .dove-trovarci-section h2 {
   font-size: 32px;
   margin-bottom: 10px;
+  font-family: 'Merriweather', serif;
+}
+
+.dove-trovarci-section p {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .map-box img {
@@ -533,6 +551,7 @@
   align-items: center;
   box-shadow: 0px 4px 12px rgba(138, 138, 138, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .recapiti-btn:hover {
@@ -561,10 +580,15 @@
   margin-left:5rem;
 }
 
+.storia-section p {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .title-storia {
   font-size: 42px;
   margin-bottom: 20px;
   text-align: left;
+  font-family: 'Merriweather', serif;
 }
 
 /* COLONNA IMMAGINE */
@@ -588,11 +612,12 @@
 /* DATI SECTION */
 /* ------------------------------------------------------ */
 
-.dati-section h1 {
+.dati-section h2 {
   font-size: 2.2rem;
   font-weight: 700;
   color: #1b1b1b;
   text-align: center;
+  font-family: 'Merriweather', serif;
 }
 
 .dati-section p {

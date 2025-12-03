@@ -33,7 +33,7 @@ export default function Step10({ formData }) {
           <span className={styles.checkmark}>✔</span>
         </div>
 
-        <h2 className={styles.title}>Registrazione completata con successo</h2>
+        <h2 className={styles.title}>Valutazione  completata con successo</h2>
 
         {/* MESSAGGI */}
         {loading && <p className={styles.text}>Invio dei dati in corso...</p>}

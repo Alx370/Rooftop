@@ -3,7 +3,7 @@ import styles from "./step9.module.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { valutaImmobileAutomatico } from "../../../../api/valutazioneApi";
 
-export default function Step9({ formData, prevStep }) {
+export default function Step9({ formData, prevStep, nextStep }) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
@@ -19,8 +19,8 @@ export default function Step9({ formData, prevStep }) {
       indirizzo: formData.indirizzo,
       civico: formData.civico || "",
       metriQuadri: Number(formData.surface),
-      tipologia: formData.tipologia, // deve combaciare con enum backend
-      statoImmobile: formData.serviceType, 
+      tipologia: formData.tipologia,
+      statoImmobile: formData.serviceType,
       piano: formData.floor || null,
       locali: Number(formData.rooms),
       bagni: Number(formData.bathrooms),
@@ -38,7 +38,7 @@ export default function Step9({ formData, prevStep }) {
       allarme: false,
       riscaldamento: formData.riscaldamento || "CENTRALIZZATO",
       classeEnergetica: formData.classeEnergetica || "C",
-      orientamento: formData.orientamento || "NORD"
+      orientamento: formData.orientamento || "NORD",
     };
 
     try {
@@ -79,17 +79,19 @@ export default function Step9({ formData, prevStep }) {
 
       {result && (
         <div className={styles.resultBox}>
-          <h3>Valutazione stimata</h3>
-          <p><strong>Valore stimato:</strong> € {result.valoreStimato}</p>
-          <p><strong>Minimo:</strong> € {result.valoreMin}</p>
-          <p><strong>Massimo:</strong> € {result.valoreMax}</p>
-          <p><strong>Zona OMI:</strong> {result.zonaOMI}</p>
-          <p><strong>Coeff. Zona:</strong> {result.coefficienteZona}</p>
-          <p><strong>Data:</strong> {result.dataValutazione}</p>
+          <h3 className={styles.resultTitle}>Valutazione Stimata</h3>
 
-          <button className={styles.backButton} onClick={prevStep}>
-            Torna indietro
-          </button>
+          <p className={styles.resultValue}>€ {result.valoreStimato}</p>
+
+          <div className={styles.buttonsResult}>
+            <button className={styles.backButton} onClick={prevStep}>
+              Indietro
+            </button>
+
+            <button className={styles.continueButton} onClick={nextStep}>
+              Continua
+            </button>
+          </div>
         </div>
       )}
     </div>

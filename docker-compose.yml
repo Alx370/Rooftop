@@ -35,6 +35,7 @@ services:
       MAIL_PASSWORD: ztkpilxvwtlowmoh
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_JPA_SHOW_SQL: false
+      OLLAMA_API_URL: http://host.docker.internal:11434/api/generate
     ports:
       - "8080:8080"
     restart: unless-stopped

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './chatbot.css';
-import chatbotIcon from '../../assets/icons/chatbot.png';
+import chatbotIcon from '../../assets/icons/chat_Icon.jpg';
 import { sendMessage } from '../../api/chatBotApi';
 import ReactMarkdown from 'react-markdown';
 

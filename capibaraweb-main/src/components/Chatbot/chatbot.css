@@ -10,7 +10,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: white;
+  background: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -109,7 +109,7 @@ export default function Header() {
             <Link to="/login" className="login-link">Login</Link>
           ) : (
             <>
-              <button onClick={goDashboard}>
+              <button className="login-link" onClick={goDashboard}>
                 Dashboard
               </button>
               <button className="login-link logout" onClick={handleLogout}>

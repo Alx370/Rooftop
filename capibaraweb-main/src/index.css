@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   --primary: #ff6400;
@@ -46,7 +46,7 @@ body {
   background: #F5FBEF;
   background-size: 2060px 1600px;
   background-repeat: repeat;
-  font-family: 'Merriweather', serif;
+  font-family: 'Montserrat', sans-serif;
   color: #020122;
   display: flex;
   place-items: center;

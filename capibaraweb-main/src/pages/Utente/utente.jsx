@@ -4,6 +4,7 @@ import "./utente.css";
 import utenteHomeImg from "../../assets/images/utente/casa.png";
 import CalendarioImg from "../../assets/images/utente/calendario.png";
 import DocumentoImg from "../../assets/images/utente/documento.png";
+import agente4Img from "../../assets/images/chisiamo/Torino/agente4.webp";
 import { getMe } from "../../api/authApi";
 
 export default function Utente() {
@@ -24,6 +25,7 @@ export default function Utente() {
 
   // Recupera dati utente dal backend
   useEffect(() => {
+
     const fetchUserData = async () => {
       try {
         setLoading(true);
@@ -43,6 +45,7 @@ export default function Utente() {
     };
 
     fetchUserData();
+
   }, [navigate]);
 
   // Gestione click "Vedi profilo" con dati statici
@@ -51,7 +54,7 @@ export default function Utente() {
       nome: "Alma Cosi",
       descrizione: "Esperta in immobili residenziali",
       esperienza: "+8 anni di esperienza",
-      foto: "../../src/assets/images/chisiamo/Torino/agente4.png"
+      foto: agente4Img
     };
     navigate("/chi-siamo", { state: { selectedAgent: almaCosi } });
   };
@@ -67,7 +70,7 @@ export default function Utente() {
       nome: "Alma Cosi",
       descrizione: "Esperta in immobili residenziali",
       esperienza: "+8 anni di esperienza",
-      foto: "../../src/assets/images/chisiamo/Torino/agente4.png"
+      foto: agente4Img
     }
   } : {
     nome: "Caricamento...",
@@ -175,7 +178,7 @@ export default function Utente() {
     <div className="utente">
       {/* BENVENUTO */}
       <section className="benvenuto-section-utente">
-        <h1>Benvenut{user.sesso === "F" ? "a" : "o"}, {user.nome}!</h1>
+        <h1>Benvenuto/a, {user.nome}!</h1>
         <p>Tutto ciò che ti serve, raccolto in un unico spazio.</p>
       </section>
 

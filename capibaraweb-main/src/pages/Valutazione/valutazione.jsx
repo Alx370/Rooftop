@@ -2,35 +2,51 @@ import { Link } from "react-router-dom";
 import "../Valutazione/valutazione.css";
 import React, { useEffect } from "react";
 import { setPageMeta, setStructuredData } from "../../utils/seo";
-import Affitto from "../../assets/images/valutazione/affitto.png";
-import Vendita from "../../assets/images/valutazione/vendita.png";
-import Icon1 from "../../assets/images/valutazione/icon1.png";
-import Icon2 from "../../assets/images/valutazione/icon2.png";
-import Icon3 from "../../assets/images/valutazione/icon3.png";
+import Affitto from "../../assets/images/valutazione/affitto.webp";
+import Vendita from "../../assets/images/valutazione/vendita.webp";
+import Icon1 from "../../assets/images/valutazione/icon1.webp";
+import Icon2 from "../../assets/images/valutazione/icon2.webp";
+import Icon3 from "../../assets/images/valutazione/icon3.webp";
 
 const Valutazione = () => {
   useEffect(() => {
     setPageMeta({
-      title: 'Valutazione immobiliare',
+      title: 'Valutazione Immobiliare Gratuita in 72 Ore | Immobiliaris',
       description:
-        'Valutiamo il tuo immobile in pochi step: servizi per vendita e affitto, analisi professionale e report dettagliato.',
+        'Valutazione immobiliare professionale per vendita e affitto. Analisi accurata del valore di mercato, report dettagliato entro 72 ore. Richiedi la tua valutazione gratuita.',
       url: window.location.href,
-      image: '/src/assets/images/valutazione/vendita.png',
+      image: Vendita,
+      type: 'website'
     });
 
     setStructuredData({
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Valutazione immobiliare — Capibara Web",
-      "description": "Valutiamo il tuo immobile in pochi step: servizi per vendita e affitto, analisi professionale e report dettagliato.",
-      "url": window.location.href
+      "@type": "Service",
+      "serviceType": "Valutazione Immobiliare",
+      "name": "Valutazione immobiliare professionale — Immobiliaris",
+      "description": "Servizio di valutazione immobiliare per vendita e affitto. Analisi professionale con report dettagliato entro 72 ore.",
+      "url": window.location.href,
+      "provider": {
+        "@type": "RealEstateAgent",
+        "name": "Immobiliaris"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "Valutazione immobiliare gratuita"
+      }
     });
   }, []);
   return (
     <main className="valutazione-container">
 
       {/* --- HERO --- */}
-      <section className="hero-section">
+      <section className="hero-section-valutazione">
         <h1>Valutiamo il tuo<br />immobile in pochi step</h1>
         <p>Dati reali, competenza umana e trasparenza in ogni fase.</p>
       </section>

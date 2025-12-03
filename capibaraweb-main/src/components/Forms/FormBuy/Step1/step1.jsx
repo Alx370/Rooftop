@@ -7,10 +7,6 @@ export default function Step1({ formData, setFormData, nextStep, prevStep }) {
 
   const provincePiemonte = {
     TORINO: "TO",
-    VERCELLI: "VC",
-    BIELLA: "BI",
-    VERBANIA: "VB",
-    NOVARA: "NO",
     CUNEO: "CN",
     ASTI: "AT",
     ALESSANDRIA: "AL",

@@ -110,6 +110,7 @@ h2 {
 }
 
 .hero-text {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -120,6 +121,8 @@ h2 {
 .hero-text h1 {
   font-size: 4rem;
   margin-bottom: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
 }
 
 .hero-text p {
@@ -127,6 +130,8 @@ h2 {
   margin-bottom: 3rem;
   max-width: 400px;
   text-align: justify;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 .hero-buttons {
@@ -152,6 +157,7 @@ h2 {
   color: var(--text-dark);
   margin-bottom: 1rem;
   text-align: center;
+  font-family: 'Merriweather', serif;
 }
 
 .subtitle-home {
@@ -160,6 +166,8 @@ h2 {
   text-align: center;
   max-width: 90%;
   font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 .intro-cards-home {
@@ -211,7 +219,7 @@ h2 {
 .card-content-home h3 {
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #000;
   font-size: 1.5rem;
   font-family: Montserrat, sans-serif;
 }
@@ -219,7 +227,7 @@ h2 {
 .card-content-home p {
   margin-bottom: 1rem;
   max-width: 85%;
-  color: #fff;
+  color: #000;
   font-family: Montserrat, sans-serif;
 }
 
@@ -238,6 +246,7 @@ h2 {
   font-weight: 700;
   margin-bottom: 4rem;
   text-align: center;
+  font-family: 'Merriweather', serif;
 }
 
 .usp-grid {
@@ -281,7 +290,7 @@ h2 {
   color: var(--primary);
   font-size: 2rem;
   margin-bottom: 0.6rem;
-
+  text-align: center;
 }
 
 .usp-text p,
@@ -320,6 +329,7 @@ h2 {
 }
 
 .testimonials h2 {
+  font-family: 'Merriweather', serif;
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -443,6 +453,7 @@ h2 {
 }
 
 .faq-title {
+  font-family: 'Merriweather', serif;
   text-align: left;
   font-size: 2rem;
   margin-top:-0.6rem;
@@ -468,6 +479,7 @@ h2 {
 }
 
 .faq-item summary {
+  font-family: 'Merriweather', serif;
   font-weight: 700;
   cursor: pointer;
   list-style: none;
@@ -505,6 +517,7 @@ h2 {
 }
 
 .newsletter h2 {
+  font-family: 'Merriweather', serif;
   font-size: 2.2rem;
   margin-bottom: 1rem;
 }
@@ -520,6 +533,7 @@ h2 {
 }
 
 .newsletter-form input {
+  font-family: 'Montserrat', sans-serif;
   background-color: white;
   color: #000;
   padding: 0.8rem 1rem;
@@ -564,6 +578,8 @@ h2 {
   }
   .hero-text h1 {
     font-size: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
   }
   .hero-bg-palazzo-img {
     width: 70%;
@@ -615,11 +631,15 @@ h2 {
   }
   .hero-text h1 {
     font-size: 2.4rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
   }
   .hero-text p {
     max-width: 90%;
     text-align: center;
     font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
   }
   .hero-buttons {
     justify-content: center;
@@ -652,9 +672,12 @@ h2 {
 @media (max-width: 768px) {
   .intro-home h2 {
     font-size: 1.8rem;
+    font-family: 'Merriweather', serif;
   }
   .subtitle-home{
     font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
   }
   .card-home {
     height: 250px;
@@ -747,6 +770,7 @@ h2 {
 
   .usp-section h2{
     font-size: 1.8rem;
+    font-family: 'Merriweather', serif;
   }
   .usp-section {
     padding: 3rem 1rem;

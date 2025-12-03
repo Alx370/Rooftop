@@ -107,8 +107,7 @@
   margin-bottom: 6rem;
 }
 
-.contact-column {
-  font-family: 'Merriweather', serif;
+.contact-column { 
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -117,6 +116,7 @@
 }
 
 .contact-column h2 {
+  font-family: 'Merriweather', serif;
   font-size: 2rem;
   color: #1f1b4b;
   margin-bottom: 2rem;
@@ -124,6 +124,7 @@
 }
 
 .contact-column p {
+  font-family: 'Montserrat', sans-serif;
   max-width: 400px;
   margin-left:-5rem;
 }

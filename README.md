@@ -1,15 +1,24 @@
-# Gruppo numero 3 - Rooftop
-## Membri del Gruppo
-- Alessandro Formicola (https://github.com/Alx370)
-- Alessandro De Filippis (https://github.com/Aledefy)
-- Andrea Alume (https://github.com/AndreaAlume)
-- Kuhharonak Stanislau (https://github.com/stani-kukha)
-- Gualtiero Begalla (https://github.com/gualty160104)
-- Noemi Borra (https://github.com/noemiborra)
-- Marta Pastore (https://github.com/martapastore-svg)
-- Matteo Bianco (https://github.com/matteobianco583)
-- Chiara Guercio (https://github.com/chiaraguercio-tech)
-- Antonio Petroiae (https://github.com/antonioapetroaie-cmd)
+# Gruppo 3 – Rooftop  
+
+---
+
+## Team & Ruoli
+
+### Software Developer
+- Alessandro Formicola – [@Alx370](https://github.com/Alx370)  
+- Alessandro De Filippis – [@Aledefy](https://github.com/Aledefy)  
+- Andrea Alume – [@AndreaAlume](https://github.com/AndreaAlume)
+
+### Web Developer
+- Kuhharonak Stanislau – [@stani-kukha](https://github.com/stani-kukha)  
+- Gualtiero Begalla – [@gualty160104](https://github.com/gualty160104)  
+- Noemi Borra – [@noemiborra](https://github.com/noemiborra)
+
+### Digital Strategist
+- Marta Pastore – [@martapastore-svg](https://github.com/martapastore-svg)  
+- Matteo Bianco – [@matteobianco583](https://github.com/matteobianco583)  
+- Chiara Guercio – [@chiaraguercio-tech](https://github.com/chiaraguercio-tech)  
+- Antonio Petroiae – [@antonioapetroaie-cmd](https://github.com/antonioapetroaie-cmd)
 
 ---
 
@@ -43,19 +52,20 @@ Il portale è pensato per le principali città piemontesi:
 ---
 
 ## Tecnologie Utilizzate
-- **Frontend**: React + Vite, HTML5, CSS, JavaScript/TypeScript
-- **Backend**: Java con Spring Boot
-- **Database**: MySQL
-- **Containerizzazione**: Docker e Docker Compose
+- **Frontend**: React + Vite, HTML5, CSS, TypeScript/JavaScript  
+- **Backend**: Java 21, Spring Boot  
+- **Database**: MySQL  
+- **Containerizzazione**: Docker + Docker Compose
 
 ---
 
 ## Requisiti per Avviare il Progetto
-- Node.js (versione 18 o superiore)
-- Java Development Kit (JDK) (versione 21)
-- Docker Desktop e Docker Compose
+- Node.js v18+
+- JDK 21  
+- Docker Desktop + Docker Compose  
+- Porte disponibili: **5173**, **8080/8081**, **3307/3308**
 
-## Avvio del progetto
+## Avvio del progetto (Docker)
 Assicurarsi di avere Docker in esecuzione prima di procedere e di non avere porte occupate e in caso chiudere servizi in conflitto su `5173`, `8080/8081`, `3307/3308`.
 Infine clonare il repository principale che contiene sia il frontend che il backend.
 ```bash
@@ -81,16 +91,6 @@ cd Rooftop
 
 ---
 
-## Struttura delle Cartelle
-- **Frontend**: `capibaraweb-main/`
-  - Contiene `Dockerfile`, `vite.config.js`, e la directory `src/`.
-- **Backend**: `Progetto_Rooftop/`
-  - Contiene `Dockerfile`, `src/main/java`, e `application.properties`.
-- **Database**: `Database/`
-  - Contiene `init.sql` per l’inizializzazione del database.
-
----
-
 ## Avvio Manuale (Senza Docker)
 In caso di problemi con Docker, è possibile avviare manualmente frontend e backend.
 
@@ -111,11 +111,34 @@ In caso di problemi con Docker, è possibile avviare manualmente frontend e back
 
 Assicurarsi che MySQL sia avviato e configurato correttamente.
 
-## Troubleshooting
-- **Immagini non visibili nel frontend**: Importare gli asset in JSX con `import img from "...";`.
-- **CSS non applicati**: Verificare gli import corretti, es. `import "./Header.css";`.
-- **Porte occupate**: Chiudere servizi in conflitto su `5173`, `8080/8081`, `3307/3308`.
-- **Errori TypeScript sugli import immagini**: Aggiungere `src/images.d.ts` con `declare module '*.png';` (già presente).
+--- 
 
+## Struttura delle Cartelle
+Rooftop/
+├── capibaraweb-main/        # Frontend
+│   ├── Dockerfile
+│   ├── src/
+│   └── vite.config.js
+│
+├── Progetto_Rooftop/        # Backend
+│   ├── Dockerfile
+│   ├── src/main/java/
+│   └── application.properties
+│
+├── Database/                # Inizializzazione database
+│   └── init.sql
+│
+├── docker-compose.yml
+└── docker-compose.dev.yml
 
+---
 
+## Documentazione API 
+La documentazione delle API è disponibile all'indirizzo:
+[@API](Progetto_Rooftop/API_doc.md)
+Contiene:
+- Endpoints pubblici e privati
+- Metodi, parametri e body richiesti
+- Risposte e codici HTTP
+
+---

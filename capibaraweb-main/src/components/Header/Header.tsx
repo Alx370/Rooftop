@@ -4,6 +4,9 @@ import "./Header.css";
 
 import { getSession, clearSession } from "../../utils/session.js";
 
+// Resolve logo path via Vite so it works in dev and production builds
+const logoUrl = new URL('/src/assets/images/global/LogoBlack.png', import.meta.url).href;
+
 /* ===========================
    TIPI DELLA SESSIONE
 =========================== */
@@ -77,7 +80,7 @@ export default function Header() {
         <div className="logo">
           <Link to="/">
             <img
-              src="@assets/images/LogoBlack.png"
+              src={logoUrl}
               alt="Capibara Web Logo"
               className="logo-image"
             />

@@ -12,29 +12,38 @@
 }
 
 .error {
-  color: red;
+  color: #d40000;
   text-align: center;
   margin-bottom: 15px;
 }
 
-.buttons {
+.buttons,
+.buttonsResult {
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .backButton,
-.submitButton {
+.submitButton,
+.continueButton {
   padding: 12px 28px;
   font-size: 16px;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .backButton {
   background: white;
-  border: 1px solid #020122;
+  border: 2px solid #020122;
   color: #020122;
+}
+
+.backButton:hover {
+  background: #020122;
+  color: white;
 }
 
 .submitButton {
@@ -43,10 +52,38 @@
   color: white;
 }
 
+.submitButton:hover {
+  background: #e06400;
+}
+
+.continueButton {
+  background: #008f4c;
+  border: none;
+  color: white;
+}
+
+.continueButton:hover {
+  background: #006f3a;
+}
+
 .resultBox {
-  background: #f7f7f7;
-  padding: 25px;
-  border-radius: 12px;
+  background: white;
+  padding: 40px 25px;
+  border-radius: 18px;
   margin-top: 30px;
-  text-align: left;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.resultTitle {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.resultValue {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ff7300;
+  margin-bottom: 30px;
 }

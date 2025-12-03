@@ -36,3 +36,32 @@ export default function FaqList() {
     </div>
   );
 }
+
+/**
+ * FAQ List Component for Immobiliaris Real Estate Agency.
+ *
+ * Renders a list of frequently asked questions fetched from the backend API.
+ * Displays questions and answers in a simple list format with loading states
+ * and error handling for failed API requests.
+ *
+ * Features:
+ * - Fetches FAQ data from REST API on component mount
+ * - Loading state while data is being fetched
+ * - Error handling with console logging
+ * - Simple list rendering of questions and answers
+ * - Empty state message when no FAQs are available
+ *
+ * @component
+ * @returns {JSX.Element} The rendered FAQ list page
+ *
+ * @example
+ * <FaqList />
+ *
+ * @typedef {Object} FAQ
+ * @property {number} id - Unique identifier for the FAQ
+ * @property {string} domanda - The question text
+ * @property {string} risposta - The answer text
+ *
+ * API endpoint: GET http://localhost:8080/api/faq
+ */
+

@@ -317,3 +317,70 @@ export default function Utente() {
     </div>
   );
 }
+
+/**
+ * User Dashboard Component for Immobiliaris Real Estate Agency.
+ *
+ * Renders a comprehensive user dashboard for property owners, including:
+ * - Personalized welcome with user data from backend
+ * - Personal agent information card with profile navigation
+ * - Progress timeline showing the current property selling/renting process
+ * - Profile overview with statistics (proposals, visits, favorites)
+ * - Scheduled visits management with calendar and time selection
+ * - Recent activity feed with visual icons
+ *
+ * Features:
+ * - Dynamic user data fetching with loading and error states
+ * - JWT-based authentication with redirect to login if unauthorized
+ * - Interactive calendar and time slot selection for appointments
+ * - Agent profile navigation with state passing
+ * - Real-time statistics display
+ * - Responsive activity timeline
+ *
+ * @component
+ * @returns {JSX.Element} The rendered User dashboard page
+ *
+ * @example
+ * <Utente />
+ *
+ * @typedef {Object} UserData
+ * @property {string} nome - User's first name
+ * @property {string} cognome - User's last name
+ * @property {string} email - User's email address
+ * @property {string} telefono - User's phone number
+ *
+ * @typedef {Object} Agent
+ * @property {string} nome - Agent's name
+ * @property {string} descrizione - Agent's description
+ * @property {string} esperienza - Agent's experience
+ * @property {string} foto - Agent's photo path
+ *
+ * @typedef {Object} Step
+ * @property {string} nome - Step name
+ * @property {boolean} completed - Whether the step is completed
+ *
+ * @typedef {Object} Stat
+ * @property {string} numero - Statistical number
+ * @property {string} label - Stat label
+ * @property {string} subtitle - Additional stat information
+ *
+ * @typedef {Object} Visit
+ * @property {number} id - Visit ID
+ * @property {string} data - Visit date
+ * @property {string} ora - Visit time
+ * @property {string} tipo - Visit type
+ * @property {string} indirizzo - Property address
+ * @property {string} status - Visit status (accepted/pending)
+ *
+ * @typedef {Object} Activity
+ * @property {string} data - Activity date
+ * @property {string} titolo - Activity title
+ * @property {string} icon - Activity icon
+ *
+ * @function fetchUserData
+ * @description Fetches user data from backend API with error handling
+ * @async
+ *
+ * @function handleVediProfilo
+ * @description Navigates to agent profile page with agent data
+ */

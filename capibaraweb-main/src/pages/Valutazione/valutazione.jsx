@@ -132,3 +132,35 @@ const Valutazione = () => {
 };
 
 export default Valutazione;
+
+/**
+ * Property Evaluation Page Component for Immobiliaris Real Estate Agency.
+ *
+ * Renders the property evaluation landing page where users can choose between
+ * selling or renting their property and start the evaluation process.
+ * Includes SEO optimization with meta tags and structured data.
+ *
+ * Features:
+ * - Hero section with main call-to-action
+ * - Two service cards (Sale and Rent) with navigation to respective forms
+ * - Three-step process explanation with visual icons
+ * - Access section for returning users to login
+ * - SEO meta tags and JSON-LD structured data for search engines
+ * - Responsive design with background images and overlays
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Property Evaluation page
+ *
+ * @example
+ * <Valutazione />
+ *
+ * @see ../../utils/seo.js for SEO helpers
+ * @see ./valutazione.css for styles
+ * @see /formbuy/step0 for sale evaluation form
+ * @see /formrent/step0 for rent evaluation form
+ *
+ * Navigation paths:
+ * - Sale evaluation: /formbuy/step0
+ * - Rent evaluation: /formrent/step0
+ * - User login: /login
+ */

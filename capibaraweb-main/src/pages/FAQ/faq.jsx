@@ -134,3 +134,99 @@ const Faq = () => {
 };
 
 export default Faq;
+
+/**
+ * @fileoverview Frequently Asked Questions (FAQ) page component
+ * 
+ * @description
+ * This component displays a comprehensive FAQ section for the real estate agency,
+ * providing answers to common questions about tenant selection, property evaluation,
+ * support services, negotiation timelines, and remote property sales. It includes
+ * an interactive contact form for users who need additional personalized assistance.
+ * 
+ * @component Faq
+ * @returns {JSX.Element} A functional React component that renders the FAQ page
+ * 
+ * @sections
+ * 1. FAQ Intro Section
+ *    - Welcome message and introduction text
+ *    - Sets the tone for user assistance
+ * 
+ * 2. FAQ Items Section
+ *    - Collapsible details/summary elements for each question
+ *    - Five main FAQ categories:
+ *      a. Tenant selection process and verification
+ *      b. Required documents for property evaluation
+ *      c. Post-signature support and services
+ *      d. Average negotiation duration
+ *      e. Remote property sale management
+ * 
+ * 3. Contact Form Section
+ *    - Form for personalized inquiries
+ *    - Fields: Name, Email, Message
+ *    - Decorative images (house and garden)
+ * 
+ * @faqTopics
+ * - Come selezionate gli inquilini? (How do you select tenants?)
+ *   Covers verification of documents, income, and references
+ * 
+ * - Quali documenti servono per la valutazione? (What documents are needed for evaluation?)
+ *   Details required documents: property title, cadastral survey, floor plans,
+ *   APE certificate, habitability certificate, system compliance certificates
+ * 
+ * - Offrite supporto anche dopo la firma? (Do you offer post-signing support?)
+ *   Explains ongoing support including bureaucratic management and direct consultant contact
+ * 
+ * - Quanto dura in media una trattativa? (How long does a negotiation take on average?)
+ *   Provides timelines: weeks to months for sales, 15-30 days for rentals
+ * 
+ * - Posso affidare la vendita a distanza? (Can I manage a remote sale?)
+ *   Details remote sale process using digital tools and electronic signatures
+ * 
+ * @formFields
+ * - Nome Cognome (Full Name) - Text input
+ * - Mail (Email) - Email input
+ * - Messaggio (Message) - Textarea
+ * - Invia (Send) - Submit button
+ * 
+ * @assets
+ * - CasaFaq: Main house image for contact section
+ * - GardenFaq: Background garden image for contact section
+ * 
+ * @styling
+ * - ./faq.css: Contains all component-specific styles
+ * - Responsive layout with collapsible FAQ items
+ * - Two-column layout for contact section (form + images)
+ * 
+ * @interactiveFeatures
+ * - Collapsible FAQ items using HTML details/summary elements
+ * - Native browser accordion functionality
+ * - Contact form for personalized questions
+ * 
+ * @contentFeatures
+ * - Emphasized keywords using <b> tags for SEO and readability
+ * - Line breaks for improved text formatting
+ * - Clear, professional language addressing user concerns
+ * 
+ * @dependencies
+ * - react: Core React library
+ * 
+ * @note
+ * The form submission functionality is not yet implemented and would require
+ * integration with a backend API or email service.
+ * 
+ * @example
+ * // Basic usage
+ * import Faq from './pages/FAQ/faq';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <Faq />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @author Rooftop Development Team
+ * @version 1.0.0
+ */

@@ -125,3 +125,44 @@ const Register = () => {
 };
 
 export default Register;
+
+/**
+ * Register Page Component for Immobiliaris Real Estate Agency.
+ *
+ * Renders a registration form for new user account creation.
+ * Handles form validation, user registration, success/error states, and redirects to login page.
+ * Processes name input by splitting into first and last name for API payload.
+ *
+ * Features:
+ * - Full name, email, password, and password confirmation fields
+ * - Client-side validation for required fields and password matching
+ * - Error and success message display
+ * - Automatic redirect to login page after successful registration
+ * - Name parsing (splits full name into nome and cognome)
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Register page
+ *
+ * @example
+ * <Register />
+ *
+ * @typedef {Object} FormData
+ * @property {string} name - Full name of the user
+ * @property {string} email - Email address of the user
+ * @property {string} password - User's chosen password
+ * @property {string} confirmPassword - Password confirmation
+ *
+ * @typedef {Object} RegisterPayload
+ * @property {string} nome - First name
+ * @property {string} cognome - Last name
+ * @property {string} email - Email address
+ * @property {string} password - Password
+ *
+ * @function handleChange
+ * @description Updates form data state when input fields change
+ * @param {React.ChangeEvent<HTMLInputElement>} e - Input change event
+ *
+ * @function handleSubmit
+ * @description Handles form submission, validates data, and registers user
+ * @param {React.FormEvent<HTMLFormElement>} e - Form submit event
+ */

@@ -389,6 +389,47 @@ const Home = () => {
       </section>
     </div>
   );
+
 };
 
 export default Home;
+
+/**
+ * Home Page Component for Immobiliaris Real Estate Agency.
+ *
+ * This component renders the main landing page, including:
+ * - Hero section with branding and call-to-action
+ * - Introduction to services (selling and renting properties)
+ * - Unique Selling Propositions (USP) grid
+ * - Testimonials carousel with smooth scrolling
+ * - Frequently Asked Questions (FAQ) section
+ * - Newsletter subscription form
+ *
+ * SEO meta tags and structured data are set on mount for better search engine visibility.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Home page
+ *
+ * @example
+ * <Home />
+ *
+ * @see src/utils/seo.js for SEO helpers
+ * @see src/pages/Home/home.css for styles
+ *
+ * @typedef {Object} Testimonial
+ * @property {string} text - The testimonial text
+ * @property {string} img - Path to the testimonial image
+ * @property {string} name - Name of the testimonial author
+ *
+ * @function smoothScroll
+ * @description Smoothly scrolls the testimonial grid left or right by one card width
+ * @param {number} direction - Direction to scroll: -1 (left), 1 (right)
+ *
+ * @function setPageMeta
+ * @description Sets SEO meta tags for the page
+ * @param {Object} meta - Meta tag properties
+ *
+ * @function setStructuredData
+ * @description Injects JSON-LD structured data for search engines
+ * @param {Object} data - Structured data object
+ */

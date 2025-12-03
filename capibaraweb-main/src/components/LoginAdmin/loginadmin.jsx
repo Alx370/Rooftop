@@ -69,3 +69,63 @@ export default function LoginAdmin() {
         </div>
     );
 }
+
+/**
+ * @fileoverview Admin login component for real estate agents
+ * 
+ * @description
+ * This component provides a specialized login interface for administrative users,
+ * specifically real estate agents with @immobiliaris.it email addresses. It validates
+ * email domains and manages authentication sessions for administrative access.
+ * 
+ * @component LoginAdmin
+ * @returns {JSX.Element} A functional React component that renders the admin login form
+ * 
+ * @state {string} email - The email input value entered by the user
+ * @state {string} password - The password input value entered by the user
+ * @state {string} error - Error message displayed when validation fails
+ * 
+ * @function handleLogin
+ * @description Handles the login form submission with email validation and session creation
+ * @param {Event} e - The form submission event
+ * @returns {void}
+ * @validation
+ * - Email must end with "@immobiliaris.it"
+ * - Displays error message if validation fails
+ * @sideEffects
+ * - Sets "adminLogged" flag in localStorage on successful validation
+ * - Navigates to "/agente" route after successful login
+ * 
+ * @dependencies
+ * - react: Core React library with hooks (useState)
+ * - react-router-dom: Routing library for navigation (useNavigate, Link)
+ * 
+ * @styling
+ * - ./loginadmin.css: Contains all component-specific styles
+ * 
+ * @features
+ * - Domain-based email validation (@immobiliaris.it)
+ * - Error handling with user feedback
+ * - Session persistence via localStorage
+ * - Password recovery link (placeholder)
+ * - Automatic redirection after successful login
+ * 
+ * @security
+ * - Client-side email domain validation
+ * - Password field with masked input
+ * 
+ * @example
+ * // Basic usage
+ * import LoginAdmin from './components/LoginAdmin/loginadmin';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <LoginAdmin />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @author Rooftop Development Team
+ * @version 1.0.0
+ */

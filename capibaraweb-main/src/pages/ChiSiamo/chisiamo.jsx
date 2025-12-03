@@ -472,3 +472,108 @@ export default function ChiSiamo() {
     </div>
   );
 }
+
+/**
+ * @fileoverview About Us page component showcasing the real estate agency team
+ * 
+ * @description
+ * This component displays comprehensive information about Immobiliaris real estate agency,
+ * including a filterable list of agents across different provinces, company history,
+ * location information, and key statistics. It features interactive agent cards with
+ * detailed modals, province filtering, and SEO optimization with structured data.
+ * 
+ * @component ChiSiamo
+ * @returns {JSX.Element} A functional React component that renders the About Us page
+ * 
+ * @typedef {Object} Agent
+ * @property {number} id - Unique agent identifier
+ * @property {string} nome - Agent's full name
+ * @property {string} descrizione - Short description/tagline
+ * @property {string} presentazione - Detailed agent presentation
+ * @property {string} provincia - Province where the agent operates (Torino, Cuneo, Alessandria, Asti)
+ * @property {string} tel - Agent's phone number
+ * @property {string} mail - Agent's email address
+ * @property {string} img - Agent's profile image URL
+ * 
+ * @state {boolean} openMenu - Controls the visibility of the province filter modal
+ * @state {string} selectedProvince - Currently selected province filter ("Torino", "Cuneo", "Alessandria", "Asti", "Tutti")
+ * @state {Agent|null} selectedAgent - Currently selected agent for detailed modal view
+ * 
+ * @constant {Array<string>} provinces - Available province options for filtering
+ * @constant {Array<Agent>} agentsData - Complete dataset of all agents across provinces
+ * @constant {Array<Agent>} filteredAgents - Agents filtered by selected province
+ * @constant {string} phoneNumber - Agency contact phone number
+ * @constant {string} emailAddress - Agency contact email address
+ * 
+ * @function asset
+ * @description Helper function to resolve asset paths via Vite for development and production
+ * @param {string} p - Relative path to asset from /src/assets/
+ * @returns {string} Fully resolved asset URL
+ * @example
+ * asset('images/chisiamo/Torino/agente1.webp')
+ * // Returns: resolved URL to the asset
+ * 
+ * @hook useEffect
+ * @description Sets up SEO metadata and structured data for the page on component mount
+ * @sideEffects
+ * - Calls setPageMeta with page title, description, URL, image, and type
+ * - Calls setStructuredData with Schema.org RealEstateAgent structured data
+ * 
+ * @dependencies
+ * - react: Core React library with hooks (useState, useEffect)
+ * - ../../utils/seo: SEO utilities (setPageMeta, setStructuredData)
+ * 
+ * @styling
+ * - ./chisiamo.css: Contains all component-specific styles
+ * 
+ * @seoFeatures
+ * - Dynamic page meta tags (title, description, Open Graph)
+ * - Schema.org structured data for real estate agency
+ * - Includes company information, contact details, service areas, and ratings
+ * 
+ * @sections
+ * 1. Hero Section - Main introduction with background images
+ * 2. Province Filter - Modal-based filter to select agent province
+ * 3. Agent Cards Grid - Filterable grid of agent cards with images
+ * 4. Agent Detail Modal - Detailed view with contact information
+ * 5. Location Map - Interactive map link to Google Maps
+ * 6. Contact Buttons - Quick call and email buttons
+ * 7. Company History - Story and background of the agency
+ * 8. Statistics - Key metrics (houses sold, agents, consultations)
+ * 
+ * @interactiveFeatures
+ * - Province dropdown filter with modal overlay
+ * - Agent card click to view detailed information
+ * - Modal with agent presentation and contact details
+ * - Clickable map linking to Google Maps
+ * - Phone and email quick action buttons
+ * 
+ * @assets
+ * - Agent profile images for all provinces
+ * - Background images for hero section
+ * - Map image with link to Google Maps
+ * - Icons for phone and email buttons
+ * - Panorama image for company history section
+ * 
+ * @dataStructure
+ * The component manages 16 agents across 4 provinces:
+ * - Torino: 4 agents (ids 1-4)
+ * - Cuneo: 4 agents (ids 5-8)
+ * - Alessandria: 4 agents (ids 9-12)
+ * - Asti: 4 agents (ids 13-16)
+ * 
+ * @example
+ * // Basic usage
+ * import ChiSiamo from './pages/ChiSiamo/chisiamo';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <ChiSiamo />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @author Rooftop Development Team
+ * @version 1.0.0
+ */

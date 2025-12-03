@@ -289,3 +289,120 @@ const Agente = () => {
 }
 
 export default Agente;
+
+/**
+ * @fileoverview Real estate agent dashboard component
+ * 
+ * @description
+ * This component provides a comprehensive dashboard for real estate agents to manage
+ * their clients, properties, and appointments. It includes features for tracking client
+ * negotiations, managing property evaluations, scheduling appointments through an
+ * interactive calendar, and handling appointment requests via a modal interface.
+ * 
+ * @component Agente
+ * @returns {JSX.Element} A functional React component that renders the agent dashboard
+ * 
+ * @typedef {Object} Cliente
+ * @property {string} nome - Client's full name
+ * @property {string} tipologia - Client type (Venditore/Locatore)
+ * @property {string} contatto - Client's phone number
+ * @property {string} stato - Negotiation status
+ * 
+ * @typedef {Object} Immobile
+ * @property {number} id - Unique property identifier
+ * @property {string} nome - Property name
+ * @property {string} stato - Property status (Affitto/Vendita)
+ * @property {string} indirizzo - Property address
+ * @property {string} valutazione - Evaluation status
+ * 
+ * @typedef {Object} Appuntamento
+ * @property {string} data - Appointment date and time
+ * @property {string} descrizione - Appointment description
+ * 
+ * @state {Array<Cliente>} clienti - List of clients with their information and status
+ * @state {Array<Immobile>} immobili - List of properties managed by the agent
+ * @state {Array<Appuntamento>} appuntamenti - List of scheduled appointments
+ * @state {number} selectedDate - Currently selected day in the calendar (1-30)
+ * @state {string|null} selectedTime - Selected time slot for appointment
+ * @state {boolean} showModal - Controls the visibility of the appointment request modal
+ * @state {string} clientEmail - Email address entered for appointment request
+ * @state {string} emailError - Error message for email validation
+ * 
+ * @constant {Array<string>} statiValutazione - Available property evaluation statuses
+ * @constant {Array<string>} orari - Available time slots for appointments
+ * 
+ * @function handleChangeValutazione
+ * @description Updates the evaluation status of a property and adjusts its status accordingly
+ * @param {number} immobileId - The ID of the property to update
+ * @param {string} nuovoStato - The new evaluation status to set
+ * @returns {void}
+ * @logic
+ * - If status is "Venduto", sets property stato to "Vendita"
+ * - Otherwise, maintains current property stato
+ * 
+ * @function handleTimeSelection
+ * @description Handles time slot selection and opens the appointment modal
+ * @param {string} ora - The selected time slot
+ * @returns {void}
+ * @sideEffects Opens modal if both date and time are selected
+ * 
+ * @function validateEmail
+ * @description Validates email format using regex pattern
+ * @param {string} email - Email address to validate
+ * @returns {boolean} True if email format is valid
+ * 
+ * @function handleSendAppointment
+ * @description Processes and sends appointment request to client
+ * @returns {void}
+ * @validation
+ * - Checks if email is provided
+ * - Validates email format
+ * @sideEffects
+ * - Logs appointment details to console
+ * - Shows alert confirmation
+ * - Resets modal state and form fields
+ * @todo Implement API call when backend is ready
+ * 
+ * @function handleCloseModal
+ * @description Closes the appointment modal and resets all related state
+ * @returns {void}
+ * @sideEffects Resets modal, email input, error message, and selected time
+ * 
+ * @dependencies
+ * - react: Core React library with hooks (useState, useEffect)
+ * - react-router-dom: Routing library (useNavigate - imported but not currently used)
+ * 
+ * @styling
+ * - ./agente.css: Contains all component-specific styles
+ * 
+ * @features
+ * - Client management table with contact information and negotiation status
+ * - Property cards with evaluation status dropdowns
+ * - Interactive 30-day calendar with event indicators
+ * - Time slot selection grid
+ * - Appointment request modal with email validation
+ * - Responsive design for client and property management
+ * - CRUD action buttons (Elimina/Modifica) - UI only, not yet implemented
+ * 
+ * @uiElements
+ * - Client table with sortable columns and action buttons
+ * - Property grid with status badges and evaluation selectors
+ * - Calendar with selectable dates and event markers
+ * - Time slot selector with visual feedback
+ * - Modal overlay with form for email input
+ * 
+ * @example
+ * // Basic usage
+ * import Agente from './pages/Agente/agente';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <Agente />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @author Rooftop Development Team
+ * @version 1.0.0
+ */

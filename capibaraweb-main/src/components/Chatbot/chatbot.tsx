@@ -101,3 +101,62 @@ const Chatbot: React.FC = () => {
 };
 
 export default Chatbot;
+
+/**
+ * @fileoverview Chatbot component for real-time user assistance
+ * 
+ * @description
+ * This component implements an interactive chatbot interface that allows users to communicate
+ * with an AI assistant. It features a toggleable chat window, message history, loading states,
+ * and markdown support for bot responses.
+ * 
+ * @component Chatbot
+ * @returns {React.FC} A functional React component that renders a chatbot interface
+ * 
+ * @state {boolean} isOpen - Controls the visibility of the chat window
+ * @state {Array<{text: string, sender: 'user'|'bot'}>} messages - Array storing the conversation history
+ * @state {string} inputMessage - Current text input from the user
+ * @state {boolean} isLoading - Indicates whether the bot is processing a request
+ * 
+ * @function toggleChat
+ * @description Toggles the visibility of the chat window
+ * @returns {void}
+ * 
+ * @function handleSendMessage
+ * @async
+ * @description Handles sending a user message to the chatbot API and processing the response
+ * @returns {Promise<void>}
+ * @throws {Error} Displays an error message if the API call fails
+ * 
+ * @function handleKeyPress
+ * @description Handles keyboard events, specifically triggering message send on Enter key
+ * @param {React.KeyboardEvent} e - The keyboard event object
+ * @returns {void}
+ * 
+ * @dependencies
+ * - react: Core React library for component creation
+ * - react-markdown: Library for rendering markdown content in bot messages
+ * - ../../api/chatBotApi: API module for sending messages to the backend
+ * 
+ * @styling
+ * - ./chatbot.css: Contains all component-specific styles
+ * 
+ * @assets
+ * - chatbotIcon: Icon image displayed on the chatbot toggle button
+ * 
+ * @example
+ * // Basic usage
+ * import Chatbot from './components/Chatbot/chatbot';
+ * 
+ * function App() {
+ *   return (
+ *     <div>
+ *       <Chatbot />
+ *     </div>
+ *   );
+ * }
+ * 
+ * @author Rooftop Development Team
+ * @version 1.0.0
+ */
+

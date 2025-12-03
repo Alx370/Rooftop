@@ -137,3 +137,43 @@ export default function Login() {
     </section>
   );
 }
+
+/**
+ * Login Page Component for Immobiliaris Real Estate Agency.
+ *
+ * Renders a login form for user authentication via email and password.
+ * Handles authentication, error display, and redirects users based on their role.
+ * Stores JWT token, role, and email in localStorage for session management.
+ *
+ * Features:
+ * - Email/password login with validation and error handling
+ * - Google login button (UI only, not implemented)
+ * - Role-based navigation after successful login
+ * - LocalStorage usage for token, role, and email
+ * - JWT token decoding and validation
+ * - Automatic page reload after successful authentication
+ *
+ * Role-based redirections:
+ * - AGENTE: /agente
+ * - AMMINISTRATORE: /admin
+ * - VALUTATORE: /agente
+ * - PROPRIETARIO: /utente
+ * - Default: /
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Login page
+ *
+ * @example
+ * <Login />
+ *
+ * @see ../../api/authApi.js for login API
+ * @see ../../utils/jwt_decoder.js for JWT decoding
+ * @see ./login.css for styles
+ *
+ * @typedef {Object} LoginResponse
+ * @property {string} token - JWT token returned from the server
+ *
+ * @function handleSubmit
+ * @description Handles form submission, authenticates user, manages localStorage, and redirects
+ * @param {React.FormEvent<HTMLFormElement>} e - Form submit event
+ */
